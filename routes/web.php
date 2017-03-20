@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
 
-    return view('welcome');
+    //return view('welcome');
+    dd(\App\Entities\Setting::getSetting(1));
 });
 
 Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');

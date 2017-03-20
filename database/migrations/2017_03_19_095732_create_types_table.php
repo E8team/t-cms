@@ -18,7 +18,9 @@ class CreateTypesTable extends Migration
             $table->char('name', 30);
             $table->string('description')->nullable();
             $table->unsignedInteger('order')->default(0)->index();
-            $table->morphs('typeable');
+            $table->unsignedInteger('typeable_id');
+            $table->string('typeable_type', 50);
+            $table->index(['typeable_id', 'typeable_type']);
         });
     }
 
