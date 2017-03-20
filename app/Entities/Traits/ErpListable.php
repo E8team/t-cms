@@ -13,8 +13,8 @@ Trait ErpListable
             }
             foreach ($order as $v) {
                 if (is_string($v)) $v = explode('-', $v, 2);
-                if(in_array($v[0], self::$allowSortFields)){
-                    $query->orderBy($v[0], isset($v[1])?$v[1]:'asc');
+                if (in_array($v[0], self::$allowSortFields)) {
+                    $query->orderBy($v[0], isset($v[1]) ? $v[1] : 'asc');
                 }
             }
         }
