@@ -24,16 +24,18 @@ class CreatePostsTable extends Migration
             $table->longText('post_content');
             // 文章封面
             $table->string('cover', 40)->nullable();
-            $table->char('post_status', 10)->default('post');
-            $table->char('post_type', 10)->default('publish');
+            $table->char('post_status', 10)->default('publish');
+            //post page(单页) revision(修订) attachment(附件)
+            $table->char('post_type', 10)->default('post');
             // 浏览量
-            $table->unsignedInteger('views_count')->defaule(0)->index();
-            $table->boolean('allow_comment')->default(0);
+            $table->unsignedInteger('views_count')->default(0)->index();
+            $table->boolean('allow_comment')->default(false);
             $table->unsignedInteger('comments_num')->default(0);
             // 文章置顶
             $table->timestamp('top')->nullable()->index();
             $table->unsignedInteger('order')->default(0)->index();
             $table->unsignedInteger('parent')->default(0);
+            $table->string('post_mime_type', 100)->nullable();
             //文章的一些其他配置
             $table->mediumText('setting')->nullable();
             $table->softDeletes();

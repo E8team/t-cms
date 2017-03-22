@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategoryTableSeeder extends Seeder
+class CategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,7 @@ class CategoryTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
+                'id' => 1,
                 'type' => 0,
                 'cate_name' => '公司新闻',
                 'description' => '这里的公司新闻',
@@ -23,6 +24,7 @@ class CategoryTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
+                'id' => 2,
                 'type' => 1,
                 'cate_name' => '公司概况',
                 'description' => '公司概况',
@@ -33,6 +35,7 @@ class CategoryTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
+                'id' => 3,
                 'type' => 1,
                 'cate_name' => '公司简介',
                 'description' => '公司简介',
@@ -43,6 +46,7 @@ class CategoryTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
+                'id' => 4,
                 'type' => 1,
                 'cate_name' => '现任领导',
                 'description' => '现任领导',

@@ -19,7 +19,13 @@ class Category extends BaseModel
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
-
+    public static function allCategory()
+    {
+        $allMenu = Category::orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $res = [];
+        self::tree($allMenu, $res);
+        return $res;
+    }
     public static function getMenu()
     {
         $allMenu = Category::where('is_menu', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();

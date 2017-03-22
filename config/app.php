@@ -177,7 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        JellyBool\Translug\TranslugServiceProvider::class,
     ],
 
     /*
@@ -226,7 +226,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PictureManager' => Ty666\PictureManager\Facades\PictureManager::class
+        'PictureManager' => Ty666\PictureManager\Facades\PictureManager::class,
+        'Translug' => \JellyBool\Translug\TranslugFacade::class,
     ],
 
 ];

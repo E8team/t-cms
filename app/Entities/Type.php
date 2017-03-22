@@ -7,11 +7,13 @@ class Type extends BaseModel
 {
     public $timestamps = false;
 
-    /**
-     * Get all of the owning commentable models.
-     */
-    public function typeable()
+    public function scopeLinkType($query)
     {
-        return $this->morphTo();
+        return $query->where('typeable_type', Link::class);
+    }
+
+    public function link()
+    {
+        return $this->hasMany(Link::class);
     }
 }

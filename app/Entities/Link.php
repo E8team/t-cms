@@ -9,6 +9,6 @@ class Link extends BaseModel
 
     public function type()
     {
-        return $this->morphOne(Type::class, 'typeable');
+        return $this->belongsTo(Type::class);
     }
 }
