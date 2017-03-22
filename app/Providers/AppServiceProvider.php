@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Libs\Template;
+use App\Entities\Setting;
+use App\Libs\Theme;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,5 +32,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+        $this->app->singleton(Theme::class, function ($app) {
+            return new Theme($app['filesystem']->disk('theme'), Setting::getSetting('current_theme'));
+        });
     }
 }

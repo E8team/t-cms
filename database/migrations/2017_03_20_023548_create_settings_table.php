@@ -18,7 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('name', 30)->unique();
             $table->text('value');
             $table->string('description')->nullable();
-            $table->boolean('is_autoload')->defalut(true);
+            $table->boolean('is_autoload')->default(true);
             $table->timestamps();
         });
     }

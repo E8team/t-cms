@@ -29,8 +29,8 @@ class CreateCategoriesTable extends Migration
             // 分类slug
             $table->string('cate_slug', 30)->nullable()->unique();
             // 是否在导航栏显示
-            $table->boolean('is_menu')->defalut(false);
-            $table->unsignedInteger('order')->defaule(0)->index();
+            $table->boolean('is_menu')->default(false);
+            $table->unsignedInteger('order')->default(0)->index();
             // 分类的一些其他配置
             $table->mediumText('setting')->nullable();
             $table->timestamps();

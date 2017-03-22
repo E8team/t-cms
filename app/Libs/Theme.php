@@ -1,32 +1,19 @@
 <?php
 namespace App\Libs;
 
-use App\Entities\Setting;
-use Storage;
+
 use View;
 
 class Theme
 {
-    private static $_instance = null;
     private $storage;
-    private $defaultTheme = null;
+    private $currentTheme;
     private $isAddedNamespace = false;
 
-    private function __construct()
+    public function __construct($storage, $currentTheme)
     {
-        $this->storage = Storage::disk('theme');
-    }
-
-    private function __clone()
-    {
-    }
-
-    public static function getInstance()
-    {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new self ();
-        }
-        return self::$_instance;
+        $this->storage = $storage;
+        $this->currentTheme = is_null($currentTheme)?'default':$currentTheme;
     }
 
     public function getAllThemeInfo()
@@ -53,22 +40,13 @@ class Theme
         return $templateInfo;
     }
 
-    public function getDefaultTheme()
-    {
-        if (is_null($this->defaultTheme)) {
-            $this->defaultTheme = Setting::getSetting('current_theme');
-            if(is_null($this->defaultTheme))
-                $this->defaultTheme = 'defalut';
-        }
-        return $this->defaultTheme;
-    }
+
 
     public function addNamespace()
     {
         if(!$this->isAddedNamespace)
         {
-            $defaultTheme = $this->getDefaultTheme();
-            View::addNamespace($defaultTheme, config('filesystems.disks.theme.root') . '/' . $defaultTheme);
+            View::addNamespace($this->currentTheme, config('filesystems.disks.theme.root') . '/' . $this->currentTheme);
             $this->isAddedNamespace = true;
         }
     }
@@ -76,6 +54,6 @@ class Theme
     public function view($view, $data = [], $mergeData = [])
     {
         $this->addNamespace();
-        return View::make($this->getDefaultTheme() . '::' . $view, $data, $mergeData);
+        return View::make($this->currentTheme . '::' . $view, $data, $mergeData);
     }
 }

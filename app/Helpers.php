@@ -9,5 +9,5 @@
  */
 function theme_view($view, $data = [], $mergeData = [])
 {
-    return \App\Libs\Theme::getInstance()->view($view, $data, $mergeData);
+    return app(\App\Libs\Theme::class)->view($view, $data, $mergeData);
 }

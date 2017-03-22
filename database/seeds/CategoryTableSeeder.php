@@ -1,0 +1,57 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class CategoryTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('categories')->insert([
+            [
+                'type' => 0,
+                'cate_name' => '公司新闻',
+                'description' => '这里的公司新闻',
+                'cate_slug' => 'company-news',
+                'is_menu' => true,
+                'parent_id' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'type' => 1,
+                'cate_name' => '公司概况',
+                'description' => '公司概况',
+                'cate_slug' => 'company-gk',
+                'is_menu' => true,
+                'parent_id' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'type' => 1,
+                'cate_name' => '公司简介',
+                'description' => '公司简介',
+                'cate_slug' => 'company-jj',
+                'is_menu' => true,
+                'parent_id' => 2,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'type' => 1,
+                'cate_name' => '现任领导',
+                'description' => '现任领导',
+                'cate_slug' => 'company-xrld',
+                'is_menu' => true,
+                'parent_id' => 2,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+        ]);
+    }
+}
