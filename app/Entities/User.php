@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -17,8 +18,13 @@ class User extends BaseModel implements
     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
-   // use Notifiable,EntrustUserTrait;
-
+    use Notifiable;
+    use EntrustUserTrait {
+        restore as private restoreEntrust;
+        EntrustUserTrait::can as may;
+        Authorizable::can insteadof EntrustUserTrait;
+    }
+    use SoftDeletes { restore as private restoreSoftDelete; }
     /**
      * The attributes that are mass assignable.
      *
@@ -36,5 +42,12 @@ class User extends BaseModel implements
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    /**
+     * For EntrustUserTrait and SoftDeletes conflict
+     */
+    public function restore()
+    {
+        $this->restoreEntrust();
+        $this->restoreSoftDelete();
+    }
 }

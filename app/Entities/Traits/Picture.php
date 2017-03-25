@@ -4,7 +4,7 @@ namespace App\Entities\Traits;
 
 Trait Picture
 {
-    public function getPicure($picture, $allowSizeList = null)
+    public function getPicure($picture, $allowSizeList = null, $defaulePic = '')
     {
         if (empty($picture)) return null;
 
@@ -13,6 +13,10 @@ Trait Picture
             if (is_string($allowSizeList)) $allowSizeList = [$allowSizeList];
 
             $sizeList = array_intersect($allowSizeList, $sizeList);
+        }
+        if(empty($picture)) {
+            //获取默认图片 (如果需要)
+            return array_combine($sizeList, array_fill(0, count($sizeList), $defaulePic));
         }
         list($pictureId, $suffix) = explode('.', $picture, 2);
         $data = [];
