@@ -17,6 +17,7 @@ class LinksTableSeeder extends Seeder
                 'url' => 'https://www.3twd.cn',
                 'linkman' => '3t',
                 'type_id' => 1,
+                'is_visible' => true,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -25,6 +26,7 @@ class LinksTableSeeder extends Seeder
                 'url' => 'https://www.baidu.com',
                 'linkman' => '李总',
                 'type_id' => 2,
+                'is_visible' => true,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]

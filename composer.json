@@ -10,6 +10,7 @@
         "jellybool/translug": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "zizaco/entrust": "5.2.x-dev",
         "ty666/picture-manager": "^1.0"
     },
     "require-dev": {

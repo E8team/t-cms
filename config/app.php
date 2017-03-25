@@ -168,7 +168,9 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
         Ty666\PictureManager\PictureManagerServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -228,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PictureManager' => Ty666\PictureManager\Facades\PictureManager::class,
         'Translug' => \JellyBool\Translug\TranslugFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

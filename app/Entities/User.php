@@ -9,6 +9,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends BaseModel implements
     AuthenticatableContract,
@@ -16,7 +17,7 @@ class User extends BaseModel implements
     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
-    use Notifiable;
+   // use Notifiable,EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +25,7 @@ class User extends BaseModel implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'user_name', 'nick_name', 'email', 'password', 'reg_ip', 'last_ip'
     ];
 
     /**
@@ -35,4 +36,5 @@ class User extends BaseModel implements
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 }

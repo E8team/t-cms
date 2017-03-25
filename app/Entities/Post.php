@@ -13,7 +13,7 @@ class Post extends BaseModel
 
     public function author()
     {
-        return $this->hasOne(User::class, 'id', 'post_author');
+        return $this->hasOne(User::class, 'id', 'author');
     }
 
     public function category()
@@ -23,17 +23,17 @@ class Post extends BaseModel
 
     public function scopePage($query)
     {
-        return $query->where('post_type', 'post');
+        return $query->where('type', 'post');
     }
 
     public function scopeDraft($query)
     {
-        return $query->where('post_type', 'draft');
+        return $query->where('type', 'draft');
     }
 
     public function scopePublish($query)
     {
-        return $query->where('post_status', 'publish');
+        return $query->where('status', 'publish');
     }
 
     public function scopeOrderByTop($query)
@@ -44,6 +44,6 @@ class Post extends BaseModel
     //附件
     public function scopeAttachment($query)
     {
-        return $query->where('post_type', 'attachment');
+        return $query->where('type', 'attachment');
     }
 }
