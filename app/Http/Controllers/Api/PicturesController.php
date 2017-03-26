@@ -18,6 +18,7 @@ class PicturesController extends ApiController
     public function upload(Request $request)
     {
 
+        $picture = '';
         try{
             $picture = PictureManager::upload($request->file($request->get('picture_key', 'file')));
         }catch (UploadException $e){

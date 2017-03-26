@@ -13,3 +13,6 @@
 
 
 Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');
+
+Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::post('login', 'Auth\LoginController@login')->name('login');

@@ -31,7 +31,7 @@ class Theme
     public function getTemplateInfo($name = null)
     {
         if (is_null($name)) {
-            $name = $this->getDefaultTheme();
+            $name = $this->currentTheme;
         }
         $templateInfo = [];
         if ($this->storage->exists($name . '/config.json')) {

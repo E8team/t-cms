@@ -16,7 +16,6 @@ class PostsTableSeeder extends Seeder
                 'id' => 1,
                 'author' => 1,
                 'title' => 'hello world',
-                'slug' => 'hello-world',
                 'content' => '这是第一篇文章',
                 'status' => 'publish',
                 'type' => 'post',
@@ -28,7 +27,7 @@ class PostsTableSeeder extends Seeder
                 'id' => 2,
                 'author' => 1,
                 'title' => 'hello world111111',
-                'slug' => 'hello-world111111111',
+
                 'content' => '这是第二篇文章11111111',
                 'status' => 'publish',
                 'type' => 'post',

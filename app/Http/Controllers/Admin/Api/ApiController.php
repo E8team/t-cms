@@ -7,10 +7,10 @@
  */
 
 namespace App\Http\Controllers\Admin\Api;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Controller;
 use Dingo\Api\Routing\Helpers;
 
-class ApiController extends AdminController
+class ApiController extends Controller
 {
     use Helpers;
 }

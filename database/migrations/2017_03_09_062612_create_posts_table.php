@@ -15,17 +15,17 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('post_author')->index();
+            $table->unsignedInteger('author')->index();
             $table->string('title',100)->unique();
             // slug
-            $table->string('slug', 100)->unique()->nullable();
+            //$table->string('slug', 100)->unique()->nullable();
             // 摘要
             $table->string('excerpt', 512)->nullable();
             $table->longText('content');
             // 文章封面
-            $table->string('cover', 40)->nullable();
+            $table->char('cover', 40)->nullable();
             $table->char('status', 10)->default('publish');
-            //post page(单页) revision(修订) attachment(附件)
+            //post page(单页) //revision(修订) //attachment(附件)
             $table->char('type', 10)->default('post');
             // 浏览量
             $table->unsignedInteger('views_count')->default(0)->index();
@@ -34,8 +34,8 @@ class CreatePostsTable extends Migration
             // 文章置顶
             $table->timestamp('top')->nullable()->index();
             $table->unsignedInteger('order')->default(0)->index();
-            $table->unsignedInteger('parent')->default(0);
-            $table->string('mime_type', 100)->nullable();
+            // 内容模板
+            $table->string('template', 30)->nullable();
             //文章的一些其他配置
             $table->mediumText('setting')->nullable();
             $table->softDeletes();

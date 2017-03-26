@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Rule;
 
-class UserCreatedRequest extends FormRequest
+class PostUpdateRequest extends FormRequest
 {
+    protected $allowModifyFields = ['title', 'excerpt', 'content', 'cover', 'status'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,11 +25,13 @@ class UserCreatedRequest extends FormRequest
      */
     public function rules()
     {
+        $postId = $this->route()->getParameter('postId');
         return [
-            'user_name' => 'required|unique:users',
-            'nick_name' => 'string',
-            'email' => 'email|unique:users',
-            'password' => 'required'
+            'title' => ['required', Rule::unique('posts')->ignore($postId)],
+            'excerpt' => 'string',
+            'content' => 'string',
+            'cover' => 'string',
+            'status' => 'in:publish,draft',
         ];
     }
 }

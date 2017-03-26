@@ -3,11 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Rule;
 
-class UserUpdatedRequest extends FormRequest
+class UserCreateRequest extends FormRequest
 {
-    protected $allowModifyFields = ['user_name', 'nick_name', 'email', 'password', 'is_lock'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,13 +23,11 @@ class UserUpdatedRequest extends FormRequest
      */
     public function rules()
     {
-        $userId = $this->route()->getParameter('userId');
         return [
-            'user_name' => ['required', Rule::unique('users')->ignore($userId)],
+            'user_name' => 'required|unique:users',
             'nick_name' => 'string',
-            'email' => ['email', Rule::unique('users')->ignore($userId)],
-            'password' => 'min:6',
-            'is_lock' => 'boolean'
+            'email' => 'email|unique:users',
+            'password' => 'required'
         ];
     }
 }

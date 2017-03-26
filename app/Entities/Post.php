@@ -3,11 +3,12 @@
 namespace App\Entities;
 
 
+use App\Entities\Traits\Picture;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends BaseModel
 {
-    use SoftDeletes;
+    use SoftDeletes, Picture;
 
     protected $dates = ['deleted_at', 'top'];
 
@@ -21,9 +22,14 @@ class Post extends BaseModel
         return $this->belongsToMany(Category::class);
     }
 
-    public function scopePage($query)
+    public function scopePost($query)
     {
         return $query->where('type', 'post');
+    }
+
+    public function scopePage($query)
+    {
+        return $query->where('type', 'page');
     }
 
     public function scopeDraft($query)
@@ -41,9 +47,4 @@ class Post extends BaseModel
         return $query->orderBy('top', 'DESC');
     }
 
-    //附件
-    public function scopeAttachment($query)
-    {
-        return $query->where('type', 'attachment');
-    }
 }

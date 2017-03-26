@@ -31,6 +31,12 @@ class CreateCategoriesTable extends Migration
             // 是否在导航栏显示
             $table->boolean('is_menu')->default(false);
             $table->unsignedInteger('order')->default(0)->index();
+            // 单页模板
+            $table->string('page_template', 30)->nullable();
+            // 列表页模板
+            $table->string('list_template', 30)->nullable();
+            // 默认内容模板
+            $table->string('content_template', 30)->nullable();
             // 分类的一些其他配置
             $table->mediumText('setting')->nullable();
             $table->timestamps();
