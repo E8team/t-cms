@@ -2,50 +2,26 @@
 
 namespace App\Entities;
 
+use App\Entities\Traits\Cachable;
 use Cache;
 
 class Setting extends BaseModel
 {
+    use Cachable;
+
     protected $fillable = ['name', 'value', 'description', 'is_autoload'];
 
     protected $casts = [
         'is_autoload' => 'boolean',
     ];
 
-    private function clearCache()
+    protected function clearCache()
     {
         if ($this->is_autoload) {
             Cache::forget('setting_autoload');
         } else {
             Cache::forget('setting_' . $this->name);
         }
-    }
-
-    public function save(array $options = [])
-    {   //both inserts and updates
-        if (!parent::save($options)) {
-            return false;
-        }
-        $this->clearCache();
-        return true;
-    }
-
-    public function delete(array $options = [])
-    {   //soft or hard
-        if (!parent::delete($options)) {
-            return false;
-        }
-        $this->clearCache();
-        return true;
-    }
-
-    public function restore()
-    {   //soft delete undo's
-        if (!parent::restore()) {
-            return false;
-        }
-        $this->clearCache();
-        return true;
     }
 
     public static function allSetting()

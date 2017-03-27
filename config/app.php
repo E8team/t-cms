@@ -178,8 +178,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        JellyBool\Translug\TranslugServiceProvider::class,
+        App\Providers\RouteServiceProvider::class
     ],
 
     /*
