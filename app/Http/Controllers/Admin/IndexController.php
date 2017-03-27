@@ -10,7 +10,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-
-        dd(Permission::getPermissionsArray());
+        dd(Permission::allPermission());
     }
 }

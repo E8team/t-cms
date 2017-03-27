@@ -35,13 +35,8 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         return Cache::rememberForever('permissions', function () {
             return static::recent()
                 ->get()
-                ->keyBy('id');
+                ->keyBy('id')
+                ->groupBy('parent_id');
         });
-    }
-
-    public static function getPermissionsArray()
-    {
-        $allPermission = static::allPermission();
-        dd($allPermission);
     }
 }
