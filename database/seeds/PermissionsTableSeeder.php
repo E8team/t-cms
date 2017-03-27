@@ -30,7 +30,6 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
-
             [
                 'id'=>3,
                 'name' => 'admin.user.list',
@@ -46,6 +45,15 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => '编辑用户',
                 'description' => '编辑用户',
                 'parent_id' => 2,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'id'=>5,
+                'name' => 'admin.permission.list',
+                'display_name' => '显示权限列表',
+                'description' => '显示权限列表',
+                'parent_id' => 1,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

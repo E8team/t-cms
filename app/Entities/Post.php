@@ -4,6 +4,7 @@ namespace App\Entities;
 
 
 use App\Entities\Traits\Picture;
+use Cache;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends BaseModel
@@ -47,4 +48,27 @@ class Post extends BaseModel
         return $query->orderBy('top', 'DESC');
     }
 
+    public function getViewsCountAttribute($viewsCount)
+    {
+        return Cache::rememberForever('post_views_count_' . $this->id, function () use ($viewsCount) {
+            return $viewsCount;
+        });
+    }
+
+    public function addViewCount()
+    {
+        //todo 感觉这里并发会有问题 2017年3月27日23:18:41
+        $cacheKey = 'post_views_count_' . $this->id;
+        if (Cache::has($cacheKey)) {
+            $currentViewCount = Cache::increment($cacheKey);
+            if($currentViewCount - $this->views_count >= config('cache.post.cache_views_count_num'))
+            {
+                //将阅读量写入数据库
+                //User::where($this->getKeyName(), $this->getKey())->increment('views_count', config('cache.post.cache_views_count_num'));
+                User::where($this->getKeyName(), $this->getKey())->update('views_count', $currentViewCount);
+            }
+        } else {
+            Cache::forever($cacheKey, $this->views_count + 1);
+        }
+    }
 }
