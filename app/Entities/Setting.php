@@ -24,7 +24,7 @@ class Setting extends BaseModel
         }
     }
 
-    public static function allSetting()
+    public static function allSettingWithCache()
     {
         return Cache::rememberForever('setting_autoload', function () {
             return static::where('is_autoload', true)
@@ -36,7 +36,7 @@ class Setting extends BaseModel
 
     public static function getSetting($name)
     {
-        $value = static::allSetting()->get($name);
+        $value = static::allSettingWithCache()->get($name);
         if (is_null($value)) {
             $value = Cache::rememberForever('setting_' . $name, function () use ($name) {
                 return static::where('name', $name)->first();

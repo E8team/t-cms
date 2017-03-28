@@ -30,7 +30,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     }
 
 
-    public static function allPermission()
+    public static function allPermissionWithCache()
     {
         return Cache::rememberForever('permissions', function () {
             return static::recent()

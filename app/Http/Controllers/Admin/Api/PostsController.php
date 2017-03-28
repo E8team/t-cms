@@ -25,6 +25,7 @@ class PostsController extends ApiController
      */
     public function store(PostCreateRequest $request)
     {
+
     }
     /**
      * Display the specified resource.

@@ -10,5 +10,4 @@ class PicturesController extends Controller
     {
         return PictureManager::init($img_id, $size, $suffix)->show();
     }
-
 }
