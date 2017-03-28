@@ -12,10 +12,13 @@ use Config;
 class Permission extends BaseModel implements EntrustPermissionInterface
 {
     use EntrustPermissionTrait, Cachable;
+    protected $casts = [
+        'is_menu' => 'boolean'
+    ];
     protected $fillable = [];
     protected function clearCache()
     {
-        Cache::forget('permissions');
+        Cache::tags(Config::get('permissions_table'))->flush();
     }
 
     /**
@@ -32,11 +35,34 @@ class Permission extends BaseModel implements EntrustPermissionInterface
 
     public static function allPermissionWithCache()
     {
-        return Cache::rememberForever('permissions', function () {
+        return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
             return static::recent()
                 ->get()
-                ->keyBy('id')
-                ->groupBy('parent_id');
+                ->keyBy('id');
+                //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
         });
+    }
+
+    public static function getUserMenu($user)
+    {
+
+        if(is_numeric($user))
+        {
+            $user = User::find($user);
+        }
+        if(!$user instanceof User)
+        {
+            return null;
+        }
+
+        $menu = collect();
+        $user->roles->each(function ($item) use (&$menu)
+        {
+            $menu = $menu->merge($item->cachedPermissions());
+        });
+        if($menu->isEmpty()){
+            return $menu;
+        }
+        return $menu->sortBy('order')->sortBy('created_at')->groupBy('parent_id');
     }
 }

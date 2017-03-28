@@ -17,7 +17,7 @@ class CreateTypesTable extends Migration
             $table->increments('id');
             $table->char('name', 30);
             $table->string('description')->nullable();
-            $table->unsignedInteger('order')->default(0)->index();
+            $table->integer('order')->default(0)->index();
             $table->string('typeable_type', 50)->index();
         });
     }
@@ -29,6 +29,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('types');
     }
 }

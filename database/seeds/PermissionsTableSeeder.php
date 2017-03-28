@@ -18,6 +18,8 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => '权限管理',
                 'description' => '权限管理',
                 'parent_id' => 0,
+                'is_menu' => true,
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -27,6 +29,8 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => '用户管理',
                 'description' => '用户管理',
                 'parent_id' => 0,
+                'is_menu' => true,
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -36,6 +40,8 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => '显示用户列表',
                 'description' => '显示用户列表',
                 'parent_id' => 2,
+                'is_menu' => true,
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -45,6 +51,8 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => '编辑用户',
                 'description' => '编辑用户',
                 'parent_id' => 2,
+                'is_menu' => true,
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -54,6 +62,8 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => '显示权限列表',
                 'description' => '显示权限列表',
                 'parent_id' => 1,
+                'is_menu' => true,
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

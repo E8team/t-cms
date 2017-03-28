@@ -1,6 +1,7 @@
 <?php
 namespace App\Entities\Traits;
 
+use Config;
 
 Trait Picture
 {
@@ -8,7 +9,7 @@ Trait Picture
     {
         if (empty($picture)) return null;
 
-        $sizeList = array_keys(config('picture.sizeList'));
+        $sizeList = array_keys(Config::get('picture.sizeList'));
         if (!is_null($allowSizeList)) {
             if (is_string($allowSizeList)) $allowSizeList = [$allowSizeList];
 

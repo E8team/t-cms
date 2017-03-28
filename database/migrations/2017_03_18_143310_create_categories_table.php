@@ -30,7 +30,7 @@ class CreateCategoriesTable extends Migration
             $table->string('cate_slug', 30)->nullable()->unique();
             // 是否在导航栏显示
             $table->boolean('is_menu')->default(false);
-            $table->unsignedInteger('order')->default(0)->index();
+            $table->integer('order')->default(0)->index();
             // 单页模板
             $table->string('page_template', 30)->nullable();
             // 列表页模板

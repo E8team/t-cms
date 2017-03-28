@@ -17,6 +17,7 @@ class RolesTableSeeder extends Seeder
                 'name' => 'super_admin',
                 'display_name' => '超级管理员',
                 'description' => '超级管理员',
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -25,6 +26,7 @@ class RolesTableSeeder extends Seeder
                 'name' => 'poster',
                 'display_name' => '文章发布者',
                 'description' => '文章发布者',
+                'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]

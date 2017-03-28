@@ -1,8 +1,8 @@
 <?php
 namespace App\Libs;
 
-
 use View;
+use Config;
 
 class Theme
 {
@@ -46,7 +46,7 @@ class Theme
     {
         if(!$this->isAddedNamespace)
         {
-            View::addNamespace($this->currentTheme, config('filesystems.disks.theme.root') . '/' . $this->currentTheme);
+            View::addNamespace($this->currentTheme, Config::get('filesystems.disks.theme.root') . '/' . $this->currentTheme);
             $this->isAddedNamespace = true;
         }
     }
