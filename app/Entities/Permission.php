@@ -36,7 +36,8 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     public static function allPermissionWithCache()
     {
         return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
-            return static::recent()
+            return static::Ordered()
+                ->recent()
                 ->get()
                 ->keyBy('id');
                 //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
