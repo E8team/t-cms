@@ -1,2 +1,2 @@
 <?php
-Route::get('/', 'IndexController@index');
+Route::get('/{path?}', 'IndexController@index');
