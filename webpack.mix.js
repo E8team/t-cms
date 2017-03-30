@@ -26,6 +26,4 @@ mix.webpackConfig({
     }
 });
 mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/login.js', 'public/js')
     .less('resources/assets/less/app.less', 'public/css')
-    .less('resources/assets/less/login.less', 'public/css')
