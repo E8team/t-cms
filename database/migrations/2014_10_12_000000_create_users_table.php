@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('nick_name', 30)->nullable();
             $table->string('email', 100)->unique();
             $table->string('password');
-            $table->boolean('is_lock')->defaule(false);
-            $table->softDeletes();
+            $table->boolean('is_locked')->defaule(false);
+            //$table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

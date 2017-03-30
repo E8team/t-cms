@@ -17,8 +17,8 @@ class PostTransformer extends BaseTransformer
             'views_count' => $model->views_count,
             'comments_num' => $model->comments_num,
             'top' => $model->top,
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'created_at' => $model->created_at->toDateTimeString(),
+            'updated_at' => $model->updated_at->toDateTimeString()
         ];
     }
 }

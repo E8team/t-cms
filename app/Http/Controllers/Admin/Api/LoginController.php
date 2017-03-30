@@ -38,6 +38,13 @@ class LoginController extends ApiController
         }
         try{
             $this->attemptLogin($credentials, $request->has('remember'));
+            //该用户是否被锁定
+            $user = Auth::user();
+            if($user->is_locked){ //用户是否已经被锁定
+                $this->logout($request);
+                // todo 国际化
+                return $this->response->error('该用户已经被锁定', 423);
+            }
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
         }catch (LoginFailed $e){

@@ -13,4 +13,11 @@ use Dingo\Api\Routing\Helpers;
 class ApiController extends Controller
 {
     use Helpers;
+
+    function perPage($default = null)
+    {
+        $maxPerPage = config('app.max_per_page');
+        $perPage = (request('per_page') ?: $default) ?: config('app.default_per_page');
+        return (int) ($perPage < $maxPerPage ? $perPage : $maxPerPage);
+    }
 }

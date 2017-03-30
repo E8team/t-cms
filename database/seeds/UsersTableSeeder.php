@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
                 'nick_name' => '陶煜',
                 'email' => 'taoyu@qq.com',
                 'password' => bcrypt('taoyu'),
-                'is_lock' => false,
+                'is_locked' => false,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
                 'nick_name' => '陶煜1',
                 'email' => 'taoyu1@qq.com',
                 'password' => bcrypt('taoyu'),
-                'is_lock' => false,
+                'is_locked' => true,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]

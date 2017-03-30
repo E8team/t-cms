@@ -24,7 +24,10 @@ class User extends BaseModel implements
         EntrustUserTrait::can as may;
         Authorizable::can insteadof EntrustUserTrait;
     }
-    use SoftDeletes { restore as private restoreSoftDelete; }
+    protected $casts = [
+        'is_locked' => 'boolean'
+    ];
+    //use SoftDeletes { restore as private restoreSoftDelete; }
     /**
      * The attributes that are mass assignable.
      *
@@ -48,6 +51,6 @@ class User extends BaseModel implements
     public function restore()
     {
         $this->restoreEntrust();
-        $this->restoreSoftDelete();
+        //$this->restoreSoftDelete();
     }
 }
