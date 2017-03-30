@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Auth\UserProvider;
+use App\Entities\User;
+use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //注册provider
+        Auth::provider('e8', function ($app) {
+            return new UserProvider(
+                new BcryptHasher(),
+                User::class
+            );
+        });
     }
 }

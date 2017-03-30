@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Api\Auth;
+namespace App\Http\Controllers\Admin\Api;
 
-use App\Http\Controllers\Admin\Api\ApiController;
+use App\Exceptions\LoginFailed;
 use Dingo\Api\Exception\ValidationHttpException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Lang;
 use Validator;
+use Auth;
 
 class LoginController extends ApiController
 {
@@ -23,7 +24,8 @@ class LoginController extends ApiController
      */
     public function login(Request $request)
     {
-        $validator = $this->validateLogin($this->credentials($request));
+        $credentials = $this->credentials($request);
+        $validator = $this->validateLogin($credentials);
         if ($validator->fails()) {
             throw new ValidationHttpException($validator->errors());
         }
@@ -34,13 +36,13 @@ class LoginController extends ApiController
             $this->fireLockoutEvent($request);
             return $this->sendLockoutResponse($request);
         }
-
-        if ($this->attemptLogin($request)) { //登录成功
+        try{
+            $this->attemptLogin($credentials, $request->has('remember'));
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
-        }else {//登录失败
+        }catch (LoginFailed $e){
             $this->incrementLoginAttempts($request);
-            throw new ValidationHttpException([$this->username(), Lang::get('auth.failed')]);
+            throw new ValidationHttpException($e->getError());
         }
     }
 
@@ -53,7 +55,7 @@ class LoginController extends ApiController
     protected function validateLogin($credentials)
     {
         $validator = Validator::make($credentials, [
-            'name' => ['bail', 'required', 'regex:/^[a-zA-Z0-9_]+$/'],
+            $this->username() => ['bail', 'required', 'regex:/^[a-zA-Z0-9_]+$/'],
             'password' => ['required']
         ]);
         return $validator;
@@ -62,14 +64,22 @@ class LoginController extends ApiController
     /**
      * Attempt to log the user into the application.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin($credentials, $remember)
     {
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->has('remember')
-        );
+        $loginSuccess = false;
+        try{
+            $loginSuccess = $this->guard()->attempt($credentials, $remember);
+        }catch (ModelNotFoundException $e) {
+            //todo 国际化
+            throw new LoginFailed([$this->username() => '用户名不存在']);
+        }
+        if(!$loginSuccess){
+            //todo 国际化
+            throw new LoginFailed(['password' => '密码错误']);
+        }
+        return true;
     }
 
     /**
