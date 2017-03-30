@@ -11,8 +11,14 @@
     </head>
     <body>
     <!-- 加载编辑器的容器 -->
-    <script id="container" name="content" type="text/plain">这里写你的初始化内容</script>
-
+    <form action="{!! route('admin.posts.store') !!}" method="post">
+        {{csrf_field()}}
+        <!-- 加载编辑器的容器 -->
+        <script id="container" name="content" type="text/plain">
+            这里写你的初始化内容
+        </script>
+        <button type="submit">提交</button>
+    </form>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var ue = UE.getEditor('container');

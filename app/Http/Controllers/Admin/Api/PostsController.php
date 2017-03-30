@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
+use Illuminate\Http\Request;
 
 class PostsController extends ApiController
 {
@@ -25,7 +26,6 @@ class PostsController extends ApiController
      */
     public function store(PostCreateRequest $request)
     {
-
     }
     /**
      * Display the specified resource.
