@@ -228,7 +228,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PictureManager' => Ty666\PictureManager\Facades\PictureManager::class,
-        'Translug' => \JellyBool\Translug\TranslugFacade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
