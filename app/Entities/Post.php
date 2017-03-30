@@ -3,10 +3,10 @@
 namespace App\Entities;
 
 
-use App\Entities\Traits\Picture;
 use Cache;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Config;
+use Ty666\PictureManager\Traits\Picture;
 
 class Post extends BaseModel
 {

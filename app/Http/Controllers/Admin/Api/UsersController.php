@@ -16,7 +16,12 @@ class UsersController extends ApiController
 {
     public function lists()
     {
-        $users = User::paginate($this->perPage());
-        return $this->response->paginator($users, new UserTransformer());
+        $users = User::with('roles')
+            ->WithSimpleSearch()
+            ->withSort()
+            ->recent()
+            ->paginate($this->perPage());
+        return $this->response->paginator($users, new UserTransformer())
+            ->addMeta('allow_sort_fields', User::$allowSortFields);;
     }
 }
