@@ -11,6 +11,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        //dd(Permission::getUserMenu(User::find(1)));
+        return view('ueditor');
     }
 }

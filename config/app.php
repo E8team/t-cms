@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh_cn',
 
     /*
     |--------------------------------------------------------------------------
@@ -170,7 +170,7 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Ty666\PictureManager\PictureManagerServiceProvider::class,
-
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
         /*
          * Application Service Providers...
          */
