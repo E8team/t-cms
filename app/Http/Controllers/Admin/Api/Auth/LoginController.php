@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Api\Auth;
 
 use App\Http\Controllers\Admin\Api\ApiController;
+use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Lang;
+use Validator;
 
 class LoginController extends ApiController
 {
     use ThrottlesLogins;
 
-
-    /**
-     * Show the application's login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
 
     /**
      * Handle a login request to the application.
@@ -31,14 +23,15 @@ class LoginController extends ApiController
      */
     public function login(Request $request)
     {
-        $this->validateLogin($request);
-
+        $validator = $this->validateLogin($this->credentials($request));
+        if ($validator->fails()) {
+            throw new ValidationHttpException($validator->errors());
+        }
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
-
             return $this->sendLockoutResponse($request);
         }
 
@@ -47,9 +40,8 @@ class LoginController extends ApiController
             $this->clearLoginAttempts($request);
         }else {//登录失败
             $this->incrementLoginAttempts($request);
-            throw new UnauthorizedHttpException('login', Lang::get('auth.failed'));
+            throw new ValidationHttpException([$this->username(), Lang::get('auth.failed')]);
         }
-
     }
 
     /**
@@ -58,11 +50,13 @@ class LoginController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    protected function validateLogin(Request $request)
+    protected function validateLogin($credentials)
     {
-        $this->validate($request, [
-            $this->username() => 'required', 'password' => 'required',
+        $validator = Validator::make($credentials, [
+            'name' => ['bail', 'required', 'regex:/^[a-zA-Z0-9_]+$/'],
+            'password' => ['required']
         ]);
+        return $validator;
     }
 
     /**
@@ -90,7 +84,21 @@ class LoginController extends ApiController
     }
 
 
+    /**
+     * Redirect the user after determining they are locked out.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendLockoutResponse(Request $request)
+    {
+        $seconds = $this->limiter()->availableIn(
+            $this->throttleKey($request)
+        );
 
+        $message = Lang::get('auth.throttle', ['seconds' => $seconds]);
+        $this->response->error($message, 423);
+    }
     /**
      * Log the user out of the application.
      *

@@ -7,6 +7,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('ueditor');
+        return view('admin.index');
     }
 }
