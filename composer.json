@@ -11,7 +11,8 @@
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
         "ty666/picture-manager": "^1.0",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "stevenyangecho/laravel-u-editor": "~1.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.3",
