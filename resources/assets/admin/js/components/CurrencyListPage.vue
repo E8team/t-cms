@@ -13,6 +13,18 @@
             </div>
             <div slot="footer">
                 <div class="footer">
+                    <div class="page_num_box">
+                        显示:
+                        <el-select @change="change()" class="page_num" size="small" v-model="perPage">
+                            <el-option label="5" value="5"></el-option>
+                            <el-option label="10" value="10"></el-option>
+                            <el-option label="20" value="20"></el-option>
+                            <el-option label="30" value="30"></el-option>
+                            <el-option label="50" value="50"></el-option>
+                            <el-option label="100" value="100"></el-option>
+                        </el-select>
+                        项结果
+                    </div>
                     <slot name="option"></slot>
                 </div>
                 <el-pagination
@@ -22,7 +34,7 @@
                         :total="total"
                         :current-page="currentPage"
                         :page-size="perPage"
-                        @current-change="pageChange">
+                        @current-change="change">
                 </el-pagination>
             </div>
         </panel>
@@ -67,6 +79,7 @@
                 this.loading = true
                 this.$http.get(this.queryName, {
                     params: {
+                        per_page: this.perPage,
                         page,
                         q: keyword
                     }
@@ -80,7 +93,7 @@
                     this.loading = false
                 })
             },
-            pageChange (currentPage) {
+            change (currentPage) {
                 this.getList(currentPage)
             }
         }
@@ -92,11 +105,17 @@
         float: right;
         margin-right: 10px;
     }
-
+    .page_num_box{
+        font-size: 14px;
+        color: #666;
+        .page_num{
+            margin: 0 5px;
+            width: 70px;
+        }
+    }
     .footer {
         float: left;
     }
-
     .main {
         width: 100%;
     }
