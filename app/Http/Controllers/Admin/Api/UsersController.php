@@ -24,7 +24,8 @@ class UsersController extends ApiController
             ->recent()
             ->paginate($this->perPage());
         return $this->response->paginator($users, new UserTransformer())
-            ->addMeta('allow_sort_fields', User::$allowSortFields);
+            ->addMeta('allow_sort_fields', User::$allowSortFields)
+            ->addMeta('allow_search_fields', User::$allowSearchFields);
     }
 
     public function show($id)
