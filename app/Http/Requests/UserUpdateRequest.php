@@ -29,11 +29,11 @@ class UserUpdateRequest extends Request
      */
     public function rules()
     {
-        $userId = $this->route()->parameter('user');
+        $user = $this->route()->parameter('user');
         return [
-            'user_name' => ['required', Rule::unique('users')->ignore($userId)],
+            'user_name' => [Rule::unique('users')->ignore($user->id)],
             'nick_name' => 'string',
-            'email' => ['email', Rule::unique('users')->ignore($userId)],
+            'email' => ['email', Rule::unique('users')->ignore($user->id)],
             'avatar' => 'string|max:40',
             'password' => 'min:6',
             'is_lock' => 'boolean'

@@ -4,19 +4,12 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
+use App\Transformers\PostTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
 
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,21 +30,9 @@ class PostsController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($postId)
+    public function show(Post $post)
     {
-        Post::post()->find($postId);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
+        return $this->response->item($post, new PostTransformer());
     }
 
     /**
@@ -62,7 +43,7 @@ class PostsController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(PostUpdateRequest $request, $id)
+    public function update(Post $post, PostUpdateRequest $request)
     {
 
     }

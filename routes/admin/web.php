@@ -1,3 +1,3 @@
 <?php
 
-Route::get('/{path?}/{path?}', 'IndexController@index')->where('path', '[\/\w\.-]*');
+Route::get('/{path?}', 'IndexController@index')->where('path', '[\/\w\.-]*');

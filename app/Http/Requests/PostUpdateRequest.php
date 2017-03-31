@@ -26,9 +26,9 @@ class PostUpdateRequest extends Request
      */
     public function rules()
     {
-        $postId = $this->route()->parameter('post');
+        $post = $this->route()->parameter('post');
         return [
-            'title' => ['required', Rule::unique('posts')->ignore($postId)],
+            'title' => ['required', Rule::unique('posts')->ignore($post->id)],
             'excerpt' => 'string',
             'content' => 'string',
             'cover' => 'string',

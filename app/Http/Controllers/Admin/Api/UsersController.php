@@ -41,9 +41,8 @@ class UsersController extends ApiController
         }
     }
 
-    public function update($user, UserUpdateRequest $request)
+    public function update(User $user, UserUpdateRequest $request)
     {
-        dd($user);
         $data = $request->all();
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
