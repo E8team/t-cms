@@ -33,6 +33,7 @@ class PostUpdateRequest extends Request
             'content' => 'string',
             'cover' => 'string',
             'status' => 'in:publish,draft',
+            'order' => 'int'
         ];
     }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Traits\Update;
+use Illuminate\Validation\Rule;
 
-class PostCreateRequest extends Request
+
+class RoleUpdateRequest extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -12,7 +16,7 @@ class PostCreateRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,13 +27,10 @@ class PostCreateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|uniqe:posts',
-            'excerpt' => 'string',
-            'content' => 'string',
-            'cover' => 'string',
-            'status' => 'in:publish,draft',
-            'type' => 'in:post,type',
-            'order' => 'int'
+            'name' => 'required:unique:roles',
+            'display_name' => 'string',
+            'description' => ['email', Rule::unique('roles')->ignore($role->id)],
+            'order' => 'int',
         ];
     }
 }
