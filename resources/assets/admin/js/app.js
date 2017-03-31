@@ -8,7 +8,7 @@ Vue.use(ElementUI);
 import Panel from './components/Panel.vue'
 Vue.component(Panel.name, Panel)
 Vue.prototype.$http = axios.create({
-    baseURL: '/api/',
+    baseURL: '/api/admin/',
 })
 Vue.prototype.$http.defaults.headers.common = {
     // 'X-CSRF-TOKEN': window.t_meta.csrfToken,

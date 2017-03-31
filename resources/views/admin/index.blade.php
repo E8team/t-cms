@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>登录_t-cms</title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset(mix('admin/css/app.css'))}}">
     <script>
         window.t_meta = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -18,5 +18,5 @@
 <body>
     <div id="app"></div>
 </body>
-<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<script type="text/javascript" src="{{asset(mix('admin/js/app.js'))}}"></script>
 </html>

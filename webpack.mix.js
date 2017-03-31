@@ -25,6 +25,6 @@ mix.webpackConfig({
         ]
     }
 });
-mix.js('resources/assets/js/app.js', 'public/js')
-    .less('resources/assets/less/app.less', 'public/css')
+mix.js('resources/assets/admin/js/app.js', 'public/admin/js')
+    .less('resources/assets/admin/less/app.less', 'public/admin/css')
     .version();
