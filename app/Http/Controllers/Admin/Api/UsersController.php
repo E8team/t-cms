@@ -8,9 +8,14 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Transformers\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hash;
+use Auth;
 
 class UsersController extends ApiController
 {
+    public function me()
+    {
+        return $this->response->item(Auth::user(), new UserTransformer());
+    }
 
     public function lists()
     {
@@ -36,13 +41,14 @@ class UsersController extends ApiController
         }
     }
 
-    public function update($id, UserUpdateRequest $request)
+    public function update($user, UserUpdateRequest $request)
     {
+        dd($user);
         $data = $request->all();
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
-        $request->performUpdate(User::findOrFail($id));
+        //$request->performUpdate(User::findOrFail($id));
     }
 
     public function store(UserCreateRequest $request)

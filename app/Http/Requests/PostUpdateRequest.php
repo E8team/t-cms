@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Rule;
+use Illuminate\Validation\Rule;
 
-class PostUpdateRequest extends FormRequest
+
+class PostUpdateRequest extends Request
 {
     protected $allowModifyFields = ['title', 'excerpt', 'content', 'cover', 'status'];
 
@@ -26,7 +26,7 @@ class PostUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $postId = $this->route()->getParameter('postId');
+        $postId = $this->route()->parameter('post');
         return [
             'title' => ['required', Rule::unique('posts')->ignore($postId)],
             'excerpt' => 'string',

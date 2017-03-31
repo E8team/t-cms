@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
-use Illuminate\Foundation\Http\FormRequest;
-use Rule;
+use Illuminate\Validation\Rule;
 
-class UserUpdateRequest extends FormRequest
+
+class UserUpdateRequest extends Request
 {
 
     use Update;
@@ -29,7 +29,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $userId = $this->route()->getParameter('userId');
+        $userId = $this->route()->parameter('user');
         return [
             'user_name' => ['required', Rule::unique('users')->ignore($userId)],
             'nick_name' => 'string',

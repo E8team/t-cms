@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class PostCreateRequest extends FormRequest
+class PostCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
