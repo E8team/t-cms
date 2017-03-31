@@ -28,9 +28,8 @@ class UsersController extends ApiController
             ->addMeta('allow_search_fields', User::$allowSearchFields);
     }
 
-    public function show($id)
+    public function show($user)
     {
-        $user = User::find($id);
         $this->response->item($user, new UserTransformer());
     }
 
@@ -48,7 +47,7 @@ class UsersController extends ApiController
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
-        //$request->performUpdate(User::findOrFail($id));
+        $request->performUpdate($user);
     }
 
     public function store(UserCreateRequest $request)

@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 
+use App\Entities\Traits\Listable;
 use Cache;
 use Config;
 use DB;
@@ -11,7 +12,7 @@ use Zizaco\Entrust\Traits\EntrustRoleTrait;
 
 class Role extends BaseModel implements EntrustRoleInterface
 {
-    use EntrustRoleTrait;
+    use EntrustRoleTrait, Listable;
 
     /**
      * The database table used by the model.
