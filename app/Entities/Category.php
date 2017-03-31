@@ -36,10 +36,10 @@ class Category extends BaseModel
         return $res;
     }
 
-    private static function tree(&$allMenu, &$res, $parent_id = 0 )
+    private static function tree(&$allMenu, &$res, $parent_id = 0)
     {
-        foreach ($allMenu as $key => $value){
-            if($value['parent_id']==$parent_id){
+        foreach ($allMenu as $key => $value) {
+            if ($value['parent_id'] == $parent_id) {
                 $res[$value['id']] = $value;
                 $res[$value['id']]['children'] = [];
                 unset($allMenu[$key]);

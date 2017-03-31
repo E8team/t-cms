@@ -2,11 +2,15 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Traits\Update;
 use Illuminate\Foundation\Http\FormRequest;
 use Rule;
 
 class UserUpdateRequest extends FormRequest
 {
+
+    use Update;
+
     protected $allowModifyFields = ['user_name', 'nick_name', 'email', 'password', 'is_lock'];
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +19,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

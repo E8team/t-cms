@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
             ,$query->bindings
             ,$query->time);
         });*/
+
     }
 
     /**
@@ -33,8 +34,26 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
 
+        $apiHandler = app('Dingo\Api\Exception\Handler');
+        $apiHandler->register(function (\Illuminate\Auth\AuthenticationException $exception) {
+            return response([
+                'code' => 401.1,
+                //todo 国际化
+                'message' => '请先登录!'
+            ], 401);
+        });
+        $apiHandler->register(function (AuthorizationException $exception) {
+            return response([
+                'code' => 401.3,
+                //todo 国际化
+                'message' => $exception->getMessage()=='This action is unauthorized.'?'没有权限!':$exception->getMessage()
+            ], 401);
+        });
+
         $this->app->singleton(Theme::class, function ($app) {
             return new Theme($app['filesystem']->disk('theme'), Setting::getSetting('current_theme'));
         });
+
+
     }
 }

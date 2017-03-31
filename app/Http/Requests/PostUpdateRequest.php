@@ -8,6 +8,7 @@ use Rule;
 class PostUpdateRequest extends FormRequest
 {
     protected $allowModifyFields = ['title', 'excerpt', 'content', 'cover', 'status'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

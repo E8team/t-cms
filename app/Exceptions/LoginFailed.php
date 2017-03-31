@@ -9,11 +9,13 @@
 namespace App\Exceptions;
 
 
-class LoginFailed extends \RuntimeException
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+class LoginFailed extends HttpException
 {
     private $error;
 
-    public function __construct($error)
+    public function __construct($error, $statusCode = 403)
     {
         $this->error = $error;
     }

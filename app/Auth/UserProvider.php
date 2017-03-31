@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Auth;
+
 use App\Exceptions\StudentNotFoundException;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
+
 class UserProvider extends EloquentUserProvider
 {
     public function validateCredentials(Authenticatable $user, array $credentials)
@@ -17,7 +19,7 @@ class UserProvider extends EloquentUserProvider
     /**
      * Retrieve a user by the given credentials.
      *
-     * @param  array  $credentials
+     * @param  array $credentials
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function retrieveByCredentials(array $credentials)
@@ -32,13 +34,13 @@ class UserProvider extends EloquentUserProvider
         $query = $this->createModel()->newQuery();
 
         foreach ($credentials as $key => $value) {
-            if (! Str::contains($key, 'password')) {
+            if (!Str::contains($key, 'password')) {
                 $query->where($key, $value);
             }
         }
 
         $user = $query->first();
-        if(is_null($user)){
+        if (is_null($user)) {
             throw new ModelNotFoundException();
         }
         return $user;

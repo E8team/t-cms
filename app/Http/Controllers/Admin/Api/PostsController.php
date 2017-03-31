@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
-use Illuminate\Http\Request;
 
 class PostsController extends ApiController
 {
@@ -17,6 +16,7 @@ class PostsController extends ApiController
     {
 
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -26,7 +26,9 @@ class PostsController extends ApiController
      */
     public function store(PostCreateRequest $request)
     {
+
     }
+
     /**
      * Display the specified resource.
      *
@@ -38,6 +40,7 @@ class PostsController extends ApiController
     {
         Post::post()->find($postId);
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -54,14 +57,15 @@ class PostsController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  PostUpdateRequest $request
-     * @param  string            $id
+     * @param  string $id
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function update(PostUpdateRequest $request, $id)
     {
 
     }
+
     /**
      * Remove the specified resource from storage.
      *

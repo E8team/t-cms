@@ -19,19 +19,18 @@ Trait Listable
                 $orders = explode(',', $orders);
                 foreach ($orders as &$v) {
                     //这第三个参数没毛病
-                    if(strpos($v, '-', 1))
-                    {
+                    if (strpos($v, '-', 1)) {
                         $temp = explode('-', $v, 2);
                         $v = ['field' => $temp[0], 'dir' => $temp[1]];
-                    }else{
+                    } else {
                         $v = ['field' => $v, 'dir' => 'asc'];
                     }
                 }
                 unset($v);
             }
 
-            foreach ($orders as $order){
-                if(in_array($order['field'], static::$allowSortFields)) {
+            foreach ($orders as $order) {
+                if (in_array($order['field'], static::$allowSortFields)) {
                     $query->orderBy($order['field'], isset($order['dir']) ? $order['dir'] : 'asc');
                 }
             }

@@ -3,14 +3,13 @@
 namespace App\Entities;
 
 use App\Entities\Traits\Listable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 use Ty666\PictureManager\Traits\Picture;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
@@ -51,6 +50,7 @@ class User extends BaseModel implements
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     /**
      * For EntrustUserTrait and SoftDeletes conflict
      */

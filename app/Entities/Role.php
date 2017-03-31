@@ -3,12 +3,11 @@
 namespace App\Entities;
 
 
-use Zizaco\Entrust\Contracts\EntrustRoleInterface;
-use Zizaco\Entrust\EntrustRole;
-use Config;
-use Zizaco\Entrust\Traits\EntrustRoleTrait;
 use Cache;
+use Config;
 use DB;
+use Zizaco\Entrust\Contracts\EntrustRoleInterface;
+use Zizaco\Entrust\Traits\EntrustRoleTrait;
 
 class Role extends BaseModel implements EntrustRoleInterface
 {
@@ -42,7 +41,7 @@ class Role extends BaseModel implements EntrustRoleInterface
     public function cachedPermissions()
     {
         $rolePrimaryKey = $this->primaryKey;
-        $cacheKey = 'entrust_permissions_for_role_'.$this->$rolePrimaryKey;
+        $cacheKey = 'entrust_permissions_for_role_' . $this->$rolePrimaryKey;
         return Cache::tags(Config::get('entrust.permission_role_table'))->rememberForever($cacheKey, function () {
             return $this->perms()->ordered()->recent()->get();
         });

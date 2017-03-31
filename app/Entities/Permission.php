@@ -5,9 +5,9 @@ namespace App\Entities;
 
 use App\Entities\Traits\Cachable;
 use Cache;
+use Config;
 use Zizaco\Entrust\Contracts\EntrustPermissionInterface;
 use Zizaco\Entrust\Traits\EntrustPermissionTrait;
-use Config;
 
 class Permission extends BaseModel implements EntrustPermissionInterface
 {
@@ -16,6 +16,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         'is_menu' => 'boolean'
     ];
     protected $fillable = [];
+
     protected function clearCache()
     {
         Cache::tags(Config::get('permissions_table'))->flush();
@@ -40,28 +41,25 @@ class Permission extends BaseModel implements EntrustPermissionInterface
                 ->recent()
                 ->get()
                 ->keyBy('id');
-                //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
+            //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
         });
     }
 
     public static function getUserMenu($user)
     {
 
-        if(is_numeric($user))
-        {
+        if (is_numeric($user)) {
             $user = User::find($user);
         }
-        if(!$user instanceof User)
-        {
+        if (!$user instanceof User) {
             return null;
         }
 
         $menu = collect();
-        $user->roles->each(function ($item) use (&$menu)
-        {
+        $user->roles->each(function ($item) use (&$menu) {
             $menu = $menu->merge($item->cachedPermissions());
         });
-        if($menu->isEmpty()){
+        if ($menu->isEmpty()) {
             return $menu;
         }
         return $menu->sortBy('order')->sortBy('created_at')->groupBy('parent_id');

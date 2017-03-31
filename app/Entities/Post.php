@@ -4,8 +4,8 @@ namespace App\Entities;
 
 
 use Cache;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Config;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Ty666\PictureManager\Traits\Picture;
 
 class Post extends BaseModel
@@ -62,8 +62,7 @@ class Post extends BaseModel
         $cacheKey = 'post_views_count_' . $this->id;
         if (Cache::has($cacheKey)) {
             $currentViewCount = Cache::increment($cacheKey);
-            if($currentViewCount - $this->views_count >= Config::get('cache.post.cache_views_count_num'))
-            {
+            if ($currentViewCount - $this->views_count >= Config::get('cache.post.cache_views_count_num')) {
                 //将阅读量写入数据库
                 //User::where($this->getKeyName(), $this->getKey())->increment('views_count', config('cache.post.cache_views_count_num'));
                 User::where($this->getKeyName(), $this->getKey())->update('views_count', $currentViewCount);

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Exceptions\LoginFailed;
+use Auth;
 use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Lang;
 use Validator;
-use Auth;
 
 class LoginController extends ApiController
 {
@@ -19,7 +19,7 @@ class LoginController extends ApiController
     /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function login(Request $request)
@@ -36,18 +36,18 @@ class LoginController extends ApiController
             $this->fireLockoutEvent($request);
             return $this->sendLockoutResponse($request);
         }
-        try{
+        try {
             $this->attemptLogin($credentials, $request->has('remember'));
             //该用户是否被锁定
             $user = Auth::user();
-            if($user->is_locked){ //用户是否已经被锁定
+            if ($user->is_locked) { //用户是否已经被锁定
                 $this->logout($request);
                 // todo 国际化
                 return $this->response->error('该用户已经被锁定', 423);
             }
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
-        }catch (LoginFailed $e){
+        } catch (LoginFailed $e) {
             $this->incrementLoginAttempts($request);
             throw new ValidationHttpException($e->getError());
         }
@@ -56,7 +56,7 @@ class LoginController extends ApiController
     /**
      * Validate the user login request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return void
      */
     protected function validateLogin($credentials)
@@ -76,13 +76,13 @@ class LoginController extends ApiController
     protected function attemptLogin($credentials, $remember)
     {
         $loginSuccess = false;
-        try{
+        try {
             $loginSuccess = $this->guard()->attempt($credentials, $remember);
-        }catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             //todo 国际化
             throw new LoginFailed([$this->username() => '用户名不存在']);
         }
-        if(!$loginSuccess){
+        if (!$loginSuccess) {
             //todo 国际化
             throw new LoginFailed(['password' => '密码错误']);
         }
@@ -92,7 +92,7 @@ class LoginController extends ApiController
     /**
      * Get the needed authorization credentials from the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     protected function credentials(Request $request)
@@ -104,7 +104,7 @@ class LoginController extends ApiController
     /**
      * Redirect the user after determining they are locked out.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendLockoutResponse(Request $request)
@@ -116,10 +116,11 @@ class LoginController extends ApiController
         $message = Lang::get('auth.throttle', ['seconds' => $seconds]);
         $this->response->error($message, 423);
     }
+
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
