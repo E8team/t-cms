@@ -42,14 +42,20 @@ class AppServiceProvider extends ServiceProvider
                 'message' => '请先登录!'
             ], 401);
         });
-        $apiHandler->register(function (AuthorizationException $exception) {
+        $apiHandler->register(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
             return response([
                 'code' => 401.3,
                 //todo 国际化
                 'message' => $exception->getMessage()=='This action is unauthorized.'?'没有权限!':$exception->getMessage()
             ], 401);
         });
-
+        $apiHandler->register(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return response([
+                'code' => 404,
+                //todo 国际化
+                'message' => $exception->getMessage()
+            ], 404);
+        });
         $this->app->singleton(Theme::class, function ($app) {
             return new Theme($app['filesystem']->disk('theme'), Setting::getSetting('current_theme'));
         });

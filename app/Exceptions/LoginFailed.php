@@ -18,6 +18,8 @@ class LoginFailed extends HttpException
     public function __construct($error, $statusCode = 403)
     {
         $this->error = $error;
+        //todo 国际化
+        parent::__construct($statusCode, '登录失败', null, [], $statusCode);
     }
 
     public function getError()

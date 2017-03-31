@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
@@ -75,6 +76,9 @@ class PostsController extends ApiController
      */
     public function destroy($id)
     {
-
+        if (!Post::destroy($id)) {
+            //todo 国际化
+            throw new NotFoundHttpException('该文章不存在');
+        }
     }
 }

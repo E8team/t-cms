@@ -34,6 +34,7 @@ class UserUpdateRequest extends FormRequest
             'user_name' => ['required', Rule::unique('users')->ignore($userId)],
             'nick_name' => 'string',
             'email' => ['email', Rule::unique('users')->ignore($userId)],
+            'avatar' => 'string|max:40',
             'password' => 'min:6',
             'is_lock' => 'boolean'
         ];

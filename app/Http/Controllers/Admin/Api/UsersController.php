@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ty
- * Date: 2017/3/30 0030
- * Time: 下午 9:00
- */
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Entities\User;
+use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Transformers\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,9 +11,9 @@ use Hash;
 
 class UsersController extends ApiController
 {
+
     public function lists()
     {
-
         $users = User::withSimpleSearch()
             ->withSort()
             ->recent()
@@ -50,4 +44,12 @@ class UsersController extends ApiController
         }
         $request->performUpdate(User::findOrFail($id));
     }
+
+    public function store(UserCreateRequest $request)
+    {
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        User::create($data);
+    }
+
 }
