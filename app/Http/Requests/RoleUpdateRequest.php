@@ -33,7 +33,7 @@ class RoleUpdateRequest extends Request
         return [
             'name' => [Rule::unique('roles')->ignore($role->id)],
             'display_name' => 'string',
-            'description' => ['email', Rule::unique('roles')->ignore($role->id)],
+            'description' => 'string',
             'order' => 'int',
         ];
     }

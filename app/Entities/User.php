@@ -62,6 +62,6 @@ class User extends BaseModel implements
 
     public function getAvatarAttribute($value)
     {
-        return $this->getPicure($value, ['is', 'xs', 'l'], asset('images/default_avatar.jpg'));
+        return $this->getPicure($value, ['is', 'xs', 'l'], asset('static/admin/images/default_avatar.jpg'));
     }
 }
