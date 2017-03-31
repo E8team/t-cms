@@ -1,19 +1,35 @@
 <?php
 
-$api->get('post/{post}', 'PostsController@show');
+
 
 $api->group(['middleware'=>'auth'], function ($api) {
+    // 当前登录的用户
     $api->get('me', 'UsersController@me');
+    // 用户列表
     $api->get('users', 'UsersController@lists');
+    // 创建用户
     $api->post('users', 'UsersController@store');
-    $api->get('user/{user}', 'UsersController@show');
-    $api->put('user/{user}', 'UsersController@update');
-    $api->delete('user/{id}', 'UsersController@destroy');
+    // 获取某个用户的信息
+    $api->get('users/{user}', 'UsersController@show');
+    // 更新用户
+    $api->put('users/{user}', 'UsersController@update');
+    // 删除用户
+    $api->delete('users/{id}', 'UsersController@destroy');
+    // 获取用户角色
+    $api->get('users/{user}/roles', 'UsersController@roles');
 
+    // 角色列表
+    $api->get('roles', 'RolesController@lists');
+    // 获取某个角色的信息
+    $api->get('roles/{role}', 'RolesController@show');
+    // 更新角色
+    $api->put('roles/{role}', 'RolesController@update');
+    // 删除角色
+    $api->delete('role/{id}', 'RolesController@destroy');
 
+    $api->get('post/{post}', 'PostsController@show');
 });
-$api->get('roles', 'RolesController@lists');
-$api->delete('role/{id}', 'RolesController@destroy');
+
 
 // auth 相关
 $api->post('login', 'LoginController@login');

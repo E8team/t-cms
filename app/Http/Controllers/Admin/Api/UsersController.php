@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\User;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Transformers\RoleTransformer;
 use App\Transformers\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hash;
@@ -57,4 +58,8 @@ class UsersController extends ApiController
         User::create($data);
     }
 
+    public function roles(User $user)
+    {
+        return $this->response->collection($user->roles, new RoleTransformer());
+    }
 }

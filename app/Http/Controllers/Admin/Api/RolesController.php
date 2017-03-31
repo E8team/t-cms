@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Entities\Role;
 use App\Http\Requests\RoleCreateRequest;
+use App\Http\Requests\RoleUpdateRequest;
 use App\Transformers\RoleTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RolesController extends ApiController
 {
+    public function show(Role $role)
+    {
+        return $this->response->item($role, new RoleTransformer());
+    }
+
     public function lists()
     {
         $roles = Role::withSimpleSearch()
@@ -23,6 +29,11 @@ class RolesController extends ApiController
     public function store(RoleCreateRequest $request)
     {
         Role::create($request->all());
+    }
+
+    public function update($role, RoleUpdateRequest $request)
+    {
+        $request->performUpdate($role);
     }
 
     public function destroy($id)
