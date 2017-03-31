@@ -30,7 +30,7 @@
         },
         methods: {
             login () {
-                this.$http.post('admin/login', {
+                this.$http.post('login', {
                     user_name: this.user_name,
                     password: this.password,
                     rember: this.rember
