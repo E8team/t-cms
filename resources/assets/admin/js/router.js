@@ -26,6 +26,11 @@ export default new Router({
                             path: 'users',
                             name: 'users',
                             component: require('./views/userManage/Users.vue')
+                        },
+                        {
+                            path: 'roles',
+                            name: 'roles',
+                            component: require('./views/userManage/Roles.vue')
                         }
                     ]
                 },
