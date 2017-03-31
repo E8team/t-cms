@@ -6,7 +6,7 @@ use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
 
-class RoleUpdateRequest extends Request
+class RoleCreateRequest extends Request
 {
 
     /**
@@ -29,7 +29,7 @@ class RoleUpdateRequest extends Request
         return [
             'name' => 'required:unique:roles',
             'display_name' => 'string',
-            'description' => ['email', Rule::unique('roles')->ignore($role->id)],
+            'description' => 'string',
             'order' => 'int',
         ];
     }

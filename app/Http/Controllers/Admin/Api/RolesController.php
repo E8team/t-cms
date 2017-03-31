@@ -3,9 +3,9 @@ namespace App\Http\Controllers\Admin\Api;
 
 
 use App\Entities\Role;
+use App\Http\Requests\RoleCreateRequest;
 use App\Transformers\RoleTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Hash;
 
 class RolesController extends ApiController
 {
@@ -21,11 +21,9 @@ class RolesController extends ApiController
             ->addMeta('allow_search_fields', Role::$allowSearchFields);
     }
 
-    public function store()
+    public function store(RoleCreateRequest $request)
     {
-        $data = $request->all();
-        $data['password'] = Hash::make($data['password']);
-        User::create($data);
+        Role::create($request->all());
     }
 
     public function destroy($id)
