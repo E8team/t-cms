@@ -9,6 +9,9 @@
     <div class="body">
       <slot></slot>
     </div>
+    <footer v-if="$slots['footer'] !== undefined">
+      <slot name="footer"></slot>
+    </footer>
   </div>
 </template>
 
@@ -65,7 +68,11 @@ export default{
       }
     }
     .body{
-      padding: 15px;
+      padding: 10px 15px;
+    }
+    footer{
+      padding: 0 0 10px 15px;
+      overflow: hidden;
     }
   }
 </style>
