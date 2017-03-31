@@ -36,7 +36,6 @@
             CurrencyListPage
         },
         mounted () {
-            console.log('users')
         }
     }
 </script>

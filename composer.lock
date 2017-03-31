@@ -2600,16 +2600,16 @@
         },
         {
             "name": "ty666/picture-manager",
-            "version": "1.0.10",
+            "version": "1.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/3tnet/pictureManager.git",
-                "reference": "dca660c2701406b7e57726deeee25aa2f7e3e225"
+                "reference": "874787c348b60d3d71269fcdff8bdc1422235a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/dca660c2701406b7e57726deeee25aa2f7e3e225.zip",
-                "reference": "dca660c2701406b7e57726deeee25aa2f7e3e225",
+                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/874787c348b60d3d71269fcdff8bdc1422235a36.zip",
+                "reference": "874787c348b60d3d71269fcdff8bdc1422235a36",
                 "shasum": ""
             },
             "require": {
@@ -2632,7 +2632,7 @@
                 }
             ],
             "description": "a picture manager tool",
-            "time": "2017-03-30T04:30:10+00:00"
+            "time": "2017-03-30T15:42:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
