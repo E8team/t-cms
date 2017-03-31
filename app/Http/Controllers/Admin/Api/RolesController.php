@@ -14,7 +14,6 @@ class RolesController extends ApiController
         $roles = Role::withSimpleSearch()
             ->withSort()
             ->ordered()
-            ->recent()
             ->paginate($this->perPage());
         return $this->response->paginator($roles, new RoleTransformer())
             ->addMeta('allow_sort_fields', Role::$allowSortFields)

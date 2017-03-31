@@ -10,8 +10,10 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('user/{user}', 'UsersController@update');
     $api->delete('user/{id}', 'UsersController@destroy');
 
-});
 
+});
+$api->get('roles', 'RolesController@lists');
+$api->delete('role/{id}', 'RolesController@destroy');
 
 // auth 相关
 $api->post('login', 'LoginController@login');
