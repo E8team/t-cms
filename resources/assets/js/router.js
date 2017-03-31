@@ -21,6 +21,10 @@ export default new Router({
                     path: 'home',
                     component: Home,
                     children: [
+                        {
+                            path: 'users',
+                            component: require('./views/userManage/Users.vue')
+                        }
                     ]
                 },
                 {

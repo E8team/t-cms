@@ -5,6 +5,8 @@ import 'element-ui/lib/theme-default/index.css';
 import App from './App.vue';
 import router from './router'
 Vue.use(ElementUI);
+import Panel from './components/Panel.vue'
+Vue.component(Panel.name, Panel)
 Vue.prototype.$http = axios.create({
     baseURL: '/api/',
 })
