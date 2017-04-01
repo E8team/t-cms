@@ -3,7 +3,7 @@
 namespace App\Entities;
 
 use App\Entities\Traits\Listable;
-
+//todo need cache
 class Category extends BaseModel
 {
     use Listable;
@@ -12,6 +12,11 @@ class Category extends BaseModel
     protected $casts = [
         'is_nav' => 'boolean',
     ];
+
+
+    protected $fillable = ['type', 'image', 'parent_id', 'cate_name',
+        'description', 'url', 'cate_slug', 'is_nav', 'order',
+        'page_template', 'list_template', 'content_template', 'setting'];
 
     public function posts()
     {
@@ -49,5 +54,15 @@ class Category extends BaseModel
                 self::tree($allMenu, $res[$value['id']]['children'], $value['id']);
             }
         }
+    }
+
+    public function scopeTopCategories($query)
+    {
+        return $query->where('parent_id', 0);
+    }
+
+    public function scopeChildrenCategories($query, $parentId)
+    {
+        return $query->where('parent_id', $parentId);
     }
 }

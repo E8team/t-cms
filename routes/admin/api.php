@@ -39,6 +39,16 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新权限
     $api->put('permissions/{permission}', 'PermissionController@update');
 
+
+    // 获取所有的父级分类
+    $api->get('top_categories', 'CategoriesController@getTopCategories');
+    // 获取某个权限下面的子级权限
+    $api->get('categories/{category}/children', 'CategoriesController@getChildren');
+    // 创建权限
+    $api->post('categories', 'CategoriesController@store');
+    // 更新分类
+    $api->put('categories/{category}', 'CategoriesController@update');
+
     $api->get('post/{post}', 'PostsController@show');
 });
 

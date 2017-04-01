@@ -32,13 +32,12 @@ class PermissionsController extends ApiController
             Permission::allPermissionWithCache()->where('parent_id', 0),
             new PermissionTransformer());*/
         $topPermissions = Permission::topPermissions()
-            ->withSort()
             ->withSimpleSearch()
             ->ordered()
             ->recent()
-            ->paginate($this->perPage());
-        return $this->response->paginator($topPermissions, new PermissionTransformer())
-            ->setMeta(Permission::getAllowSearchFieldsMeta() + Permission::getAllowSortFieldsMeta());
+            ->get();
+        return $this->response->collection($topPermissions, new PermissionTransformer())
+            ->setMeta(Permission::getAllowSearchFieldsMeta());
 
     }
 
@@ -47,13 +46,12 @@ class PermissionsController extends ApiController
         /*$permissions = Permission::allPermissionWithCache()->where('parent_id', $permission->id);
         return $this->response->collection($permissions, new PermissionTransformer());*/
         $childrenPermissions = Permission::childrenPermissions($permission->id)
-            ->withSort()
             ->withSimpleSearch()
             ->ordered()
             ->recent()
-            ->paginate($this->perPage());
-        return $this->response->paginator($childrenPermissions, new PermissionTransformer())
-            ->setMeta(Permission::getAllowSearchFieldsMeta() + Permission::getAllowSortFieldsMeta());
+            ->get();
+        return $this->response->collection($childrenPermissions, new PermissionTransformer())
+            ->setMeta(Permission::getAllowSearchFieldsMeta());
     }
 
     public function store(PermissionCreateRequest $request)
