@@ -35,9 +35,9 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 获取某个权限下面的子级权限
     $api->get('permissions/{permission}/children', 'PermissionsController@getChildren');
     // 创建权限
-    $api->post('permissions', 'PermissionController@store');
+    $api->post('permissions', 'PermissionsController@store');
     // 更新权限
-    $api->put('permissions/{permission}', 'PermissionController@update');
+    $api->put('permissions/{permission}', 'PermissionsController@update');
 
 
     // 获取所有的父级分类
