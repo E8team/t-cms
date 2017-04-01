@@ -2,13 +2,21 @@
 
 namespace App\Entities;
 
+use App\Entities\Traits\Listable;
+//todo need cache
 class Category extends BaseModel
 {
+    use Listable;
     public $timestamps = false;
 
     protected $casts = [
-        'is_menu' => 'boolean',
+        'is_nav' => 'boolean',
     ];
+
+
+    protected $fillable = ['type', 'image', 'parent_id', 'cate_name',
+        'description', 'url', 'cate_slug', 'is_nav', 'order',
+        'page_template', 'list_template', 'content_template', 'setting'];
 
     public function posts()
     {
@@ -28,23 +36,39 @@ class Category extends BaseModel
         return $res;
     }
 
-    public static function getMenu()
+    public static function getNav()
     {
-        $allMenu = Category::where('is_menu', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $allNav = Category::where('is_nav', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
         $res = [];
-        self::tree($allMenu, $res);
+        self::tree($allNav, $res);
         return $res;
     }
 
-    private static function tree(&$allMenu, &$res, $parent_id = 0)
+    private static function tree(&$allNav, &$res, $parent_id = 0)
     {
-        foreach ($allMenu as $key => $value) {
+        foreach ($allNav as $key => $value) {
             if ($value['parent_id'] == $parent_id) {
                 $res[$value['id']] = $value;
                 $res[$value['id']]['children'] = [];
-                unset($allMenu[$key]);
+                unset($allNav[$key]);
                 self::tree($allMenu, $res[$value['id']]['children'], $value['id']);
             }
         }
+    }
+
+    public function getImageAttribute($image)
+    {
+        //todo 找一个默认缩略图
+        return $this->getPicure($image, ['l', 'b', 'r'], asset('images/default_avatar.jpg'));
+    }
+
+    public function scopeTopCategories($query)
+    {
+        return $query->where('parent_id', 0);
+    }
+
+    public function scopeChildrenCategories($query, $parentId)
+    {
+        return $query->where('parent_id', $parentId);
     }
 }

@@ -18,7 +18,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_name' => '公司新闻',
                 'description' => '这里的公司新闻',
                 'cate_slug' => 'company-news',
-                'is_menu' => true,
+                'is_nav' => true,
                 'parent_id' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
@@ -29,7 +29,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_name' => '公司概况',
                 'description' => '公司概况',
                 'cate_slug' => 'company-gk',
-                'is_menu' => true,
+                'is_nav' => true,
                 'parent_id' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
@@ -40,7 +40,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_name' => '公司简介',
                 'description' => '公司简介',
                 'cate_slug' => 'company-jj',
-                'is_menu' => true,
+                'is_nav' => true,
                 'parent_id' => 2,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
@@ -51,7 +51,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_name' => '现任领导',
                 'description' => '现任领导',
                 'cate_slug' => 'company-xrld',
-                'is_menu' => true,
+                'is_nav' => true,
                 'parent_id' => 2,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()

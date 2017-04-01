@@ -4,6 +4,7 @@ namespace App\Entities;
 
 
 use App\Entities\Traits\Cachable;
+use App\Entities\Traits\Listable;
 use Cache;
 use Config;
 use Zizaco\Entrust\Contracts\EntrustPermissionInterface;
@@ -11,16 +12,18 @@ use Zizaco\Entrust\Traits\EntrustPermissionTrait;
 
 class Permission extends BaseModel implements EntrustPermissionInterface
 {
-    use EntrustPermissionTrait, Cachable;
+    use EntrustPermissionTrait, Cachable, Listable;
     protected $casts = [
         'is_menu' => 'boolean'
     ];
-    protected $fillable = [];
-
+    protected $fillable = ['name', 'display_name', 'description', 'parent_id', 'is_menu', 'icon', 'order'];
+    protected static $allowSortFields = ['name', 'display_name', 'is_menu', 'order'];
+    protected static $allowSearchFields = ['name', 'display_name'];
     protected function clearCache()
     {
         Cache::tags(Config::get('permissions_table'))->flush();
     }
+
 
     /**
      * Creates a new instance of the model.
@@ -41,7 +44,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
                 ->recent()
                 ->get()
                 ->keyBy('id');
-            //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
+                //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
         });
     }
 
@@ -64,4 +67,15 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         }
         return $menu->sortBy('order')->sortBy('created_at')->groupBy('parent_id');
     }
+
+    public function scopeTopPermissions($query)
+    {
+        return $query->where('parent_id', 0);
+    }
+
+    public function scopeChildrenPermissions($query, $parentId)
+    {
+        return $query->where('parent_id', $parentId);
+    }
+
 }

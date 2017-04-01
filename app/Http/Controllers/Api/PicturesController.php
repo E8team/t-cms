@@ -22,7 +22,7 @@ class PicturesController extends ApiController
         try{
             $picture = PictureManager::upload($request->file($request->get('picture_key', 'file')));
         }catch (UploadException $e){
-            $this->response->error('图片上传失败');
+            return $this->response->error('图片上传失败');
         }
 
         return ['picture' => $picture];

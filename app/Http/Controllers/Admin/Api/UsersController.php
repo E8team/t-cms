@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\User;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Transformers\RoleTransformer;
 use App\Transformers\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hash;
@@ -24,8 +25,7 @@ class UsersController extends ApiController
             ->recent()
             ->paginate($this->perPage());
         return $this->response->paginator($users, new UserTransformer())
-            ->addMeta('allow_sort_fields', User::$allowSortFields)
-            ->addMeta('allow_search_fields', User::$allowSearchFields);
+            ->setMeta(User::getAllowSortFieldsMeta() + User::getAllowSearchFieldsMeta());
     }
 
     public function show($user)
@@ -39,6 +39,7 @@ class UsersController extends ApiController
             //todo 国际化
             throw new NotFoundHttpException('该用户不存在');
         }
+        return $this->response->noContent();
     }
 
     public function update(User $user, UserUpdateRequest $request)
@@ -48,6 +49,7 @@ class UsersController extends ApiController
             $data['password'] = Hash::make($data['password']);
         }
         $request->performUpdate($user);
+        return $this->response->noContent();
     }
 
     public function store(UserCreateRequest $request)
@@ -55,6 +57,11 @@ class UsersController extends ApiController
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
         User::create($data);
+        return $this->response->noContent();
     }
 
+    public function roles(User $user)
+    {
+        return $this->response->collection($user->roles, new RoleTransformer());
+    }
 }

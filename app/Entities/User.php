@@ -26,8 +26,8 @@ class User extends BaseModel implements
         Authorizable::can insteadof EntrustUserTrait;
     }
 
-    public static $allowSortFields = ['id', 'user_name', 'nick_name', 'created_at', 'is_locked'];
-    public static $allowSearchFields = ['id', 'user_name', 'nick_name', 'email'];
+    protected static $allowSortFields = ['id', 'user_name', 'nick_name', 'created_at', 'is_locked'];
+    protected static $allowSearchFields = ['id', 'user_name', 'nick_name', 'email'];
 
     protected $casts = [
         'is_locked' => 'boolean'
@@ -60,8 +60,8 @@ class User extends BaseModel implements
         //$this->restoreSoftDelete();
     }
 
-    public function getAvatarAttribute($value)
+    public function getAvatarAttribute($avatar)
     {
-        return $this->getPicure($value, ['is', 'xs', 'l'], asset('images/default_avatar.jpg'));
+        return $this->getPicure($avatar, ['is', 'xs', 'l'], asset('images/default_avatar.jpg'));
     }
 }
