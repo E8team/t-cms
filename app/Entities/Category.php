@@ -56,6 +56,12 @@ class Category extends BaseModel
         }
     }
 
+    public function getImageAttribute($image)
+    {
+        //todo 找一个默认缩略图
+        return $this->getPicure($image, ['l', 'b', 'r'], asset('images/default_avatar.jpg'));
+    }
+
     public function scopeTopCategories($query)
     {
         return $query->where('parent_id', 0);
