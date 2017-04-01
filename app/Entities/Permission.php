@@ -41,7 +41,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
                 ->recent()
                 ->get()
                 ->keyBy('id');
-            //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
+                //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
         });
     }
 
@@ -63,5 +63,6 @@ class Permission extends BaseModel implements EntrustPermissionInterface
             return $menu;
         }
         return $menu->sortBy('order')->sortBy('created_at')->groupBy('parent_id');
+
     }
 }

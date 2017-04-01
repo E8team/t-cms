@@ -26,8 +26,13 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('roles/{role}', 'RolesController@update');
     // 删除角色
     $api->delete('role/{id}', 'RolesController@destroy');
-
+    // 获取菜单
     $api->get('menus', 'PermissionsController@menus');
+    // 获取所有的父级权限
+    $api->get('topPermissions', 'PermissionsController@getTopPermissions');
+    // 获取某个权限下面的子级权限
+    $api->get('permissions/{permission}/children', 'PermissionsController@getChildren');
+
 
     $api->get('post/{post}', 'PostsController@show');
 });
