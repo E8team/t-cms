@@ -61,5 +61,6 @@ class PostsController extends ApiController
             //todo 国际化
             throw new NotFoundHttpException('该文章不存在');
         }
+        return $this->response->noContent();
     }
 }

@@ -27,6 +27,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 删除角色
     $api->delete('role/{id}', 'RolesController@destroy');
 
+    $api->get('menus', 'PermissionsController@menus');
+
     $api->get('post/{post}', 'PostsController@show');
 });
 

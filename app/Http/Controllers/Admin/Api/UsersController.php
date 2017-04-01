@@ -40,6 +40,7 @@ class UsersController extends ApiController
             //todo 国际化
             throw new NotFoundHttpException('该用户不存在');
         }
+        return $this->response->noContent();
     }
 
     public function update(User $user, UserUpdateRequest $request)
@@ -49,6 +50,7 @@ class UsersController extends ApiController
             $data['password'] = Hash::make($data['password']);
         }
         $request->performUpdate($user);
+        return $this->response->noContent();
     }
 
     public function store(UserCreateRequest $request)
@@ -56,6 +58,7 @@ class UsersController extends ApiController
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
         User::create($data);
+        return $this->response->noContent();
     }
 
     public function roles(User $user)

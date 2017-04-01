@@ -29,11 +29,13 @@ class RolesController extends ApiController
     public function store(RoleCreateRequest $request)
     {
         Role::create($request->all());
+        return $this->response->noContent();
     }
 
     public function update($role, RoleUpdateRequest $request)
     {
         $request->performUpdate($role);
+        return $this->response->noContent();
     }
 
     public function destroy($id)
@@ -42,5 +44,6 @@ class RolesController extends ApiController
             //todo 国际化
             throw new NotFoundHttpException('该角色不存在');
         }
+        return $this->response->noContent();
     }
 }

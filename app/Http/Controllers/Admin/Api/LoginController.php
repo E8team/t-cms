@@ -47,6 +47,7 @@ class LoginController extends ApiController
             }
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
+            return $this->response->noContent();
         } catch (LoginFailed $e) {
             $this->incrementLoginAttempts($request);
             throw new ValidationHttpException($e->getError());
