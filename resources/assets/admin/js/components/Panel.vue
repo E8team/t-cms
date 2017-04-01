@@ -6,9 +6,11 @@
         <slot name="header"></slot>
       </div>
     </header>
-    <div class="body">
-      <slot></slot>
-    </div>
+    <el-row :gutter="10">
+      <el-col class="body" :xs="24" :sm="16" :md="10" :lg="8" :class="{'covered': covered}">
+        <slot></slot>
+      </el-col>
+    </el-row>
     <footer v-if="$slots['footer'] !== undefined">
       <slot name="footer"></slot>
     </footer>
@@ -22,6 +24,10 @@ export default{
     title: {
       type: String,
       required: true
+    },
+    covered: {
+      type: Boolean,
+      default: true
     },
     small: {
       type: Boolean,
@@ -67,8 +73,17 @@ export default{
         transform: translate(0,-50%);
       }
     }
+    .el-row{
+      margin: 0!important;
+    }
     .body{
-      padding: 10px 15px;
+      padding: 30px 15px;
+      float: inherit;
+      margin: 0 auto;
+      &.covered{
+        padding: 10px 15px!important;
+        width: 100%!important;
+      }
     }
     footer{
       padding: 0 0 10px 15px;

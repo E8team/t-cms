@@ -1,6 +1,9 @@
 <template>
     <div class="users">
         <CurrencyListPage title="角色列表" queryName="roles">
+            <div slot="option">
+                <el-button type="primary" icon="plus">添加角色</el-button>
+            </div>
             <template scope="list">
                 <el-table border :data="list.data" style="width: 100%">
                     <el-table-column property="name" label="角色"></el-table-column>
