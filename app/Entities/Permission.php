@@ -15,7 +15,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     protected $casts = [
         'is_menu' => 'boolean'
     ];
-    protected $fillable = [];
+    protected $fillable = ['name', 'display_name', 'description', 'parent_id', 'is_menu', 'icon', 'order'];
 
     protected function clearCache()
     {

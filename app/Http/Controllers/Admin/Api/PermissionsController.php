@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Api;
 
 
 use App\Entities\Permission;
+use App\Http\Requests\PermissionCreateRequest;
+use App\Http\Requests\PermissionUpdateRequest;
 use App\Transformers\PermissionTransformer;
 use Auth;
 
@@ -36,4 +38,18 @@ class PermissionsController extends ApiController
         $permissions = Permission::allPermissionWithCache()->where('parent_id', $permission->id);
         return $this->response->collection($permissions, new PermissionTransformer());
     }
+
+    public function store(PermissionCreateRequest $request)
+    {
+        Permission::create($request->all());
+        return $this->response->noContent();
+    }
+
+    public function update(Permission $permission, PermissionUpdateRequest $request)
+    {
+        $request->performUpdate($permission);
+        return $this->response->noContent();
+    }
+
+
 }
