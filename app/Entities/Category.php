@@ -7,7 +7,7 @@ class Category extends BaseModel
     public $timestamps = false;
 
     protected $casts = [
-        'is_menu' => 'boolean',
+        'is_nav' => 'boolean',
     ];
 
     public function posts()
@@ -28,21 +28,21 @@ class Category extends BaseModel
         return $res;
     }
 
-    public static function getMenu()
+    public static function getNav()
     {
-        $allMenu = Category::where('is_menu', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $allNav = Category::where('is_nav', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
         $res = [];
-        self::tree($allMenu, $res);
+        self::tree($allNav, $res);
         return $res;
     }
 
-    private static function tree(&$allMenu, &$res, $parent_id = 0)
+    private static function tree(&$allNav, &$res, $parent_id = 0)
     {
-        foreach ($allMenu as $key => $value) {
+        foreach ($allNav as $key => $value) {
             if ($value['parent_id'] == $parent_id) {
                 $res[$value['id']] = $value;
                 $res[$value['id']]['children'] = [];
-                unset($allMenu[$key]);
+                unset($allNav[$key]);
                 self::tree($allMenu, $res[$value['id']]['children'], $value['id']);
             }
         }
