@@ -28,15 +28,32 @@ class PermissionsController extends ApiController
 
     public function getTopPermissions()
     {
-        return $this->response->collection(
+        /*return $this->response->collection(
             Permission::allPermissionWithCache()->where('parent_id', 0),
-            new PermissionTransformer());
+            new PermissionTransformer());*/
+        $topPermissions = Permission::topPermissions()
+            ->withSort()
+            ->withSimpleSearch()
+            ->ordered()
+            ->recent()
+            ->paginate($this->perPage());
+        return $this->response->paginator($topPermissions, new PermissionTransformer())
+            ->setMeta(Permission::getAllowSearchFieldsMeta() + Permission::getAllowSortFieldsMeta());
+
     }
 
     public function getChildren(Permission $permission)
     {
-        $permissions = Permission::allPermissionWithCache()->where('parent_id', $permission->id);
-        return $this->response->collection($permissions, new PermissionTransformer());
+        /*$permissions = Permission::allPermissionWithCache()->where('parent_id', $permission->id);
+        return $this->response->collection($permissions, new PermissionTransformer());*/
+        $childrenPermissions = Permission::childrenPermissions($permission->id)
+            ->withSort()
+            ->withSimpleSearch()
+            ->ordered()
+            ->recent()
+            ->paginate($this->perPage());
+        return $this->response->paginator($childrenPermissions, new PermissionTransformer())
+            ->setMeta(Permission::getAllowSearchFieldsMeta() + Permission::getAllowSortFieldsMeta());
     }
 
     public function store(PermissionCreateRequest $request)

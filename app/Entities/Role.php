@@ -13,8 +13,8 @@ use Zizaco\Entrust\Traits\EntrustRoleTrait;
 class Role extends BaseModel implements EntrustRoleInterface
 {
     use EntrustRoleTrait, Listable;
-    public static $allowSortFields = ['id', 'name', 'display_name', 'order'];
-    public static $allowSearchFields = ['id', 'name', 'display_name', 'description'];
+    protected static $allowSortFields = ['id', 'name', 'display_name', 'order'];
+    protected static $allowSearchFields = ['id', 'name', 'display_name', 'description'];
     /**
      * The database table used by the model.
      *

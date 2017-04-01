@@ -2,8 +2,11 @@
 
 namespace App\Entities;
 
+use App\Entities\Traits\Listable;
+
 class Category extends BaseModel
 {
+    use Listable;
     public $timestamps = false;
 
     protected $casts = [

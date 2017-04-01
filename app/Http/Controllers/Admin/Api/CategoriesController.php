@@ -9,7 +9,14 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
+use App\Entities\Category;
+
 class CategoriesController extends ApiController
 {
-    //public function
+    public function nav()
+    {
+
+    }
+
+
 }
