@@ -13,13 +13,14 @@
                 </el-form-item>
                 <el-form-item label="头像">
                     <el-upload class="avatar-uploader"
+                            accept="image/jpeg,image/png"
                             :action="`${$t_meta.base_url}/ajax_upload_picture`"
                             :with-credentials="true"
                             :headers="{'X-CSRF-TOKEN': $t_meta.csrfToken}"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload"
                             :show-file-list="false" >
-                        <img v-if="user.avatar_urls.xs" :src="user.avatar_urls.xs" class="avatar" />
+                        <img v-if="user.avatar_urls" :src="user.avatar_urls.xs" class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
@@ -72,13 +73,11 @@
             },
             confirm () {
                 let method, url;
-                this.userId ? (method = 'put', url = 'users') : (method = 'post', url = `users/${this.userId}`);
+                this.userId ? (method = 'put', url = `users/${this.userId}`) : (method = 'post', url = 'users');
                 this.$http[method](url, {
-                    body: {
-                        ...this.user
-                    }
+                    ...this.user
                 }).then(res => {
-                    this.user = res.data.data;
+                    console.log(res.data)
                 });
             }
         },
