@@ -12,6 +12,7 @@
     <script>
         window.t_meta = {!! json_encode([
             'csrfToken' => csrf_token(),
+            'base_url' => url('/')
         ]) !!};
     </script>
 </head>
