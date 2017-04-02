@@ -2,7 +2,7 @@
     <div class="home">
         <el-menu :unique-opened="true" :default-active="currentPath" :router="true" class="menu" theme="dark">
             <div class="user_box">
-                <img :src="me.avatar ? me.avatar.xs : ''" :alt="me.user_name">
+                <img :src="me.avatar_urls ? me.avatar_urls.md : ''" :alt="me.user_name">
                 <div class="info">
                     <span>{{me.user_name}}</span>
                 </div>

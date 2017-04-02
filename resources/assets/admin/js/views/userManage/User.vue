@@ -1,7 +1,7 @@
 <template>
     <div class="user">
         <panel :covered="false" :title="title">
-            <el-form :model="user" label-width="100px">
+            <el-form :model="user" label-width="85px">
                 <el-form-item required label="用户名">
                     <el-input placeholder="请设置用户名" v-model="user.user_name"></el-input>
                 </el-form-item>
@@ -13,10 +13,14 @@
                 </el-form-item>
                 <el-form-item label="头像">
                     <el-upload class="avatar-uploader"
-                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :action="`${$t_meta.base_url}/ajax_upload_picture`"
+                            :with-credentials="true"
+                            :headers="{'X-CSRF-TOKEN': $t_meta.csrfToken}"
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload"
                             :show-file-list="false" >
-                        <!--<img class="avatar">-->
-                        <i class="el-icon-plus avatar-uploader-icon"></i>
+                        <img v-if="user.avatar_urls.xs" :src="user.avatar_urls.xs" class="avatar" />
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
                 <el-form-item required label="密码">
@@ -27,7 +31,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button-group>
-                        <el-button type="success" >确认</el-button>
+                        <el-button type="success" @click="confirm">确认</el-button>
                         <el-button @click="$router.back()">取消</el-button>
                     </el-button-group>
                 </el-form-item>
@@ -47,17 +51,46 @@
                     'nick_name': '',
                     'email': '',
                     'avatar': '',
+                    'avatar_urls': {},
                     'password': '',
                     'rePassword': ''
                 }
             }
         },
+        methods: {
+            handleAvatarSuccess (res, file) {
+                this.user.avatar_urls.xs = URL.createObjectURL(file.raw);
+                this.$forceUpdate();
+                this.user.avatar = res.picture;
+            },
+            beforeAvatarUpload(file) {
+                const isPIC = file.type === 'image/jpeg' || file.type === 'image/png';
+                if (!isPIC) {
+                    this.$message.error('上传头像图片只能是 JPG 或 PNG 格式!');
+                }
+                return isPIC;
+            },
+            confirm () {
+                let method, url;
+                this.userId ? (method = 'put', url = 'users') : (method = 'post', url = `users/${this.userId}`);
+                this.$http[method](url, {
+                    body: {
+                        ...this.user
+                    }
+                }).then(res => {
+                    this.user = res.data.data;
+                });
+            }
+        },
         mounted () {
             if (this.$route.name === 'user-edit') {
-                this.userId = this.$route.params.id
-                this.title = '编辑用户'
+                this.userId = this.$route.params.id;
+                this.$http.get(`users/${this.userId}`).then(res => {
+                    this.user = res.data.data;
+                });
+                this.title = '编辑用户';
             }else{
-                this.title = '添加用户'
+                this.title = '添加用户';
             }
         }
     }

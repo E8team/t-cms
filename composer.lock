@@ -2600,16 +2600,16 @@
         },
         {
             "name": "ty666/picture-manager",
-            "version": "1.0.11",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/3tnet/pictureManager.git",
-                "reference": "874787c348b60d3d71269fcdff8bdc1422235a36"
+                "reference": "b99df628efe0b14a3540c4e3323454dfc2b68021"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/874787c348b60d3d71269fcdff8bdc1422235a36.zip",
-                "reference": "874787c348b60d3d71269fcdff8bdc1422235a36",
+                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/b99df628efe0b14a3540c4e3323454dfc2b68021.zip",
+                "reference": "b99df628efe0b14a3540c4e3323454dfc2b68021",
                 "shasum": ""
             },
             "require": {
@@ -2632,7 +2632,7 @@
                 }
             ],
             "description": "a picture manager tool",
-            "time": "2017-03-30T15:42:16+00:00"
+            "time": "2017-04-02T11:20:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3238,16 +3238,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.7",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69"
+                "reference": "ef7b2f56815df854e66ceaee8ebe9393ae36a40d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/php-code-coverage/09e2277d14ea467e5a984010f501343ef29ffc69.zip",
-                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69",
+                "url": "https://files.phpcomposer.com/files/sebastianbergmann/php-code-coverage/ef7b2f56815df854e66ceaee8ebe9393ae36a40d.zip",
+                "reference": "ef7b2f56815df854e66ceaee8ebe9393ae36a40d",
                 "shasum": ""
             },
             "require": {
@@ -3297,7 +3297,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-01T09:12:17+00:00"
+            "time": "2017-04-02T07:44:40+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
