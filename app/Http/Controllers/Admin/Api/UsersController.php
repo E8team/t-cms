@@ -30,7 +30,7 @@ class UsersController extends ApiController
 
     public function show(User $user)
     {
-        $this->response->item($user, new UserTransformer());
+        return $this->response->item($user, new UserTransformer());
     }
 
     public function destroy($id)
