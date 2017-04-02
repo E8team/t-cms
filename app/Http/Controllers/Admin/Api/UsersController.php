@@ -28,7 +28,7 @@ class UsersController extends ApiController
             ->setMeta(User::getAllowSortFieldsMeta() + User::getAllowSearchFieldsMeta());
     }
 
-    public function show($user)
+    public function show(User $user)
     {
         $this->response->item($user, new UserTransformer());
     }
