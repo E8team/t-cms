@@ -9,9 +9,9 @@
             </div>
             <el-submenu index="userManage">
                 <template slot="title"><i class="el-icon-message"></i>用户管理</template>
-                <el-menu-item index="/admin/home/users">用户列表</el-menu-item>
-                <el-menu-item index="/admin/home/roles">角色列表</el-menu-item>
-                <el-menu-item index="1-1">权限列表</el-menu-item>
+                <el-menu-item index="/admin/home/user-list">用户列表</el-menu-item>
+                <el-menu-item index="/admin/home/role-list">角色列表</el-menu-item>
+                <el-menu-item index="/admin/home/permission-list">权限列表</el-menu-item>
             </el-submenu>
         </el-menu>
         <div class="content">

@@ -1,5 +1,10 @@
 <template>
     <div class="currency-list-page">
+        <div v-if="$slots['option'] !== undefined" class="option_wrapper">
+            <div class="option">
+                <slot name="option"></slot>
+            </div>
+        </div>
         <panel :title="title">
             <div slot="header">
                 <el-input
@@ -25,7 +30,6 @@
                         </el-select>
                         项结果
                     </div>
-                    <slot name="option"></slot>
                 </div>
                 <el-pagination
                         v-if="total > perPage"
@@ -118,5 +122,11 @@
     }
     .main {
         width: 100%;
+    }
+    .option_wrapper{
+        overflow: hidden;
+        margin-bottom: 10px;
+        .option{
+        }
     }
 </style>

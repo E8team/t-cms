@@ -23,14 +23,29 @@ export default new Router({
                     component: Home,
                     children: [
                         {
-                            path: 'users',
-                            name: 'users',
-                            component: require('./views/userManage/Users.vue')
+                            path: 'user-list',
+                            name: 'user-list',
+                            component: require('./views/userManage/UserList.vue')
                         },
                         {
-                            path: 'roles',
-                            name: 'roles',
-                            component: require('./views/userManage/Roles.vue')
+                            path: 'user-add',
+                            name: 'user-add',
+                            component: require('./views/userManage/User.vue')
+                        },
+                        {
+                            path: 'user-edit/:id',
+                            name: 'user-edit',
+                            component: require('./views/userManage/User.vue')
+                        },
+                        {
+                            path: 'role-list',
+                            name: 'role-list',
+                            component: require('./views/userManage/RoleList.vue')
+                        },
+                        {
+                            path: 'permission-list',
+                            name: 'permission-list',
+                            component: require('./views/userManage/PermissionList.vue')
                         }
                     ]
                 },
