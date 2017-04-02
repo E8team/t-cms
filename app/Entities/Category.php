@@ -53,7 +53,7 @@ class Category extends BaseModel
                 $res[$value['id']] = $value;
                 $res[$value['id']]['children'] = [];
                 unset($allNav[$key]);
-                self::tree($allMenu, $res[$value['id']]['children'], $value['id']);
+                self::tree($allNav, $res[$value['id']]['children'], $value['id']);
             }
         }
     }

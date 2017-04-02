@@ -12,7 +12,7 @@ class CategoriesController extends ApiController
 {
     public function nav()
     {
-        dd(Category::getNav());
+        return Category::getNav();
     }
 
     public function store(CategoryCreateRequest $request)
