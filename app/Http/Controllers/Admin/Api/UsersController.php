@@ -55,7 +55,12 @@ class UsersController extends ApiController
     public function store(UserCreateRequest $request)
     {
         $data = $request->all();
-        $data['password'] = Hash::make($data['password']);
+        if(empty($data['password'])){
+            unset($data['password']);
+        }else{
+            $data['password'] = Hash::make($data['password']);
+        }
+
         User::create($data);
         return $this->response->noContent();
     }

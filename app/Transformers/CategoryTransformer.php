@@ -9,6 +9,7 @@ class CategoryTransformer extends BaseTransformer
         return [
             'type' => $model->type,
             'image' => $model->image,
+            'image_urls' => $model->image_urls,
             'parent_id' => $model->parent_id,
             'cate_name' => $model->cate_name,
             'description' => $model->description,

@@ -55,3 +55,5 @@ $api->group(['middleware'=>'auth'], function ($api) {
 
 // auth 相关
 $api->post('login', 'LoginController@login');
+
+$api->get('nav', 'CategoriesController@nav');

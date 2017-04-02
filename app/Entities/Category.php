@@ -3,10 +3,12 @@
 namespace App\Entities;
 
 use App\Entities\Traits\Listable;
+use Ty666\PictureManager\Traits\Picture;
+
 //todo need cache
 class Category extends BaseModel
 {
-    use Listable;
+    use Listable, Picture;
     public $timestamps = false;
 
     protected $casts = [
@@ -56,10 +58,10 @@ class Category extends BaseModel
         }
     }
 
-    public function getImageAttribute($image)
+    public function getImageUrlsAttribute($image)
     {
         //todo 找一个默认缩略图
-        return $this->getPicure($image, ['l', 'b', 'r'], asset('images/default_avatar.jpg'));
+        return $this->getPicure($image, ['sm', 'md', 'lg','o'], asset('images/default_avatar.jpg'));
     }
 
     public function scopeTopCategories($query)
