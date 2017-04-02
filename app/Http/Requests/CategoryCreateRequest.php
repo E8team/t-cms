@@ -24,18 +24,18 @@ class CategoryCreateRequest extends Request
     {
         return [
             'type' => 'required|in:0,1,2',
-            'image' => 'string|max:40',
+            'image' => 'nullable|picture_id',
             'parent_id' => 'int',
             'cate_name' => 'required|string|max:30',
-            'description' => 'string',
-            'url' => 'url',
-            'cate_slug' => 'string|max:30|unqiue:categories',
+            'description' => 'nullable|string',
+            'url' => 'nullable|url',
+            'cate_slug' => 'nullable|string|max:30|unqiue:categories',
             'is_nav' => 'boolean',
             'order' => 'int',
-            'page_template' => 'string|max:30',
-            'list_template' => 'string|max:30',
-            'content_template' => 'string|max:30',
-            'setting' => 'string'
+            'page_template' => 'nullable|string|max:30',
+            'list_template' => 'nullable|string|max:30',
+            'content_template' => 'nullable|string|max:30',
+            'setting' => 'nullable|string'
         ];
     }
 }

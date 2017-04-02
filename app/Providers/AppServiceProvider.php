@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Entities\Setting;
 use App\Libs\Theme;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,7 +21,10 @@ class AppServiceProvider extends ServiceProvider
             ,$query->bindings
             ,$query->time);
         });*/
+        Validator::extend('picture_id', function($attribute, $value, $parameters, $validator) {
 
+            return preg_match('/[0-9a-z]{32}\.'.'('.implode('|', config('picture.allowTypeList')).')'.'/i', $value)==1;
+        }, '图片上传错误!');
     }
 
     /**
@@ -59,6 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Theme::class, function ($app) {
             return new Theme($app['filesystem']->disk('theme'), Setting::getSetting('current_theme'));
         });
+
 
 
     }

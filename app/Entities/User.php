@@ -60,8 +60,8 @@ class User extends BaseModel implements
         //$this->restoreSoftDelete();
     }
 
-    public function getAvatarUrlsAttribute($avatar)
+    public function getAvatarUrlsAttribute()
     {
-        return $this->getPicure($avatar, ['is', 'xs', 'sm', 'md'], asset('images/default_avatar.jpg'));
+        return $this->getPicure($this->avatar, ['is', 'xs', 'sm', 'md'], asset('images/default_avatar.jpg'));
     }
 }

@@ -58,10 +58,10 @@ class Category extends BaseModel
         }
     }
 
-    public function getImageUrlsAttribute($image)
+    public function getImageUrlsAttribute()
     {
         //todo 找一个默认缩略图
-        return $this->getPicure($image, ['sm', 'md', 'lg','o'], asset('images/default_avatar.jpg'));
+        return $this->getPicure($this->image, ['sm', 'md', 'lg','o'], asset('images/default_avatar.jpg'));
     }
 
     public function scopeTopCategories($query)

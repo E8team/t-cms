@@ -24,10 +24,10 @@ class PostCreateRequest extends Request
     {
         return [
             'title' => 'required|uniqe:posts',
-            'excerpt' => 'string',
-            'content' => 'string',
-            'cover' => 'string',
-            'status' => 'in:publish,draft',
+            'excerpt' => 'nullable|string',
+            'content' => 'nullable|string',
+            'cover' => 'nullable|picture',
+            'status' => 'nullable|in:publish,draft',
             'type' => 'in:post,type',
             'order' => 'int'
         ];

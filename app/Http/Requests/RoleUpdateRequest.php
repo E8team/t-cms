@@ -32,8 +32,8 @@ class RoleUpdateRequest extends Request
         $role = $this->route()->parameter('role');
         return [
             'name' => [Rule::unique('roles')->ignore($role->id)],
-            'display_name' => 'string',
-            'description' => 'string',
+            'display_name' => 'nullable|string',
+            'description' => 'nullable|string',
             'order' => 'int',
         ];
     }

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 100)->unique();
             $table->string('avatar', 40)->nullable();
             $table->string('password');
-            $table->boolean('is_locked')->defaule(false);
+            $table->boolean('is_locked')->default(false);
             //$table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

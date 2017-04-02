@@ -28,11 +28,11 @@ class PermissionCreateRequest extends Request
     {
         return [
             'name' => 'required:unique:permissions',
-            'display_name' => 'string',
-            'description' => 'string',
+            'display_name' => 'nullable|string',
+            'description' => 'nullable|string',
             'parent_id' => 'int',
             'is_menu' => 'boolean',
-            'icon' => 'string',
+            'icon' => 'nullable|string',
             'order' => 'int'
         ];
     }

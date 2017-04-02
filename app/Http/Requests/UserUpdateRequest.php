@@ -32,11 +32,11 @@ class UserUpdateRequest extends Request
         $user = $this->route()->parameter('user');
         return [
             'user_name' => [Rule::unique('users')->ignore($user->id)],
-            'nick_name' => 'string',
+            'nick_name' => 'nullable|string',
             'email' => ['email', Rule::unique('users')->ignore($user->id)],
-            'avatar' => 'string|max:40',
+            'avatar' => 'nullable|picture_id',
             'password' => 'min:6',
-            'is_lock' => 'boolean'
+            'is_lock' => 'nullable|boolean'
         ];
     }
 }

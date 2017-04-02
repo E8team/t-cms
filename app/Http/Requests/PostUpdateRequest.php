@@ -29,9 +29,9 @@ class PostUpdateRequest extends Request
         $post = $this->route()->parameter('post');
         return [
             'title' => ['required', Rule::unique('posts')->ignore($post->id)],
-            'excerpt' => 'string',
-            'content' => 'string',
-            'cover' => 'string',
+            'excerpt' => 'nullable|string',
+            'content' => 'nullable|string',
+            'cover' => 'nullable|picture_id',
             'status' => 'in:publish,draft',
             'order' => 'int'
         ];

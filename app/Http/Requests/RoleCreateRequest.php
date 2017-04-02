@@ -28,8 +28,8 @@ class RoleCreateRequest extends Request
     {
         return [
             'name' => 'required:unique:roles',
-            'display_name' => 'string',
-            'description' => 'string',
+            'display_name' => 'nullable|string',
+            'description' => 'nullable|string',
             'order' => 'int',
         ];
     }
