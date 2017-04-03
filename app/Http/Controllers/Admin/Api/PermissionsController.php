@@ -28,7 +28,14 @@ class PermissionsController extends ApiController
 
     public function allPermissions()
     {
-        dd(Permission::allPermission()->groupBy('parent_id')->toArray());
+        $permissions = Permission::allPermission()->groupBy('parent_id')->toArray();
+        foreach ($permissions[0] as &$permission){
+            $permission['children'] = $permissions[$permission['id']];
+            unset($permissions[$permission['id']]);
+        }
+        unset($permission);
+        $permissions = $permissions[0];
+        return $permissions;
     }
 
     public function getTopPermissions()

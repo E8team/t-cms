@@ -23,6 +23,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('roles', 'RolesController@lists');
     // 获取某个角色的信息
     $api->get('roles/{role}', 'RolesController@show');
+    $api->get('roles/{role}/permissions', 'RolesController@permissions');
     // 创建角色
     $api->post('roles', 'RolesController@store');
     // 更新角色

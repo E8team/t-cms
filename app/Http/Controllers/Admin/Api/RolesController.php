@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Entities\Role;
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleUpdateRequest;
+use App\Transformers\PermissionTransformer;
 use App\Transformers\RoleTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -29,7 +30,11 @@ class RolesController extends ApiController
         return $this->response->paginator($roles, new RoleTransformer())
             ->setMeta(Role::getAllowSortFieldsMeta() + Role::getAllowSortFieldsMeta());
     }
-
+    public function permissions(Role $role)
+    {
+        $permissions = $role->perms()->ordered()->recent()->get();
+        return $this->response->collection($permissions, new PermissionTransformer());
+    }
     public function store(RoleCreateRequest $request)
     {
         Role::create($request->all());
