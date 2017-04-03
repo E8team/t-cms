@@ -82,10 +82,4 @@ Trait Listable
     {
         return [ 'allow_search_fields' => static::$allowSearchFields ];
     }
-
-    public function scopeApplyFilter($query, $filter = null)
-    {
-        //todo
-        //if($filter)
-    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Transformers\CategoryTransformer;
 use App\Transformers\PostTransformer;
+use Illuminate\Http\Request;
 
 class CategoriesController extends ApiController
 {
@@ -51,15 +52,14 @@ class CategoriesController extends ApiController
             ->setMeta(Category::getAllowSearchFieldsMeta());
     }
 
-    public function posts(Category $category)
+    public function posts(Category $category, Request $request)
     {
         $posts = $category->posts()
-            ->withSimpleSearch()
-            ->withSort()
-            ->ordered()
-            ->recent()
-            ->scopeFilter()
+            ->applyFilter($request)
+            ->with('user')
+            ->with('categories')
             ->paginate($this->perPage());
         return $this->response->paginator($posts, new PostTransformer());
     }
+
 }

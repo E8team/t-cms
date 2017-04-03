@@ -23,7 +23,7 @@ class Post extends BaseModel
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
@@ -31,6 +31,32 @@ class Post extends BaseModel
     public function scopePost($query)
     {
         return $query->where('type', 'post');
+    }
+    public function scopeApplyFilter($query, $data)
+    {
+        $data = $data->only('q', 'type', 'status', 'orders');
+        $query->orderByTop();
+        if(!is_null($data['q']))
+        {
+            $query->withSimpleSearch($data['q']);
+        }
+        if(!is_null($data['q']))
+        {
+            $query->withSort($data['orders']);
+        }
+        switch ($data['type']){
+            case 'page':
+                $query->type();
+                break;
+            case 'draft':
+                $query->draft();
+        }
+        switch ($data['status']){
+            case 'publish':
+                $query->publish();
+                break;
+        }
+        return $query->ordered()->recent();
     }
 
     public function scopePage($query)
@@ -74,5 +100,14 @@ class Post extends BaseModel
         } else {
             Cache::forever($cacheKey, $this->views_count + 1);
         }
+    }
+
+    public static function movePosts2Categories($categoryIds, $postIds)
+    {
+        $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
+        $posts = static::findOrFail($postIds);
+        $posts->each(function ($post) use ($categoryIds){
+            $post->categories()->sync($categoryIds);
+        });
     }
 }

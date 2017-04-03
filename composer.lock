@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2faa8c774e94243f3a327928557e7d54",
+    "content-hash": "ce2182934f4e2e129f19b41f338e7929",
     "packages": [
         {
             "name": "dingo/api",
@@ -2600,16 +2600,16 @@
         },
         {
             "name": "ty666/picture-manager",
-            "version": "1.0.13",
+            "version": "1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/3tnet/pictureManager.git",
-                "reference": "b99df628efe0b14a3540c4e3323454dfc2b68021"
+                "reference": "1bf110405a9877dbb5447b784f53dd10b5d87170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/b99df628efe0b14a3540c4e3323454dfc2b68021.zip",
-                "reference": "b99df628efe0b14a3540c4e3323454dfc2b68021",
+                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/1bf110405a9877dbb5447b784f53dd10b5d87170.zip",
+                "reference": "1bf110405a9877dbb5447b784f53dd10b5d87170",
                 "shasum": ""
             },
             "require": {
@@ -2632,7 +2632,7 @@
                 }
             ],
             "description": "a picture manager tool",
-            "time": "2017-04-02T11:20:16+00:00"
+            "time": "2017-04-02T11:43:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3067,6 +3067,51 @@
             "time": "2015-05-11T14:41:42+00:00"
         },
         {
+            "name": "itsgoingd/clockwork",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsgoingd/clockwork.git",
+                "reference": "9864bad522eba9f486e79c0cb7bc953967b64cf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/itsgoingd/clockwork/9864bad522eba9f486e79c0cb7bc953967b64cf7.zip",
+                "reference": "9864bad522eba9f486e79c0cb7bc953967b64cf7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "psr/log": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Clockwork\\": "Clockwork/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "itsgoingd",
+                    "email": "itsgoingd@luzer.sk",
+                    "homepage": "http://twitter.com/itsgoingd"
+                }
+            ],
+            "description": "Server-side component of Clockwork, a Chrome extension for PHP development",
+            "homepage": "http://github.com/itsgoingd/clockwork",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "logging",
+                "profiling"
+            ],
+            "time": "2017-01-25T13:47:29+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "0.9.9",
             "source": {
@@ -3487,16 +3532,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.17",
+            "version": "5.7.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf"
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/68752b665d3875f9a38a357e3ecb35c79f8673bf.zip",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf",
+                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/69c4f49ff376af2692bad9cebd883d17ebaa98a1.zip",
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
                 "shasum": ""
             },
             "require": {
@@ -3565,7 +3610,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-19T16:52:12+00:00"
+            "time": "2017-04-03T02:22:27+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
