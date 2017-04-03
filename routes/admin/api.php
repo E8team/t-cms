@@ -1,6 +1,6 @@
 <?php
 
-$api->get('categories/{category}/posts', 'CategoriesController@posts');
+
 
 $api->group(['middleware'=>'auth'], function ($api) {
     // 当前登录的用户
@@ -39,7 +39,6 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新权限
     $api->put('permissions/{permission}', 'PermissionsController@update');
 
-
     // 获取所有的父级分类
     $api->get('top_categories', 'CategoriesController@getTopCategories');
     // 获取某个权限下面的子级权限
@@ -48,6 +47,10 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('categories', 'CategoriesController@store');
     // 更新分类
     $api->put('categories/{category}', 'CategoriesController@update');
+    //某个分类下的文章
+    $api->get('categories/{category}/posts', 'CategoriesController@posts');
+    //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
+    $api->get('move_posts_to_categories', 'PostsController@movePosts2Categories');
 
     $api->get('post/{post}', 'PostsController@show');
 });

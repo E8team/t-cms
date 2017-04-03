@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
 
 class PostUpdateRequest extends Request
 {
+    use Update;
     protected $allowModifyFields = ['title', 'excerpt', 'content', 'cover', 'status'];
 
     /**

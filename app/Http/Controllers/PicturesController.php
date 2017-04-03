@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Category;
 use Illuminate\Http\Request;
 use PictureManager;
 use Ty666\PictureManager\Exception\UploadException;

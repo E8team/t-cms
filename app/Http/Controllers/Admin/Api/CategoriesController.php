@@ -57,8 +57,9 @@ class CategoriesController extends ApiController
         $posts = $category->posts()
             ->applyFilter($request)
             ->with('user')
+            ->with('categories')
             ->paginate($this->perPage());
-
         return $this->response->paginator($posts, new PostTransformer());
     }
+
 }

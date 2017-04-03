@@ -9,7 +9,8 @@ class PostTransformer extends BaseTransformer
 
         return [
             'id' => $model->id,
-            //'user' => $model->user,
+            'user' => $model->user,
+            'categries' => $model->categries,
             'author_info' => $model->author_info,
             'title' => $model->title,
             'content' => $model->content,

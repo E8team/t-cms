@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Entities\Category;
 use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Transformers\PostTransformer;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
@@ -20,7 +22,8 @@ class PostsController extends ApiController
      */
     public function store(PostCreateRequest $request)
     {
-
+        Post::create($request->all());
+        return $this->response->noContent();
     }
 
     /**
@@ -45,7 +48,8 @@ class PostsController extends ApiController
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
-
+        $request->performUpdate($post);
+        return $this->response->noContent();
     }
 
     /**
@@ -62,5 +66,20 @@ class PostsController extends ApiController
             throw new NotFoundHttpException('该文章不存在');
         }
         return $this->response->noContent();
+    }
+
+    public function movePosts2Categories(Request $request)
+    {
+        $this->validate($request, [
+            'post_ids' => 'int_array',
+            'category_ids' => 'int_array',
+        ]);
+        $postIds = $request->get('post_ids');
+        $categoryIds = $request->get('category_ids');
+        $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
+        $posts = Post::findOrFail($postIds);
+        $posts->each(function ($post) use ($categoryIds){
+            $post->categories()->sync($categoryIds);
+        });
     }
 }
