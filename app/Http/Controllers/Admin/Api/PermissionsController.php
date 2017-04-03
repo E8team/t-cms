@@ -9,6 +9,7 @@ use App\Http\Requests\PermissionCreateRequest;
 use App\Http\Requests\PermissionUpdateRequest;
 use App\Transformers\PermissionTransformer;
 use Auth;
+use Illuminate\Http\Request;
 
 class PermissionsController extends ApiController
 {
@@ -66,5 +67,14 @@ class PermissionsController extends ApiController
         return $this->response->noContent();
     }
 
-
+    public function movePermissions2Roles(Request $request) {
+        $this->validate($request, [
+            'permission_ids' => 'int_array',
+            'role_ids' => 'int_array'
+        ]);
+        $permissionIds = $request->get('permission_ids');
+        $roleIds = $request->get('role_ids');
+        Permission::movePermissions2Roles($permissionIds, $roleIds);
+        return $this->response->noContent();
+    }
 }

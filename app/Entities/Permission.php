@@ -24,7 +24,6 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         Cache::tags(Config::get('permissions_table'))->flush();
     }
 
-
     /**
      * Creates a new instance of the model.
      *
@@ -78,4 +77,12 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         return $query->where('parent_id', $parentId);
     }
 
+    public static function movePermissions2Roles($permissionIds, $roleIds)
+    {
+        $permissions = static::findOrFail($permissionIds);
+        $roleIds = Role::findOrFail($roleIds)->pluck('id');
+        $permissions->each(function ($permission) use ($roleIds){
+            $permission->roles()->sync($roleIds);
+        });
+    }
 }

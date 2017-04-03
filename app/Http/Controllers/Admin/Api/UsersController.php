@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Entities\User;
+use App\Http\Requests\Request;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Transformers\RoleTransformer;
@@ -68,5 +69,16 @@ class UsersController extends ApiController
     public function roles(User $user)
     {
         return $this->response->collection($user->roles, new RoleTransformer());
+    }
+
+    public function moveUsers2Roles(Request $request)
+    {
+        $this->validate($request, [
+            'user_ids' => 'int_array',
+            'role_ids' => 'int_array',
+        ]);
+        $userIds = $request->get('user_ids');
+        $roleIds = $request->get('role_ids');
+
     }
 }

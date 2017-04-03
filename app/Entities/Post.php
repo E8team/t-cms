@@ -101,4 +101,13 @@ class Post extends BaseModel
             Cache::forever($cacheKey, $this->views_count + 1);
         }
     }
+
+    public static function movePosts2Categories($categoryIds, $postIds)
+    {
+        $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
+        $posts = static::findOrFail($postIds);
+        $posts->each(function ($post) use ($categoryIds){
+            $post->categories()->sync($categoryIds);
+        });
+    }
 }

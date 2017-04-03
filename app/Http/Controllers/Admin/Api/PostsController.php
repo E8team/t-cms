@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin\Api;
 
-use App\Entities\Category;
 use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
@@ -76,10 +75,7 @@ class PostsController extends ApiController
         ]);
         $postIds = $request->get('post_ids');
         $categoryIds = $request->get('category_ids');
-        $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
-        $posts = Post::findOrFail($postIds);
-        $posts->each(function ($post) use ($categoryIds){
-            $post->categories()->sync($categoryIds);
-        });
+        Post::movePosts2Categories($postIds, $categoryIds);
+        return $this->response->noContent();
     }
 }

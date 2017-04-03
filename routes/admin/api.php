@@ -1,7 +1,5 @@
 <?php
 
-
-
 $api->group(['middleware'=>'auth'], function ($api) {
     // 当前登录的用户
     $api->get('me', 'UsersController@me');
@@ -17,7 +15,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->delete('users/{id}', 'UsersController@destroy');
     // 获取用户角色
     $api->get('users/{user}/roles', 'UsersController@roles');
-
+    // 批量移动用户至角色 ?user_ids[0]=1&user_ids[1]=2&role_ids[0]=1&role_ids[1]=2
+    $api->put('move_users_to_roles', 'UsersController@moveUsers2Roles');
     // 角色列表
     $api->get('roles', 'RolesController@lists');
     // 获取某个角色的信息
@@ -38,10 +37,11 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('permissions', 'PermissionsController@store');
     // 更新权限
     $api->put('permissions/{permission}', 'PermissionsController@update');
-
+    //将权限批量移动到角色 ?permission_ids[0]=1&permission_ids[1]=2&role_ids[0]=1&role_ids[1]=2
+    $api->put('move_permissions_to_roles', 'PermissionsController@movePermissions2Roles');
     // 获取所有的父级分类
     $api->get('top_categories', 'CategoriesController@getTopCategories');
-    // 获取某个权限下面的子级权限
+    // 获取某个分类下的文章
     $api->get('categories/{category}/children', 'CategoriesController@getChildren');
     // 创建权限
     $api->post('categories', 'CategoriesController@store');
