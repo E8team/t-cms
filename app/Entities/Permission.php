@@ -35,15 +35,18 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         $this->table = Config::get('entrust.permissions_table');
     }
 
-
+    public static function allPermission()
+    {
+        return static::Ordered()
+            ->recent()
+            ->get()
+            ->keyBy('id');
+        //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
+    }
     public static function allPermissionWithCache()
     {
         return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
-            return static::Ordered()
-                ->recent()
-                ->get()
-                ->keyBy('id');
-                //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
+            return static::allPermission();
         });
     }
 

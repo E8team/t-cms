@@ -14,12 +14,17 @@ class RolesController extends ApiController
     {
         return $this->response->item($role, new RoleTransformer());
     }
-
+    public function allRoles()
+    {
+        $roles = Role::ordered()->recent()->get();
+        return $this->response->collection($roles, new RoleTransformer());
+    }
     public function lists()
     {
         $roles = Role::withSimpleSearch()
             ->withSort()
             ->ordered()
+            ->recent()
             ->paginate($this->perPage());
         return $this->response->paginator($roles, new RoleTransformer())
             ->setMeta(Role::getAllowSortFieldsMeta() + Role::getAllowSortFieldsMeta());

@@ -17,6 +17,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('users/{user}/roles', 'UsersController@roles');
     // 批量移动用户至角色 ?user_ids[0]=1&user_ids[1]=2&role_ids[0]=1&role_ids[1]=2
     $api->put('move_users_to_roles', 'UsersController@moveUsers2Roles');
+    // 获取所有角色(不分页 用于添加用户时显示)
+    $api->get('roles/all', 'RolesController@allRoles');
     // 角色列表
     $api->get('roles', 'RolesController@lists');
     // 获取某个角色的信息
@@ -29,8 +31,10 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->delete('roles/{id}', 'RolesController@destroy');
     // 获取菜单
     $api->get('menus', 'PermissionsController@menus');
+    // 获取所有权限(不分页 用于创建角色时显示)
+    $api->get('permissions/all', 'PermissionsController@allPermissions');
     // 获取所有的父级权限
-    $api->get('top_permissions', 'PermissionsController@getTopPermissions');
+    $api->get('permissions/top', 'PermissionsController@getTopPermissions');
     // 获取某个权限下面的子级权限
     $api->get('permissions/{permission}/children', 'PermissionsController@getChildren');
     // 创建权限

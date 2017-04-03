@@ -16,7 +16,6 @@ class PermissionsController extends ApiController
     public function menus()
     {
         $permissions = Permission::getUserMenu(Auth::user());
-
         $topPermissions = Permission::allPermissionWithCache();
         $topPermissions = $topPermissions->only($permissions->keys()->all())->keyBy('id')->toArray();
         foreach ($topPermissions as &$topPermission)
@@ -25,6 +24,11 @@ class PermissionsController extends ApiController
         }
         unset($topPermission);
         return $topPermissions;
+    }
+
+    public function allPermissions()
+    {
+        dd(Permission::allPermission()->groupBy('parent_id')->toArray());
     }
 
     public function getTopPermissions()
