@@ -32,6 +32,32 @@ class Post extends BaseModel
     {
         return $query->where('type', 'post');
     }
+    public function scopeApplyFilter($query, $data)
+    {
+        $data = $data->only('q', 'type', 'status', 'orders');
+        $query->orderByTop();
+        if(!is_null($data['q']))
+        {
+            $query->withSimpleSearch($data['q']);
+        }
+        if(!is_null($data['q']))
+        {
+            $query->withSort($data['orders']);
+        }
+        switch ($data['type']){
+            case 'page':
+                $query->type();
+                break;
+            case 'draft':
+                $query->draft();
+        }
+        switch ($data['status']){
+            case 'publish':
+                $query->publish();
+                break;
+        }
+        return $query->ordered()->recent();
+    }
 
     public function scopePage($query)
     {
