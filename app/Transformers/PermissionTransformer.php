@@ -14,7 +14,9 @@ class PermissionTransformer extends BaseTransformer
             'parent_id' => $model->parent_id,
             'is_menu' => $model->is_menu,
             'icon' => $model->icon,
-            'order' => $model->orders
+            'order' => $model->orders,
+            'created_at' => $model->created_at->toDateTimeString(),
+            'updated_at' => $model->updated_at->toDateTimeString()
         ];
     }
 }
