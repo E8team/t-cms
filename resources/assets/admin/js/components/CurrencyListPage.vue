@@ -79,6 +79,9 @@
             }
         },
         methods: {
+            refresh () {
+                this.getList(this.currentPage)
+            },
             getList (page = 1, keyword = '', sort) {
                 this.loading = true
                 this.$http.get(this.queryName, {

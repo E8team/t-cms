@@ -33,6 +33,9 @@
             CurrencyListPage
         },
         mounted () {
+            this.$http.get('top_permissions').then(res => {
+                console.log(res.data);
+            })
         }
     }
 </script>

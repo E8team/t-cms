@@ -27,7 +27,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新角色
     $api->put('roles/{role}', 'RolesController@update');
     // 删除角色
-    $api->delete('role/{id}', 'RolesController@destroy');
+    $api->delete('roles/{id}', 'RolesController@destroy');
     // 获取菜单
     $api->get('menus', 'PermissionsController@menus');
     // 获取所有的父级权限
