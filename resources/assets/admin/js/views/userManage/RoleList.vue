@@ -2,7 +2,7 @@
     <div class="users">
         <CurrencyListPage title="角色列表" queryName="roles">
             <div slot="option">
-                <el-button type="primary" icon="plus">添加角色</el-button>
+                <el-button @click="$router.push({name: 'role-add'})" type="primary" icon="plus">添加角色</el-button>
             </div>
             <template scope="list">
                 <el-table border :data="list.data" style="width: 100%">
@@ -10,15 +10,15 @@
                     <el-table-column property="display_name" label="角色名称"></el-table-column>
                     <el-table-column property="description" label="描述"></el-table-column>
                     <el-table-column
-                            inline-template
-                            :context="_self"
                             fixed="right"
                             label="操作"
                             width="160">
-                        <el-button-group>
-                            <el-button size="mini" type="warning">编辑</el-button>
-                            <el-button size="mini" type="danger">删除</el-button>
-                        </el-button-group>
+                        <template scope="scope">
+                            <el-button-group>
+                                <el-button size="mini" @click="$router.push({name: 'role-edit', params: {id: scope.row.id}})" type="warning">编辑</el-button>
+                                <el-button size="mini" @click="del(scope.row.id)" type="danger">删除</el-button>
+                            </el-button-group>
+                        </template>
                     </el-table-column>
                 </el-table>
             </template>
@@ -32,7 +32,27 @@
         components: {
             CurrencyListPage
         },
+        data () {
+            return {
+            }
+        },
+        methods: {
+            del (id) {
+                this.$confirm('你确定要删除该角色?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http.delete(`roles/${id}`).then(res => {
+                        this.$message('已删除');
+                        this.$refs['list'].refresh()
+                    })
+                }).catch(() => {
+                })
+            }
+        },
         mounted () {
+
         }
     }
 </script>

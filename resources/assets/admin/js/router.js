@@ -23,8 +23,8 @@ export default new Router({
                     component: Home,
                     children: [
                         {
-                            path: 'user-list',
-                            name: 'user-list',
+                            path: 'users',
+                            name: 'users',
                             component: require('./views/userManage/UserList.vue')
                         },
                         {
@@ -38,13 +38,23 @@ export default new Router({
                             component: require('./views/userManage/User.vue')
                         },
                         {
-                            path: 'role-list',
-                            name: 'role-list',
+                            path: 'roles',
+                            name: 'roles',
                             component: require('./views/userManage/RoleList.vue')
                         },
                         {
-                            path: 'permission-list',
-                            name: 'permission-list',
+                            path: 'role-add',
+                            name: 'role-add',
+                            component: require('./views/userManage/Role.vue')
+                        },
+                        {
+                            path: 'role-edit/:id',
+                            name: 'role-edit',
+                            component: require('./views/userManage/Role.vue')
+                        },
+                        {
+                            path: 'permissions',
+                            name: 'permissions',
                             component: require('./views/userManage/PermissionList.vue')
                         }
                     ]

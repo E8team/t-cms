@@ -1,6 +1,6 @@
 <template>
     <div class="users">
-        <CurrencyListPage title="用户列表" queryName="users">
+        <CurrencyListPage title="用户列表" ref="list" queryName="users">
             <div slot="option">
                 <el-button type="primary" @click="$router.push({name: 'user-add'})" icon="plus">添加用户</el-button>
             </div>
@@ -22,7 +22,7 @@
                         <template scope="scope">
                             <el-button-group>
                                 <el-button size="mini" @click="$router.push({name: 'user-edit', params: {id: scope.row.id}})" type="warning">编辑</el-button>
-                                <el-button size="mini" type="danger">删除</el-button>
+                                <el-button @click="del(scope.row.id)" size="mini" type="danger">删除</el-button>
                             </el-button-group>
                         </template>
                     </el-table-column>
@@ -37,6 +37,25 @@
     export default{
         components: {
             CurrencyListPage
+        },
+        data () {
+            return {
+            }
+        },
+        methods: {
+            del (id) {
+                this.$confirm('你确定要删除该用户?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http.delete(`users/${id}`).then(res => {
+                        this.$message('已删除');
+                        this.$refs['list'].refresh()
+                    })
+                }).catch(() => {
+                })
+            }
         },
         mounted () {
         }

@@ -8,7 +8,7 @@
                 <el-form-item label="昵称">
                     <el-input placeholder="请设置用户昵称" v-model="user.nick_name"></el-input>
                 </el-form-item>
-                <el-form-item label="email">
+                <el-form-item required label="email">
                     <el-input placeholder="可用于登录和找回密码" v-model="user.email"></el-input>
                 </el-form-item>
                 <el-form-item label="头像">
@@ -20,7 +20,7 @@
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload"
                             :show-file-list="false" >
-                        <img v-if="user.avatar_urls" :src="user.avatar_urls.xs" class="avatar" />
+                        <img v-if="user.avatar_urls.xs" :src="user.avatar_urls.xs" class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
@@ -46,15 +46,15 @@
         data () {
             return {
                 title: '',
-                userId: null,
+                id: null,
                 user: {
-                    'user_name': '',
-                    'nick_name': '',
-                    'email': '',
-                    'avatar': '',
+                    'user_name': null,
+                    'nick_name': null,
+                    'email': null,
+                    'avatar': null,
                     'avatar_urls': {},
-                    'password': '',
-                    'rePassword': ''
+                    'password': null,
+                    'rePassword': null
                 }
             }
         },
@@ -73,18 +73,22 @@
             },
             confirm () {
                 let method, url;
-                this.userId ? (method = 'put', url = `users/${this.userId}`) : (method = 'post', url = 'users');
+                this.id ? (method = 'put', url = `users/${this.id}`) : (method = 'post', url = 'users');
                 this.$http[method](url, {
                     ...this.user
                 }).then(res => {
-                    console.log(res.data)
+                    this.$message({
+                        message: `${this.title}成功`,
+                        type: 'success'
+                    });
+                    this.$router.push({name: 'users'});
                 });
             }
         },
         mounted () {
             if (this.$route.name === 'user-edit') {
-                this.userId = this.$route.params.id;
-                this.$http.get(`users/${this.userId}`).then(res => {
+                this.id = this.$route.params.id;
+                this.$http.get(`users/${this.id}`).then(res => {
                     this.user = res.data.data;
                 });
                 this.title = '编辑用户';
