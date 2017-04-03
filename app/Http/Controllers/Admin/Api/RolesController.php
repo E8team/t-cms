@@ -31,7 +31,7 @@ class RolesController extends ApiController
         return $this->response->noContent();
     }
 
-    public function update($role, RoleUpdateRequest $request)
+    public function update(Role $role, RoleUpdateRequest $request)
     {
         $request->performUpdate($role);
         return $this->response->noContent();
