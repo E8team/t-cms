@@ -25,7 +25,7 @@ class UserCreateRequest extends Request
         return [
             'user_name' => 'required|unique:users',
             'nick_name' => 'nullable|string|max:30',
-            'email' => 'email|unique:users',
+            'email' => 'required|email|unique:users',
             'avatar' => 'nullable|picture_id',
             'password' => 'required'
         ];

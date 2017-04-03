@@ -7,6 +7,7 @@ use App\Entities\Category;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Transformers\CategoryTransformer;
+use App\Transformers\PostTransformer;
 
 class CategoriesController extends ApiController
 {
@@ -48,5 +49,17 @@ class CategoriesController extends ApiController
             ->get();
         return $this->response->collection($childrenCategories, new CategoryTransformer())
             ->setMeta(Category::getAllowSearchFieldsMeta());
+    }
+
+    public function posts(Category $category)
+    {
+        $posts = $category->posts()
+            ->withSimpleSearch()
+            ->withSort()
+            ->ordered()
+            ->recent()
+            ->scopeFilter()
+            ->paginate($this->perPage());
+        return $this->response->paginator($posts, new PostTransformer());
     }
 }

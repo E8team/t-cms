@@ -1,6 +1,6 @@
 <?php
 
-
+$api->get('categories/{category}/posts', 'CategoriesController@posts');
 
 $api->group(['middleware'=>'auth'], function ($api) {
     // 当前登录的用户

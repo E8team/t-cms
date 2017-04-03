@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 
+use App\Entities\Traits\Listable;
 use Cache;
 use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,13 +11,16 @@ use Ty666\PictureManager\Traits\Picture;
 
 class Post extends BaseModel
 {
-    use SoftDeletes, Picture;
+    use SoftDeletes, Picture, Listable;
 
     protected $dates = ['deleted_at', 'top'];
 
-    public function author()
+    protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
+    protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order'];
+
+    public function user()
     {
-        return $this->hasOne(User::class, 'id', 'author');
+        return $this->belongsTo(User::class);
     }
 
     public function category()
@@ -51,9 +55,9 @@ class Post extends BaseModel
 
     public function getViewsCountAttribute($viewsCount)
     {
-        return Cache::rememberForever('post_views_count_' . $this->id, function () use ($viewsCount) {
+        return intval(Cache::rememberForever('post_views_count_' . $this->id, function () use ($viewsCount) {
             return $viewsCount;
-        });
+        }));
     }
 
     public function addViewCount()

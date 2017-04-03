@@ -6,9 +6,11 @@ class PostTransformer extends BaseTransformer
 {
     public function transformData($model)
     {
+
         return [
             'id' => $model->id,
-            'author' => $model->author,
+            'user' => $model->user,
+            'author_info' => $model->author_info,
             'title' => $model->title,
             'content' => $model->content,
             'cover' => $model->cover,
