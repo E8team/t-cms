@@ -14,7 +14,7 @@ class UserTransformer extends BaseTransformer
             'is_locked' => $model->is_locked,
             'avatar' => $model->avatar,
             'avatar_urls' => $model->avatar_urls,
-            //'roles' => $model->roles,
+            'roles' => $model->roles,
             'created_at' => $model->created_at->toDateTimeString(),
             'updated_at' => $model->updated_at->toDateTimeString()
         ];

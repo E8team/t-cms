@@ -65,7 +65,7 @@ class User extends BaseModel implements
         return $this->getPicure($this->avatar, ['is', 'xs', 'sm', 'md'], asset('images/default_avatar.jpg'));
     }
 
-    public function moveUsers2Roles($userIds, $roleIds)
+    public static function moveUsers2Roles($userIds, $roleIds)
     {
         $users = static::findOrFail($userIds);
         $roleIds = Role::findOrFail($roleIds)->pluck('id');

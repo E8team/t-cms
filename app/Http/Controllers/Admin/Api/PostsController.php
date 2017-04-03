@@ -13,7 +13,7 @@ class PostsController extends ApiController
 
 
     /**
-     * Store a newly created resource in storage.
+     * 创建文章
      *
      * @param  PostCreateRequest $request
      *
@@ -26,11 +26,9 @@ class PostsController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  string $slug
-     *
-     * @return \Illuminate\Http\Response
+     * 显示指定文章
+     * @param Post $post
+     * @return \Dingo\Api\Http\Response
      */
     public function show(Post $post)
     {
@@ -38,12 +36,10 @@ class PostsController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  PostUpdateRequest $request
-     * @param  string $id
-     *
-     * @return \Illuminate\Http\Response
+     * 更新指定文章
+     * @param Post $post
+     * @param PostUpdateRequest $request
+     * @return \Dingo\Api\Http\Response
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
@@ -52,7 +48,7 @@ class PostsController extends ApiController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除指定文章
      *
      * @param  int $id
      *
@@ -67,6 +63,11 @@ class PostsController extends ApiController
         return $this->response->noContent();
     }
 
+    /**
+     * 批量移动
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function movePosts2Categories(Request $request)
     {
         $this->validate($request, [
