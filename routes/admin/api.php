@@ -50,7 +50,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     //某个分类下的文章
     $api->get('categories/{category}/posts', 'CategoriesController@posts');
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
-    $api->get('move_posts_to_categories', 'PostsController@movePosts2Categories');
+    $api->put('move_posts_to_categories', 'PostsController@movePosts2Categories');
 
     $api->get('post/{post}', 'PostsController@show');
 });
