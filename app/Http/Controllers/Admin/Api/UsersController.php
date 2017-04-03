@@ -35,7 +35,7 @@ class UsersController extends ApiController
 
     public function destroy($id)
     {
-        if (!User::destroy($id)) {
+        if (!User::destroy(intval($id))) {
             //todo 国际化
             throw new NotFoundHttpException('该用户不存在');
         }

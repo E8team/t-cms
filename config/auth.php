@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'model' => \App\Entities\User::class,
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

@@ -57,7 +57,7 @@ class PostsController extends ApiController
      */
     public function destroy($id)
     {
-        if (!Post::destroy($id)) {
+        if (!Post::destroy(intval($id))) {
             //todo 国际化
             throw new NotFoundHttpException('该文章不存在');
         }
