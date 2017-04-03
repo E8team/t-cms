@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Entities\Role;
 use App\Entities\User;
 use App\Http\Requests\Request;
 use App\Http\Requests\UserCreateRequest;
@@ -75,6 +76,10 @@ class UsersController extends ApiController
             $data['password'] = Hash::make($data['password']);
         }
         $request->performUpdate($user);
+        if(!empty($data['role_ids'])){
+            $roleIds = Role::findOrFail($data['role_ids'])->pluck('id');
+            $user->save($roleIds);
+        }
         return $this->response->noContent();
     }
 
@@ -92,7 +97,11 @@ class UsersController extends ApiController
             $data['password'] = Hash::make($data['password']);
         }
 
-        User::create($data);
+        $user = User::create($data);
+        if(!empty($data['role_ids'])){
+            $roleIds = Role::findOrFail($data['role_ids'])->pluck('id');
+            $user->roles()->sync($roleIds);
+        }
         return $this->response->noContent();
     }
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
+use App\Entities\Permission;
 use App\Entities\Role;
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleUpdateRequest;
@@ -37,13 +38,25 @@ class RolesController extends ApiController
     }
     public function store(RoleCreateRequest $request)
     {
-        Role::create($request->all());
+        $data = $request->all();
+        $role = Role::create($data);
+        if(!empty($data['permission_ids']))
+        {
+            $permissionIds = Permission::findOrfail($data['permission_ids'])->pluck('id');
+            $role->attachPermissions($permissionIds);
+        }
         return $this->response->noContent();
     }
 
     public function update(Role $role, RoleUpdateRequest $request)
     {
         $request->performUpdate($role);
+        $permissionIds = $request->get('permission_ids');
+        if(!empty($permissionIds))
+        {
+            $permissionIds = Permission::findOrfail($permissionIds)->pluck('id');
+            $role->savePermissions($permissionIds);
+        }
         return $this->response->noContent();
     }
 

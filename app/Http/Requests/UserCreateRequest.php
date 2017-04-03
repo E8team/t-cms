@@ -27,7 +27,8 @@ class UserCreateRequest extends Request
             'nick_name' => 'nullable|string|max:30',
             'email' => 'required|email|unique:users',
             'avatar' => 'nullable|picture_id',
-            'password' => 'required'
+            'password' => 'required',
+            'role_ids' => 'nullable|int_array'
         ];
     }
 }
