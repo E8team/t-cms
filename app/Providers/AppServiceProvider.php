@@ -17,9 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \DB::listen(function ($query) {
-            var_dump($query->sql
+            \Log::info('sql',[$query->sql
             ,$query->bindings
-            ,$query->time);
+            ,$query->time]);
         });
         Validator::extend('picture_id', function($attribute, $value, $parameters, $validator) {
 
