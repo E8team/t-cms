@@ -56,6 +56,16 @@ export default new Router({
                             path: 'permissions',
                             name: 'permissions',
                             component: require('./views/userManage/PermissionList.vue')
+                        },
+                        {
+                            path: 'permission-add',
+                            name: 'permission-add',
+                            component: require('./views/userManage/Permission.vue')
+                        },
+                        {
+                            path: 'permission-edit/:id',
+                            name: 'permission-edit',
+                            component: require('./views/userManage/Permission.vue')
                         }
                     ]
                 },

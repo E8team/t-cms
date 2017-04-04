@@ -2,7 +2,7 @@
     <div class="roles">
         <CurrencyListPage title="角色列表" queryName="roles">
             <div slot="option">
-                <el-button type="primary" icon="plus">添加角色</el-button>
+                <el-button type="primary" @click="$router.push({name: 'role-add'})" icon="plus">添加角色</el-button>
             </div>
             <template scope="list">
                 <el-table border :data="list.data" style="width: 100%">
