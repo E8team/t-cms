@@ -17,7 +17,7 @@ class LoginController extends ApiController
 
 
     /**
-     * Handle a login request to the application.
+     * 处理登录请求
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
@@ -55,7 +55,7 @@ class LoginController extends ApiController
     }
 
     /**
-     * Validate the user login request.
+     * 验证登录请求
      *
      * @param  \Illuminate\Http\Request $request
      * @return void

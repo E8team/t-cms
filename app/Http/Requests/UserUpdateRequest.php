@@ -36,7 +36,8 @@ class UserUpdateRequest extends Request
             'email' => ['email', Rule::unique('users')->ignore($user->id)],
             'avatar' => 'nullable|picture_id',
             'password' => 'nullable|min:6',
-            'is_lock' => 'nullable|boolean'
+            'is_lock' => 'nullable|boolean',
+            'role_ids' => 'nullable|int_array'
         ];
     }
 }

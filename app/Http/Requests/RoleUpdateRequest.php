@@ -35,6 +35,7 @@ class RoleUpdateRequest extends Request
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
             'order' => 'int',
+            'permission_ids' => 'nullable|int_array'
         ];
     }
 }

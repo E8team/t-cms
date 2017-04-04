@@ -12,23 +12,42 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends ApiController
 {
+    /**
+     * 获取导航栏
+     * @return array
+     */
     public function nav()
     {
         return Category::getNav();
     }
 
+    /**
+     * 创建分类
+     * @param CategoryCreateRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function store(CategoryCreateRequest $request)
     {
         Category::create($request->all());
         return $this->response->noContent();
     }
 
+    /**
+     * 更新权限
+     * @param Category $category
+     * @param CategoryUpdateRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function update(Category $category, CategoryUpdateRequest $request)
     {
         $request->performUpdate($category);
         return $this->response->noContent();
     }
 
+    /**
+     * 获取一级分类
+     * @return \Dingo\Api\Http\Response
+     */
     public function getTopCategories()
     {
         $topCategories = Category::topCategories()
@@ -41,6 +60,11 @@ class CategoriesController extends ApiController
 
     }
 
+    /**
+     * 获取子级分类
+     * @param Category $category
+     * @return \Dingo\Api\Http\Response
+     */
     public function getChildren(Category $category)
     {
         $childrenCategories = Category::childrenCategories($category->id)
@@ -52,6 +76,12 @@ class CategoriesController extends ApiController
             ->setMeta(Category::getAllowSearchFieldsMeta());
     }
 
+    /**
+     * 获取某个分类下的文章
+     * @param Category $category
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function posts(Category $category, Request $request)
     {
         $posts = $category->posts()
