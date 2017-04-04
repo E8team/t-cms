@@ -12,15 +12,30 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RolesController extends ApiController
 {
+    /**
+     * 显示某个角色
+     * @param Role $role
+     * @return \Dingo\Api\Http\Response
+     */
     public function show(Role $role)
     {
         return $this->response->item($role, new RoleTransformer());
     }
+
+    /**
+     * 获取所有角色(不分页 用于添加用户时显示)
+     * @return \Dingo\Api\Http\Response
+     */
     public function allRoles()
     {
         $roles = Role::ordered()->recent()->get();
         return $this->response->collection($roles, new RoleTransformer());
     }
+
+    /**
+     * 角色列表
+     * @return \Dingo\Api\Http\Response
+     */
     public function lists()
     {
         $roles = Role::withSimpleSearch()
@@ -31,11 +46,23 @@ class RolesController extends ApiController
         return $this->response->paginator($roles, new RoleTransformer())
             ->setMeta(Role::getAllowSortFieldsMeta() + Role::getAllowSortFieldsMeta());
     }
+
+    /**
+     * 获取某个角色下面的权限
+     * @param Role $role
+     * @return \Dingo\Api\Http\Response
+     */
     public function permissions(Role $role)
     {
         $permissions = $role->perms()->ordered()->recent()->get();
         return $this->response->collection($permissions, new PermissionTransformer());
     }
+
+    /**
+     * 创建角色
+     * @param RoleCreateRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function store(RoleCreateRequest $request)
     {
         $data = $request->all();
@@ -48,6 +75,12 @@ class RolesController extends ApiController
         return $this->response->noContent();
     }
 
+    /**
+     * 更新角色
+     * @param Role $role
+     * @param RoleUpdateRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function update(Role $role, RoleUpdateRequest $request)
     {
         $request->performUpdate($role);
@@ -60,6 +93,11 @@ class RolesController extends ApiController
         return $this->response->noContent();
     }
 
+    /**
+     * 删除角色
+     * @param $id
+     * @return \Dingo\Api\Http\Response
+     */
     public function destroy($id)
     {
         if (!Role::destroy(intval($id))) {

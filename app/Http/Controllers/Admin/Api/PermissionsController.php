@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 
 class PermissionsController extends ApiController
 {
+    /**
+     * 获取后台菜单
+     * @return mixed
+     */
     public function menus()
     {
         $permissions = Permission::getUserMenu(Auth::user());
@@ -26,6 +30,10 @@ class PermissionsController extends ApiController
         return $topPermissions;
     }
 
+    /**
+     * 获取所有权限(不分页 用于创建角色时显示)
+     * @return mixed
+     */
     public function allPermissions()
     {
         $permissions = Permission::allPermission()->groupBy('parent_id')->toArray();
@@ -38,6 +46,10 @@ class PermissionsController extends ApiController
         return $permissions;
     }
 
+    /**
+     * 获取一级权限
+     * @return \Dingo\Api\Http\Response
+     */
     public function getTopPermissions()
     {
         /*return $this->response->collection(
@@ -53,6 +65,11 @@ class PermissionsController extends ApiController
 
     }
 
+    /**
+     * 获取子级权限
+     * @param Permission $permission
+     * @return \Dingo\Api\Http\Response
+     */
     public function getChildren(Permission $permission)
     {
         /*$permissions = Permission::allPermissionWithCache()->where('parent_id', $permission->id);
@@ -66,18 +83,34 @@ class PermissionsController extends ApiController
             ->setMeta(Permission::getAllowSearchFieldsMeta());
     }
 
+    /**
+     * 创建权限
+     * @param PermissionCreateRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function store(PermissionCreateRequest $request)
     {
         Permission::create($request->all());
         return $this->response->noContent();
     }
 
+    /**
+     * 更新权限
+     * @param Permission $permission
+     * @param PermissionUpdateRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function update(Permission $permission, PermissionUpdateRequest $request)
     {
         $request->performUpdate($permission);
         return $this->response->noContent();
     }
 
+    /**
+     * 批量移动权限
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function movePermissions2Roles(Request $request) {
         $this->validate($request, [
             'permission_ids' => 'int_array',
