@@ -63,16 +63,14 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$http.delete(`permission/${id}`).then(res => {
+                    this.$http.delete(`permissions/${id}`).then(res => {
                         this.$message('已删除');
-                        this.$refs['list'].refresh()
+                        this.refreshChildren(this.currentId);
                     })
                 }).catch(() => {
                 })
-            }
-        },
-        watch: {
-            'currentId' (id) {
+            },
+            refreshChildren (id) {
                 this.loading = true;
                 this.$http.get(`permissions/${id}/children`).then(res => {
                     this.childPermission = res.data.data;
@@ -80,6 +78,11 @@
                 }).catch(res => {
                     this.loading = false;
                 });
+            }
+        },
+        watch: {
+            'currentId' (id) {
+                this.refreshChildren(id);
             }
         },
         mounted () {
