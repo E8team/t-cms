@@ -54,7 +54,7 @@
                     'display_name': null,
                     'description': null,
                     'parent_id': 0,
-                    'is_menu': null,
+                    'is_menu': false,
                     'icon': null,
                     'order': null
                 },
