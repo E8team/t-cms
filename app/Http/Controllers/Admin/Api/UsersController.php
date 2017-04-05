@@ -30,8 +30,7 @@ class UsersController extends ApiController
      */
     public function lists()
     {
-        $users = User::with('roles')
-            ->withSimpleSearch()
+        $users = User::with('roles')->withSimpleSearch()
             ->withSort()
             ->recent()
             ->paginate($this->perPage());
@@ -46,6 +45,7 @@ class UsersController extends ApiController
      */
     public function show(User $user)
     {
+        $user->load('roles');
         return $this->response->item($user, new UserTransformer());
     }
 

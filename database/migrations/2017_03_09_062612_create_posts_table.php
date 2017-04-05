@@ -23,11 +23,11 @@ class CreatePostsTable extends Migration
             //$table->string('slug', 100)->unique()->nullable();
             // 摘要
             $table->string('excerpt', 512)->nullable();
-            $table->longText('content');
+            // $table->longText('content');
             // 文章封面
             $table->char('cover', 40)->nullable();
             $table->char('status', 10)->default('publish');
-            //post page(单页) //revision(修订) //attachment(附件)
+            // post page(单页) //revision(修订) //attachment(附件)
             $table->char('type', 10)->default('post');
             // 浏览量
             $table->unsignedInteger('views_count')->default(0)->index();

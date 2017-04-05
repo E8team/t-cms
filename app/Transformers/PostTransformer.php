@@ -2,26 +2,35 @@
 
 namespace App\Transformers;
 
-class PostTransformer extends BaseTransformer
+use App\Entities\Post;
+use League\Fractal\TransformerAbstract;
+
+class PostTransformer extends TransformerAbstract
 {
-    public function transformData($model)
+    protected $availableIncludes  = ['content'];
+    public function transform(Post $post)
     {
 
         return [
-            'id' => $model->id,
-            'user' => $model->user,
-            'categries' => $model->categries,
-            'author_info' => $model->author_info,
-            'title' => $model->title,
-            'content' => $model->content,
-            'cover' => $model->cover,
-            'status' => $model->status,
-            'type' => $model->type,
-            'views_count' => $model->views_count,
-            'comments_num' => $model->comments_num,
-            'top' => $model->top,
-            'created_at' => $model->created_at->toDateTimeString(),
-            'updated_at' => $model->updated_at->toDateTimeString()
+            'id' => $post->id,
+            'user' => $post->user,
+            'categries' => $post->categries,
+            'author_info' => $post->author_info,
+            'title' => $post->title,
+            'cover' => $post->cover,
+            'status' => $post->status,
+            'type' => $post->type,
+            'views_count' => $post->views_count,
+            'comments_num' => $post->comments_num,
+            'top' => $post->top,
+            'created_at' => $post->created_at->toDateTimeString(),
+            'updated_at' => $post->updated_at->toDateTimeString()
         ];
+    }
+
+    public function includeContent(Post $post)
+    {
+        $content = $post->content;
+        return $this->item($content, new PostContentTransformer());
     }
 }

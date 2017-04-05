@@ -18,7 +18,7 @@ class PostsTableSeeder extends Seeder
                 'user_id' => $user->id,
                 'author_info' => '作者: 陶煜， 上传：陶煜， 拍摄：陶煜',
                 'title' => 'hello world',
-                'content' => '这是第一篇文章',
+                //'content' => '这是第一篇文章',
                 'status' => 'publish',
                 'type' => 'post',
                 'top' => \Carbon\Carbon::now(),
@@ -30,13 +30,28 @@ class PostsTableSeeder extends Seeder
                 'user_id' => $user->id,
                 'author_info' => '作者: 陶煜， 上传：陶煜， 拍摄：陶煜',
                 'title' => 'hello world111111',
-                'content' => '这是第二篇文章11111111',
+                //'content' => '这是第二篇文章11111111',
                 'status' => 'publish',
                 'type' => 'post',
                 'top' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
+        ]);
+
+        DB::table('post_contents')->insert([
+            [
+                'post_id' => 1,
+                'content' => '这是第一篇文章',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'post_id' => 2,
+                'content' => '这是第二篇文章11111111',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]
         ]);
     }
 }

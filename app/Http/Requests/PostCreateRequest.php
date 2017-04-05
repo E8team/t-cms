@@ -27,7 +27,7 @@ class PostCreateRequest extends Request
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
             'cover' => 'nullable|picture',
-            'status' => 'nullable|in:publish,draft',
+            //'status' => 'nullable|in:publish,draft',
             'type' => 'in:post,type',
             'order' => 'int'
         ];

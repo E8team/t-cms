@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Ty666\PictureManager\Traits\Picture;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Config;
 
 class User extends BaseModel implements
     AuthenticatableContract,
@@ -72,5 +73,15 @@ class User extends BaseModel implements
         $users->each(function ($user) use ($roleIds){
             $user->roles()->sync($roleIds);
         });
+    }
+    /**
+     * 角色的多对多关联
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Config::get('entrust.role'), Config::get('entrust.role_user_table'), Config::get('entrust.user_foreign_key'), Config::get('entrust.role_foreign_key'))
+            ->ordered()->recent();
     }
 }
