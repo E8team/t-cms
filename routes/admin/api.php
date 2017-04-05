@@ -7,7 +7,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('users', 'UsersController@lists');
     // 创建用户
     $api->post('users', 'UsersController@store');
-    // 获取某个用户的信息
+    // 获取指定用户的信息
     $api->get('users/{user}', 'UsersController@show');
     // 更新用户
     $api->put('users/{user}', 'UsersController@update');
@@ -21,7 +21,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('roles/all', 'RolesController@allRoles');
     // 角色列表
     $api->get('roles', 'RolesController@lists');
-    // 获取某个角色的信息
+    // 获取指定角色的信息
     $api->get('roles/{role}', 'RolesController@show');
     $api->get('roles/{role}/permissions', 'RolesController@permissions');
     // 创建角色
@@ -36,25 +36,27 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('permissions/all', 'PermissionsController@allPermissions');
     // 获取所有的父级权限
     $api->get('permissions/top', 'PermissionsController@getTopPermissions');
-    //获取某个权限
+    //获取指定权限
     $api->get('permissions/{permission}', 'PermissionsController@show');
-    // 获取某个权限下面的子级权限
+    // 获取指定权限下面的子级权限
     $api->get('permissions/{permission}/children', 'PermissionsController@getChildren');
     // 创建权限
     $api->post('permissions', 'PermissionsController@store');
     // 更新权限
     $api->put('permissions/{permission}', 'PermissionsController@update');
+    //删除指定权限
+    $api->delete('permissions/{id}', 'PermissionsController@destroy');
     //将权限批量移动到角色 ?permission_ids[0]=1&permission_ids[1]=2&role_ids[0]=1&role_ids[1]=2
     $api->put('move_permissions_to_roles', 'PermissionsController@movePermissions2Roles');
     // 获取所有的父级分类
     $api->get('top_categories', 'CategoriesController@getTopCategories');
-    // 获取某个分类下的文章
+    // 获取指定分类下的文章
     $api->get('categories/{category}/children', 'CategoriesController@getChildren');
     // 创建权限
     $api->post('categories', 'CategoriesController@store');
     // 更新分类
     $api->put('categories/{category}', 'CategoriesController@update');
-    //某个分类下的文章
+    //指定分类下的文章
     $api->get('categories/{category}/posts', 'CategoriesController@posts');
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
     $api->put('move_posts_to_categories', 'PostsController@movePosts2Categories');

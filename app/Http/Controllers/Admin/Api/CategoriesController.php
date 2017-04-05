@@ -77,7 +77,7 @@ class CategoriesController extends ApiController
     }
 
     /**
-     * 获取某个分类下的文章
+     * 获取指定分类下的文章
      * @param Category $category
      * @param Request $request
      * @return \Dingo\Api\Http\Response

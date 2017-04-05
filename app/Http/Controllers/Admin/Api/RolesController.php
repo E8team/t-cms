@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class RolesController extends ApiController
 {
     /**
-     * 显示某个角色
+     * 显示指定角色
      * @param Role $role
      * @return \Dingo\Api\Http\Response
      */
@@ -48,7 +48,7 @@ class RolesController extends ApiController
     }
 
     /**
-     * 获取某个角色下面的权限
+     * 获取指定角色下面的权限
      * @param Role $role
      * @return \Dingo\Api\Http\Response
      */

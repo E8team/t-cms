@@ -10,6 +10,7 @@ use App\Http\Requests\PermissionUpdateRequest;
 use App\Transformers\PermissionTransformer;
 use Auth;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PermissionsController extends ApiController
 {
@@ -32,7 +33,7 @@ class PermissionsController extends ApiController
 
 
     /**
-     * 获取某个权限信息
+     * 获取指定权限信息
      * @param Permission $permission
      * @return \Dingo\Api\Http\Response
      */
@@ -130,6 +131,22 @@ class PermissionsController extends ApiController
         $permissionIds = $request->get('permission_ids');
         $roleIds = $request->get('role_ids');
         Permission::movePermissions2Roles($permissionIds, $roleIds);
+        return $this->response->noContent();
+    }
+
+    /**
+     * 删除指定权限
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if (!Permission::destroy(intval($id))) {
+            //todo 国际化
+            throw new NotFoundHttpException('该权限不存在');
+        }
         return $this->response->noContent();
     }
 }
