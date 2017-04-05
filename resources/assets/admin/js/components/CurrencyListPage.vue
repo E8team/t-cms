@@ -32,7 +32,6 @@
                     </div>
                 </div>
                 <el-pagination
-                        v-if="total > perPage"
                         class="page"
                         layout="prev, pager, next"
                         :total="total"
@@ -94,7 +93,7 @@
                     this.loading = false
                     this.list = res.data.data
                     this.total = res.data.meta.pagination.total
-                    this.perPage = res.data.meta.pagination.per_page
+                    // this.perPage = res.data.meta.pagination.per_page
                     this.allowSortFields = res.data.meta.allow_sort_fields
                 }).catch(err => {
                     this.loading = false
