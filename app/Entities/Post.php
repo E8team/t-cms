@@ -110,4 +110,9 @@ class Post extends BaseModel
             $post->categories()->sync($categoryIds);
         });
     }
+
+    public function content()
+    {
+        return $this->hasOne(PostContents::class);
+    }
 }

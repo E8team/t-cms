@@ -11,7 +11,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostsController extends ApiController
 {
 
-
+    public function drafts(PostCreateRequest $request)
+    {
+        $data = $request->all();
+        $data['status'] = 'draft';
+        Post::create($data);
+        return $this->response->noContent();
+    }
     /**
      * 创建文章
      *
@@ -21,7 +27,9 @@ class PostsController extends ApiController
      */
     public function store(PostCreateRequest $request)
     {
-        Post::create($request->all());
+        $data = $request->all();
+        $data['status'] = 'publish';
+        Post::create($data);
         return $this->response->noContent();
     }
 
@@ -79,4 +87,5 @@ class PostsController extends ApiController
         Post::movePosts2Categories($postIds, $categoryIds);
         return $this->response->noContent();
     }
+
 }

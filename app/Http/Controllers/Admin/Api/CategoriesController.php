@@ -92,4 +92,5 @@ class CategoriesController extends ApiController
         return $this->response->paginator($posts, new PostTransformer());
     }
 
+
 }
