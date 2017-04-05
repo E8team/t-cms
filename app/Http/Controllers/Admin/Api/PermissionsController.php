@@ -30,6 +30,17 @@ class PermissionsController extends ApiController
         return $topPermissions;
     }
 
+
+    /**
+     * 获取某个权限信息
+     * @param Permission $permission
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(Permission $permission)
+    {
+        return $this->response->item($permission, new PermissionTransformer());
+    }
+
     /**
      * 获取所有权限(不分页 用于创建角色时显示)
      * @return mixed
