@@ -22,7 +22,7 @@
                         <el-table-column property="created_at" label="创建时间"></el-table-column>
                         <el-table-column label="状态">
                             <template scope="scope">
-                                <el-tag :type="scope.row.is_meuu ? 'success' : 'gray'">{{scope.row.is_meuu ? '作为菜单' : '普通权限'}}</el-tag>
+                                <el-tag :type="scope.row.is_menu ? 'success' : 'gray'">{{scope.row.is_menu ? '作为菜单' : '普通权限'}}</el-tag>
                             </template>
                         </el-table-column>
                         <el-table-column property="parent_id" label="父级id"></el-table-column>
@@ -63,7 +63,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$http.delete(`roles/${id}`).then(res => {
+                    this.$http.delete(`permission/${id}`).then(res => {
                         this.$message('已删除');
                         this.$refs['list'].refresh()
                     })

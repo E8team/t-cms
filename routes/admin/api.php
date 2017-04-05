@@ -32,12 +32,12 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->delete('roles/{id}', 'RolesController@destroy');
     // 获取菜单
     $api->get('menus', 'PermissionsController@menus');
-    //获取某个权限
-    $api->get('permissions/{permission}', 'PermissionsController@show');
     // 获取所有权限(不分页 用于创建角色时显示)
     $api->get('permissions/all', 'PermissionsController@allPermissions');
     // 获取所有的父级权限
     $api->get('permissions/top', 'PermissionsController@getTopPermissions');
+    //获取某个权限
+    $api->get('permissions/{permission}', 'PermissionsController@show');
     // 获取某个权限下面的子级权限
     $api->get('permissions/{permission}/children', 'PermissionsController@getChildren');
     // 创建权限

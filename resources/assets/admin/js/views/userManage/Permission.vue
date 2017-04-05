@@ -72,7 +72,7 @@
                         message: `${this.title}成功`,
                         type: 'success'
                     });
-                    this.$router.push({name: 'roles'});
+                    this.$router.push({name: 'permissions'});
                 });
             }
         },
@@ -82,8 +82,8 @@
             })
             if (this.$route.name === 'permission-edit') {
                 this.id = this.$route.params.id;
-                this.$http.get(`roles/${this.id}`).then(res => {
-                    this.role = res.data.data;
+                this.$http.get(`permissions/${this.id}`).then(res => {
+                    this.permission = res.data.data;
                 });
                 this.title = '编辑权限';
             }else{
