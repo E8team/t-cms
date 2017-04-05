@@ -2,6 +2,7 @@
   .menu{
     border-radius: 0;
     width: 180px;
+    transition: transform .3s;
     position: fixed;
     top: 0;
     left: 0;
@@ -23,8 +24,91 @@
       }
     }
   }
+  &.close{
+    .menu{
+      transform: translateX(-180px);
+    }
+    .content{
+      padding-left: 0px;
+      .hamburger_close_box{
+        top: 13px!important;
+        left: 10px!important;
+      }
+    }
+  }
   .content{
-    padding: 10px;
-    padding-left: 190px;
+    padding-left: 180px;
+    transition: padding-left .3s;
+    .header{
+      height: 60px;
+      background: #fff;
+      box-shadow: 0 1px 1px rgba(0,0,0,.1);
+      margin-bottom: 10px;
+      .hamburger_close_box{
+        width: 25px;
+        height: 25px;
+        position: relative;
+        top: 18px;
+        left: 15px;
+        cursor: pointer;
+      }
+      .hamburger, .close{
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: all .2s;
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        font-style: normal;
+        color: #ddd;
+        text-align: left;
+        text-indent: -9999px;
+        direction: ltr;
+      }
+      .hamburger{
+        width: 20px;
+        height: 2px;
+        box-shadow: inset 0 0 0 32px, 0 -6px, 0 6px;
+      }
+      .close{
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        width: 30px;
+        height: 30px;
+        margin: 2px;
+        &:before, &::after{
+            content: '';
+            pointer-events: none;
+            box-shadow: inset 0 0 0 32px;
+        }
+        &:before{
+          width: 20px;
+          height: 2px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%,-50%);
+          -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+        }
+        &::after{
+          height: 20px;
+          width: 2px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%,-50%);
+          -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+        }
+      }
+    }
+    .content_body{
+      padding: 10px;
+      box-sizing: border-box;
+      
+    }
   }
 }
