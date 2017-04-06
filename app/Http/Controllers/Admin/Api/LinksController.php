@@ -12,6 +12,7 @@ use App\Entities\Type;
 use App\Http\Requests\LinkCreateRequest;
 use App\Http\Requests\LinkUpdateRequest;
 use App\Transformers\LinkTransformer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LinksController extends ApiController
 {
@@ -35,6 +36,15 @@ class LinksController extends ApiController
     public function update(Link $link, LinkUpdateRequest $request)
     {
         $request->performUpdate($link);
+        return $this->response->noContent();
+    }
+
+    public function destroy($id)
+    {
+        if (!Link::destroy(intval($id))) {
+            //todo 国际化
+            throw new NotFoundHttpException('该友情链接不存在');
+        }
         return $this->response->noContent();
     }
 }
