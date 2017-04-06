@@ -45,7 +45,6 @@ class UsersController extends ApiController
      */
     public function show(User $user)
     {
-        $user->load('roles');
         return $this->response->item($user, new UserTransformer());
     }
 

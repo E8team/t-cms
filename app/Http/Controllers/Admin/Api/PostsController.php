@@ -5,19 +5,12 @@ use App\Entities\Post;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Transformers\PostTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
-
-    public function drafts(PostCreateRequest $request)
-    {
-        $data = $request->all();
-        $data['status'] = 'draft';
-        Post::create($data);
-        return $this->response->noContent();
-    }
     /**
      * 创建文章
      *
@@ -29,7 +22,16 @@ class PostsController extends ApiController
     {
         $data = $request->all();
         $data['status'] = 'publish';
-        Post::create($data);
+        // 处理置顶
+        if($request->has('top')){
+            $data['top'] = Carbon::now();
+        }
+        $post = Post::create($data);
+        // 处理分类
+        if(!empty($data['category_ids'])){
+            $post->saveCategories($data['category_ids']);
+        }
+
         return $this->response->noContent();
     }
 
@@ -51,7 +53,17 @@ class PostsController extends ApiController
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
+
+        // 处理置顶
+        if($request->has('top')){
+            $data['top'] = Carbon::now();
+        }
         $request->performUpdate($post);
+        // 处理分类
+        if(!empty($request->has('category_ids'))){
+            $post->saveCategories($request->get('category_ids'));
+        }
+
         return $this->response->noContent();
     }
 
@@ -87,5 +99,4 @@ class PostsController extends ApiController
         Post::movePosts2Categories($postIds, $categoryIds);
         return $this->response->noContent();
     }
-
 }

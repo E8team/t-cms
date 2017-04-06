@@ -7,12 +7,14 @@ use App\Entities\Traits\Listable;
 use Cache;
 use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Ty666\PictureManager\Traits\Picture;
 
 class Post extends BaseModel
 {
     use SoftDeletes, Picture, Listable;
 
+    protected $fillable = ['title', 'author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top'];
     protected $dates = ['deleted_at', 'top'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
@@ -25,7 +27,7 @@ class Post extends BaseModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->ordered()->recent();
     }
 
     public function scopePost($query)
@@ -115,4 +117,22 @@ class Post extends BaseModel
     {
         return $this->hasOne(PostContents::class);
     }
+
+    public function saveCategories($categories)
+    {
+        if($categories instanceof Collection)
+        {
+            $categories = $categories->pluck('id');
+        }else if(is_string($categories)){
+            $categories = explode(',', $categories);
+        }
+        $this->categories()->sync($categories);
+    }
+
+    public function getCoverUrlsAttribute()
+    {
+        //todo 换一个默认封面
+        return $this->getPicure($this->cover, ['sm', 'md', 'lg', 'o'], asset('images/default_avatar.jpg'));
+    }
+
 }
