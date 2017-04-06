@@ -7,6 +7,8 @@ namespace App\Http\Controllers\Admin\Api;
 
 
 use App\Entities\Setting;
+use App\Http\Requests\SettingCreateRequest;
+use App\Http\Requests\SettingUpdateRequest;
 
 class SettingsController extends ApiController
 {
@@ -15,8 +17,16 @@ class SettingsController extends ApiController
         dd(Setting::allSetting());
     }
 
-    public function store()
+    public function store(SettingCreateRequest $request)
     {
-
+        Setting::create($request->all());
+        return $this->response->noContent();
     }
+
+    public function update(Setting $setting, SettingUpdateRequest $request)
+    {
+        $request->performUpdate($setting);
+        return $this->response->noContent();
+    }
+
 }

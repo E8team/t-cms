@@ -10,7 +10,6 @@ use App\Entities\Link;
 use App\Entities\Type;
 use App\Http\Requests\TypeCreateRequest;
 use App\Http\Requests\TypeUpdateRequest;
-use App\Transformers\LinkTransformer;
 use App\Transformers\TypeTransformer;
 
 class TypesController extends ApiController

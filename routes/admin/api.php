@@ -81,10 +81,14 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新友情链接
     $api->put('links/{link}', 'LinksController@update');
     // -------------------------------------------------
-
+    $api->get('settings', 'SettingsController@lists');
+    // 创建设置项
+    $api->post('settings', 'SettingsController@store');
+    // 更新设置项
+    $api->put('settings/setting', 'SettingsController@update');
 });
 
-$api->get('settings', 'SettingsController@lists');
+
 // auth 相关
 $api->post('login', 'LoginController@login');
 
