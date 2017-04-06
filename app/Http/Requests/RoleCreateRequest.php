@@ -30,7 +30,7 @@ class RoleCreateRequest extends Request
             'name' => 'required:unique:roles',
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
-            'order' => 'int',
+            'order' => 'nullable|int',
             'permission_ids' => 'nullable|int_array'
         ];
     }

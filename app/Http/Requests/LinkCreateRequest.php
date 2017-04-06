@@ -6,7 +6,7 @@ use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
 
-class PermissionCreateRequest extends Request
+class LinkCreateRequest extends Request
 {
 
     /**
@@ -27,13 +27,12 @@ class PermissionCreateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required:unique:permissions',
-            'display_name' => 'nullable|string',
-            'description' => 'nullable|string',
-            'parent_id' => 'nullable|int',
-            'is_menu' => 'nullable|boolean',
-            'icon' => 'nullable|string',
-            'order' => 'nullable|int'
+            'url' => 'required|url|max:255',
+            'logo' => 'nullable|picture_id',
+            'linkman' => 'nullable|string|max:30',
+            'type_id' => 'required|int',
+            'order' => 'nullable|int',
+            'is_visible' => 'nullable|boolean'
         ];
     }
 }

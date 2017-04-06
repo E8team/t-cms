@@ -3,13 +3,17 @@
 namespace App\Entities;
 
 
+use App\Entities\Traits\Listable;
 use Ty666\PictureManager\Traits\Picture;
 
 class Link extends BaseModel
 {
-    use Picture;
-    public $timestamps = false;
+    use Picture, Listable;
 
+    protected $fillable = ['url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
+    public $timestamps = false;
+    protected static $allowSortFields = ['type_id', 'order', 'is_visible'];
+    protected static $allowSearchFields = ['url', 'linkman'];
     public function type()
     {
         return $this->belongsTo(Type::class);
@@ -22,12 +26,14 @@ class Link extends BaseModel
 
     public function scopeByType($query, $type)
     {
-        if($type instanceof Type)
-        {
+        if(is_null($type)){
+            return $query;
+        }
+        if($type instanceof Type) {
             $typeId = $type->id;
-        }elseif(is_array($type)){
+        }elseif(is_array($type)) {
             $typeId = $type['id'];
-        }else{
+        }else {
             $typeId = intval($type);
         }
 

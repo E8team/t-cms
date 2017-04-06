@@ -1,6 +1,7 @@
 <?php
 
 $api->group(['middleware'=>'auth'], function ($api) {
+    // -------------------------------------------------
     // 当前登录的用户
     $api->get('me', 'UsersController@me');
     // 用户列表
@@ -13,6 +14,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('users/{user}', 'UsersController@update');
     // 删除用户
     $api->delete('users/{id}', 'UsersController@destroy');
+    // -------------------------------------------------
     // 获取用户角色
     $api->get('users/{user}/roles', 'UsersController@roles');
     // 批量移动用户至角色 ?user_ids[0]=1&user_ids[1]=2&role_ids[0]=1&role_ids[1]=2
@@ -30,6 +32,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('roles/{role}', 'RolesController@update');
     // 删除角色
     $api->delete('roles/{id}', 'RolesController@destroy');
+    // -------------------------------------------------
     // 获取菜单
     $api->get('menus', 'PermissionsController@menus');
     // 获取所有权限(不分页 用于创建角色时显示)
@@ -48,6 +51,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->delete('permissions/{id}', 'PermissionsController@destroy');
     //将权限批量移动到角色 ?permission_ids[0]=1&permission_ids[1]=2&role_ids[0]=1&role_ids[1]=2
     $api->put('move_permissions_to_roles', 'PermissionsController@movePermissions2Roles');
+    // -------------------------------------------------
     // 获取所有的父级分类
     $api->get('top_categories', 'CategoriesController@getTopCategories');
     // 获取指定分类下的文章
@@ -60,16 +64,27 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('categories/{category}/posts', 'CategoriesController@posts');
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
     $api->put('move_posts_to_categories', 'PostsController@movePosts2Categories');
-
+    // -------------------------------------------------
     $api->get('posts/{post}', 'PostsController@show');
+    // -------------------------------------------------
+    // 获取所有友情链接的类别
+    $api->get('types/link', 'TypesController@links');
+    // 创建类别
+    $api->post('types', 'TypesController@store');
+    // 更新类别
+    $api->put('types/{type}', 'TypesController@update');
+    // ---------------------------------------------------
+    // 指定类别下面的友情链接 type如果不传表示获取所有分类下的友情链接
+    $api->get('links/{type?}', 'LinksController@lists');
+    // 创建友情链接
+    $api->post('links', 'LinksController@store');
+    // 更新友情链接
+    $api->put('links/{link}', 'LinksController@update');
+    // -------------------------------------------------
 
 });
 
-// 获取友情链接分类
-$api->get('type/link', 'LinksController@linkType');
-// 指定分类下面的友情链接
-$api->get('type/{type}/link', 'LinksController@lists');
-
+$api->get('settings', 'SettingsController@lists');
 // auth 相关
 $api->post('login', 'LoginController@login');
 

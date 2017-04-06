@@ -6,9 +6,12 @@ use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
 
-class PermissionCreateRequest extends Request
+class LinkUpdateRequest extends Request
 {
 
+    use Update;
+
+    protected $allowModifyFields = ['url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -21,19 +24,17 @@ class PermissionCreateRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
-     *
      * @return array
      */
     public function rules()
     {
         return [
-            'name' => 'required:unique:permissions',
-            'display_name' => 'nullable|string',
-            'description' => 'nullable|string',
-            'parent_id' => 'nullable|int',
-            'is_menu' => 'nullable|boolean',
-            'icon' => 'nullable|string',
-            'order' => 'nullable|int'
+            'url' => 'nullable|url|max:255',
+            'logo' => 'nullable|picture_id',
+            'linkman' => 'nullable|string|max:30',
+            'type_id' => 'nullable|int',
+            'order' => 'nullable|int',
+            'is_visible' => 'nullable|boolean'
         ];
     }
 }

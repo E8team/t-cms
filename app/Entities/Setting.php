@@ -24,13 +24,22 @@ class Setting extends BaseModel
         }
     }
 
+    public static function allSetting($isAutoload = null)
+    {
+        if(!is_null($isAutoload)){
+            $query = static::where('is_autoload', (boolean)$isAutoload);
+        }else{
+            $query = static::query();
+        }
+        return $query->recent()
+            ->get()
+            ->keyBy('name');
+    }
+
     public static function allSettingWithCache()
     {
         return Cache::rememberForever('setting_autoload', function () {
-            return static::where('is_autoload', true)
-                ->recent()
-                ->get()
-                ->keyBy('name');
+            return static::allSetting();
         });
     }
 

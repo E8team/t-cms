@@ -6,9 +6,12 @@ use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
 
-class PermissionCreateRequest extends Request
+class SettingUpdateRequest extends Request
 {
 
+    use Update;
+
+    protected $allowModifyFields = ['name', 'value', 'description', 'is_autoload'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -21,19 +24,16 @@ class PermissionCreateRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
-     *
      * @return array
      */
     public function rules()
     {
+        $setting = $this->route()->parameter('setting');
         return [
-            'name' => 'required:unique:permissions',
-            'display_name' => 'nullable|string',
-            'description' => 'nullable|string',
-            'parent_id' => 'nullable|int',
-            'is_menu' => 'nullable|boolean',
-            'icon' => 'nullable|string',
-            'order' => 'nullable|int'
+            'name' => ['max:30', Rule::unique('settings')->ignore($setting->id)],
+            'value' => 'nullable|string',
+            'description' => 'nullable|string|max:255',
+            'is_autoload' => 'nullable|boolean'
         ];
     }
 }

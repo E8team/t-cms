@@ -6,7 +6,7 @@ use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
 
-class PermissionCreateRequest extends Request
+class TypeCreateRequest extends Request
 {
 
     /**
@@ -27,13 +27,12 @@ class PermissionCreateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required:unique:permissions',
-            'display_name' => 'nullable|string',
-            'description' => 'nullable|string',
-            'parent_id' => 'nullable|int',
-            'is_menu' => 'nullable|boolean',
-            'icon' => 'nullable|string',
-            'order' => 'nullable|int'
+            'name' => 'required|string|max:30',
+            'description' => 'nullable|string|max:255',
+            'order' => 'nullable|int',
+            // class_name指定Model类名 表示是该model的类别
+            // 在store方法中给定真实的类名
+            'class_name' => 'in:link'
         ];
     }
 }

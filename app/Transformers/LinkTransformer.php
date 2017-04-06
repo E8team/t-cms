@@ -5,7 +5,7 @@ namespace App\Transformers;
 use App\Entities\Link;
 use League\Fractal\TransformerAbstract;
 
-class TypeTransformer extends TransformerAbstract
+class LinkTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['type'];
 

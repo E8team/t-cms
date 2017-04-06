@@ -31,7 +31,7 @@ class PostCreateRequest extends Request
             //'status' => 'nullable|in:publish,draft',
             'type' => 'in:post,page',
             'views_count' => 'nullable|int',
-            'order' => 'int',
+            'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
             'category_ids' => 'nullable|int_array',
         ];
