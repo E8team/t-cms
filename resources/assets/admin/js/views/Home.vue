@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" :class="{'close': isClose}">
         <el-menu :unique-opened="true" :default-active="currentPath" :router="true" class="menu" theme="dark">
             <div class="user_box">
                 <img :src="me.avatar_urls ? me.avatar_urls.md : ''" :alt="me.user_name">
@@ -15,7 +15,14 @@
             </el-submenu>
         </el-menu>
         <div class="content">
-            <router-view></router-view>
+            <div class="header">
+                <div @click="isClose = !isClose"  class="hamburger_close_box">
+                    <span :class="{'hamburger': !isClose, 'close': isClose}"></span>
+                </div>
+            </div>
+            <div class="content_body">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
@@ -26,7 +33,8 @@
         data () {
             return{
                 currentPath: '',
-                me: {}
+                me: {},
+                isClose: false
             }
         },
         mounted() {
