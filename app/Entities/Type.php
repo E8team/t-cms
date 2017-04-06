@@ -9,7 +9,7 @@ class Type extends BaseModel
 
     public function scopeLinkType($query)
     {
-        return $query->where('typeable_type', Link::class);
+        return $query->where('typeable_type', Link::class)->ordered();
     }
 
     public function link()

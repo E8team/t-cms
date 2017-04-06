@@ -61,9 +61,14 @@ $api->group(['middleware'=>'auth'], function ($api) {
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
     $api->put('move_posts_to_categories', 'PostsController@movePosts2Categories');
 
-    $api->get('post/{post}', 'PostsController@show');
+    $api->get('posts/{post}', 'PostsController@show');
+
 });
 
+// 获取友情链接分类
+$api->get('type/link', 'LinksController@linkType');
+// 指定分类下面的友情链接
+$api->get('type/{type}/link', 'LinksController@lists');
 
 // auth 相关
 $api->post('login', 'LoginController@login');
