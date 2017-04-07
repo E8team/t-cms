@@ -10,6 +10,7 @@ class CategoryTransformer extends TransformerAbstract
     public function transform(Category $category)
     {
         return [
+            'id' => $category->id,
             'type' => $category->type,
             'image' => $category->image,
             'image_urls' => $category->image_urls,

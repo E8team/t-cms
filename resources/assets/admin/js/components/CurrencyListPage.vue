@@ -21,12 +21,12 @@
                     <div class="page_num_box">
                         显示:
                         <el-select @change="change()" class="page_num" size="small" v-model="perPage">
-                            <el-option label="5" value="5"></el-option>
-                            <el-option label="10" value="10"></el-option>
-                            <el-option label="20" value="20"></el-option>
-                            <el-option label="30" value="30"></el-option>
-                            <el-option label="50" value="50"></el-option>
-                            <el-option label="100" value="100"></el-option>
+                            <el-option label="5" :value="5"></el-option>
+                            <el-option label="10" :value="10"></el-option>
+                            <el-option label="20" :value="20"></el-option>
+                            <el-option label="30" :value="30"></el-option>
+                            <el-option label="50" :value="50"></el-option>
+                            <el-option label="100" :value="100"></el-option>
                         </el-select>
                         项结果
                     </div>

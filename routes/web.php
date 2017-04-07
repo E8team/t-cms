@@ -1,7 +1,7 @@
 <?php
 Route::get('/', function (){
 
-    return 'hello world!';
+    return view('welcome');
 });
 Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');
 
