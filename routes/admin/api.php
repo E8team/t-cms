@@ -94,7 +94,13 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('settings', 'SettingsController@store');
     // 更新设置项
     $api->put('settings/setting', 'SettingsController@update');
+
+    // 获取所有主题
+    $api->get('themes', 'ThemesController@lists');
+    // 获取正文模板
+    $api->get('themes/content_template', 'ThemesController@contentTemplate');
 });
+
 
 
 // auth 相关

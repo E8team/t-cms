@@ -17,4 +17,10 @@ class ThemesController extends ApiController
     {
         dd(app(Theme::class)->getAllThemeInfo());
     }
+
+    public function contentTemplate()
+    {
+        return app(Theme::class)->getContentTemplate();
+    }
+
 }

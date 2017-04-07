@@ -9,7 +9,7 @@ use Ty666\PictureManager\Traits\Picture;
 class Category extends BaseModel
 {
     use Listable, Picture;
-    public $timestamps = false;
+    protected static $allowSearchFields = ['cate_name', 'description', 'url', 'cate_slug'];
 
     protected $casts = [
         'is_nav' => 'boolean',
