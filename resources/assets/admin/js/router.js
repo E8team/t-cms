@@ -66,6 +66,11 @@ export default new Router({
                             path: 'permission-edit/:id',
                             name: 'permission-edit',
                             component: require('./views/userManage/Permission.vue')
+                        },
+                        {
+                            path: 'article-add',
+                            name: 'article-add',
+                            component: require('./views/articleManage/Article.vue')
                         }
                     ]
                 },

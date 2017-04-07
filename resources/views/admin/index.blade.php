@@ -12,7 +12,13 @@
     <script>
         window.t_meta = {!! json_encode([
             'csrfToken' => csrf_token(),
-            'base_url' => url('/')
+            'base_url' => url('/'),
+            'ueditor_include' => [
+                asset('/laravel-u-editor/ueditor.all.min.js'),
+                asset('/laravel-u-editor/ueditor.config.js'),
+                // asset($UeditorLangFile)
+            ],
+            'public' => asset('/')
         ]) !!};
     </script>
 </head>
