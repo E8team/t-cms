@@ -34,6 +34,7 @@ class PostCreateRequest extends Request
             'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
             'category_ids' => 'nullable|int_array',
+            'created_at' => 'nullable|date'
         ];
     }
 }
