@@ -48,15 +48,16 @@ class CategoriesController extends ApiController
      * 获取一级分类
      * @return \Dingo\Api\Http\Response
      */
-    public function getTopCategories()
+    public function getTopCategories(Request $request)
     {
         $topCategories = Category::topCategories()
-            ->withSimpleSearch()
+            ->byType($request->get('type'))
+            //->withSimpleSearch()
             ->ordered()
             ->recent()
             ->get();
-        return $this->response->collection($topCategories, new CategoryTransformer())
-            ->setMeta(Category::getAllowSearchFieldsMeta());
+        return $this->response->collection($topCategories, new CategoryTransformer());
+            //->setMeta(Category::getAllowSearchFieldsMeta());
 
     }
 
@@ -65,15 +66,16 @@ class CategoriesController extends ApiController
      * @param Category $category
      * @return \Dingo\Api\Http\Response
      */
-    public function getChildren(Category $category)
+    public function getChildren(Category $category, Request $request)
     {
         $childrenCategories = Category::childrenCategories($category->id)
-            ->withSimpleSearch()
+            ->byType($request->get('type'))
+            //->withSimpleSearch()
             ->ordered()
             ->recent()
             ->get();
-        return $this->response->collection($childrenCategories, new CategoryTransformer())
-            ->setMeta(Category::getAllowSearchFieldsMeta());
+        return $this->response->collection($childrenCategories, new CategoryTransformer());
+            //->setMeta(Category::getAllowSearchFieldsMeta());
     }
 
     /**

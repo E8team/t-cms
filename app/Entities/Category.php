@@ -73,4 +73,20 @@ class Category extends BaseModel
     {
         return $query->where('parent_id', $parentId);
     }
+
+    public function scopeByType($query, $type = null)
+    {
+        switch ($type)
+        {
+            case 'post':
+                $query->where('type', 0);
+                break;
+            case 'page':
+                $query->where('type', 1);
+                break;
+            case 'ext_link':
+                $query->where('type', 2);
+                break;
+        }
+    }
 }
