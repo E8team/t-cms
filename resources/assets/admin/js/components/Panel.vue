@@ -53,7 +53,7 @@ export default{
         h2{
           height: 45px;
           font-size: 16px;
-          line-height: 27px;
+          line-height: 24px;
           padding-left: 15px;
         }
       } 

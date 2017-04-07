@@ -12,7 +12,7 @@
               <el-input placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
               <div class="tip">选填，如果不填写会默认抓取正文前54个字</div>
           </el-form-item>
-          <el-form-item label="封面">
+          <el-form-item required label="封面">
               <el-button type="success">从正文选择</el-button>
               <el-button type="info">本地上传</el-button>
               <div class="tip">大图片建议尺寸：900像素 * 500像素</div>
@@ -34,10 +34,10 @@
       </panel>
       <panel title="发布" size="small">
         <el-form label-position="top" :model="article">
-          <el-form-item label="浏览次数">
+          <el-form-item required label="浏览次数">
               <el-input-number v-model="article.views_count"></el-input-number>
           </el-form-item>
-          <el-form-item label="浏览次数">
+          <el-form-item required label="发布时间">
               <el-date-picker
                 v-model="article.created_at"
                 type="datetime"
@@ -46,7 +46,7 @@
               >
               </el-date-picker>
           </el-form-item>
-          <el-form-item label="正文模板">
+          <el-form-item required label="正文模板">
               <el-select v-model="article.template" placeholder="请选择">
                 <el-option
                   :key="item.file_name"
@@ -56,7 +56,10 @@
                 </el-option>
               </el-select>
           </el-form-item>
-          <el-button type="success">发布</el-button>
+          <el-button-group>
+              <el-button type="success">发布</el-button>
+              <el-button @click="$router.back()">返回</el-button>
+          </el-button-group>
         </el-form>
       </panel>
     </div>
@@ -71,7 +74,11 @@
         if (node.level === 0) {
           return;
         }
-        this.$http.get(`categories/${node.data.id}/children`).then(res => {
+        this.$http.get(`categories/${node.data.id}/children`,{
+          params: {
+            type: 'post'
+          }
+        }).then(res => {
           return resolve(res.data.data)
         })
       },
@@ -100,7 +107,11 @@
           ue.execCommand('serverparam', '_token', window.t_meta.csrfToken);
         });
       }
-      this.$http.get('top_categories').then(res => {
+      this.$http.get('top_categories', {
+        params: {
+          type: 'post'
+        }
+      }).then(res => {
         this.topCategories = res.data.data
       })
       this.$http.get('themes/content_template').then(res => {
@@ -161,5 +172,9 @@
       height: 100%;
       width: 300px;
     }
+  }
+  .el-scrollbar__wrap{
+    margin-bottom: 0!important;
+    overflow-x: hidden;
   }
 </style>
