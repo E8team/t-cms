@@ -3,14 +3,14 @@
     <panel title="撰写新文章" class="main">
        <el-form label-position="top" :model="article">
           <el-form-item required label="标题">
-              <el-input placeholder="在此输入标题"></el-input>
+              <el-input v-model="article.title" placeholder="在此输入标题"></el-input>
           </el-form-item>
           <el-form-item label="作者信息">
-              <el-input placeholder="请输入作者信息"></el-input>
+              <el-input v-model="article.author_info" placeholder="请输入作者信息"></el-input>
           </el-form-item>
           <el-form-item id="ueditor_wrapper"></el-form-item>
           <el-form-item label="摘要">
-              <el-input placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
+              <el-input v-model="article.excerpt" placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
               <div class="tip">选填，如果不填写会默认抓取正文前54个字</div>
           </el-form-item>
        </el-form>
@@ -20,10 +20,8 @@
         <el-checkbox-group v-model="article.category_ids">
         <el-tree
           :render-content="renderCategorie"
-          :data="topCategories"
-          lazy
-          :props= 'props'
-          :load='loadCategorie'>
+          :data="allCategories"
+          :props= 'props'>
         </el-tree>
         </el-checkbox-group>
       </panel>
@@ -48,10 +46,10 @@
               </el-select>
           </el-form-item>
           <el-form-item required label="浏览次数">
-              <el-input-number v-model="article.views_count"></el-input-number>
+              <el-input-number :min="0" v-model="article.views_count"></el-input-number>
           </el-form-item>
           <el-button-group class="public_btn">
-              <el-button type="success">发布</el-button>
+              <el-button type="success" @click="confirm">发布</el-button>
               <el-button @click="$router.back()">返回</el-button>
           </el-button-group>
         </el-form>
@@ -59,7 +57,7 @@
       <panel title="封面" size="small">
         <!--<el-form-item required label="封面">-->
         <div class="cover_box">
-          <el-button size="small" type="success">从正文选择</el-button>
+          <el-button size="small" @click="selImageDialog = true" type="success">从正文选择</el-button>
           <el-upload
             class="upload_cover"
             accept="image/jpeg,image/png"
@@ -80,6 +78,16 @@
         </div>
       </panel>
     </div>
+    <el-dialog title="从正文中选择图片" v-model="selImageDialog">
+      <ul class="img_list">
+        <div class="no_img" v-if="contentImages.length == 0"><i class="el-icon-warning"></i>没有找到图片</div>
+        <li :class="{'active': selImageIndex == index}" v-for="(item, index) in contentImages"><img :src="item.src" @click="selImageIndex = index"/></li>
+      </ul>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="selImageDialog = false">取 消</el-button>
+        <el-button type="primary" @click="selImageDialog = false, selImage()">选 择</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -87,6 +95,18 @@
   export default {
     name: 'article',
     methods: {
+      confirm () {
+        this.article.content = this.articleContent;
+        this.$http.post('posts', {
+          ...this.article
+        }).then(res => {
+          console.log('ok')
+        })
+      },
+      selImage () {
+        this.preViewCover = this.contentImages[this.selImageIndex].src
+        //todo 
+      },
       handleCoverSuccess (res, file) {
         this.preViewCover = window.URL.createObjectURL(file.raw);
         this.article.cover = res.picture;
@@ -112,16 +132,30 @@
       },
       renderCategorie(h, { node, data, store }) {
         return (<span style="overflow: hidden"><el-checkbox label={node.data.id}>{node.label}</el-checkbox></span>);
+      },
+      initEditor () {
+        this.editorInited = true;
+        this.editor = window.UE.getEditor('ueditor_container', {
+          initialFrameHeight: 300
+        });
+        this.editor.ready(() => {
+          this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
+        });
       }
     },
     beforeCreate () {
-      for(let item of window.t_meta.ueditor_include){
-        let scriptNode = document.createElement("script");
-        scriptNode.setAttribute("type", "text/javascript");
-        scriptNode.setAttribute("src",item);
-        scriptNode.setAttribute('data-type', 'ueditor_include')
-        document.body.appendChild(scriptNode);
-      }
+       for(let item of window.t_meta.ueditor_include){
+          let scriptNode = document.createElement("script");
+          scriptNode.setAttribute("type", "text/javascript");
+          scriptNode.setAttribute("src",item);
+          scriptNode.setAttribute('data-type', 'ueditor_include')
+          scriptNode.onload = () => {
+            if(window.UE.getEditor != undefined && this.editorInited == false){
+              this.initEditor()
+            }
+          }
+          document.body.appendChild(scriptNode);
+        }
     },
     mounted () {
       let ueditorNode = document.createElement("script");
@@ -129,20 +163,13 @@
       ueditorNode.setAttribute('name', 'content');
       ueditorNode.setAttribute('type', 'text/plain');
       document.querySelector('#ueditor_wrapper').appendChild(ueditorNode);
-      window.onload = () => {
-        let ue = window.UE.getEditor('ueditor_container', {
-          initialFrameHeight: 300
-        });
-        ue.ready(function() {
-          ue.execCommand('serverparam', '_token', window.t_meta.csrfToken);
-        });
-      }
-      this.$http.get('top_categories', {
+      
+      this.$http.get('categories/all', {
         params: {
           type: 'post'
         }
       }).then(res => {
-        this.topCategories = res.data.data
+        this.allCategories = res.data
       })
       this.$http.get('themes/content_template').then(res => {
         this.contentTemplates = res.data
@@ -150,19 +177,31 @@
       })
     },
     beforeDestroy () {
+      try {
+        this.editor.destroy();
+      } catch (e) {
+      }finally{
+        this.editor = null
+        window.UE = null
+      }
       document.querySelectorAll('[data-type=ueditor_include]').forEach(function(element) {
         document.body.removeChild(element);
       }, this);
     },
     data () {
       return{
+        editorInited: false,
+        selImageDialog: false,
+        contentImages: [],
+        selImageIndex: null,
         props: {
           label: 'cate_name',
-          children: 'cate_name'
+          children: 'children'
         },
-        topCategories: [],
+        allCategories: [],
         contentTemplates: [],
         preViewCover: null,
+        editor: null,
         article: {
           'title': null,
           'author_info': null,
@@ -176,6 +215,22 @@
           'category_ids': [],
           'created_at': null
         }
+      }
+    },
+    watch: {
+      'selImageDialog' (val) {
+        if(val){
+          let ueditorDom = document.querySelector('#ueditor_0');
+          if(ueditorDom){
+            this.contentImages = ueditorDom.contentDocument.querySelectorAll('img')
+          }
+        }
+      }
+    },
+    computed: {
+      'articleContent' () {
+        if(this.editor)
+          return this.editor.getContent()
       }
     }
   }
@@ -220,6 +275,42 @@
       color: #999;
       position: relative;
       top: -3px;
+    }
+    .img_list{
+      overflow: hidden;
+      padding: 0;
+      .no_img{
+        background: #f5f5f5;
+        line-height: 200px;
+        color: #666;
+        font-size: 14px;
+        text-align: center;
+        i{
+          margin-right: 10px;
+        }
+      }
+      li{
+        padding: 20px;
+        list-style: none;
+        float: left;
+        width: 25%;
+        position: relative;
+        &.active::after{
+          content: '';
+          background-color: #20A0FF;
+          z-index: -1;
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          right: 15px;
+          bottom: 17px;
+        }
+        img{
+          width: 100%;
+          cursor: pointer;
+          height: 125px;
+        }
+      }
     }
   }
   .el-scrollbar__wrap{
