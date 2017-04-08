@@ -34,7 +34,7 @@ class PostUpdateRequest extends Request
             'author_info' => 'nullable|string|max:50',
             'excerpt' => 'nullable|string',
             'cover' => 'nullable|picture',
-            //'status' => 'nullable|in:publish,draft',
+            'status' => 'nullable|in:publish,draft',
             'type' => 'nullable|in:post,page',
             'views_count' => 'nullable|int',
             'order' => 'nullable|int',
