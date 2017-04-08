@@ -71,6 +71,11 @@ export default new Router({
                             path: 'article-add',
                             name: 'article-add',
                             component: require('./views/articleManage/Article.vue')
+                        },
+                        {
+                            path: 'configure',
+                            name: 'configure',
+                            component: require('./views/setting/Configure.vue')
                         }
                     ]
                 },
