@@ -94,5 +94,8 @@ class CategoriesController extends ApiController
         return $this->response->paginator($posts, new PostTransformer());
     }
 
-
+    public function getAllCategory(Request $request)
+    {
+        return Category::allCategoryArray($request->get('type'));
+    }
 }

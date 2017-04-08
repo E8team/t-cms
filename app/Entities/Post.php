@@ -42,7 +42,7 @@ class Post extends BaseModel
         {
             $query->withSimpleSearch($data['q']);
         }
-        if(!is_null($data['q']))
+        if(!is_null($data['orders']))
         {
             $query->withSort($data['orders']);
         }

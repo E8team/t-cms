@@ -46,6 +46,14 @@ class Category extends BaseModel
         return $res;
     }
 
+    public static function allCategoryArray($type = null)
+    {
+        $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $res = [];
+        self::tree($allCategory, $res);
+        return $res;
+    }
+
     private static function tree(&$allNav, &$res, $parent_id = 0)
     {
         foreach ($allNav as $key => $value) {
@@ -88,5 +96,6 @@ class Category extends BaseModel
                 $query->where('type', 2);
                 break;
         }
+        return $query;
     }
 }
