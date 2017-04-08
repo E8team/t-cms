@@ -62,14 +62,22 @@
           <el-button size="small" type="success">从正文选择</el-button>
           <el-upload
             class="upload_cover"
+            accept="image/jpeg,image/png"
+            :action="`${$t_meta.base_url}/ajax_upload_picture`"
+            :with-credentials="true"
+            :headers="{'X-CSRF-TOKEN': $t_meta.csrfToken}"
+            :on-success="handleCoverSuccess"
+            :before-upload="beforeCoverUpload"
             :show-file-list="false"
-            action="https://jsonplaceholder.typicode.com/posts/"
             >
             <el-button type="info" size="small" >本地上传</el-button>
           </el-upload>
         </div>
         <div class="tip">封面图片建议尺寸：900像素 * 500像素</div>
           <!--</el-form-item>-->
+        <div class="cover_preview" v-if="preViewCover != null">
+          <img :src="preViewCover"/>
+        </div>
       </panel>
     </div>
   </div>
@@ -79,6 +87,17 @@
   export default {
     name: 'article',
     methods: {
+      handleCoverSuccess (res, file) {
+        this.preViewCover = window.URL.createObjectURL(file.raw);
+        this.article.cover = res.picture;
+      },
+      beforeCoverUpload (file) {
+        const isPIC = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isPIC) {
+            this.$message.error('上传头像图片只能是 JPG 或 PNG 格式!');
+        }
+        return isPIC;
+      },
       loadCategorie (node, resolve) {
         if (node.level === 0) {
           return;
@@ -111,7 +130,9 @@
       ueditorNode.setAttribute('type', 'text/plain');
       document.querySelector('#ueditor_wrapper').appendChild(ueditorNode);
       window.onload = () => {
-        let ue = window.UE.getEditor('ueditor_container');
+        let ue = window.UE.getEditor('ueditor_container', {
+          initialFrameHeight: 300
+        });
         ue.ready(function() {
           ue.execCommand('serverparam', '_token', window.t_meta.csrfToken);
         });
@@ -125,6 +146,7 @@
       })
       this.$http.get('themes/content_template').then(res => {
         this.contentTemplates = res.data
+        this.article.template = this.contentTemplates.find(item => item.is_defalut).file_name;
       })
     },
     beforeDestroy () {
@@ -140,6 +162,7 @@
         },
         topCategories: [],
         contentTemplates: [],
+        preViewCover: null,
         article: {
           'title': null,
           'author_info': null,
@@ -184,6 +207,12 @@
       .upload_cover{
         float:left;
         margin-right: 10px;
+      }
+    }
+    .cover_preview{
+      margin-top: 20px;
+      >img{
+        max-width: 100%;
       }
     }
     .tip{
