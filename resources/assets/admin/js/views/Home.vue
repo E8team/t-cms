@@ -13,6 +13,11 @@
                 <el-menu-item index="/admin/home/roles">角色列表</el-menu-item>
                 <el-menu-item index="/admin/home/permissions">权限列表</el-menu-item>
             </el-submenu>
+            <el-submenu index="setting">
+                <template slot="title"><i class="el-icon-setting"></i>设置</template>
+                <el-menu-item index="/admin/home/Configure">站点配置</el-menu-item>
+                <el-menu-item index="/admin/home/roles">主题</el-menu-item>
+            </el-submenu>
         </el-menu>
         <div class="content">
             <div class="header">
