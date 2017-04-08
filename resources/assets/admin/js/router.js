@@ -68,6 +68,11 @@ export default new Router({
                             component: require('./views/userManage/Permission.vue')
                         },
                         {
+                            path: 'articles',
+                            name: 'articles',
+                            component: require('./views/articleManage/ArticleList.vue')
+                        },
+                        {
                             path: 'article-add',
                             name: 'article-add',
                             component: require('./views/articleManage/Article.vue')

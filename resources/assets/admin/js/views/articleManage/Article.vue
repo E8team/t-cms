@@ -144,18 +144,20 @@
       }
     },
     beforeCreate () {
-       for(let item of window.t_meta.ueditor_include){
-          let scriptNode = document.createElement("script");
-          scriptNode.setAttribute("type", "text/javascript");
-          scriptNode.setAttribute("src",item);
-          scriptNode.setAttribute('data-type', 'ueditor_include')
-          scriptNode.onload = () => {
-            if(window.UE.getEditor != undefined && this.editorInited == false){
-              this.initEditor()
+      if(document.querySelectorAll('[data-type=ueditor_include]').length == 0){
+        for(let item of window.t_meta.ueditor_include){
+            let scriptNode = document.createElement("script");
+            scriptNode.setAttribute("type", "text/javascript");
+            scriptNode.setAttribute("src",item);
+            scriptNode.setAttribute('data-type', 'ueditor_include')
+            scriptNode.onload = () => {
+              if(window.UE.getEditor != undefined && this.editorInited == false){
+                this.initEditor()
+              }
             }
+            document.body.appendChild(scriptNode);
           }
-          document.body.appendChild(scriptNode);
-        }
+      }
     },
     mounted () {
       let ueditorNode = document.createElement("script");
@@ -182,7 +184,6 @@
       } catch (e) {
       }finally{
         this.editor = null
-        window.UE = null
       }
       document.querySelectorAll('[data-type=ueditor_include]').forEach(function(element) {
         document.body.removeChild(element);

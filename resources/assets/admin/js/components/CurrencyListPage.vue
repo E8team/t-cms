@@ -79,7 +79,9 @@
         },
         methods: {
             refresh () {
-                this.getList(this.currentPage)
+                this.$nextTick(() => {
+                    this.getList(this.currentPage)
+                })
             },
             getList (page = 1, keyword = '', sort) {
                 this.loading = true
