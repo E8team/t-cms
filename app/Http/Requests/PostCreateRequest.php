@@ -23,7 +23,7 @@ class PostCreateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|uniqe:posts',
+            'title' => 'required|unique:posts',
             'author_info' => 'nullable|string|max:50',
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
