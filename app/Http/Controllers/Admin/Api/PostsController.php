@@ -8,6 +8,7 @@ use App\Transformers\PostTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use PictureManager;
 
 class PostsController extends ApiController
 {
@@ -25,6 +26,9 @@ class PostsController extends ApiController
         // 处理置顶
         if($request->has('top')){
             $data['top'] = Carbon::now();
+        }
+        if($request->has('cover_in_content')){
+            $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
         }
         $post = Post::create($data);
         // 处理分类
@@ -57,6 +61,10 @@ class PostsController extends ApiController
         // 处理置顶
         if($request->has('top')){
             $data['top'] = Carbon::now();
+        }
+        // 处理从正文中获取的封面
+        if($request->has('cover_in_content')){
+            $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
         }
         $request->performUpdate($post);
         // 处理分类
