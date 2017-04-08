@@ -56,12 +56,14 @@ class Category extends BaseModel
 
     private static function tree(&$allNav, &$res, $parent_id = 0)
     {
+        $i = 0;
         foreach ($allNav as $key => $value) {
             if ($value['parent_id'] == $parent_id) {
-                $res[$value['id']] = $value;
-                $res[$value['id']]['children'] = [];
+                $res[$i] = $value;
+                $res[$i]['children'] = [];
                 unset($allNav[$key]);
-                self::tree($allNav, $res[$value['id']]['children'], $value['id']);
+                self::tree($allNav, $res[$i]['children'], $value['id']);
+                $i++;
             }
         }
     }
