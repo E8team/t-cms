@@ -45,7 +45,12 @@ class Theme
 
     public function getContentTemplate()
     {
-        return $this->getTemplateInfo()['content_template'];
+        $contentTemplates = $this->getTemplateInfo()['content_template'];
+        foreach ($contentTemplates as &$contentTemplate){
+            $contentTemplate['title'].="({$contentTemplate['file_name']})";
+        }
+        unset($contentTemplate);
+        return $contentTemplates;
     }
 
 
