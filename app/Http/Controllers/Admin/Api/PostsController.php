@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use PictureManager;
+use Auth;
 
 class PostsController extends ApiController
 {
@@ -23,19 +24,8 @@ class PostsController extends ApiController
     {
         $data = $request->all();
         $data['status'] = 'publish';
-        // 处理置顶
-        if($request->has('top')){
-            $data['top'] = Carbon::now();
-        }
-        if($request->has('cover_in_content')){
-            $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
-        }
-        $post = Post::create($data);
-        // 处理分类
-        if(!empty($data['category_ids'])){
-            $post->saveCategories($data['category_ids']);
-        }
-
+        $data['user_id'] = Auth::id();
+        $post = Post::createPost($data);
         return $this->response->noContent();
     }
 
@@ -58,6 +48,7 @@ class PostsController extends ApiController
     public function update(Post $post, PostUpdateRequest $request)
     {
 
+        $data['type'] = 'post';
         // 处理置顶
         if($request->has('top')){
             $data['top'] = Carbon::now();
@@ -68,8 +59,8 @@ class PostsController extends ApiController
         }
         $request->performUpdate($post);
         // 处理分类
-        if(!empty($request->has('category_ids'))){
-            $post->saveCategories($request->get('category_ids'));
+        if(!empty($data['category_ids'])){
+            $post->saveCategories($data['category_ids']);
         }
 
         return $this->response->noContent();

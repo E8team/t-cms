@@ -5,16 +5,18 @@ namespace App\Entities;
 
 use App\Entities\Traits\Listable;
 use Cache;
+use Carbon\Carbon;
 use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Ty666\PictureManager\Traits\Picture;
+use PictureManager;
 
 class Post extends BaseModel
 {
     use SoftDeletes, Picture, Listable;
 
-    protected $fillable = ['title', 'author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'created_at'];
+    protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'created_at'];
     protected $dates = ['deleted_at', 'top'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
@@ -135,4 +137,24 @@ class Post extends BaseModel
         return $this->getPicure($this->cover, ['sm', 'md', 'lg', 'o'], asset('images/default_avatar.jpg'));
     }
 
+    public static function createPost($data)
+    {
+        $data['type'] = 'post';
+        // 处理置顶
+        if(isset($data['top'])){
+            $data['top'] = Carbon::now();
+        }
+        if(isset($data['cover_in_content'])){
+            //todo size
+            $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
+        }
+        $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
+
+        $post = static::create($data);
+        // 处理分类
+        if(!empty($data['category_ids'])){
+            $post->saveCategories($data['category_ids']);
+        }
+        return $post;
+    }
 }

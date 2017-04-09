@@ -29,7 +29,7 @@ class PostCreateRequest extends Request
             'content' => 'nullable|string',
             'cover' => 'nullable|picture',
             'status' => 'nullable|in:publish,draft',
-            'type' => 'in:post,page',
+            //'type' => 'in:post,page',
             'views_count' => 'nullable|int',
             'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
