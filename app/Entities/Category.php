@@ -100,4 +100,13 @@ class Category extends BaseModel
         }
         return $query;
     }
+
+    /**
+     * 获取该分类下的文章数量
+     * @return mixed
+     */
+    public function getPostNum()
+    {
+        return $this->posts()->post()->count();
+    }
 }
