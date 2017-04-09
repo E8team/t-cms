@@ -2,14 +2,15 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Entities\Post;
+use App\Entities\PostContent;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Transformers\PostTransformer;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use PictureManager;
-use Auth;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
@@ -25,7 +26,7 @@ class PostsController extends ApiController
         $data = $request->all();
         $data['status'] = 'publish';
         $data['user_id'] = Auth::id();
-        $post = Post::createPost($data);
+        Post::createPost($data);
         return $this->response->noContent();
     }
 
@@ -50,17 +51,20 @@ class PostsController extends ApiController
 
         $data['type'] = 'post';
         // 处理置顶
-        if(isset($data['top'])){
+        if (isset($data['top'])) {
             $data['top'] = Carbon::now();
         }
         // 处理从正文中获取的封面
-        if(isset($data['cover_in_content'])){
+        if (isset($data['cover_in_content'])) {
             $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
         }
         $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
         $request->performUpdate($post);
+        if (isset($data['content'])) {
+            $post->content()->save(new PostContent(['content' => $data['content']]));
+        }
         // 处理分类
-        if(!empty($data['category_ids'])){
+        if (!empty($data['category_ids'])) {
             $post->saveCategories($data['category_ids']);
         }
 
@@ -80,6 +84,7 @@ class PostsController extends ApiController
             //todo 国际化
             throw new NotFoundHttpException('该文章不存在');
         }
+        PostContent::destroy(intval($id));
         return $this->response->noContent();
     }
 

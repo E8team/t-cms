@@ -117,7 +117,7 @@ class Post extends BaseModel
 
     public function content()
     {
-        return $this->hasOne(PostContents::class);
+        return $this->hasOne(PostContent::class);
     }
 
     public function saveCategories($categories)
@@ -151,10 +151,17 @@ class Post extends BaseModel
         $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
 
         $post = static::create($data);
+        if(isset($data['content'])){
+            $post->content()->create([
+                'content' => $data['content']
+            ]);
+        }
+
         // 处理分类
         if(!empty($data['category_ids'])){
             $post->saveCategories($data['category_ids']);
         }
+
         return $post;
     }
 }
