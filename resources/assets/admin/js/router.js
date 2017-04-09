@@ -78,6 +78,11 @@ export default new Router({
                             component: require('./views/articleManage/Article.vue')
                         },
                         {
+                            path: 'article-edit/:id',
+                            name: 'article-edit',
+                            component: require('./views/articleManage/Article.vue')
+                        },
+                        {
                             path: 'configure',
                             name: 'configure',
                             component: require('./views/setting/Configure.vue')

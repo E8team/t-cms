@@ -9,8 +9,20 @@
           <el-table border :data="list.data" style="width: 100%">
             <el-table-column width="400px" property="title" label="标题"></el-table-column>
             <el-table-column property="author_info" label="作者信息"></el-table-column>
-            <el-table-column property="views_count" label="访问"></el-table-column>
+            <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
             <el-table-column property="created_at" label="创建时间"></el-table-column>
+            <el-table-column property="created_at" label="创建时间"></el-table-column>
+            <el-table-column
+                  fixed="right"
+                  label="操作"
+                  width="160">
+              <template scope="scope">
+                  <el-button-group>
+                      <el-button size="mini" @click="$router.push({name: 'article-edit', params: {id: scope.row.id}})" type="warning">编辑</el-button>
+                      <el-button @click="del(scope.row.id)" size="mini" type="danger">删除</el-button>
+                  </el-button-group>
+              </template>
+          </el-table-column>
           </el-table>
         </template>
       </CurrencyListPage>

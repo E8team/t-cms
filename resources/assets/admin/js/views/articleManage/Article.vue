@@ -100,12 +100,12 @@
         this.$http.post('posts', {
           ...this.article
         }).then(res => {
-          console.log('ok')
+          this.$router.push({name: 'articles'});
         })
       },
       selImage () {
-        this.preViewCover = this.contentImages[this.selImageIndex].src
-        //todo 
+        this.preViewCover = this.contentImages[this.selImageIndex].src;
+        this.article.cover_in_content = this.preViewCover;
       },
       handleCoverSuccess (res, file) {
         this.preViewCover = window.URL.createObjectURL(file.raw);
@@ -140,6 +140,9 @@
         });
         this.editor.ready(() => {
           this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
+          if(this.id){
+            this.editor.setContent(this.article.content);
+          }
         });
       }
     },
@@ -177,6 +180,15 @@
         this.contentTemplates = res.data
         this.article.template = this.contentTemplates.find(item => item.is_defalut).file_name;
       })
+      if (this.$route.name === 'article-edit') {
+        this.id = this.$route.params.id;
+        this.$http.get(`posts/${this.id}`).then(res => {
+            this.article = res.data.data;
+        });
+        this.title = '编辑文章';
+      }else{
+        this.title = '撰写新文章';
+      }
     },
     beforeDestroy () {
       try {
@@ -191,6 +203,7 @@
     },
     data () {
       return{
+        id: null,
         editorInited: false,
         selImageDialog: false,
         contentImages: [],
@@ -209,7 +222,7 @@
           'excerpt': null,
           'content': null,
           'cover': null,
-          'type': null,
+          'type': 'post',
           'views_count': null,
           'order': null,
           'template': null,
