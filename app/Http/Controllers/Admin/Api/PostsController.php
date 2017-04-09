@@ -50,13 +50,14 @@ class PostsController extends ApiController
 
         $data['type'] = 'post';
         // 处理置顶
-        if($request->has('top')){
+        if(isset($data['top'])){
             $data['top'] = Carbon::now();
         }
         // 处理从正文中获取的封面
-        if($request->has('cover_in_content')){
+        if(isset($data['cover_in_content'])){
             $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
         }
+        $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
         $request->performUpdate($post);
         // 处理分类
         if(!empty($data['category_ids'])){
