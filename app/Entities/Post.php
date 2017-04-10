@@ -153,7 +153,7 @@ class Post extends BaseModel
         $post = static::create($data);
         if(isset($data['content'])){
             $post->content()->create([
-                'content' => $data['content']
+                'content' => clean($data['content'])
             ]);
         }
 

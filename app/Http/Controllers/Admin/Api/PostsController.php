@@ -61,7 +61,7 @@ class PostsController extends ApiController
         $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
         $request->performUpdate($post);
         if (isset($data['content'])) {
-            $post->content()->save(new PostContent(['content' => $data['content']]));
+            $post->content()->save(new PostContent(['content' => clean($data['content'])]));
         }
         // 处理分类
         if (!empty($data['category_ids'])) {
