@@ -97,7 +97,8 @@ class CategoriesController extends ApiController
     public function getAllCategory(Request $request)
     {
         if($request->get('show') == 'indent'){
-            return $this->response->array(Category::allCategoryIndent($request->get('type'), $request->get('indent_str')));
+            //$indentStr = $request->get('indent_str');
+            return $this->response->array(Category::allCategoryIndent($request->get('type'), '　∟　'));
         }else{
             return $this->response->array(Category::allCategoryArray($request->get('type')));
         }
