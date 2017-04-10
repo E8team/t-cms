@@ -36,4 +36,11 @@ class SettingUpdateRequest extends Request
             'is_autoload' => 'nullable|boolean'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

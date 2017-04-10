@@ -18,7 +18,7 @@ class CategoriesController extends ApiController
      */
     public function nav()
     {
-        return Category::getNav();
+        return $this->response->array(Category::getNav());
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoriesController extends ApiController
     }
 
     /**
-     * 更新权限
+     * 更新分类
      * @param Category $category
      * @param CategoryUpdateRequest $request
      * @return \Dingo\Api\Http\Response
@@ -96,6 +96,11 @@ class CategoriesController extends ApiController
 
     public function getAllCategory(Request $request)
     {
-        return Category::allCategoryArray($request->get('type'));
+        if($request->get('show') == 'indent'){
+            return $this->response->array(Category::allCategoryIndent($request->get('type'), $request->get('indent_str')));
+        }else{
+            return $this->response->array(Category::allCategoryArray($request->get('type')));
+        }
+
     }
 }

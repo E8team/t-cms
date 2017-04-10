@@ -35,4 +35,11 @@ class TypeCreateRequest extends Request
             'class_name' => 'in:link'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

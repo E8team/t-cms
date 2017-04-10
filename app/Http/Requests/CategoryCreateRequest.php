@@ -38,4 +38,11 @@ class CategoryCreateRequest extends Request
             'setting' => 'nullable|string'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

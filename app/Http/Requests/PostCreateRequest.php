@@ -37,4 +37,11 @@ class PostCreateRequest extends Request
             'created_at' => 'nullable|date'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

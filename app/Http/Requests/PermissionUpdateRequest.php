@@ -40,4 +40,11 @@ class PermissionUpdateRequest extends Request
             'order' => 'nullable|int'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

@@ -48,4 +48,12 @@ class CategoryUpdateRequest extends Request
             'setting' => 'nullable|string'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
+
 }

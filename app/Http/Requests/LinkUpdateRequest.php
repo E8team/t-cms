@@ -37,4 +37,11 @@ class LinkUpdateRequest extends Request
             'is_visible' => 'nullable|boolean'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

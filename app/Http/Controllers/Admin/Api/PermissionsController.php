@@ -28,7 +28,7 @@ class PermissionsController extends ApiController
             $topPermission['children'] = $permissions[$topPermission['id']];
         }
         unset($topPermission);
-        return $topPermissions;
+        return $this->response->array($topPermissions);
     }
 
 
@@ -55,7 +55,7 @@ class PermissionsController extends ApiController
         }
         unset($permission);
         $permissions = $permissions[0];
-        return $permissions;
+        return $this->response->array($permissions);
     }
 
     /**
@@ -144,8 +144,7 @@ class PermissionsController extends ApiController
     public function destroy($id)
     {
         if (!Permission::destroy(intval($id))) {
-            //todo 国际化
-            throw new NotFoundHttpException('该权限不存在');
+            throw new NotFoundHttpException('message.permission_not_found');
         }
         return $this->response->noContent();
     }

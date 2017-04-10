@@ -42,8 +42,7 @@ class LinksController extends ApiController
     public function destroy($id)
     {
         if (!Link::destroy(intval($id))) {
-            //todo 国际化
-            throw new NotFoundHttpException('该友情链接不存在');
+            throw new NotFoundHttpException(trans('message.link_not_found'));
         }
         return $this->response->noContent();
     }

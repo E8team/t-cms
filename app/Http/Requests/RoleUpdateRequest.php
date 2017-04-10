@@ -38,4 +38,11 @@ class RoleUpdateRequest extends Request
             'permission_ids' => 'nullable|int_array'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

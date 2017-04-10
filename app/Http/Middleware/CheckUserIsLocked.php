@@ -18,8 +18,7 @@ class CheckUserIsLocked
     public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->is_locked) {
-            //todo 国际化
-            throw new AuthorizationException('您的账号已被锁定!');
+            throw new AuthorizationException(trans('message.your_account_has_been_locked'));
         }
         return $next($request);
     }

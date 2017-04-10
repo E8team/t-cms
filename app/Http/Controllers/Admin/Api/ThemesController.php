@@ -20,7 +20,7 @@ class ThemesController extends ApiController
 
     public function contentTemplate()
     {
-        return app(Theme::class)->getContentTemplate();
+        return $this->response->array(app(Theme::class)->getContentTemplate());
     }
 
 }

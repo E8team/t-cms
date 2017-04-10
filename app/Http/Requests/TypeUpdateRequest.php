@@ -34,4 +34,11 @@ class TypeUpdateRequest extends Request
             'order' => 'nullable|int'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

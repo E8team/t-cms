@@ -81,8 +81,7 @@ class PostsController extends ApiController
     public function destroy($id)
     {
         if (!Post::destroy(intval($id))) {
-            //todo 国际化
-            throw new NotFoundHttpException('该文章不存在');
+            throw new NotFoundHttpException(trans('message.post_not_found'));
         }
         PostContent::destroy(intval($id));
         return $this->response->noContent();
