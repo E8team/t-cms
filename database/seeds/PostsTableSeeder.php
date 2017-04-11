@@ -45,14 +45,12 @@ class PostsTableSeeder extends Seeder
             [
                 'post_id' => 1,
                 'content' => '这是第一篇文章',
-                'published_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'post_id' => 2,
                 'content' => '这是第二篇文章11111111',
-                'published_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
