@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" :class="{'close': isClose}">
         <el-menu :unique-opened="true" :default-active="currentPath" :router="true" class="menu" theme="dark">
             <div class="user_box">
                 <img :src="me.avatar_urls ? me.avatar_urls.md : ''" :alt="me.user_name">
@@ -17,10 +17,27 @@
                 <template slot="title"><i class="el-icon-message"></i>文章管理</template>
                 <el-menu-item index="/admin/home/users">分类管理</el-menu-item>
                 <el-menu-item index="/admin/home/roles">文章列表</el-menu-item>
+            <el-submenu index="article">
+                <template slot="title"><i class="el-icon-document"></i>文章管理</template>
+                <el-menu-item index="/admin/home/article-add">写文章</el-menu-item>
+                <el-menu-item index="/admin/home/articles">文章列表</el-menu-item>
+                <el-menu-item index="/admin/home/columns">栏目管理</el-menu-item>
+            </el-submenu>
+            <el-submenu index="setting">
+                <template slot="title"><i class="el-icon-setting"></i>设置</template>
+                <el-menu-item index="/admin/home/configure">站点配置</el-menu-item>
+                <el-menu-item index="/admin/home/roles">主题</el-menu-item>
             </el-submenu>
         </el-menu>
         <div class="content">
-            <router-view></router-view>
+            <div class="header">
+                <div @click="isClose = !isClose"  class="hamburger_close_box">
+                    <span :class="{'hamburger': !isClose, 'close': isClose}"></span>
+                </div>
+            </div>
+            <div class="content_body">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
@@ -31,7 +48,8 @@
         data () {
             return{
                 currentPath: '',
-                me: {}
+                me: {},
+                isClose: false
             }
         },
         mounted() {

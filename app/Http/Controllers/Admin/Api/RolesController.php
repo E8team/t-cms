@@ -101,12 +101,9 @@ class RolesController extends ApiController
     public function destroy($id)
     {
         if (!Role::destroy(intval($id))) {
-            //todo 国际化
-            throw new NotFoundHttpException('该角色不存在');
+            throw new NotFoundHttpException(trans('message.role_not_found'));
         }
         return $this->response->noContent();
     }
-
-
 
 }

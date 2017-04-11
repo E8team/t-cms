@@ -2,16 +2,18 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Entities\Post;
+use App\Entities\PostContent;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Transformers\PostTransformer;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PictureManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
-
-
     /**
      * 创建文章
      *
@@ -21,7 +23,10 @@ class PostsController extends ApiController
      */
     public function store(PostCreateRequest $request)
     {
-        Post::create($request->all());
+        $data = $request->all();
+        $data['status'] = 'publish';
+        $data['user_id'] = Auth::id();
+        Post::createPost($data);
         return $this->response->noContent();
     }
 
@@ -43,7 +48,26 @@ class PostsController extends ApiController
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
+
+        $data['type'] = 'post';
+        // 处理置顶
+        if (isset($data['top'])) {
+            $data['top'] = Carbon::now();
+        }
+        // 处理从正文中获取的封面
+        if (isset($data['cover_in_content'])) {
+            $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
+        }
+        $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
         $request->performUpdate($post);
+        if (isset($data['content'])) {
+            $post->content()->save(new PostContent(['content' => clean($data['content'])]));
+        }
+        // 处理分类
+        if (!empty($data['category_ids'])) {
+            $post->saveCategories($data['category_ids']);
+        }
+
         return $this->response->noContent();
     }
 
@@ -57,9 +81,9 @@ class PostsController extends ApiController
     public function destroy($id)
     {
         if (!Post::destroy(intval($id))) {
-            //todo 国际化
-            throw new NotFoundHttpException('该文章不存在');
+            throw new NotFoundHttpException(trans('message.post_not_found'));
         }
+        PostContent::destroy(intval($id));
         return $this->response->noContent();
     }
 

@@ -8,7 +8,6 @@ use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
-use Lang;
 use Validator;
 
 class LoginController extends ApiController
@@ -42,8 +41,7 @@ class LoginController extends ApiController
             $user = Auth::user();
             if ($user->is_locked) { //用户是否已经被锁定
                 $this->logout($request);
-                // todo 国际化
-                return $this->response->error('该用户已经被锁定', 423);
+                return $this->response->error(trans('auth.user_locked'), 423);
             }
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
@@ -80,12 +78,10 @@ class LoginController extends ApiController
         try {
             $loginSuccess = $this->guard()->attempt($credentials, $remember);
         } catch (ModelNotFoundException $e) {
-            //todo 国际化
-            throw new LoginFailed([$this->username() => '用户名不存在']);
+            throw new LoginFailed([$this->username() => trans('auth.user_name_not_fount')]);
         }
         if (!$loginSuccess) {
-            //todo 国际化
-            throw new LoginFailed(['password' => '密码错误']);
+            throw new LoginFailed(['password' => trans('auth.password_error')]);
         }
         return true;
     }
@@ -114,7 +110,7 @@ class LoginController extends ApiController
             $this->throttleKey($request)
         );
 
-        $message = Lang::get('auth.throttle', ['seconds' => $seconds]);
+        $message = trans('auth.throttle', ['seconds' => $seconds]);
         $this->response->error($message, 423);
     }
 

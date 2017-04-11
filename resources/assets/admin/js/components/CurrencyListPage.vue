@@ -21,18 +21,17 @@
                     <div class="page_num_box">
                         显示:
                         <el-select @change="change()" class="page_num" size="small" v-model="perPage">
-                            <el-option label="5" value="5"></el-option>
-                            <el-option label="10" value="10"></el-option>
-                            <el-option label="20" value="20"></el-option>
-                            <el-option label="30" value="30"></el-option>
-                            <el-option label="50" value="50"></el-option>
-                            <el-option label="100" value="100"></el-option>
+                            <el-option label="5" :value="5"></el-option>
+                            <el-option label="10" :value="10"></el-option>
+                            <el-option label="20" :value="20"></el-option>
+                            <el-option label="30" :value="30"></el-option>
+                            <el-option label="50" :value="50"></el-option>
+                            <el-option label="100" :value="100"></el-option>
                         </el-select>
                         项结果
                     </div>
                 </div>
                 <el-pagination
-                        v-if="total > perPage"
                         class="page"
                         layout="prev, pager, next"
                         :total="total"
@@ -80,7 +79,9 @@
         },
         methods: {
             refresh () {
-                this.getList(this.currentPage)
+                this.$nextTick(() => {
+                    this.getList(this.currentPage)
+                })
             },
             getList (page = 1, keyword = '', sort) {
                 this.loading = true
@@ -94,7 +95,7 @@
                     this.loading = false
                     this.list = res.data.data
                     this.total = res.data.meta.pagination.total
-                    this.perPage = res.data.meta.pagination.per_page
+                    // this.perPage = res.data.meta.pagination.per_page
                     this.allowSortFields = res.data.meta.allow_sort_fields
                 }).catch(err => {
                     this.loading = false

@@ -66,6 +66,41 @@ export default new Router({
                             path: 'permission-edit/:id',
                             name: 'permission-edit',
                             component: require('./views/userManage/Permission.vue')
+                        },
+                        {
+                            path: 'articles',
+                            name: 'articles',
+                            component: require('./views/articleManage/ArticleList.vue')
+                        },
+                        {
+                            path: 'article-add',
+                            name: 'article-add',
+                            component: require('./views/articleManage/Article.vue')
+                        },
+                        {
+                            path: 'article-edit/:id',
+                            name: 'article-edit',
+                            component: require('./views/articleManage/Article.vue')
+                        },
+                        {
+                            path: 'columns',
+                            name: 'columns',
+                            component: require('./views/articleManage/ColumnList.vue')
+                        },
+                        {
+                            path: 'column-add',
+                            name: 'column-add',
+                            component: require('./views/articleManage/Column.vue')
+                        },
+                        {
+                            path: 'column-edit/:id',
+                            name: 'column-edit',
+                            component: require('./views/articleManage/Column.vue')
+                        },
+                        {
+                            path: 'configure',
+                            name: 'configure',
+                            component: require('./views/setting/Configure.vue')
                         }
                     ]
                 },

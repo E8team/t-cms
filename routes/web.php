@@ -1,7 +1,7 @@
 <?php
 Route::get('/', function (){
-
-    return 'hello world!';
+    dd(PictureManager::convert(public_path('images/default_avatar.jpg')));
+    //return view('welcome');
 });
 Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');
 

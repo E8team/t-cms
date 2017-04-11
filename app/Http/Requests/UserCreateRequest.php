@@ -31,4 +31,11 @@ class UserCreateRequest extends Request
             'role_ids' => 'nullable|int_array'
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

@@ -2,21 +2,24 @@
 
 namespace App\Transformers;
 
-class PermissionTransformer extends BaseTransformer
+use App\Entities\Permission;
+use League\Fractal\TransformerAbstract;
+
+class PermissionTransformer extends TransformerAbstract
 {
-    public function transformData($model)
+    public function transform(Permission $permission)
     {
         return [
-            'id' => $model->id,
-            'name' => $model->name,
-            'display_name' => $model->display_name,
-            'description' => $model->description,
-            'parent_id' => $model->parent_id,
-            'is_menu' => $model->is_menu,
-            'icon' => $model->icon,
-            'order' => $model->orders,
-            'created_at' => $model->created_at->toDateTimeString(),
-            'updated_at' => $model->updated_at->toDateTimeString()
+            'id' => $permission->id,
+            'name' => $permission->name,
+            'display_name' => $permission->display_name,
+            'description' => $permission->description,
+            'parent_id' => $permission->parent_id,
+            'is_menu' => $permission->is_menu,
+            'icon' => $permission->icon,
+            'order' => $permission->orders,
+            'created_at' => $permission->created_at->toDateTimeString(),
+            'updated_at' => $permission->updated_at->toDateTimeString()
         ];
     }
 }

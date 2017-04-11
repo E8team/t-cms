@@ -30,10 +30,17 @@ class PermissionCreateRequest extends Request
             'name' => 'required:unique:permissions',
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
-            'parent_id' => 'int',
-            'is_menu' => 'boolean',
+            'parent_id' => 'nullable|int',
+            'is_menu' => 'nullable|boolean',
             'icon' => 'nullable|string',
-            'order' => 'int'
+            'order' => 'nullable|int'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+
         ];
     }
 }

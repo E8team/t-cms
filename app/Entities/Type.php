@@ -5,14 +5,16 @@ namespace App\Entities;
 
 class Type extends BaseModel
 {
+    protected $fillable = ['name', 'description', 'order', 'class_name'];
+
     public $timestamps = false;
 
-    public function scopeLinkType($query)
+    public function scopeLink($query)
     {
-        return $query->where('typeable_type', Link::class);
+        return $query->where('class_name', Link::class)->ordered();
     }
 
-    public function link()
+    public function links()
     {
         return $this->hasMany(Link::class);
     }

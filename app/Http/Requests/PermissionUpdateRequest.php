@@ -34,10 +34,17 @@ class PermissionUpdateRequest extends Request
             'name' => [Rule::unique('permissions')->ignore($permission->id)],
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
-            'parent_id' => 'int',
-            'is_menu' => 'boolean',
+            'parent_id' => 'nullable|int',
+            'is_menu' => 'nullable|boolean',
             'icon' => 'nullable|string',
-            'order' => 'int'
+            'order' => 'nullable|int'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+
         ];
     }
 }

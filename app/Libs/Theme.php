@@ -9,7 +9,7 @@ class Theme
     private $storage;
     private $currentTheme;
     private $isAddedNamespace = false;
-
+    private $themesMap = [];
     public function __construct($storage, $currentTheme)
     {
         $this->storage = $storage;
@@ -33,13 +33,25 @@ class Theme
         if (is_null($name)) {
             $name = $this->currentTheme;
         }
-        $templateInfo = [];
-        if ($this->storage->exists($name . '/config.json')) {
-            $templateInfo = json_decode($this->storage->get($name . '/config.json'), true);
+        if(!isset($themesMap[$name]))
+        {
+            if ($this->storage->exists($name . '/config.json')) {
+                $themesMap[$name] = json_decode($this->storage->get($name . '/config.json'), true);
+            }
         }
-        return $templateInfo;
+        return $themesMap[$name];
+
     }
 
+    public function getContentTemplate()
+    {
+        $contentTemplates = $this->getTemplateInfo()['content_template'];
+        foreach ($contentTemplates as &$contentTemplate){
+            $contentTemplate['title'].="({$contentTemplate['file_name']})";
+        }
+        unset($contentTemplate);
+        return $contentTemplates;
+    }
 
 
     public function addNamespace()

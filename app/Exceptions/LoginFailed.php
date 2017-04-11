@@ -10,6 +10,7 @@ namespace App\Exceptions;
 
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Lang;
 
 class LoginFailed extends HttpException
 {
@@ -18,8 +19,7 @@ class LoginFailed extends HttpException
     public function __construct($error, $statusCode = 403)
     {
         $this->error = $error;
-        //todo 国际化
-        parent::__construct($statusCode, '登录失败', null, [], $statusCode);
+        parent::__construct($statusCode, Lang::get('auth.login_failed'), null, [], $statusCode);
     }
 
     public function getError()

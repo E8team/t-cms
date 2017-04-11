@@ -12,13 +12,18 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends ApiController
 {
+
+    public function show(Category $category)
+    {
+        return $this->response->item($category, new CategoryTransformer());
+    }
     /**
      * 获取导航栏
      * @return array
      */
     public function nav()
     {
-        return Category::getNav();
+        return $this->response->array(Category::getNav());
     }
 
     /**
@@ -33,7 +38,7 @@ class CategoriesController extends ApiController
     }
 
     /**
-     * 更新权限
+     * 更新分类
      * @param Category $category
      * @param CategoryUpdateRequest $request
      * @return \Dingo\Api\Http\Response
@@ -48,15 +53,16 @@ class CategoriesController extends ApiController
      * 获取一级分类
      * @return \Dingo\Api\Http\Response
      */
-    public function getTopCategories()
+    public function getTopCategories(Request $request)
     {
         $topCategories = Category::topCategories()
-            ->withSimpleSearch()
+            ->byType($request->get('type'))
+            //->withSimpleSearch()
             ->ordered()
             ->recent()
             ->get();
-        return $this->response->collection($topCategories, new CategoryTransformer())
-            ->setMeta(Category::getAllowSearchFieldsMeta());
+        return $this->response->collection($topCategories, new CategoryTransformer());
+            //->setMeta(Category::getAllowSearchFieldsMeta());
 
     }
 
@@ -65,15 +71,16 @@ class CategoriesController extends ApiController
      * @param Category $category
      * @return \Dingo\Api\Http\Response
      */
-    public function getChildren(Category $category)
+    public function getChildren(Category $category, Request $request)
     {
         $childrenCategories = Category::childrenCategories($category->id)
-            ->withSimpleSearch()
+            ->byType($request->get('type'))
+            //->withSimpleSearch()
             ->ordered()
             ->recent()
             ->get();
-        return $this->response->collection($childrenCategories, new CategoryTransformer())
-            ->setMeta(Category::getAllowSearchFieldsMeta());
+        return $this->response->collection($childrenCategories, new CategoryTransformer());
+            //->setMeta(Category::getAllowSearchFieldsMeta());
     }
 
     /**
@@ -92,4 +99,14 @@ class CategoriesController extends ApiController
         return $this->response->paginator($posts, new PostTransformer());
     }
 
+    public function getAllCategory(Request $request)
+    {
+        if($request->get('show') == 'indent'){
+            //$indentStr = $request->get('indent_str');
+            return $this->response->array(Category::allCategoryIndent($request->get('type'), '　∟　'));
+        }else{
+            return $this->response->array(Category::allCategoryArray($request->get('type')));
+        }
+
+    }
 }

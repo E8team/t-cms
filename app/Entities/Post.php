@@ -5,18 +5,22 @@ namespace App\Entities;
 
 use App\Entities\Traits\Listable;
 use Cache;
+use Carbon\Carbon;
 use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Ty666\PictureManager\Traits\Picture;
+use PictureManager;
 
 class Post extends BaseModel
 {
     use SoftDeletes, Picture, Listable;
 
-    protected $dates = ['deleted_at', 'top'];
+    protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'published_at'];
+    protected $dates = ['deleted_at', 'top', 'published_at'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
-    protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order'];
+    protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order', 'published_at'];
 
     public function user()
     {
@@ -25,7 +29,7 @@ class Post extends BaseModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->ordered()->recent();
     }
 
     public function scopePost($query)
@@ -40,7 +44,7 @@ class Post extends BaseModel
         {
             $query->withSimpleSearch($data['q']);
         }
-        if(!is_null($data['q']))
+        if(!is_null($data['orders']))
         {
             $query->withSort($data['orders']);
         }
@@ -109,5 +113,55 @@ class Post extends BaseModel
         $posts->each(function ($post) use ($categoryIds){
             $post->categories()->sync($categoryIds);
         });
+    }
+
+    public function content()
+    {
+        return $this->hasOne(PostContent::class);
+    }
+
+    public function saveCategories($categories)
+    {
+        if($categories instanceof Collection)
+        {
+            $categories = $categories->pluck('id');
+        }else if(is_string($categories)){
+            $categories = explode(',', $categories);
+        }
+        $this->categories()->sync($categories);
+    }
+
+    public function getCoverUrlsAttribute()
+    {
+        //todo 换一个默认封面
+        return $this->getPicure($this->cover, ['sm', 'md', 'lg', 'o'], asset('images/default_avatar.jpg'));
+    }
+
+    public static function createPost($data)
+    {
+        $data['type'] = 'post';
+        // 处理置顶
+        if(isset($data['top'])){
+            $data['top'] = Carbon::now();
+        }
+        if(isset($data['cover_in_content'])){
+            //todo size
+            $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
+        }
+        $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
+
+        $post = static::create($data);
+        if(isset($data['content'])){
+            $post->content()->create([
+                'content' => clean($data['content'])
+            ]);
+        }
+
+        // 处理分类
+        if(!empty($data['category_ids'])){
+            $post->saveCategories($data['category_ids']);
+        }
+
+        return $post;
     }
 }

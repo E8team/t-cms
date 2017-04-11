@@ -24,6 +24,11 @@
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
+                <el-form-item required label="选择角色">
+                    <el-checkbox-group>
+                        <el-checkbox v-for="item in allRoles" :label="item.id" :key="item.id">{{item.display_name}}</el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
                 <el-form-item required label="密码">
                     <el-input placeholder="请设置登录密码" v-model="user.password"></el-input>
                 </el-form-item>
@@ -47,6 +52,7 @@
             return {
                 title: '',
                 id: null,
+                allRoles: [],
                 user: {
                     'user_name': null,
                     'nick_name': null,
@@ -86,6 +92,9 @@
             }
         },
         mounted () {
+            this.$http.get('roles/all').then(res => {
+                this.allRoles = res.data.data;
+            });
             if (this.$route.name === 'user-edit') {
                 this.id = this.$route.params.id;
                 this.$http.get(`users/${this.id}`).then(res => {

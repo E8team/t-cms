@@ -2,21 +2,31 @@
 
 namespace App\Transformers;
 
-class UserTransformer extends BaseTransformer
+use App\Entities\User;
+use League\Fractal\TransformerAbstract;
+
+class UserTransformer extends TransformerAbstract
 {
-    public function transformData($model)
+    protected $availableIncludes  = ['roles'];
+
+    public function transform(User $user)
     {
         return [
-            'id' => $model->id,
-            'user_name' => $model->user_name,
-            'nick_name' => $model->nick_name,
-            'email' => $model->email,
-            'is_locked' => $model->is_locked,
-            'avatar' => $model->avatar,
-            'avatar_urls' => $model->avatar_urls,
-            'roles' => $model->roles,
-            'created_at' => $model->created_at->toDateTimeString(),
-            'updated_at' => $model->updated_at->toDateTimeString()
+            'id' => $user->id,
+            'user_name' => $user->user_name,
+            'nick_name' => $user->nick_name,
+            'email' => $user->email,
+            'is_locked' => $user->is_locked,
+            'avatar' => $user->avatar,
+            'avatar_urls' => $user->avatar_urls,
+            'created_at' => $user->created_at->toDateTimeString(),
+            'updated_at' => $user->updated_at->toDateTimeString()
         ];
+    }
+
+    public function includeRoles(User $user)
+    {
+        $roles = $user->roles;
+        return $this->collection($roles, new RoleTransformer());
     }
 }

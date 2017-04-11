@@ -2,18 +2,21 @@
 
 namespace App\Transformers;
 
-class RoleTransformer extends BaseTransformer
+use App\Entities\Role;
+use League\Fractal\TransformerAbstract;
+
+class RoleTransformer extends TransformerAbstract
 {
-    public function transformData($model)
+    public function transform(Role $role)
     {
         return [
-            'id' => $model->id,
-            'name' => $model->name,
-            'display_name' => $model->display_name,
-            'description' => $model->description,
-            'order' => $model->order,
-            'created_at' => $model->created_at->toDateTimeString(),
-            'updated_at' => $model->updated_at->toDateTimeString()
+            'id' => $role->id,
+            'name' => $role->name,
+            'display_name' => $role->display_name,
+            'description' => $role->description,
+            'order' => $role->order,
+            'created_at' => $role->created_at->toDateTimeString(),
+            'updated_at' => $role->updated_at->toDateTimeString()
         ];
     }
 }

@@ -56,6 +56,17 @@ class CategoriesTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
+            [
+                'id' => 5,
+                'type' => 0,
+                'cate_name' => '公司新闻123',
+                'description' => '这里的公司新闻123',
+                'cate_slug' => 'company-news123',
+                'is_nav' => true,
+                'parent_id' => 1,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
         ]);
     }
 }

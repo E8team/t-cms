@@ -53,21 +53,19 @@ class AppServiceProvider extends ServiceProvider
         $apiHandler->register(function (\Illuminate\Auth\AuthenticationException $exception) {
             return response([
                 'code' => 401.1,
-                //todo 国际化
-                'message' => '请先登录!'
+                'message' => trans('auth.please_login_first')
             ], 401);
         });
         $apiHandler->register(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
             return response([
                 'code' => 401.3,
-                //todo 国际化
-                'message' => $exception->getMessage()=='This action is unauthorized.'?'没有权限!':$exception->getMessage()
+                'message' => $exception->getMessage()=='This action is unauthorized.'?trans('message.no_permission'):$exception->getMessage()
             ], 401);
         });
         $apiHandler->register(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             return response([
                 'code' => 404,
-                //todo 国际化
+                //todo 这里的错误显示需要处理
                 'message' => $exception->getMessage()
             ], 404);
         });

@@ -2,25 +2,31 @@
 
 namespace App\Transformers;
 
-class CategoryTransformer extends BaseTransformer
+use App\Entities\Category;
+use League\Fractal\TransformerAbstract;
+
+class CategoryTransformer extends TransformerAbstract
 {
-    public function transformData($model)
+    public function transform(Category $category)
     {
         return [
-            'type' => $model->type,
-            'image' => $model->image,
-            'image_urls' => $model->image_urls,
-            'parent_id' => $model->parent_id,
-            'cate_name' => $model->cate_name,
-            'description' => $model->description,
-            'url' => $model->url,
-            'cate_slug' => $model->cate_slug,
-            'is_nav' => $model->is_nav,
-            'order' => $model->order,
-            'page_template' => $model->page_template,
-            'list_template' => $model->list_template,
-            'content_template' => $model->content_template,
-            'setting' => $model->setting
+            'id' => $category->id,
+            'type' => $category->type,
+            'image' => $category->image,
+            'image_urls' => $category->image_urls,
+            'parent_id' => $category->parent_id,
+            'cate_name' => $category->cate_name,
+            'description' => $category->description,
+            'url' => $category->url,
+            'cate_slug' => $category->cate_slug,
+            'is_nav' => $category->is_nav,
+            'order' => $category->order,
+            'page_template' => $category->page_template,
+            'list_template' => $category->list_template,
+            'content_template' => $category->content_template,
+            'setting' => $category->setting,
+            'created_at' => $category->created_at->toDateTimeString(),
+            'updated_at' => $category->updated_at->toDateTimeString()
         ];
     }
 }

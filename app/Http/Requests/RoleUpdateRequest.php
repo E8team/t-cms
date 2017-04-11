@@ -34,8 +34,15 @@ class RoleUpdateRequest extends Request
             'name' => [Rule::unique('roles')->ignore($role->id)],
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
-            'order' => 'int',
+            'order' => 'nullable|int',
             'permission_ids' => 'nullable|int_array'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+
         ];
     }
 }
