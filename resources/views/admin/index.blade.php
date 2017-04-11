@@ -7,17 +7,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>登录_t-cms</title>
+    <title>管理_t-cms</title>
     <link rel="stylesheet" href="{{asset(mix('static/admin/css/app.css'))}}">
     <script>
         window.t_meta = {!! json_encode([
             'csrfToken' => csrf_token(),
             'base_url' => url('/'),
             'ueditor_include' => [
-                asset('/laravel-u-editor/ueditor.all.min.js'),
-                asset('/laravel-u-editor/ueditor.config.js'),
-                // asset($UeditorLangFile)
+                asset('vendor/ueditor/ueditor.config.js'),
+                asset('vendor/ueditor/ueditor.all.js')
             ],
+            'ueditor_server_url' => config('ueditor.route.name'),
             'public' => asset('/')
         ]) !!};
     </script>

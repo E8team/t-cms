@@ -83,6 +83,21 @@ export default new Router({
                             component: require('./views/articleManage/Article.vue')
                         },
                         {
+                            path: 'columns',
+                            name: 'columns',
+                            component: require('./views/articleManage/ColumnList.vue')
+                        },
+                        {
+                            path: 'column-add',
+                            name: 'column-add',
+                            component: require('./views/articleManage/Column.vue')
+                        },
+                        {
+                            path: 'column-edit/:id',
+                            name: 'column-edit',
+                            component: require('./views/articleManage/Column.vue')
+                        },
+                        {
                             path: 'configure',
                             name: 'configure',
                             component: require('./views/setting/Configure.vue')
