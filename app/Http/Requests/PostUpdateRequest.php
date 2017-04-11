@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 class PostUpdateRequest extends Request
 {
     use Update;
-    protected $allowModifyFields = ['title', 'author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'created_at'];
+    protected $allowModifyFields = ['title', 'author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'published_at'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -40,7 +40,7 @@ class PostUpdateRequest extends Request
             'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
             'category_ids' => 'nullable|int_array',
-            'created_at' => 'nullable|date'
+            'published_at' => 'nullable|date'
         ];
     }
 

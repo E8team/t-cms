@@ -41,6 +41,8 @@ class CreatePostsTable extends Migration
             //文章的一些其他配置
             $table->mediumText('setting')->nullable();
             $table->softDeletes();
+            // 发布时间
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

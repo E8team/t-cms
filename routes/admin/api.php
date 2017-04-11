@@ -1,5 +1,5 @@
 <?php
-
+$api->post('categories', 'CategoriesController@store');
 $api->group(['middleware'=>'auth'], function ($api) {
     // -------------------------------------------------
     // 当前登录的用户
@@ -59,7 +59,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 获取指定分类下的子级分类?type=post|page|ext_link
     $api->get('categories/{category}/children', 'CategoriesController@getChildren');
     // 创建权限
-    $api->post('categories', 'CategoriesController@store');
+    //$api->post('categories', 'CategoriesController@store');
     // 更新分类
     $api->put('categories/{category}', 'CategoriesController@update');
     //指定分类下的文章

@@ -39,10 +39,5 @@ class CategoryCreateRequest extends Request
         ];
     }
 
-    public function messages()
-    {
-        return [
 
-        ];
-    }
 }

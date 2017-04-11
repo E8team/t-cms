@@ -16,11 +16,11 @@ class Post extends BaseModel
 {
     use SoftDeletes, Picture, Listable;
 
-    protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'created_at'];
+    protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'published_at'];
     protected $dates = ['deleted_at', 'top'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
-    protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order'];
+    protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order', 'published_at'];
 
     public function user()
     {
@@ -148,7 +148,7 @@ class Post extends BaseModel
             //todo size
             $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
         }
-        $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
+        $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
 
         $post = static::create($data);
         if(isset($data['content'])){

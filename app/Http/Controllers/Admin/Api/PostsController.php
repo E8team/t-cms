@@ -58,7 +58,7 @@ class PostsController extends ApiController
         if (isset($data['cover_in_content'])) {
             $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
         }
-        $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
+        $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
         $request->performUpdate($post);
         if (isset($data['content'])) {
             $post->content()->save(new PostContent(['content' => clean($data['content'])]));
