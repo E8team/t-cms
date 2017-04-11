@@ -23,6 +23,7 @@ class PostTransformer extends TransformerAbstract
             'views_count' => $post->views_count,
             'comments_num' => $post->comments_num,
             'top' => $post->top,
+            'published_at' => $post->published_at->toDateTimeString(),
             'created_at' => $post->created_at->toDateTimeString(),
             'updated_at' => $post->updated_at->toDateTimeString()
         ];

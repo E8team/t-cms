@@ -17,7 +17,7 @@ class Post extends BaseModel
     use SoftDeletes, Picture, Listable;
 
     protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'published_at'];
-    protected $dates = ['deleted_at', 'top'];
+    protected $dates = ['deleted_at', 'top', 'published_at'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
     protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order', 'published_at'];
