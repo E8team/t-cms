@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends ApiController
 {
+
+    public function show(Category $category)
+    {
+        return $this->response->item($category, new CategoryTransformer());
+    }
     /**
      * 获取导航栏
      * @return array

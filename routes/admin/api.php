@@ -1,5 +1,4 @@
 <?php
-$api->post('categories', 'CategoriesController@store');
 $api->group(['middleware'=>'auth'], function ($api) {
     // -------------------------------------------------
     // 当前登录的用户
@@ -52,16 +51,21 @@ $api->group(['middleware'=>'auth'], function ($api) {
     //将权限批量移动到角色 ?permission_ids[0]=1&permission_ids[1]=2&role_ids[0]=1&role_ids[1]=2
     $api->put('move_permissions_to_roles', 'PermissionsController@movePermissions2Roles');
     // -------------------------------------------------
+
+    //获取所有分类?type=post|page|ext_link
+    $api->get('categories/all', 'CategoriesController@getAllCategory');
     //获取所有分类?type=post|page|ext_link
     $api->get('categories/all', 'CategoriesController@getAllCategory');
     // 获取所有的父级分类?type=post|page|ext_link
     $api->get('top_categories', 'CategoriesController@getTopCategories');
     // 获取指定分类下的子级分类?type=post|page|ext_link
     $api->get('categories/{category}/children', 'CategoriesController@getChildren');
-    // 创建权限
-    //$api->post('categories', 'CategoriesController@store');
+    // 创建分类
+    $api->post('categories', 'CategoriesController@store');
     // 更新分类
     $api->put('categories/{category}', 'CategoriesController@update');
+    // 获取指定分类
+    $api->get('categories/{category}', 'CategoriesController@show');
     //指定分类下的文章
     $api->get('categories/{category}/posts', 'CategoriesController@posts');
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
