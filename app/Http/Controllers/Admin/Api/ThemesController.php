@@ -6,7 +6,8 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Libs\Theme;
+
+use Ty666\LaravelTheme\Theme;
 
 class ThemesController extends ApiController
 {
@@ -20,7 +21,13 @@ class ThemesController extends ApiController
 
     public function contentTemplate()
     {
-        return $this->response->array(app(Theme::class)->getContentTemplate());
+        $contentTemplates = app(Theme::class)->getCurrentThemeConfig()['contentTemplate'];
+        foreach ($contentTemplates as &$contentTemplate)
+        {
+            $contentTemplate['title'] .=  "({$contentTemplate['file_name']})";
+        }
+        unset($contentTemplate);
+        return $this->response->array($contentTemplates);
     }
 
 }
