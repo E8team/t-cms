@@ -32,7 +32,6 @@ class ThemesController extends ApiController
 
     public function currentThemeConfig()
     {
-
         $currentThemeConfig = app(Theme::class)->getCurrentThemeConfig();
         foreach($currentThemeConfig as $key=>&$value)
         {
