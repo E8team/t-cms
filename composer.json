@@ -13,6 +13,7 @@
         "overtrue/laravel-ueditor": "~1.0",
         "predis/predis": "^1.1",
         "stevenyangecho/laravel-u-editor": "~1.4",
+        "ty666/laravel-theme": "^1.0",
         "ty666/picture-manager": "^1.0",
         "zizaco/entrust": "5.2.x-dev"
     },
@@ -31,7 +32,7 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers.php"
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

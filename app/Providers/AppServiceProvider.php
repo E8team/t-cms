@@ -74,11 +74,12 @@ class AppServiceProvider extends ServiceProvider
             throw new ValidationHttpException($exception->validator->errors());
         });
 
-        $this->app->singleton(Theme::class, function ($app) {
-            return new Theme($app['filesystem']->disk('theme'), Setting::getSetting('current_theme'));
-        });
 
 
+        // 使用基于类的composers...
+        /*View::composer('*', function ($view){
+            $view->with('a','b');
+        });*/
 
     }
 }

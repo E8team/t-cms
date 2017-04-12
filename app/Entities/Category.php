@@ -34,7 +34,7 @@ class Category extends BaseModel
     {
         $allMenu = Category::orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
         $res = [];
-        self::tree($allMenu, $res);
+        self::treeByArray($allMenu, $res);
         return $res;
     }
 
@@ -42,7 +42,7 @@ class Category extends BaseModel
     {
         $allNav = Category::where('is_nav', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
         $res = [];
-        self::tree($allNav, $res);
+        self::treeByArray($allNav, $res);
         return $res;
     }
 

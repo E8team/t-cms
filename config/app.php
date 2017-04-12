@@ -175,6 +175,7 @@ return [
         Ty666\PictureManager\PictureManagerServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Overtrue\LaravelUEditor\UEditorServiceProvider::class,
+        Ty666\LaravelTheme\LaravelThemeServiceProvider::class,
         /*
          * Application Service Providers...
          */

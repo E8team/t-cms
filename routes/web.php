@@ -1,8 +1,5 @@
 <?php
-Route::get('/', function (){
-    dd(PictureManager::convert(public_path('images/default_avatar.jpg')));
-    //return view('welcome');
-});
+Route::get('/', 'IndexController@index');
 Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');
 
 Route::group(['middleware' => 'auth'], function (){

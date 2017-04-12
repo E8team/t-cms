@@ -48,11 +48,6 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'theme' => [
-            'driver' => 'local',
-            'root' => resource_path('themes')
-        ],
-
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

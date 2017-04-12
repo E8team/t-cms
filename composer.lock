@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab023af7e3ec91f3f6fae6bd1f5cbe50",
+    "content-hash": "594b6b8cc1ec5fa068b4b09ec574afb8",
     "packages": [
         {
             "name": "dingo/api",
@@ -2743,6 +2743,50 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2016-09-20T12:50:39+00:00"
+        },
+        {
+            "name": "ty666/laravel-theme",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ty666/laravel-theme.git",
+                "reference": "1ffba63f585e8011f1dad9f00056dcc1f7845d6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/1ffba63f585e8011f1dad9f00056dcc1f7845d6a.zip",
+                "reference": "1ffba63f585e8011f1dad9f00056dcc1f7845d6a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/view": "^5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Ty666\\LaravelTheme\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ty",
+                    "email": "1255803549@qq.com"
+                }
+            ],
+            "description": "Make laravel support theme",
+            "keywords": [
+                "laravel",
+                "theme",
+                "view"
+            ],
+            "time": "2017-04-12T06:08:04+00:00"
         },
         {
             "name": "ty666/picture-manager",
