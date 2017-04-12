@@ -25,7 +25,7 @@
                     </el-upload>
                 </el-form-item>
                 <el-form-item required label="选择角色">
-                    <el-checkbox-group>
+                    <el-checkbox-group v-model="user.role_ids">
                         <el-checkbox v-for="item in allRoles" :label="item.id" :key="item.id">{{item.display_name}}</el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
@@ -60,7 +60,8 @@
                     'avatar': null,
                     'avatar_urls': {},
                     'password': null,
-                    'rePassword': null
+                    'rePassword': null,
+                    'role_ids': []
                 }
             }
         },

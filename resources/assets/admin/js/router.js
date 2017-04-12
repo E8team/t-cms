@@ -101,6 +101,11 @@ export default new Router({
                             path: 'configure',
                             name: 'configure',
                             component: require('./views/setting/Configure.vue')
+                        },
+                        {
+                            path: 'theme',
+                            name: 'theme',
+                            component: require('./views/setting/Theme.vue')
                         }
                     ]
                 },
