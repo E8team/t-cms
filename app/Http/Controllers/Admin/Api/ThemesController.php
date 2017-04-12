@@ -21,13 +21,31 @@ class ThemesController extends ApiController
 
     public function contentTemplate()
     {
-        $contentTemplates = app(Theme::class)->getCurrentThemeConfig()['contentTemplate'];
+        $contentTemplates = app(Theme::class)->getCurrentThemeConfig()['content_template'];
         foreach ($contentTemplates as &$contentTemplate)
         {
             $contentTemplate['title'] .=  "({$contentTemplate['file_name']})";
         }
         unset($contentTemplate);
         return $this->response->array($contentTemplates);
+    }
+
+    public function currentThemeConfig()
+    {
+
+        $currentThemeConfig = app(Theme::class)->getCurrentThemeConfig();
+        foreach($currentThemeConfig as $key=>&$value)
+        {
+            if(ends_with($key, '_template')){
+                foreach($value as &$template)
+                {
+                    $template['title'] .= "({$template['file_name']})";
+                }
+                unset($template);
+            }
+        }
+        unset($value);
+        return $currentThemeConfig;
     }
 
 }

@@ -105,6 +105,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('themes', 'ThemesController@lists');
     // 获取正文模板
     $api->get('themes/content_template', 'ThemesController@contentTemplate');
+    // 当前主题的配置
+    $api->get('themes/current_theme_config', 'ThemesController@currentThemeConfig');
 });
 
 
