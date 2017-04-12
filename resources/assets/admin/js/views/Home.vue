@@ -13,10 +13,15 @@
                 <el-menu-item index="/admin/home/roles">角色列表</el-menu-item>
                 <el-menu-item index="/admin/home/permissions">权限列表</el-menu-item>
             </el-submenu>
+            <el-submenu index="articleManage">
+                <template slot="title"><i class="el-icon-message"></i>文章管理</template>
+                <el-menu-item index="/admin/home/users">分类管理</el-menu-item>
+                <el-menu-item index="/admin/home/roles">文章列表</el-menu-item>
             <el-submenu index="article">
                 <template slot="title"><i class="el-icon-document"></i>文章管理</template>
                 <el-menu-item index="/admin/home/article-add">写文章</el-menu-item>
                 <el-menu-item index="/admin/home/articles">文章列表</el-menu-item>
+                <el-menu-item index="/admin/home/columns">栏目管理</el-menu-item>
             </el-submenu>
             <el-submenu index="setting">
                 <template slot="title"><i class="el-icon-setting"></i>设置</template>

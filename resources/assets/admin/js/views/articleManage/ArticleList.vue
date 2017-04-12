@@ -7,11 +7,10 @@
       <CurrencyListPage v-if="activeIndex" title="文章列表" ref="list" :queryName="queryName">
         <template scope="list">
           <el-table border :data="list.data" style="width: 100%">
-            <el-table-column width="400px" property="title" label="标题"></el-table-column>
+            <el-table-column width="450px" property="title" label="标题"></el-table-column>
             <el-table-column property="author_info" label="作者信息"></el-table-column>
             <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
-            <el-table-column property="created_at" label="创建时间"></el-table-column>
-            <el-table-column property="created_at" label="创建时间"></el-table-column>
+            <el-table-column width="190px" property="published_at" label="发布时间"></el-table-column>
             <el-table-column
                   fixed="right"
                   label="操作"

@@ -29,7 +29,7 @@
         <el-form label-position="top" :model="article">
           <el-form-item required label="发布时间">
               <el-date-picker
-                v-model="article.created_at"
+                v-model="article.published_at"
                 type="datetime"
                 placeholder="选择日期时间"
                 align="right">
@@ -96,10 +96,16 @@
     name: 'article',
     methods: {
       confirm () {
+        let method, url;
+        this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
-        this.$http.post('posts', {
+        this.$http[method](url, {
           ...this.article
         }).then(res => {
+          this.$message({
+              message: `${this.title}成功`,
+              type: 'success'
+          });
           this.$router.push({name: 'articles'});
         })
       },
@@ -135,13 +141,21 @@
       },
       initEditor () {
         this.editorInited = true;
+        window.UEDITOR_CONFIG.serverUrl = window.t_meta.ueditor_server_url;
         this.editor = window.UE.getEditor('ueditor_container', {
           initialFrameHeight: 300
         });
         this.editor.ready(() => {
           this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
           if(this.id){
-            this.editor.setContent(this.article.content);
+            this.$http.get(`posts/${this.id}`, {
+              params: {
+                include: 'content'
+              }
+            }).then(res => {
+                this.article = res.data.data;
+                this.editor.setContent(this.article.content ? this.article.content.data.content : '');
+            });
           }
         });
       }
@@ -182,9 +196,6 @@
       })
       if (this.$route.name === 'article-edit') {
         this.id = this.$route.params.id;
-        this.$http.get(`posts/${this.id}`).then(res => {
-            this.article = res.data.data;
-        });
         this.title = '编辑文章';
       }else{
         this.title = '撰写新文章';
@@ -227,7 +238,7 @@
           'order': null,
           'template': null,
           'category_ids': [],
-          'created_at': null
+          'published_at': null
         }
       }
     },
