@@ -47,6 +47,10 @@ class RolesController extends ApiController
             ->setMeta(Role::getAllowSortFieldsMeta() + Role::getAllowSortFieldsMeta());
     }
 
+    public function permissionsIds(Role $role)
+    {
+        return $role->perms->pluck('id');
+    }
     /**
      * 获取指定角色下面的权限
      * @param Role $role

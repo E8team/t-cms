@@ -6,7 +6,6 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-
 use Ty666\LaravelTheme\Theme;
 
 class ThemesController extends ApiController
@@ -16,15 +15,14 @@ class ThemesController extends ApiController
      */
     public function lists()
     {
-        dd(app(Theme::class)->getAllThemeInfo());
+        return app(Theme::class)->getAllThemeInfo();
     }
 
     public function contentTemplate()
     {
         $contentTemplates = app(Theme::class)->getCurrentThemeConfig()['content_template'];
-        foreach ($contentTemplates as &$contentTemplate)
-        {
-            $contentTemplate['title'] .=  "({$contentTemplate['file_name']})";
+        foreach ($contentTemplates as &$contentTemplate) {
+            $contentTemplate['title'] .= "({$contentTemplate['file_name']})";
         }
         unset($contentTemplate);
         return $this->response->array($contentTemplates);
@@ -33,11 +31,9 @@ class ThemesController extends ApiController
     public function currentThemeConfig()
     {
         $currentThemeConfig = app(Theme::class)->getCurrentThemeConfig();
-        foreach($currentThemeConfig as $key=>&$value)
-        {
-            if(ends_with($key, '_template')){
-                foreach($value as &$template)
-                {
+        foreach ($currentThemeConfig as $key => &$value) {
+            if (ends_with($key, '_template')) {
+                foreach ($value as &$template) {
                     $template['title'] .= "({$template['file_name']})";
                 }
                 unset($template);

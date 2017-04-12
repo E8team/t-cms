@@ -104,6 +104,16 @@ class UsersController extends ApiController
     }
 
     /**
+     * 获取用户角色的所有id
+     * @param User $user
+     * @return mixed
+     */
+    public function roleIds(User $user)
+    {
+        return $user->roles->pluck('id');
+    }
+
+    /**
      * 获取当前用户的角色
      * @param User $user
      * @return \Dingo\Api\Http\Response
