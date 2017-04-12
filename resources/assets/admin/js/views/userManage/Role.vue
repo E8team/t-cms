@@ -14,6 +14,14 @@
                 <el-form-item label="排序">
                     <el-input-number v-model="role.order"></el-input-number>
                 </el-form-item>
+                <el-form-item label="选择权限">
+                    <div class="permission">
+                        <!--<el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+                            <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+                        </el-checkbox-group>-->
+                    </div>
+                </el-form-item>
                 <el-form-item>
                     <el-button-group>
                         <el-button type="success" @click="confirm">确认</el-button>
@@ -36,7 +44,9 @@
                     'display_name': null,
                     'description': null,
                     'order': null,
-                }
+                    'permission_ids': []
+                },
+                allPermission: []
             }
         },
         methods: {
@@ -55,6 +65,9 @@
             }
         },
         mounted () {
+            this.$http.get('permissions/all').then(res => {
+                this.allPermission = res.data.data;
+            })
             if (this.$route.name === 'role-edit') {
                 this.id = this.$route.params.id;
                 this.$http.get(`roles/${this.id}`).then(res => {
