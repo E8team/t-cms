@@ -11,7 +11,7 @@
                     <el-table-column property="description" label="描述"></el-table-column>
                     <el-table-column width="120px" label="创建时间">
                         <template scope="scope">
-                        <el-tooltip :content="scope.row.created_at" placement="top">
+                        <el-tooltip :content="scope.row.created_at" placement="left-start">
                             <span>{{scope.row.created_at | onlyDate}}</span>
                         </el-tooltip>
                         </template>
