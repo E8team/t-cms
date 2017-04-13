@@ -15,7 +15,7 @@ class ThemesController extends ApiController
      */
     public function lists()
     {
-        return app(Theme::class)->getAllThemeInfo();
+        return app(Theme::class)->getAllThemeConfig();
     }
 
     public function contentTemplate()
