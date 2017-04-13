@@ -14,6 +14,15 @@ use Ty666\LaravelTheme\Theme;
 class ThemesController extends ApiController
 {
     protected $currentThemeSettingName = 'current_theme';
+
+    public function __construct()
+    {
+        $theme = app(Theme::class);
+        if(!is_null($currentTheme = Setting::getSetting($this->currentThemeSettingName))){
+            $theme->setCurrentTheme($currentTheme);
+        }
+    }
+
     /**
      * 获取主题文件夹下面的主题列表
      */
