@@ -9,12 +9,12 @@
 namespace App\Transformers;
 
 
-use App\Entities\PostContents;
+use App\Entities\PostContent;
 use League\Fractal\TransformerAbstract;
 
 class PostContentTransformer extends TransformerAbstract
 {
-    public function transform(PostContents $postContents)
+    public function transform(PostContent $postContents)
     {
         return [
             'post_id' => $postContents->post_id,

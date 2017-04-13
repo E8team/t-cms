@@ -111,8 +111,10 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('themes/content_template', 'ThemesController@contentTemplate');
     // 当前主题的配置
     $api->get('themes/current_theme_config', 'ThemesController@currentThemeConfig');
-});
+    // 设置当前主题
+    $api->put('themes/current_theme', 'ThemesController@setCurrentTheme');
 
+});
 
 
 // auth 相关

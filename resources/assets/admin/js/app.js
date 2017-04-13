@@ -14,10 +14,34 @@ Object.keys(filters).forEach(key => {
 })
 Vue.prototype.$http = axios.create({
     baseURL: `${window.t_meta.base_url}/api/admin/`,
+    timeout: 3000,
+    responseType: 'json',
+    headers:{
+        'X-CSRF-TOKEN': window.t_meta.csrfToken,
+        'X-Requested-With': 'XMLHttpRequest'
+    }
 })
+Vue.prototype.$http.interceptors.response.use((response) => {
+    return response;
+}, (error) => {
+    if(error.code === 'ECONNABORTED'){
+        Vue.prototype.$message({
+            showClose: true,
+            message: "请求超时",
+            type: 'error'
+        })
+    }else if(error.response.status !== 422){
+        Vue.prototype.$message({
+            showClose: true,
+            message: error.response.data.message,
+            type: 'error'
+        })
+        if(error.response.status === 401){
+            router.push({name: 'login'});
+        }
+    }
+    return Promise.reject(error);
+});
 Vue.prototype.$t_meta = window.t_meta
-Vue.prototype.$http.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.t_meta.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest'
-};
+
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');

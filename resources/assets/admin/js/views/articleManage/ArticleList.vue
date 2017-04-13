@@ -12,7 +12,7 @@
             <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
             <el-table-column width="120px" label="发布时间">
               <template scope="scope">
-                <el-tooltip :content="scope.row.published_at" placement="top">
+                <el-tooltip :content="scope.row.published_at" placement="left-start">
                   <span>{{scope.row.published_at | onlyDate}}</span>
                 </el-tooltip>
               </template>

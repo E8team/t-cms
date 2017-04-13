@@ -24,6 +24,11 @@ class Setting extends BaseModel
         }
     }
 
+    public static function findByName($name)
+    {
+        static::query()->where('name', $name)->first();
+    }
+
     public static function allSetting($isAutoload = null)
     {
         if(!is_null($isAutoload)){
@@ -43,14 +48,24 @@ class Setting extends BaseModel
         });
     }
 
-    public static function getSetting($name)
+    public static function getSettingWithCache($name)
     {
         $value = static::allSettingWithCache()->get($name);
         if (is_null($value)) {
             $value = Cache::rememberForever('setting_' . $name, function () use ($name) {
-                return static::where('name', $name)->first();
+                return static::findByName($name);
             });
         }
         return $value;
     }
+    public static function getSetting($name)
+    {
+
+        $value = static::allSetting()->get($name);
+        if (is_null($value)) {
+            return static::findByName($name);
+        }
+        return $value;
+    }
+
 }
