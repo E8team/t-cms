@@ -19,7 +19,13 @@
                         <el-table-column property="name" label="权限"></el-table-column>
                         <el-table-column property="display_name" label="权限名称"></el-table-column>
                         <el-table-column property="description" label="描述"></el-table-column>
-                        <el-table-column property="created_at" label="创建时间"></el-table-column>
+                        <el-table-column width="120px" label="创建时间">
+                            <template scope="scope">
+                            <el-tooltip :content="scope.row.created_at" placement="top">
+                                <span>{{scope.row.created_at | onlyDate}}</span>
+                            </el-tooltip>
+                            </template>
+                        </el-table-column>
                         <el-table-column label="状态">
                             <template scope="scope">
                                 <el-tag :type="scope.row.is_menu ? 'success' : 'gray'">{{scope.row.is_menu ? '作为菜单' : '普通权限'}}</el-tag>

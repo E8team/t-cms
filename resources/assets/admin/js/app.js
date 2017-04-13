@@ -7,6 +7,11 @@ import router from './router'
 Vue.use(ElementUI);
 import Panel from './components/Panel.vue'
 Vue.component(Panel.name, Panel)
+import * as filters from './filters.js'
+// register global utility filters.
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 Vue.prototype.$http = axios.create({
     baseURL: `${window.t_meta.base_url}/api/admin/`,
 })

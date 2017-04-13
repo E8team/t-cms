@@ -16,10 +16,12 @@
                 </el-form-item>
                 <el-form-item label="选择权限">
                     <div class="permission">
-                        <!--<el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-                        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-                            <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
-                        </el-checkbox-group>-->
+                        <el-checkbox-group v-model="role.permission_ids">
+                            <div v-for="permissions in allPermission">
+                                <header class="title">{{permissions.display_name}}</header>
+                                <el-checkbox v-for="permission in permissions.children" :key="permission.id" :label="permission.id">{{permission.display_name}}</el-checkbox>
+                            </div>
+                        </el-checkbox-group>
                     </div>
                 </el-form-item>
                 <el-form-item>
@@ -66,12 +68,15 @@
         },
         mounted () {
             this.$http.get('permissions/all').then(res => {
-                this.allPermission = res.data.data;
+                this.allPermission = res.data;
             })
             if (this.$route.name === 'role-edit') {
                 this.id = this.$route.params.id;
                 this.$http.get(`roles/${this.id}`).then(res => {
-                    this.role = res.data.data;
+                    this.$http.get(`roles/${this.id}/permissions_ids`).then(ids => {
+                        res.data.data.permission_ids = ids.data;
+                        this.role = res.data.data;
+                    })
                 });
                 this.title = '编辑角色';
             }else{
@@ -80,3 +85,12 @@
         }
     }
 </script>
+
+<style scoped lang="less">
+    .permission{
+        padding: 0 10px;
+        .title{
+            color: #999;
+        }
+    }
+</style>

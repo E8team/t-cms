@@ -99,7 +99,10 @@
             if (this.$route.name === 'user-edit') {
                 this.id = this.$route.params.id;
                 this.$http.get(`users/${this.id}`).then(res => {
-                    this.user = res.data.data;
+                    this.$http.get(`users/${this.id}/role_ids`).then(ids => {
+                        res.data.data.role_ids = ids.data;
+                        this.user = res.data.data;
+                    })
                 });
                 this.title = '编辑用户';
             }else{

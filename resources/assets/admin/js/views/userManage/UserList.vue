@@ -9,7 +9,13 @@
                     <el-table-column property="user_name" label="用户名"></el-table-column>
                     <el-table-column property="nick_name" label="昵称"></el-table-column>
                     <el-table-column property="email" label="email"></el-table-column>
-                    <el-table-column property="created_at" label="创建时间"></el-table-column>
+                    <el-table-column width="120px" label="创建时间">
+                        <template scope="scope">
+                        <el-tooltip :content="scope.row.created_at" placement="top">
+                            <span>{{scope.row.created_at | onlyDate}}</span>
+                        </el-tooltip>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="状态">
                         <template scope="scope">
                             <el-tag :type="scope.row.is_lock ? 'danger' : 'success'">{{scope.row.is_lock ? '锁定' : '正常'}}</el-tag>

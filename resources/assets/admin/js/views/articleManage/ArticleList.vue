@@ -10,7 +10,13 @@
             <el-table-column width="450px" property="title" label="标题"></el-table-column>
             <el-table-column property="user.nick_name" label="上传者"></el-table-column>
             <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
-            <el-table-column width="190px" property="published_at" label="发布时间"></el-table-column>
+            <el-table-column width="120px" label="发布时间">
+              <template scope="scope">
+                <el-tooltip :content="scope.row.published_at" placement="top">
+                  <span>{{scope.row.published_at | onlyDate}}</span>
+                </el-tooltip>
+              </template>
+            </el-table-column>
             <el-table-column
                   fixed="right"
                   label="操作"
