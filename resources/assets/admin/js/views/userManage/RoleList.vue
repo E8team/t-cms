@@ -9,6 +9,13 @@
                     <el-table-column property="name" label="角色"></el-table-column>
                     <el-table-column property="display_name" label="角色名称"></el-table-column>
                     <el-table-column property="description" label="描述"></el-table-column>
+                    <el-table-column width="120px" label="创建时间">
+                        <template scope="scope">
+                        <el-tooltip :content="scope.row.created_at" placement="top">
+                            <span>{{scope.row.created_at | onlyDate}}</span>
+                        </el-tooltip>
+                        </template>
+                    </el-table-column>
                     <el-table-column
                             fixed="right"
                             label="操作"

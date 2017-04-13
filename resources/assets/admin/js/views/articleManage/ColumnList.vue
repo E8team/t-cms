@@ -12,7 +12,13 @@
           </el-table-column>
           <el-table-column property="cate_slug" label="slug"></el-table-column>
           <el-table-column property="description" label="栏目描述"></el-table-column>
-          <el-table-column property="created_at" label="创建时间"></el-table-column>
+          <el-table-column width="120px" label="创建时间">
+            <template scope="scope">
+              <el-tooltip :content="scope.row.created_at" placement="top">
+                <span>{{scope.row.created_at | onlyDate}}</span>
+              </el-tooltip>
+            </template>
+          </el-table-column>
           <el-table-column property="order" label="排序"></el-table-column>
           <el-table-column label="是否为导航">
             <template scope="scope">
@@ -37,6 +43,7 @@
 
 <script>
 export default {
+  name: 'column_list',
   components: {
   },
   data () {
