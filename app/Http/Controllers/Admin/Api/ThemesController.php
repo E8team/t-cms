@@ -19,7 +19,18 @@ class ThemesController extends ApiController
      */
     public function lists()
     {
-        return app(Theme::class)->getAllThemeConfig();
+        $theme = app(Theme::class);
+        $currentThemeId = $theme->getCurrentTheme();
+        $allThemeConfig = $theme->getAllThemeConfig();
+        foreach ($allThemeConfig as &$themeConfig)
+        {
+            if($themeConfig['theme_id']==$currentThemeId)
+            {
+                $themeConfig['is_current'] = true;
+                break;
+            }
+        }
+        return $allThemeConfig;
     }
 
     public function contentTemplate()
