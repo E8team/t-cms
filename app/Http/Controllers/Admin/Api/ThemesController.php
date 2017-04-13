@@ -6,16 +6,20 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
+use App\Entities\Setting;
+use Illuminate\Http\Request;
+use Ty666\LaravelTheme\Exception\ThemeNotFound;
 use Ty666\LaravelTheme\Theme;
 
 class ThemesController extends ApiController
 {
+    protected $currentThemeSettingName = 'current_theme';
     /**
      * 获取主题文件夹下面的主题列表
      */
     public function lists()
     {
-        return app(Theme::class)->getAllThemeInfo();
+        return app(Theme::class)->getAllThemeConfig();
     }
 
     public function contentTemplate()
@@ -43,4 +47,24 @@ class ThemesController extends ApiController
         return $currentThemeConfig;
     }
 
+    public function setCurrentTheme(Request $request)
+    {
+        $themeId = $request->get('theme_id');
+        if(is_null($themeId)){
+            return $this->response->errorBadRequest(trans('theme_not_found'));
+        }
+        try{
+            app(Theme::class)->getThemeConfig($themeId);
+        }catch (ThemeNotFound $e){
+            return $this->response->errorBadRequest(trans('theme_not_found'));
+        }
+        $setting = Setting::firstOrNew(['name' => $this->currentThemeSettingName]);
+        $setting->fill([
+            'value' => $themeId,
+            'description' => '当前主题',
+            'is_autoload' => true
+        ]);
+        $setting->saveOrFail();
+        return $this->response->noContent();
+    }
 }

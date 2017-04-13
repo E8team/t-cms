@@ -24,6 +24,11 @@ class Setting extends BaseModel
         }
     }
 
+    public static function findByName($name)
+    {
+        static::query()->where('name', $name)->first();
+    }
+
     public static function allSetting($isAutoload = null)
     {
         if(!is_null($isAutoload)){
@@ -53,4 +58,5 @@ class Setting extends BaseModel
         }
         return $value;
     }
+
 }
