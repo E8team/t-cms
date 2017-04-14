@@ -38,6 +38,6 @@ class PostTransformer extends TransformerAbstract
     public function includeCategories(Post $post)
     {
         $categories = $post->categories;
-        return $this->item($categories, new CategoryTransformer());
+        return $this->collection($categories, new CategoryTransformer());
     }
 }
