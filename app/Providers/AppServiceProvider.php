@@ -44,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
@@ -73,7 +74,6 @@ class AppServiceProvider extends ServiceProvider
 
             throw new ValidationHttpException($exception->validator->errors());
         });
-
 
 
         // 使用基于类的composers...

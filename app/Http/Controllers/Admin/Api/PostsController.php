@@ -18,7 +18,6 @@ class PostsController extends ApiController
     {
         $posts = Post::applyFilter($request)
             ->with('user')
-            ->with('categories')
             ->paginate($this->perPage());
         return $this->response->paginator($posts, new PostTransformer());
     }

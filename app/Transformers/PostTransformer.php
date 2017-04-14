@@ -10,7 +10,6 @@ class PostTransformer extends TransformerAbstract
     protected $availableIncludes  = ['content', 'categories'];
     public function transform(Post $post)
     {
-
         return [
             'id' => $post->id,
             'user' => $post->user,
@@ -37,6 +36,7 @@ class PostTransformer extends TransformerAbstract
 
     public function includeCategories(Post $post)
     {
+
         $categories = $post->categories;
         return $this->collection($categories, new CategoryTransformer());
     }

@@ -1,5 +1,6 @@
 <?php
 $api->group(['middleware'=>'auth'], function ($api) {
+
     // -------------------------------------------------
     // 当前登录的用户
     $api->get('me', 'UsersController@me');
