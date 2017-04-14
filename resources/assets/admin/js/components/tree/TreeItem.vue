@@ -43,21 +43,22 @@ export default{
 .item{
   &.active{
     >span{
-      background-color: #e4e4e4;
+      background-color: #F3F8FF;
+      color: #609ee9;
     }
   }
   >.item{
-    padding-left: 15px;
+    padding-left: 10px;
   }
   >span{
     padding-left: 15px;
     line-height: 40px;
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
     cursor: pointer;
     display: block;
     &:hover{
-      background-color: #f1f1f1;
+      background-color: #f9f9f9;
     }
   }
 }

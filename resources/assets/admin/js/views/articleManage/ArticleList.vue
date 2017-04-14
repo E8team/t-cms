@@ -1,10 +1,14 @@
 <template>
   <div class="article_list">
     <div class="cate_tree_wrapper">
+      <header>
+        <h3>文章栏目</h3>
+        <el-button @click="$router.push({name: 'column-add'})" class="add_btn" icon="plus" size="small"></el-button>
+      </header>
       <Tree v-model="activeIndex" :model="allCategories"></Tree>
     </div>
     <div class="main_list">
-      <CurrencyListPage v-if="activeIndex" title="文章列表" ref="list" :queryName="queryName">
+      <CurrencyListPage title="文章列表" ref="list" :queryName="queryName">
         <template scope="list">
           <el-table border :data="list.data" style="width: 100%">
             <el-table-column width="450px" property="title" label="标题"></el-table-column>
@@ -55,7 +59,11 @@ export default {
   },
   computed: {
     queryName () {
-      return `categories/${this.activeIndex}/posts`
+      if(this.activeIndex === null){
+        return `posts`
+      }else{
+        return `categories/${this.activeIndex}/posts`
+      }
     }
   },
   watch: {
@@ -68,6 +76,10 @@ export default {
   },
   mounted () {
     this.$http.get('categories/all').then(res => {
+      res.data.unshift({
+        id: null,
+        cate_name: '全部'
+      })
       this.allCategories = res.data
     })
   }
@@ -77,11 +89,36 @@ export default {
 <style lang="less" scoped>
 .article_list{
   .cate_tree_wrapper{
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     position: fixed;
     top: 80px;
     bottom: 0;
     width: 190px;
     background-color: #fff;
+    header{
+      margin: 0;
+      color: #333;
+      border-color: #ddd;
+      font-size: 18px;
+      font-weight: 300;
+      padding: 10px 15px;
+      border-bottom: 1px solid #eee;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      position: relative;
+      h3{
+        font-weight: 700;
+        font-size: 14px;
+        margin: 0;
+        line-height: 35px;
+      }
+      .add_btn{
+        position: absolute;
+        right: 10px;
+        top: 14px;
+      }
+    }
   }
   .main_list{
     padding-left: 200px;
