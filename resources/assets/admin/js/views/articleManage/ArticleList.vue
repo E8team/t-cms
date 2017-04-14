@@ -21,6 +21,11 @@
                 </el-tooltip>
               </template>
             </el-table-column>
+            <el-table-column label="分类">
+              <template scope="scope">
+                <el-tag type="primary" :key="item.id" v-for="item in scope.row.categories.data">{{item.cate_name}}</el-tag>
+              </template>
+            </el-table-column>
             <el-table-column
                   fixed="right"
                   label="操作"
@@ -60,9 +65,9 @@ export default {
   computed: {
     queryName () {
       if(this.activeIndex === null){
-        return `posts`
+        return 'posts?include=categories'
       }else{
-        return `categories/${this.activeIndex}/posts`
+        return `categories/${this.activeIndex}/posts?include=categories`
       }
     }
   },

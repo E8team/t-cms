@@ -98,12 +98,13 @@
             });
             if (this.$route.name === 'user-edit') {
                 this.id = this.$route.params.id;
-                this.$http.get(`users/${this.id}`).then(res => {
-                    this.$http.get(`users/${this.id}/role_ids`).then(ids => {
-                        res.data.data.role_ids = ids.data;
-                        this.user = res.data.data;
-                    })
-                });
+                this.$axios.all([
+                    this.$http.get(`users/${this.id}`),
+                    this.$http.get(`users/${this.id}/role_ids`)
+                ]).then(this.$axios.spread((user, ids) => {
+                    user.data.data.role_ids = ids.data;
+                    this.user = user.data.data;
+                }))
                 this.title = '编辑用户';
             }else{
                 this.title = '添加用户';

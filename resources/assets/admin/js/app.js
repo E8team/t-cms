@@ -21,6 +21,7 @@ Vue.prototype.$http = axios.create({
         'X-Requested-With': 'XMLHttpRequest'
     }
 })
+Vue.prototype.$axios = axios;
 Vue.prototype.$http.interceptors.response.use((response) => {
     return response;
 }, (error) => {
