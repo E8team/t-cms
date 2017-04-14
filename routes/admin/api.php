@@ -75,6 +75,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
     $api->put('move_posts_to_categories', 'PostsController@movePosts2Categories');
     // -------------------------------------------------
+    $api->get('posts', 'PostsController@lists');
     // 获取指定文章
     $api->get('posts/{post}', 'PostsController@show');
     // 创建文章

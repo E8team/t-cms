@@ -14,6 +14,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
+    public function lists(Request $request)
+    {
+        $posts = Post::applyFilter($request)
+            ->with('user')
+            ->with('categories')
+            ->paginate($this->perPage());
+        return $this->response->paginator($posts, new PostTransformer());
+    }
+
     /**
      * 创建文章
      *
