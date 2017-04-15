@@ -28,6 +28,7 @@ class LinkCreateRequest extends Request
     {
         return [
             'url' => 'required|url|max:255',
+            'name' => 'required|string|max:20',
             'logo' => 'nullable|picture_id',
             'linkman' => 'nullable|string|max:30',
             'type_id' => 'required|int',

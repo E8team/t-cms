@@ -10,10 +10,10 @@ class Link extends BaseModel
 {
     use Picture, Listable;
 
-    protected $fillable = ['url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
+    protected $fillable = ['name', 'url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
     public $timestamps = false;
-    protected static $allowSortFields = ['type_id', 'order', 'is_visible'];
-    protected static $allowSearchFields = ['url', 'linkman'];
+    protected static $allowSortFields = ['name', 'type_id', 'order', 'is_visible'];
+    protected static $allowSearchFields = ['name', 'url', 'linkman'];
     public function type()
     {
         return $this->belongsTo(Type::class);

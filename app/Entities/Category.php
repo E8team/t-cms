@@ -30,6 +30,11 @@ class Category extends BaseModel
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
+    public static function findBySlug($slug)
+    {
+        return static::where('cate_slug', $slug)->first();
+    }
+
     public static function allCategory()
     {
         $allMenu = Category::orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
@@ -38,13 +43,7 @@ class Category extends BaseModel
         return $res;
     }
 
-    public static function getNav()
-    {
-        $allNav = Category::where('is_nav', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
-        $res = [];
-        self::treeByArray($allNav, $res);
-        return $res;
-    }
+
 
     public static function allCategoryArray($type = null)
     {

@@ -45,7 +45,9 @@ class PostsController extends ApiController
      */
     public function show(Post $post)
     {
-        return $this->response->item($post, new PostTransformer());
+        $cateids = $post->categories->pluck('id');
+        return $this->response->item($post, new PostTransformer())
+            ->addMeta('cate_ids', $cateids);
     }
 
     /**

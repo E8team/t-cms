@@ -16,6 +16,6 @@ class Type extends BaseModel
 
     public function links()
     {
-        return $this->hasMany(Link::class);
+        return $this->hasMany(Link::class)->ordered()->recent();
     }
 }

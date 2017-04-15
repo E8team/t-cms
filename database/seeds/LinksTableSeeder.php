@@ -14,6 +14,7 @@ class LinksTableSeeder extends Seeder
         DB::table('links')->insert([
             [
                 'id' => 1,
+                'name' => '3t官网',
                 'url' => 'https://www.3twd.cn',
                 'linkman' => '3t',
                 'type_id' => 1,
@@ -23,6 +24,7 @@ class LinksTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
+                'name' => '百度官网',
                 'url' => 'https://www.baidu.com',
                 'linkman' => '李总',
                 'type_id' => 2,
