@@ -11,7 +11,7 @@
                 </el-form-item>
                 <el-checkbox v-model="rember" class="remove_pwd_checkbox">记住密码</el-checkbox>
                 <el-form-item>
-                    <el-button @click="login" class="login_button" type="primary">登录</el-button>
+                    <el-button @click="login" :loading="loading" class="login_button" type="primary">登录</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -25,16 +25,19 @@
             return {
                 user_name: '',
                 password: '',
-                rember: false
+                rember: false,
+                loading: false
             }
         },
         methods: {
             login () {
+                this.loading = true;
                 this.$http.post('login', {
                     user_name: this.user_name,
                     password: this.password,
                     rember: this.rember
                 }).then(res => {
+                    this.loading = false;
                     this.$router.push({path: '/admin/home'})
                 })
             }
