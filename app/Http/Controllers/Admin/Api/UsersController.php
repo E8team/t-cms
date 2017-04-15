@@ -46,7 +46,9 @@ class UsersController extends ApiController
      */
     public function show(User $user)
     {
-        return $this->response->item($user, new UserTransformer());
+        $roleIds =$user->roles->pluck('id');
+        return $this->response->item($user, new UserTransformer())
+            ->addMeta('role_ids', $roleIds);
     }
 
     /**
@@ -102,16 +104,6 @@ class UsersController extends ApiController
             $user->roles()->sync($roleIds);
         }
         return $this->response->noContent();
-    }
-
-    /**
-     * 获取用户角色的所有id
-     * @param User $user
-     * @return mixed
-     */
-    public function roleIds(User $user)
-    {
-        return $user->roles->pluck('id');
     }
 
     /**

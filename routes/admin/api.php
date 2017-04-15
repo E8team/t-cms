@@ -15,8 +15,6 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('users/{user}', 'UsersController@update');
     // 删除用户
     $api->delete('users/{id}', 'UsersController@destroy');
-    // 获取用户角色的所有id
-    $api->get('users/{user}/role_ids', 'UsersController@roleIds');
     // 获取用户角色
     $api->get('users/{user}/roles', 'UsersController@roles');
     // 批量移动用户至角色 ?user_ids[0]=1&user_ids[1]=2&role_ids[0]=1&role_ids[1]=2
@@ -28,8 +26,6 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('roles', 'RolesController@lists');
     // 获取指定角色的信息
     $api->get('roles/{role}', 'RolesController@show');
-    // 获取某个角色下面的权限id
-    $api->get('roles/{role}/permissions_ids', 'RolesController@permissionsIds');
     $api->get('roles/{role}/permissions', 'RolesController@permissions');
     // 创建角色
     $api->post('roles', 'RolesController@store');
