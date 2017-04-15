@@ -19,6 +19,7 @@
       <panel title="栏目" size="small">
         <el-checkbox-group v-model="article.category_ids">
         <el-tree
+          default-expand-all
           :render-content="renderCategorie"
           :data="allCategories"
           :props= 'props'>
@@ -150,10 +151,12 @@
           if(this.id){
             this.$http.get(`posts/${this.id}`, {
               params: {
-                include: 'content'
+                include: 'content,categories'
               }
             }).then(res => {
+                res.data.data.category_ids = res.data.meta.cate_ids;
                 this.article = res.data.data;
+                // this.$forceUpdate();
                 this.editor.setContent(this.article.content ? this.article.content.data.content : '');
             });
           }

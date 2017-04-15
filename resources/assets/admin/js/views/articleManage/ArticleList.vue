@@ -12,7 +12,7 @@
         <template scope="list">
           <el-table border :data="list.data" style="width: 100%">
             <el-table-column width="450px" property="title" label="标题"></el-table-column>
-            <el-table-column property="user.nick_name" label="上传者"></el-table-column>
+            <el-table-column property="user.nick_name" label="发布者"></el-table-column>
             <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
             <el-table-column width="120px" label="发布时间">
               <template scope="scope">
