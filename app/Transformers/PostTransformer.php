@@ -13,7 +13,6 @@ class PostTransformer extends TransformerAbstract
         return [
             'id' => $post->id,
             'user' => $post->user,
-            'categries' => $post->categries,
             'author_info' => $post->author_info,
             'title' => $post->title,
             'cover' => $post->cover,
@@ -21,6 +20,7 @@ class PostTransformer extends TransformerAbstract
             'type' => $post->type,
             'views_count' => $post->views_count,
             'comments_num' => $post->comments_num,
+            'template' => $post->template,
             'top' => $post->top,
             'published_at' => $post->published_at->toDateTimeString(),
             'created_at' => $post->created_at->toDateTimeString(),
@@ -36,7 +36,6 @@ class PostTransformer extends TransformerAbstract
 
     public function includeCategories(Post $post)
     {
-
         $categories = $post->categories;
         return $this->collection($categories, new CategoryTransformer());
     }

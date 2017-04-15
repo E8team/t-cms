@@ -76,11 +76,5 @@ class AppServiceProvider extends ServiceProvider
             throw new ValidationHttpException($exception->validator->errors());
         });
 
-
-        // 使用基于类的composers...
-        View::composer('*', function ($view){
-            $view->with('a','b');
-        });
-
     }
 }

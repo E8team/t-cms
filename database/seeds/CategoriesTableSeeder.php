@@ -20,6 +20,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-news',
                 'is_nav' => true,
                 'parent_id' => 0,
+                'list_template' => 'list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -31,6 +32,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-gk',
                 'is_nav' => true,
                 'parent_id' => 0,
+                'list_template' => 'list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

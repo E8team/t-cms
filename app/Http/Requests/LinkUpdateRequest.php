@@ -11,7 +11,7 @@ class LinkUpdateRequest extends Request
 
     use Update;
 
-    protected $allowModifyFields = ['url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
+    protected $allowModifyFields = ['url', 'name', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,6 +29,7 @@ class LinkUpdateRequest extends Request
     public function rules()
     {
         return [
+            'name' => 'nullable|string|max:20',
             'url' => 'nullable|url|max:255',
             'logo' => 'nullable|picture_id',
             'linkman' => 'nullable|string|max:30',
