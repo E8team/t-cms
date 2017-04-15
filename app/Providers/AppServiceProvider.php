@@ -6,6 +6,7 @@ use App\Entities\Setting;
 use App\Libs\Theme;
 use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;
 
@@ -18,11 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \DB::listen(function ($query) {
+        /*\DB::listen(function ($query) {
             \Log::info('sql',[$query->sql
             ,$query->bindings
             ,$query->time]);
-        });
+        });*/
         Validator::extend('picture_id', function($attribute, $value, $parameters, $validator) {
             return preg_match('/[0-9a-z]{32}\.'.'('.implode('|', config('picture.allowTypeList')).')'.'/i', $value)==1;
         }, '图片上传错误!');
@@ -77,9 +78,9 @@ class AppServiceProvider extends ServiceProvider
 
 
         // 使用基于类的composers...
-        /*View::composer('*', function ($view){
+        View::composer('*', function ($view){
             $view->with('a','b');
-        });*/
+        });
 
     }
 }

@@ -26,7 +26,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::patterns([
             'id' => '[0-9]+',
         ]);
-
         parent::boot();
     }
 
@@ -72,12 +71,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
+
         $api = app('Dingo\Api\Routing\Router');
         $api->version('v1', ['namespace' => $this->namespace, 'middleware'=> 'api'], function ($api) {
-
-            /*$api->group(['namespace' => 'Api'], function ($api){
-                require base_path('routes/api.php');
-            });*/
             $api->group(['namespace' => 'Admin\Api', 'prefix' => 'admin'], function ($api){
                 require base_path('routes/admin/api.php');
             });

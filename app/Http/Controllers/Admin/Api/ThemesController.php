@@ -11,16 +11,17 @@ use Illuminate\Http\Request;
 use Ty666\LaravelTheme\Exception\ThemeNotFound;
 use Ty666\LaravelTheme\Theme;
 
+
 class ThemesController extends ApiController
 {
     protected $currentThemeSettingName = 'current_theme';
 
     public function __construct()
     {
-        /*$theme = app(Theme::class);
+        $theme = app(Theme::class);
         if(!is_null($currentTheme = Setting::getSetting($this->currentThemeSettingName))){
             $theme->setCurrentTheme($currentTheme);
-        }*/
+        }
     }
 
     /**

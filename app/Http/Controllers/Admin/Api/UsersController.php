@@ -15,6 +15,7 @@ use Auth;
 
 class UsersController extends ApiController
 {
+
     /**
      * 当前登录的用户信息
      * @return \Dingo\Api\Http\Response
