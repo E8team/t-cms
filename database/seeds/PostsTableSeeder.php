@@ -22,6 +22,7 @@ class PostsTableSeeder extends Seeder
                 'status' => 'publish',
                 'type' => 'post',
                 'top' => \Carbon\Carbon::now(),
+                'template' => 'content',
                 'published_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
@@ -35,6 +36,7 @@ class PostsTableSeeder extends Seeder
                 'status' => 'publish',
                 'type' => 'post',
                 'top' => null,
+                'template' => 'content',
                 'published_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
