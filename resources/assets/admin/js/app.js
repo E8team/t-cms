@@ -40,6 +40,11 @@ Vue.prototype.$http.interceptors.response.use((response) => {
         if(error.response.status === 401){
             router.push({name: 'login'});
         }
+    }else{
+        let errorsTemp = error.response.data.errors;
+        for(let index in errorsTemp){
+            errorsTemp[index] = errorsTemp[index].join(',')
+        }
     }
     return Promise.reject(error);
 });
