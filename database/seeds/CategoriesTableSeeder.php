@@ -44,6 +44,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-jj',
                 'is_nav' => true,
                 'parent_id' => 2,
+                'list_template' => 'list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -55,6 +56,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-xrld',
                 'is_nav' => true,
                 'parent_id' => 2,
+                'list_template' => 'list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -66,6 +68,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-news123',
                 'is_nav' => true,
                 'parent_id' => 1,
+                'list_template' => 'list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
