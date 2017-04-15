@@ -11,10 +11,19 @@ class IndexController extends Controller
     {
         return theme_view('index');
     }
+
     public function postList($cateSlug)
     {
-        $category = Category::findBySlug($cateSlug);
-        dd($category->toArray());
-        //return theme_view('')
+        $currentCategory = Category::findBySlug($cateSlug);
+
+        if (!$currentCategory->isTopCategory()) {
+            $topCategory = $currentCategory->parent;
+        } else {
+            $topCategory = $currentCategory;
+        }
+        $topCategory->load(['children' => function ($query) {
+            $query->nav();
+        }]);
+        return theme_view($currentCategory->list_template, ['topCategory' => $topCategory, 'currentCategory' => $currentCategory]);
     }
 }

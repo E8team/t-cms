@@ -10,7 +10,7 @@ class Navigation
 {
     public function getNav()
     {
-        $allNav = Category::where('is_nav', true)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $allNav = Category::nav()->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
         $res = [];
         $this->treeByArray($allNav, $res);
         return $res;

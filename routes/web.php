@@ -1,6 +1,6 @@
 <?php
-Route::get('/', 'IndexController@index');
-Route::get('/list/{cateSlug}', 'IndexController@postList');
+Route::get('/', 'IndexController@index')->name('index');
+Route::get('/list/{cateSlug}', 'IndexController@postList')->name('list');
 
 Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');
 
