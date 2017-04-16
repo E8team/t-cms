@@ -3,15 +3,15 @@
         <panel title="主题选择">
             <div class="theme_main">
                 <ul>
-                    <li v-for="item in themeList" class="theme_body current">
+                    <li v-for="item in themeList" class="theme_body":class="{'current': item.is_current}">
                         <div class="theme_img">
                             <img :src="item.screenshot" :alt="item.name">
                             <div class="theme_enable_btn">
-                                <el-button type="success">启 用</el-button>
+                                <el-button @click="startTheme(item.theme_id)" type="success">启 用</el-button>
                             </div>
                         </div>
                         <footer>
-                            <h2>{{item.name}}<span> ({{item.version}})</span></h2>
+                            <h2>{{item.name}}{{item.is_current ? '(当前)' : ''}}<span> ({{item.version}})</span></h2>
                             <div class="author">
                                 <span>作者: {{item.author}}</span>
                                 <a class="text" :href="item.homepage" target="_blank">作者主页</a>
@@ -33,9 +33,23 @@
             }
         },
         mounted () {
-            this.$http.get('themes').then(res => {
-                this.themeList = res.data
-            })
+            this.getThemes();
+        },
+        methods: {
+            getThemes () {
+                this.$http.get('themes').then(res => {
+                    this.themeList = res.data
+                })
+            },
+            startTheme(themeId){
+                this.$http.put('themes/current_theme', {
+                    params: {
+                        theme_id: themeId
+                    }
+                }).then(res => {
+                    this.getThemes();
+                })
+            }
         }
     }
 </script>
@@ -46,15 +60,11 @@
         padding: 0;
         overflow: hidden;    
     }
-    .theme_body.active footer{
-        background-color: #23282d;
-        color: #fff;
-        >.author>span{
-            color: #fff;
-            font-family: "-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif";
-        }
+    .theme_body.current{
+        border: 1px solid #20a0ff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
-    .theme_body.active:hover>.theme_img>.theme_enable_btn{
+    .theme_body.current:hover>.theme_img>.theme_enable_btn{
         display: none!important;
     }
     .theme_body{

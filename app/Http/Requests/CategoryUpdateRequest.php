@@ -40,7 +40,7 @@ class CategoryUpdateRequest extends Request
             'description' => 'nullable|string',
             'url' => 'nullable|url',
             'cate_slug' => ['nullable', 'string', 'max:30', Rule::unique('category')->ignore($category->id)],
-            'is_nav' => 'nullable|boolean',
+            'is_nav' => 'boolean',
             'order' => 'nullable|int',
             'page_template' => 'nullable|string|max:30',
             'list_template' => 'nullable|string|max:30',

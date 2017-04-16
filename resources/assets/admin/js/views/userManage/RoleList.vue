@@ -1,6 +1,6 @@
 <template>
     <div class="roles">
-        <CurrencyListPage title="角色列表" queryName="roles">
+        <CurrencyListPage ref="list" title="角色列表" queryName="roles">
             <div slot="option">
                 <el-button type="primary" @click="$router.push({name: 'role-add'})" icon="plus">添加角色</el-button>
             </div>
@@ -23,7 +23,7 @@
                         <template scope="scope">
                             <el-button-group>
                                 <el-button size="mini" @click="$router.push({name: 'role-edit', params: {id: scope.row.id}})" type="warning">编辑</el-button>
-                                <el-button size="mini" type="danger">删除</el-button>
+                                <el-button size="mini" @click="del(scope.row.id)" type="danger">删除</el-button>
                             </el-button-group>
                         </template>
                     </el-table-column>
@@ -41,6 +41,20 @@
         },
         data () {
             return {
+            }
+        },
+        methods: {
+            del (id) {
+                this.$confirm('你确定要删除该角色?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http.delete(`roles/${id}`).then(res => {
+                        this.$message('已删除');
+                        this.$refs['list'].refresh();
+                    })
+                })
             }
         },
         mounted () {

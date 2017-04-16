@@ -19,11 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*\DB::listen(function ($query) {
+        \DB::listen(function ($query) {
             \Log::info('sql',[$query->sql
             ,$query->bindings
             ,$query->time]);
-        });*/
+        });
         Validator::extend('picture_id', function($attribute, $value, $parameters, $validator) {
             return preg_match('/[0-9a-z]{32}\.'.'('.implode('|', config('picture.allowTypeList')).')'.'/i', $value)==1;
         }, '图片上传错误!');

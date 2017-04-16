@@ -11,7 +11,7 @@
       <CurrencyListPage title="文章列表" ref="list" :queryName="queryName">
         <template scope="list">
           <el-table border :data="list.data" style="width: 100%">
-            <el-table-column width="450px" property="title" label="标题"></el-table-column>
+            <el-table-column width="340px" property="title" label="标题"></el-table-column>
             <el-table-column property="user.nick_name" label="发布者"></el-table-column>
             <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
             <el-table-column width="120px" label="发布时间">
@@ -98,7 +98,7 @@ export default {
     border-top-right-radius: 3px;
     position: fixed;
     top: 80px;
-    bottom: 0;
+    bottom: 10px;
     width: 190px;
     background-color: #fff;
     header{

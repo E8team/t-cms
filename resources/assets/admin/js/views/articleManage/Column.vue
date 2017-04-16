@@ -2,16 +2,16 @@
   <div class="column">
     <panel :covered="false" :title="title">
         <el-form :model="column" label-width="85px">
-            <el-form-item required label="栏目名">
-                <el-input placeholder="请设置栏目名" v-model="column.cate_name"></el-input>
+            <el-form-item :error="errors.cate_name" required label="栏目名">
+                <el-input @change="errors.cate_name = ''" placeholder="请设置栏目名" v-model="column.cate_name"></el-input>
             </el-form-item>
-            <el-form-item required label="父级栏目">
+            <el-form-item label="父级栏目">
                 <el-select v-model="column.parent_id" placeholder="请选择">
                     <el-option label="作为父级栏目" :value="0"></el-option>
                     <el-option v-for="item in topCategories" :key="item.id" :label="item.cate_name" :value="item.id"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item required label="栏目描述">
+            <el-form-item label="栏目描述">
                 <el-input placeholder="请输入栏目描述" type="textarea" :rows="2" v-model="column.description"></el-input>
             </el-form-item>
             <el-form-item label="栏目图片">
@@ -27,15 +27,8 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
-            <el-form-item required label="排序">
+            <el-form-item label="排序">
                 <el-input-number v-model="column.order"></el-input-number>
-            </el-form-item>
-            <el-form-item required label="栏目类型">
-                <el-select v-model="column.type" placeholder="请选择">
-                    <el-option label="列表栏目" :value="0"></el-option>
-                    <el-option label="单网页" :value="1"></el-option>
-                    <el-option label="外部链接" :value="2"></el-option>
-                </el-select>
             </el-form-item>
             <el-form-item label="设为导航">
                 <el-switch
@@ -46,11 +39,38 @@
                     off-color="#ff4949">
                 </el-switch>
             </el-form-item>
-            <el-form-item v-if="column.type != 2" required label="栏目slug">
+            <el-form-item required label="栏目类型">
+                <el-select v-model="column.type" placeholder="请选择">
+                    <el-option label="列表栏目" :value="0"></el-option>
+                    <el-option label="单网页" :value="1"></el-option>
+                    <el-option label="外部链接" :value="2"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item v-if="column.type != 2" label="栏目slug">
                 <el-input placeholder="请设置栏目slug" v-model="column.cate_slug"></el-input>
             </el-form-item>
             <el-form-item v-if="column.type == 2" label="外部链接">
                 <el-input placeholder="请设置外部链接" v-model="column.url"></el-input>
+            </el-form-item>
+            <el-form-item v-if="column.type == 0" label="列表模板">
+                <el-select v-model="column.list_template" placeholder="请选择">
+                    <el-option
+                    :key="item.file_name"
+                    v-for="item in listTemplates"
+                    :label="item.title"
+                    :value="item.file_name">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+             <el-form-item v-if="column.type != 2" label="正文模板">
+                <el-select v-model="column.content_template" placeholder="请选择">
+                    <el-option
+                    :key="item.file_name"
+                    v-for="item in contentTemplates"
+                    :label="item.title"
+                    :value="item.file_name">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item>
                 <el-button-group>
@@ -67,6 +87,7 @@
 export default{
   data () {
     return {
+        errors: [],
         column: {
             'type': 0,
             'image': null,
@@ -76,7 +97,7 @@ export default{
             'description': null,
             'url': null,
             'cate_slug': null,
-            'is_nav': null,
+            'is_nav': false,
             'order': null,
             'page_template': null,
             'list_template': null,
@@ -84,7 +105,9 @@ export default{
             'setting': null
         },
         topCategories: [],
-        title: ''
+        title: '',
+        contentTemplates: [],
+        listTemplates: []
     }
   },
   methods: {
@@ -101,12 +124,31 @@ export default{
         return isPIC;
     },
     confirm () {
+        let method, url;
+        this.id ? (method = 'put', url = `categories/${this.id}`) : (method = 'post', url = 'categories');
+        this.$http[method](url, {
+            ...this.column
+        }).then(res => {
+            this.$message({
+                message: `${this.title}成功`,
+                type: 'success'
+            });
+            this.$router.push({name: 'columns'});
+        }).catch(err => {
+            this.errors = err.response.data.errors;
+        });
     }
   },
   mounted () {
     this.$http.get('top_categories').then(res => {
         this.topCategories = res.data.data;
     });
+    this.$http.get('themes/current_theme_config').then(res => {
+        this.contentTemplates = res.data.content_template;
+        this.listTemplates = res.data.list_template;
+        this.column.content_template = this.contentTemplates.find(item => item.is_defalut).file_name;
+        this.column.list_template = this.listTemplates.find(item => item.is_defalut).file_name;
+    })
     if (this.$route.name === 'column-edit') {
         this.id = this.$route.params.id;
         this.$http.get(`categories/${this.id}`).then(res => {

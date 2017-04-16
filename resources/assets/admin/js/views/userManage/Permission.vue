@@ -2,8 +2,8 @@
     <div class="permission">
         <panel :covered="false" :title="title">
             <el-form :model="permission" label-width="105px">
-                <el-form-item required label="权限名">
-                    <el-input placeholder="请设置权限名称" v-model="permission.name"></el-input>
+                <el-form-item :error="errors.name" required label="权限名">
+                    <el-input @change="errors.name = ''" placeholder="请设置权限名称" v-model="permission.name"></el-input>
                 </el-form-item>
                 <el-form-item label="display name">
                     <el-input placeholder="请设置 display name" v-model="permission.display_name"></el-input>
@@ -47,6 +47,7 @@
     export default{
         data () {
             return {
+                errors: [],
                 title: '',
                 id: null,
                 permission: {
@@ -73,6 +74,8 @@
                         type: 'success'
                     });
                     this.$router.push({name: 'permissions'});
+                }).catch(err => {
+                    this.errors = err.response.data.errors;
                 });
             }
         },
