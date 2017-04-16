@@ -2,13 +2,19 @@
 
 namespace App\Entities;
 
+
+use App\Entities\Presenters\CategoryPresenters;
 use App\Entities\Traits\Listable;
+use Laracasts\Presenter\PresentableTrait;
 use Ty666\PictureManager\Traits\Picture;
 
-//todo need cache
+
 class Category extends BaseModel
 {
-    use Listable, Picture;
+    use Listable, Picture, PresentableTrait;
+
+    protected $presenter = CategoryPresenters::class;
+
     protected static $allowSearchFields = ['cate_name', 'description', 'url', 'cate_slug'];
 
     protected $casts = [
@@ -165,14 +171,5 @@ class Category extends BaseModel
     public function isExtLink()
     {
         return $this->type == 2;
-    }
-
-    public function getUrl()
-    {
-        if(!$this->isExtLink()){
-            return route('list', $this->cate_slug);
-        }else{
-            return $this->url;
-        }
     }
 }

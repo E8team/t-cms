@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Entities\Category;
+use App\Entities\Post;
 
 class IndexController extends Controller
 {
@@ -25,5 +26,10 @@ class IndexController extends Controller
             $query->nav();
         }]);
         return theme_view($currentCategory->list_template, ['topCategory' => $topCategory, 'currentCategory' => $currentCategory]);
+    }
+
+    public function content(Post $post)
+    {
+        return theme_view($post->template, ['post' => $post]);
     }
 }
