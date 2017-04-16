@@ -176,6 +176,7 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Overtrue\LaravelUEditor\UEditorServiceProvider::class,
         Ty666\LaravelTheme\LaravelThemeServiceProvider::class,
+        Appstract\Opcache\OpcacheServiceProvider::class,
         /*
          * Application Service Providers...
          */
