@@ -2,14 +2,14 @@
     <div class="user">
         <panel :covered="false" :title="title">
             <el-form :model="user" label-width="85px">
-                <el-form-item required label="用户名">
-                    <el-input placeholder="请设置用户名" v-model="user.user_name"></el-input>
+                <el-form-item :error="errors.user_name" required label="用户名">
+                    <el-input @change="errors.user_name = ''" placeholder="请设置用户名" v-model="user.user_name"></el-input>
                 </el-form-item>
                 <el-form-item label="昵称">
                     <el-input placeholder="请设置用户昵称" v-model="user.nick_name"></el-input>
                 </el-form-item>
-                <el-form-item required label="email">
-                    <el-input placeholder="可用于登录和找回密码" v-model="user.email"></el-input>
+                <el-form-item :error="errors.email" required label="email">
+                    <el-input @change="errors.email = ''" placeholder="可用于登录和找回密码" v-model="user.email"></el-input>
                 </el-form-item>
                 <el-form-item label="头像">
                     <el-upload class="avatar-uploader"
@@ -29,8 +29,8 @@
                         <el-checkbox v-for="item in allRoles" :label="item.id" :key="item.id">{{item.display_name}}</el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
-                <el-form-item required label="密码">
-                    <el-input placeholder="请设置登录密码" v-model="user.password"></el-input>
+                <el-form-item :error="errors.password" required label="密码">
+                    <el-input @change="errors.password = ''" placeholder="请设置登录密码" v-model="user.password"></el-input>
                 </el-form-item>
                 <el-form-item required label="确认密码">
                     <el-input placeholder="确认密码" v-model="user.rePassword"></el-input>
@@ -50,6 +50,7 @@
     export default{
         data () {
             return {
+                errors: [],
                 title: '',
                 id: null,
                 allRoles: [],
@@ -89,6 +90,8 @@
                         type: 'success'
                     });
                     this.$router.push({name: 'users'});
+                }).catch(err => {
+                    this.errors = err.response.data.errors;
                 });
             }
         },
