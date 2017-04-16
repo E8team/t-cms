@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ty
- * Date: 2017-03-19
- * Time: 16:29
- */
+
 
 namespace App\Entities;
 

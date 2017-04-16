@@ -73,11 +73,9 @@ class CategoriesController extends ApiController
      */
     public function getChildren(Category $category, Request $request)
     {
-        $childrenCategories = Category::childrenCategories($category->id)
+        $childrenCategories = $category->children()
             ->byType($request->get('type'))
             //->withSimpleSearch()
-            ->ordered()
-            ->recent()
             ->get();
         return $this->response->collection($childrenCategories, new CategoryTransformer());
             //->setMeta(Category::getAllowSearchFieldsMeta());

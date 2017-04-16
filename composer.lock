@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "594b6b8cc1ec5fa068b4b09ec574afb8",
+    "content-hash": "ba141c12c31d90a3fdc802fb5045fe39",
     "packages": [
         {
             "name": "dingo/api",
@@ -657,6 +657,52 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "laracasts/presenter",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/Presenter.git",
+                "reference": "b284f3137f990efd6e95df49d254f1ccc4541e92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/laracasts/Presenter/b284f3137f990efd6e95df49d254f1ccc4541e92.zip",
+                "reference": "b284f3137f990efd6e95df49d254f1ccc4541e92",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Presenter": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Simple view presenters",
+            "keywords": [
+                "laravel",
+                "presenter",
+                "view"
+            ],
+            "time": "2014-09-13T13:18:07+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2746,16 +2792,16 @@
         },
         {
             "name": "ty666/laravel-theme",
-            "version": "1.0.11",
+            "version": "1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ty666/laravel-theme.git",
-                "reference": "89dd7849685c83bbead40307f0c3b3f003515976"
+                "reference": "c0812b51c48baf1e4368d5b628a08437e58e4a7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/89dd7849685c83bbead40307f0c3b3f003515976.zip",
-                "reference": "89dd7849685c83bbead40307f0c3b3f003515976",
+                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/c0812b51c48baf1e4368d5b628a08437e58e4a7f.zip",
+                "reference": "c0812b51c48baf1e4368d5b628a08437e58e4a7f",
                 "shasum": ""
             },
             "require": {
@@ -2788,7 +2834,7 @@
                 "theme",
                 "view"
             ],
-            "time": "2017-04-15T06:50:20+00:00"
+            "time": "2017-04-16T04:48:06+00:00"
         },
         {
             "name": "ty666/picture-manager",
