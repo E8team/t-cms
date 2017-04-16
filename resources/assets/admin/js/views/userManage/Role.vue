@@ -75,13 +75,10 @@
             })
             if (this.$route.name === 'role-edit') {
                 this.id = this.$route.params.id;
-                this.$axios.all([
-                    this.$http.get(`roles/${this.id}`),
-                    this.$http.get(`roles/${this.id}/permissions_ids`)
-                ]).then(this.$axios.spread((role, ids) => {
-                    role.data.data.role_ids = ids.data;
-                    this.role = role.data.data;
-                }))
+                this.$http.get(`roles/${this.id}`).then(res => {
+                    res.data.data.permission_ids = res.data.meta.permission_ids;
+                    this.role = res.data.data;
+                })
                 this.title = '编辑角色';
             }else{
                 this.title = '添加角色';

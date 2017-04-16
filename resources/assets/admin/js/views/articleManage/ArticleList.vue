@@ -98,7 +98,7 @@ export default {
     border-top-right-radius: 3px;
     position: fixed;
     top: 80px;
-    bottom: 0;
+    bottom: 10px;
     width: 190px;
     background-color: #fff;
     header{

@@ -101,13 +101,10 @@
             });
             if (this.$route.name === 'user-edit') {
                 this.id = this.$route.params.id;
-                this.$axios.all([
-                    this.$http.get(`users/${this.id}`),
-                    this.$http.get(`users/${this.id}/role_ids`)
-                ]).then(this.$axios.spread((user, ids) => {
-                    user.data.data.role_ids = ids.data;
-                    this.user = user.data.data;
-                }))
+                this.$http.get(`users/${this.id}`).then(res => {
+                    res.data.data.role_ids = res.data.meta.role_ids;
+                    this.user = res.data.data;
+                })
                 this.title = '编辑用户';
             }else{
                 this.title = '添加用户';

@@ -155,8 +155,7 @@
               }
             }).then(res => {
                 res.data.data.category_ids = res.data.meta.cate_ids;
-                this.article = res.data.data;
-                // this.$forceUpdate();
+                this.article = res.data.data
                 this.editor.setContent(this.article.content ? this.article.content.data.content : '');
             });
           }
