@@ -3,24 +3,33 @@
 namespace App\Entities;
 
 
+use App\Entities\Presenters\PostPresenters;
 use App\Entities\Traits\Listable;
 use Cache;
 use Carbon\Carbon;
 use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
+use Laracasts\Presenter\PresentableTrait;
 use Ty666\PictureManager\Traits\Picture;
 use PictureManager;
 
 class Post extends BaseModel
 {
-    use SoftDeletes, Picture, Listable;
+    use SoftDeletes, Picture, Listable, PresentableTrait;
+
+    protected $presenter = PostPresenters::class;
 
     protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'published_at'];
     protected $dates = ['deleted_at', 'top', 'published_at'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
     protected static $allowSortFields = ['title', 'status', 'views_count', 'top', 'order', 'published_at'];
+
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('published_at', 'desc')->orderBy('created_at');
+    }
 
     public function user()
     {
@@ -32,10 +41,7 @@ class Post extends BaseModel
         return $this->belongsToMany(Category::class)->ordered()->recent();
     }
 
-    public function scopePost($query)
-    {
-        return $query->where('type', 'post');
-    }
+
     public function scopeApplyFilter($query, $data)
     {
         $data = $data->only('q', 'type', 'status', 'orders');
@@ -61,6 +67,11 @@ class Post extends BaseModel
                 break;
         }
         return $query->ordered()->recent();
+    }
+
+    public function scopePost($query)
+    {
+        return $query->where('type', 'post');
     }
 
     public function scopePage($query)

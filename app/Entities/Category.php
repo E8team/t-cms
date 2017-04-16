@@ -30,6 +30,17 @@ class Category extends BaseModel
     {
         return $this->belongsToMany(Post::class);
     }
+
+    /**
+     * 文章列表
+     * @param $query
+     * @return mixed
+     */
+    public function postList()
+    {
+        return $this->posts()->post()->orderByTop()->ordered()->recent();
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id');
