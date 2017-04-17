@@ -177,6 +177,7 @@ return [
         Overtrue\LaravelUEditor\UEditorServiceProvider::class,
         Ty666\LaravelTheme\LaravelThemeServiceProvider::class,
         Appstract\Opcache\OpcacheServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -236,6 +237,7 @@ return [
         'PictureManager' => Ty666\PictureManager\Facades\PictureManager::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

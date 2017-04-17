@@ -59,6 +59,8 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace.'\Admin')
             ->prefix('admin')
             ->group(base_path('routes/admin/web.php'));
+        // 获取图片无中间件
+        Route::get('pic/{img_id}_{size}_{suffix}', 'PicturesController@show')->name('image');
 
     }
 
@@ -71,7 +73,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-
         $api = app('Dingo\Api\Routing\Router');
         $api->version('v1', ['namespace' => $this->namespace, 'middleware'=> 'api'], function ($api) {
             $api->group(['namespace' => 'Admin\Api', 'prefix' => 'admin'], function ($api){
