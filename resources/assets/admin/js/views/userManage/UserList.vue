@@ -1,6 +1,6 @@
 <template>
     <div class="users">
-        <CurrencyListPage title="用户列表" ref="list" queryName="users">
+        <CurrencyListPage title="用户列表" ref="list" queryName="users?include=roles">
             <div slot="option">
                 <el-button type="primary" @click="$router.push({name: 'user-add'})" icon="plus">添加用户</el-button>
             </div>
@@ -19,6 +19,11 @@
                     <el-table-column label="状态">
                         <template scope="scope">
                             <el-tag :type="scope.row.is_lock ? 'danger' : 'success'">{{scope.row.is_lock ? '锁定' : '正常'}}</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="角色">
+                        <template scope="scope">
+                            <el-tag v-for="item in scope.row.roles.data" :key="item.id">{{item.display_name}}</el-tag>
                         </template>
                     </el-table-column>
                     <el-table-column
