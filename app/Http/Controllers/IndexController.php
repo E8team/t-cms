@@ -27,8 +27,10 @@ class IndexController extends Controller
     }
 
 
-    public function content(Post $post)
+    public function post($cateSlug, Post $post)
     {
+        $category = Category::findBySlug($cateSlug);
+        app(Navigation::class)->setCurrentNav($category);
         return theme_view($post->template, ['post' => $post]);
     }
 }
