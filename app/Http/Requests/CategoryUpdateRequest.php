@@ -39,7 +39,7 @@ class CategoryUpdateRequest extends Request
             'cate_name' => 'nullable|string|max:30',
             'description' => 'nullable|string',
             'url' => 'nullable|url',
-            'cate_slug' => ['nullable', 'string', 'max:30', Rule::unique('category')->ignore($category->id)],
+            'cate_slug' => ['nullable', 'string', 'max:30', Rule::unique('categories')->ignore($category->id)],
             'is_nav' => 'boolean',
             'order' => 'nullable|int',
             'page_template' => 'nullable|string|max:30',
@@ -49,11 +49,5 @@ class CategoryUpdateRequest extends Request
         ];
     }
 
-    public function messages()
-    {
-        return [
-
-        ];
-    }
 
 }

@@ -5,14 +5,14 @@
             <el-form-item :error="errors.cate_name" required label="栏目名">
                 <el-input @change="errors.cate_name = ''" placeholder="请设置栏目名" v-model="column.cate_name"></el-input>
             </el-form-item>
+            <el-form-item label="栏目描述">
+                <el-input placeholder="请输入栏目描述" type="textarea" :rows="2" v-model="column.description"></el-input>
+            </el-form-item>
             <el-form-item label="父级栏目">
                 <el-select v-model="column.parent_id" placeholder="请选择">
                     <el-option label="作为父级栏目" :value="0"></el-option>
                     <el-option v-for="item in topCategories" :key="item.id" :label="item.cate_name" :value="item.id"></el-option>
                 </el-select>
-            </el-form-item>
-            <el-form-item label="栏目描述">
-                <el-input placeholder="请输入栏目描述" type="textarea" :rows="2" v-model="column.description"></el-input>
             </el-form-item>
             <el-form-item label="栏目图片">
                 <el-upload class="avatar-uploader"
@@ -62,11 +62,21 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-             <el-form-item v-if="column.type != 2" label="正文模板">
+             <el-form-item v-if="column.type == 0" label="正文模板">
                 <el-select v-model="column.content_template" placeholder="请选择">
                     <el-option
                     :key="item.file_name"
                     v-for="item in contentTemplates"
+                    :label="item.title"
+                    :value="item.file_name">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item v-if="column.type == 1" label="单页模板">
+                <el-select v-model="column.page_template" placeholder="请选择">
+                    <el-option
+                    :key="item.file_name"
+                    v-for="item in pageTemplate"
                     :label="item.title"
                     :value="item.file_name">
                     </el-option>
@@ -107,7 +117,8 @@ export default{
         topCategories: [],
         title: '',
         contentTemplates: [],
-        listTemplates: []
+        listTemplates: [],
+        pageTemplate: []
     }
   },
   methods: {
@@ -146,8 +157,10 @@ export default{
     this.$http.get('themes/current_theme_config').then(res => {
         this.contentTemplates = res.data.content_template;
         this.listTemplates = res.data.list_template;
+        this.pageTemplate = res.data.page_template;
         this.column.content_template = this.contentTemplates.find(item => item.is_defalut).file_name;
         this.column.list_template = this.listTemplates.find(item => item.is_defalut).file_name;
+        this.column.page_template = this.pageTemplate.find(item => item.is_defalut).file_name;
     })
     if (this.$route.name === 'column-edit') {
         this.id = this.$route.params.id;

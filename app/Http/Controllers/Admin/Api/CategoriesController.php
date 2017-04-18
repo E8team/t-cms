@@ -17,6 +17,7 @@ class CategoriesController extends ApiController
     {
         return $this->response->item($category, new CategoryTransformer());
     }
+
     /**
      * 获取导航栏
      * @return array
@@ -46,6 +47,7 @@ class CategoriesController extends ApiController
     public function update(Category $category, CategoryUpdateRequest $request)
     {
         $request->performUpdate($category);
+        
         return $this->response->noContent();
     }
 
@@ -59,7 +61,7 @@ class CategoriesController extends ApiController
             ->byType($request->get('type'))
             //->withSimpleSearch()
             ->ordered()
-            ->recent()
+            ->ancient()
             ->get();
         return $this->response->collection($topCategories, new CategoryTransformer());
             //->setMeta(Category::getAllowSearchFieldsMeta());

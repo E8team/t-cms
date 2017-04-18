@@ -8,7 +8,7 @@
       <Tree v-model="activeIndex" :model="allCategories"></Tree>
     </div>
     <div class="main_list">
-      <CurrencyListPage title="文章列表" ref="list" :queryName="queryName">
+      <CurrencyListPage v-if="currnetType == 0" :title="currentTitle" ref="list" :queryName="queryName">
         <template scope="list">
           <el-table border :data="list.data" style="width: 100%">
             <el-table-column width="340px" property="title" label="标题"></el-table-column>
@@ -40,6 +40,9 @@
           </el-table>
         </template>
       </CurrencyListPage>
+      <panel v-else :title="currentTitle">
+
+      </panel>
     </div>
   </div>
 </template>
@@ -56,7 +59,9 @@ export default {
         children: 'children'
       },
       allCategories: [],
-      activeIndex: null
+      activeIndex: null,
+      currnetType: 0,
+      currentTitle: '文章列表'
     }
   },
   components: {
@@ -73,9 +78,31 @@ export default {
   },
   watch: {
     activeIndex () {
-      let listRef = this.$refs['list'];
-      if(listRef){
-        listRef.refresh(this.queryName);
+      let res = {};
+      this.search(this.activeIndex, this.allCategories, res);
+      let current = res.current;
+      this.currnetType = current.type;
+      this.currentTitle = current.cate_name;
+      if(this.currnetType == 0){
+        let listRef = this.$refs['list'];
+        if(listRef){
+          listRef.refresh(this.queryName);
+        }
+      }else{
+      }
+    }
+  },
+  methods: {
+    search (id, list, res) {
+      if(res.current)return;
+      for(let item of list){
+        if(item.id == id){
+          res.current =  item;
+          return;
+        }
+        if(item.children){
+          this.search(id, item.children, res);
+        }
       }
     }
   },

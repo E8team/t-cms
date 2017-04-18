@@ -26,6 +26,7 @@ class Category extends BaseModel
         'description', 'url', 'cate_slug', 'is_nav', 'order',
         'page_template', 'list_template', 'content_template', 'setting'];
 
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);
@@ -48,7 +49,7 @@ class Category extends BaseModel
 
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id')->ordered()->recent();
+        return $this->hasMany(Category::class, 'parent_id', 'id')->ordered()->ancient();
     }
 
     /**
@@ -70,19 +71,19 @@ class Category extends BaseModel
         return static::where('cate_slug', $slug)->firstOrFail();
     }
 
-    public static function allCategory()
+    /*public static function allCategory()
     {
-        $allMenu = Category::orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $allMenu = Category::orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
         $res = [];
         self::treeByArray($allMenu, $res);
         return $res;
-    }
+    }*/
 
 
 
     public static function allCategoryArray($type = null)
     {
-        $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
         $res = [];
         self::treeByArray($allCategory, $res);
         return $res;
@@ -93,7 +94,7 @@ class Category extends BaseModel
         if (is_null($indentStr)) {
             $indentStr = '-';
         }
-        $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->recent()->get()->toArray();
+        $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
         $res = [];
         self::treeByIndent($allCategory, $res, $indentStr, 0, 0);
         return $res;
