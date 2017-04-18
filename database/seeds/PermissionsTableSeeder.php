@@ -50,7 +50,7 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'admin.user.show',
                 'display_name' => '用户列表',
                 'description' => '显示用户列表',
-                'parent_id' => 2,
+                'parent_id' => 1,
                 'is_menu' => true,
                 'order' => 0,
                 'created_at' => \Carbon\Carbon::now(),

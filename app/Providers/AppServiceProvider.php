@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Entities\Setting;
-use App\Libs\Theme;
+use App\T\Navigation\Navigation;
 use Dingo\Api\Exception\ValidationHttpException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
             ,$query->bindings
             ,$query->time]);
         });
+
+        $this->registerCustomValidator();
+    }
+    public function registerCustomValidator(){
         Validator::extend('picture_id', function($attribute, $value, $parameters, $validator) {
             return preg_match('/[0-9a-z]{32}\.'.'('.implode('|', config('picture.allowTypeList')).')'.'/i', $value)==1;
         }, '图片上传错误!');
@@ -37,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
             return true;
         }, ':attribute 必须为数字数组');
     }
-
     /**
      * Register any application services.
      *
@@ -50,7 +53,16 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
         }
+        $this->registerDingoApiExceptionHandler();
 
+        $this->app->singleton(Navigation::class, function (){
+            return new Navigation();
+        });
+    }
+
+
+    public function registerDingoApiExceptionHandler()
+    {
         $apiHandler = app('Dingo\Api\Exception\Handler');
         $apiHandler->register(function (\Illuminate\Auth\AuthenticationException $exception) {
             return response([
@@ -75,6 +87,13 @@ class AppServiceProvider extends ServiceProvider
 
             throw new ValidationHttpException($exception->validator->errors());
         });
-
+        $apiHandler->register(function (QueryException $exception) {
+            if($this->app->environment() !== 'production'){
+                throw new HttpException(500, $exception->getSql());
+            }else{
+                // todo log
+                throw new HttpException(500);
+            }
+        });
     }
 }

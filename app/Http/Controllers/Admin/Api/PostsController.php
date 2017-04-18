@@ -58,7 +58,7 @@ class PostsController extends ApiController
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
-
+        $data = $request->all();
         $data['type'] = 'post';
         // 处理置顶
         if (isset($data['top'])) {
@@ -69,12 +69,14 @@ class PostsController extends ApiController
             $data['conver'] = PictureManager::convert(public_path($request->get('cover_in_content')), 200, 300);
         }
         $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
-        $request->performUpdate($post);
+        $post->fill($data)->saveOrFail();
+
         if (isset($data['content'])) {
-            $post->content()->save(new PostContent(['content' => clean($data['content'])]));
+            $post->content()->update(['content' => clean($data['content'])]);
         }
         // 处理分类
         if (!empty($data['category_ids'])) {
+
             $post->saveCategories($data['category_ids']);
         }
 

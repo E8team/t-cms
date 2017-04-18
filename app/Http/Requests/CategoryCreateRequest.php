@@ -29,7 +29,7 @@ class CategoryCreateRequest extends Request
             'cate_name' => 'required|string|max:30',
             'description' => 'nullable|string',
             'url' => 'nullable|url',
-            'cate_slug' => 'nullable|string|max:30|unqiue:categories',
+            'cate_slug' => 'nullable|string|max:30|unique:categories',
             'is_nav' => 'boolean',
             'order' => 'nullable|int',
             'page_template' => 'nullable|string|max:30',
