@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Api;
 
 
 use App\Entities\Category;
+use App\Entities\Presenters\PostPresenters;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Transformers\CategoryTransformer;
@@ -91,6 +92,7 @@ class CategoriesController extends ApiController
      */
     public function posts(Category $category, Request $request)
     {
+        PostPresenters::setCurrentCategory($category);
         $posts = $category->posts()
             ->applyFilter($request)
             ->with('user')
