@@ -257,7 +257,7 @@
     computed: {
       'articleContent' () {
         if(this.editor)
-          return this.editor.getContent()
+          return this.editor.getContent();
       }
     }
   }
