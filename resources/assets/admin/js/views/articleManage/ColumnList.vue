@@ -8,9 +8,9 @@
           <el-table-column label="栏目名">
             <template scope="scope">
               {{scope.row.indent_str + scope.row.cate_name}}
-              <el-tag v-if="scope.row.type == 0" type="danger">列表栏目</el-tag>
+              <!--<el-tag v-if="scope.row.type == 0" type="danger">列表栏目</el-tag>
               <el-tag v-if="scope.row.type == 1" type="warning">单页栏目</el-tag>
-              <el-tag v-if="scope.row.type == 2" type="primary">外部链接</el-tag>
+              <el-tag v-if="scope.row.type == 2" type="primary">外部链接</el-tag>-->
             </template>
           </el-table-column>
           <el-table-column property="cate_slug" label="slug"></el-table-column>

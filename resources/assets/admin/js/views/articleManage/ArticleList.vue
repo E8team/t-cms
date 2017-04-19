@@ -8,10 +8,18 @@
       <Tree v-model="activeIndex" :model="allCategories"></Tree>
     </div>
     <div class="main_list">
-      <CurrencyListPage v-if="currnetType == 0" :title="currentTitle" ref="list" :queryName="queryName">
+      <div v-show="currnetType == -1" class="default_show">
+        <p class="info">一篇文章可以发布到多个栏目哦</p>
+        <el-button type="primary"  @click="$router.push({name: 'article-add'})">撰写新文章</el-button>
+      </div>
+      <CurrencyListPage v-show="currnetType == 0" :title="currentTitle" ref="list" :queryName="queryName">
         <template scope="list">
           <el-table border :data="list.data" style="width: 100%">
-            <el-table-column width="340px" property="title" label="标题"></el-table-column>
+            <el-table-column width="340px" label="标题">
+              <template scope="scope">
+                <a :href="scope.row.url" class="title" target="_blank">{{scope.row.title}}</a>
+              </template>
+            </el-table-column>
             <el-table-column property="user.nick_name" label="发布者"></el-table-column>
             <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
             <el-table-column width="120px" label="发布时间">
@@ -40,8 +48,9 @@
           </el-table>
         </template>
       </CurrencyListPage>
-      <panel v-else :title="currentTitle">
-
+      <panel v-show="currnetType == 1" :title="currentTitle">
+        <div id="ueditor_wrapper"></div>
+        <el-button type="success" class="submit_btn">提交</el-button>
       </panel>
     </div>
   </div>
@@ -60,8 +69,20 @@ export default {
       },
       allCategories: [],
       activeIndex: null,
-      currnetType: 0,
-      currentTitle: '文章列表'
+      currnetType: -1,
+      currentTitle: '文章列表',
+      editorInited: false
+    }
+  },
+  beforeCreate () {
+    if(document.querySelectorAll('[data-type=ueditor_include]').length == 0){
+      for(let item of window.t_meta.ueditor_include){
+          let scriptNode = document.createElement("script");
+          scriptNode.setAttribute("type", "text/javascript");
+          scriptNode.setAttribute("src",item);
+          scriptNode.setAttribute('data-type', 'ueditor_include')
+          document.body.appendChild(scriptNode);
+        }
     }
   },
   components: {
@@ -89,6 +110,9 @@ export default {
           listRef.refresh(this.queryName);
         }
       }else{
+        if(!this.editorInited){
+          this.initEditor();
+        }
       }
     }
   },
@@ -104,14 +128,34 @@ export default {
           this.search(id, item.children, res);
         }
       }
+    },
+    initEditor () {
+      this.editorInited = true;
+      window.UEDITOR_CONFIG.serverUrl = window.t_meta.ueditor_server_url;
+      this.editor = window.UE.getEditor('ueditor_wrapper', {
+        initialFrameHeight: 300
+      });
+      this.editor.ready(() => {
+        this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
+        
+      });
+    },
+    del (id) {
+        this.$confirm('你确定要删除该文章?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+            this.$http.delete(`posts/${id}`).then(res => {
+                this.$message('已删除');
+                this.$refs['list'].refresh()
+            })
+        }).catch(() => {
+        })
     }
   },
   mounted () {
     this.$http.get('categories/all').then(res => {
-      res.data.unshift({
-        id: null,
-        cate_name: '全部'
-      })
       this.allCategories = res.data
     })
   }
@@ -154,6 +198,24 @@ export default {
   }
   .main_list{
     padding-left: 200px;
+    .title{
+      color: #20A0FF;
+      text-decoration: none;
+    }
+  }
+  .submit_btn{
+    margin-top: 20px;
+  }
+  .default_show{
+    text-align: center;
+    padding: 150px 0;
+    background-color: #fff;
+    border-radius: 3px;
+    .info{
+      line-height: 14px;
+      font-size: 12px;
+      color: #6d757a;
+    }
   }
 }
 </style>
