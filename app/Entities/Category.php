@@ -64,7 +64,7 @@ class Category extends BaseModel
     /**
      * 通过slug来查找分类
      * @param $slug
-     * @return mixed
+     * @return Category
      */
     public static function findBySlug($slug)
     {
@@ -145,7 +145,8 @@ class Category extends BaseModel
     public function scopeByType($query, $type = null)
     {
         switch ($type) {
-            case 'post':
+            case 'post_list':
+            case 'post': // 为了兼容
                 $query->where('type', 0);
                 break;
             case 'page':
@@ -183,5 +184,23 @@ class Category extends BaseModel
     public function isExtLink()
     {
         return $this->type == 2;
+    }
+
+    /**
+     * 判断当前栏目(分类)是否为单网页
+     * @return bool
+     */
+    public function isPage()
+    {
+        return $this->type == 1;
+    }
+
+    /**
+     * 判断当前栏目(分类)是否为列表栏目
+     * @return bool
+     */
+    public function isPostList()
+    {
+        return $this->type == 0;
     }
 }
