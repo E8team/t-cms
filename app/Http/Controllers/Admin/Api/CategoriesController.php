@@ -92,12 +92,28 @@ class CategoriesController extends ApiController
      */
     public function posts(Category $category, Request $request)
     {
+        if(!$category->isPostList())
+        {
+            //todo 国际化
+            return $this->response->errorNotFound('该栏目不是列表栏目');
+        }
+        // 这一步为了获取文章url
         PostPresenters::setCurrentCategory($category);
         $posts = $category->posts()
             ->applyFilter($request)
             ->with('user')
             ->paginate($this->perPage());
         return $this->response->paginator($posts, new PostTransformer());
+    }
+
+    public function page(Category $category)
+    {
+        if(!$category->isPage())
+        {
+            //todo 国际化
+            return $this->response->errorNotFound('该栏目不是单网页');
+        }
+        return $this->response->item($category->page(), new PostTransformer());
     }
 
     public function getAllCategory(Request $request)

@@ -30,6 +30,7 @@ class IndexController extends Controller
 
     private function showList(Category $currentCategory, Request $request)
     {
+
         $postList = $currentCategory->postList()->paginate($this->perPage());
         $postList->appends($request->all());
         return theme_view($currentCategory->list_template, [
@@ -39,7 +40,7 @@ class IndexController extends Controller
 
     private function showPage(Category $currentCategory)
     {
-        return theme_view($currentCategory->page_template, ['pagePost' => $currentCategory->posts()->first()]);
+        return theme_view($currentCategory->page_template, ['pagePost' => $currentCategory->page()]);
     }
 
     public function post($cateSlug, Post $post)

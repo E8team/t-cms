@@ -23,7 +23,9 @@ class PostCreateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts',
+            'title' => ['required', Rule::unique('posts')->where(function ($query) {
+                $query->where('type', 'post');
+            })],
             'author_info' => 'nullable|string|max:50',
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
@@ -34,7 +36,7 @@ class PostCreateRequest extends Request
             'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
             'category_ids' => 'nullable|int_array',
-            'created_at' => 'nullable|date'
+            'published_at' => 'nullable|date'
         ];
     }
 

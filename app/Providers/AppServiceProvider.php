@@ -89,7 +89,8 @@ class AppServiceProvider extends ServiceProvider
         });
         $apiHandler->register(function (QueryException $exception) {
             if($this->app->environment() !== 'production'){
-                throw new HttpException(500, $exception->getSql());
+                //throw new HttpException(500, $exception->getSql());
+                throw $exception;
             }else{
                 // todo log
                 throw new HttpException(500);

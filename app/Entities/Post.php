@@ -148,6 +148,12 @@ class Post extends BaseModel
         return $this->getPicure($this->cover, ['sm', 'md', 'lg', 'o'], asset('images/default_avatar.jpg'));
     }
 
+    public static function createPage($data)
+    {
+        $data['type'] = 'page';
+        return static::createWithContentAndCategories($data);
+    }
+
     public static function createPost($data)
     {
         $data['type'] = 'post';
@@ -159,7 +165,14 @@ class Post extends BaseModel
             //todo size
             $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
         }
-        $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
+        if(isset($data['published_at'])){
+            $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
+        }
+        return static::createWithContentAndCategories($data);
+    }
+
+    public static function createWithContentAndCategories($data)
+    {
 
         $post = static::create($data);
         if(isset($data['content'])){

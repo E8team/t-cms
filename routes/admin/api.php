@@ -1,6 +1,6 @@
 <?php
 
-$api->group(['middleware'=>'auth'], function ($api) {
+$api->group([/*'middleware'=>'auth'*/], function ($api) {
 
     // -------------------------------------------------
     // 当前登录的用户
@@ -68,8 +68,10 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('categories/{category}', 'CategoriesController@update');
     // 获取指定分类
     $api->get('categories/{category}', 'CategoriesController@show');
-    //指定分类下的文章
+    // 获取指定分类下的文章
     $api->get('categories/{category}/posts', 'CategoriesController@posts');
+    // 获取指定分类下的单页
+    $api->get('categories/{category}/page', 'CategoriesController@page');
     //将文章批量移动到分类 ?post_ids[0]=1&post_ids[1]=2&category_ids[0]=4&category_ids[1]=5
     $api->put('move_posts_to_categories', 'PostsController@movePosts2Categories');
     // -------------------------------------------------
@@ -80,6 +82,11 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('posts', 'PostsController@store');
     // 更新文章
     $api->put('posts/{post}', 'PostsController@update');
+    // 创建单网页
+    $api->post('page', 'PostsController@storePage');
+    // 更新单网页
+    $api->put('page/{post}', 'PostsController@updatePage');
+
     $api->delete('posts/{id}', 'PostsController@destroy');
     // -------------------------------------------------
     // 获取所有友情链接的类别

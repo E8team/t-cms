@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Entities\Post;
 use App\Entities\PostContent;
+use App\Http\Requests\PageCreateRequest;
+use App\Http\Requests\PageUpdateRequest;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Transformers\PostTransformer;
@@ -14,6 +16,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
+    /**
+     * 全部文章
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function lists(Request $request)
     {
         $posts = Post::applyFilter($request)
@@ -22,6 +29,36 @@ class PostsController extends ApiController
         return $this->response->paginator($posts, new PostTransformer());
     }
 
+    /**
+     * 显示指定文章
+     * @param Post $post
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(Post $post)
+    {
+        $cateids = $post->categories->pluck('id');
+        return $this->response->item($post, new PostTransformer())
+            ->addMeta('cate_ids', $cateids);
+    }
+
+    public function storePage(PageCreateRequest $request)
+    {
+        $data = $request->only($request->getAllowModifyFields());
+        Post::createPage($data);
+        return $this->response->noContent();
+    }
+    
+    public function updatePage(Post $post, PageUpdateRequest $request)
+    {
+        $data = array_filter($request->only($request->getAllowModifyFields()), function ($item){
+            return !is_null($item);
+        });
+        $post->fill($data)->saveOrFail();
+        if (isset($data['content'])) {
+            $post->content()->update(['content' => clean($data['content'])]);
+        }
+        return $this->response->noContent();
+    }
     /**
      * 创建文章
      *
@@ -39,18 +76,6 @@ class PostsController extends ApiController
     }
 
     /**
-     * 显示指定文章
-     * @param Post $post
-     * @return \Dingo\Api\Http\Response
-     */
-    public function show(Post $post)
-    {
-        $cateids = $post->categories->pluck('id');
-        return $this->response->item($post, new PostTransformer())
-            ->addMeta('cate_ids', $cateids);
-    }
-
-    /**
      * 更新指定文章
      * @param Post $post
      * @param PostUpdateRequest $request
@@ -58,8 +83,8 @@ class PostsController extends ApiController
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
-        $data = $request->all();
-        $data['type'] = 'post';
+        $data = $request->only($request->getAllowModifyFields());
+        // $data['type'] = 'post';
         // 处理置顶
         if (isset($data['top'])) {
             $data['top'] = Carbon::now();

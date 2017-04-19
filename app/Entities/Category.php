@@ -42,6 +42,11 @@ class Category extends BaseModel
         return $this->posts()->post()->orderByTop()->ordered()->recent();
     }
 
+    public function page()
+    {
+        return $this->posts()->page()->first();
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id');
