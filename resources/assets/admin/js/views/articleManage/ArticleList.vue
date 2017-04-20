@@ -76,10 +76,8 @@ export default {
       },
       page: {
         title: '',
-        content: '',
-        categories_ids: []
+        content: ''
       },
-      isCreated: true,
       allCategories: [],
       activeIndex: null,
       currnetType: -1,
@@ -105,9 +103,10 @@ export default {
   computed: {
     queryName () {
       if(this.activeIndex === null){
-        return 'posts?include=categories'
+        // return 'posts?include=categories'
+        return null;
       }else{
-        return `categories/${this.activeIndex}/posts?include=categories`
+        return `categories/${this.activeIndex}/posts?include=categories`;
       }
     }
   },
@@ -130,9 +129,6 @@ export default {
         this.$http.get(`categories/${this.activeIndex}/page`).then(res => {
           if(res.data){
             this.page = res.data;
-            this.isCreated = false;
-          }else{
-            this.isCreated = true;
           }
         })
       }
@@ -152,20 +148,8 @@ export default {
       }
     },
     confirm () {
-      let method, url;
-      if(!this.isCreated){
-        method = 'put';
-        url = `posts/${this.activeIndex}`;
-      }else{
-        method = 'post';
-        url = 'posts';
-        this.page.categories_ids = [this.activeIndex];
-      }
       this.page.content = this.editor.getContent();
-
-      this.$http[method](url, {
-        ...this.page
-      }).then(res => {
+      this.$http.post(`categories/${this.activeIndex}/page`, this.page).then(res => {
         this.$message({
             message: '已保存',
             type: 'success'
@@ -210,7 +194,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .article_list{
   .cate_tree_wrapper{
     border-top-left-radius: 3px;
@@ -249,6 +233,15 @@ export default {
     .title{
       color: #2476B4;
       text-decoration: none;
+    }
+    #ueditor_wrapper{
+      overflow: hidden;
+      #edui1 {
+        width: 100%!important;
+      }
+      #edui1_toolbarbox{
+        line-height: 1.5!important;
+      }
     }
   }
   .default_show{
