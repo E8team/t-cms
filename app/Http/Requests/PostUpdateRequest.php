@@ -30,9 +30,9 @@ class PostUpdateRequest extends Request
     {
         $post = $this->route()->parameter('post');
         return [
-            'title' => ['nullable', 'required', Rule::unique('posts')->where(function ($query) {
+            'title' => ['nullable', 'required', /*Rule::unique('posts')->where(function ($query) {
                 $query->where('type', 'post');
-            })->ignore($post->id)],
+            })->ignore($post->id)*/],
                 'author_info' => 'nullable|string|max:50',
                 'excerpt' => 'nullable|string',
                 'cover' => 'nullable|picture',

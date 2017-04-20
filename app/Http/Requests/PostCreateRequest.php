@@ -23,9 +23,9 @@ class PostCreateRequest extends Request
     public function rules()
     {
         return [
-            'title' => ['required', Rule::unique('posts')->where(function ($query) {
+            'title' => ['required'/*, Rule::unique('posts')->where(function ($query) {
                 $query->where('type', 'post');
-            })],
+            })*/],
             'author_info' => 'nullable|string|max:50',
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
