@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Auth\UserProvider;
 use App\Entities\User;
-use Illuminate\Hashing\BcryptHasher;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Auth;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Hashing\BcryptHasher;
 
 class AuthServiceProvider extends ServiceProvider
 {

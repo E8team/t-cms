@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
-use Illuminate\Validation\Rule;
 
 
 class LinkUpdateRequest extends Request
@@ -12,6 +11,7 @@ class LinkUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['url', 'name', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

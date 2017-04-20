@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Entities\Traits\Listable;
+use Config;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -12,7 +13,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Ty666\PictureManager\Traits\Picture;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
-use Config;
 
 class User extends BaseModel implements
     AuthenticatableContract,
@@ -70,10 +70,11 @@ class User extends BaseModel implements
     {
         $users = static::findOrFail($userIds);
         $roleIds = Role::findOrFail($roleIds)->pluck('id');
-        $users->each(function ($user) use ($roleIds){
+        $users->each(function ($user) use ($roleIds) {
             $user->roles()->sync($roleIds);
         });
     }
+
     /**
      * 角色的多对多关联
      *

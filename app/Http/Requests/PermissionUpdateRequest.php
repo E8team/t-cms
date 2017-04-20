@@ -12,6 +12,7 @@ class PermissionUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['name', 'display_name', 'description', 'parent_id', 'is_menu', 'icon', 'order'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

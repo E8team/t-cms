@@ -57,6 +57,7 @@ Trait Listable
         }
         return $query;
     }
+
     /**
      * @return array
      */
@@ -75,11 +76,11 @@ Trait Listable
 
     public static function getAllowSortFieldsMeta()
     {
-        return [ 'allow_sort_fields' => static::$allowSortFields ];
+        return ['allow_sort_fields' => static::$allowSortFields];
     }
 
     public static function getAllowSearchFieldsMeta()
     {
-        return [ 'allow_search_fields' => static::$allowSearchFields ];
+        return ['allow_search_fields' => static::$allowSearchFields];
     }
 }

@@ -21,9 +21,9 @@ class PostPresenters extends Presenter
 
     public function getUrl()
     {
-        if(is_null(static::$currentCategory)){
+        if (is_null(static::$currentCategory)) {
             return route('post', [$this->categories->first()->cate_slug, $this->id]);
-        }else{
+        } else {
             return route('post', [static::$currentCategory->cate_slug, $this->id]);
         }
     }

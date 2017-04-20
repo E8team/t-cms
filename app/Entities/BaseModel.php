@@ -13,6 +13,7 @@ class BaseModel extends Model
     {
         return $query->orderBy('created_at', 'desc');
     }
+
     public function scopeAncient($query)
     {
         return $query->orderBy('created_at', 'asc');

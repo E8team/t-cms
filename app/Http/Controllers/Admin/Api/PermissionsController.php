@@ -23,8 +23,7 @@ class PermissionsController extends ApiController
         $permissions = Permission::getUserMenu(Auth::user());
         $topPermissions = Permission::allPermissionWithCache();
         $topPermissions = $topPermissions->only($permissions->keys()->all())->keyBy('id')->toArray();
-        foreach ($topPermissions as &$topPermission)
-        {
+        foreach ($topPermissions as &$topPermission) {
             $topPermission['children'] = $permissions[$topPermission['id']];
         }
         unset($topPermission);
@@ -49,7 +48,7 @@ class PermissionsController extends ApiController
     public function allPermissions()
     {
         $permissions = Permission::allPermission()->groupBy('parent_id')->toArray();
-        foreach ($permissions[0] as &$permission){
+        foreach ($permissions[0] as &$permission) {
             $permission['children'] = $permissions[$permission['id']];
             unset($permissions[$permission['id']]);
         }
@@ -123,7 +122,8 @@ class PermissionsController extends ApiController
      * @param Request $request
      * @return \Dingo\Api\Http\Response
      */
-    public function movePermissions2Roles(Request $request) {
+    public function movePermissions2Roles(Request $request)
+    {
         $this->validate($request, [
             'permission_ids' => 'int_array',
             'role_ids' => 'int_array'

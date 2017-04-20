@@ -12,6 +12,7 @@ class RoleUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['name', 'display_name', 'description', 'order'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

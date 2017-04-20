@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -56,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
         Route::middleware('web')
-            ->namespace($this->namespace.'\Admin')
+            ->namespace($this->namespace . '\Admin')
             ->prefix('admin')
             ->group(base_path('routes/admin/web.php'));
         // 获取图片无中间件
@@ -74,8 +75,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         $api = app('Dingo\Api\Routing\Router');
-        $api->version('v1', ['namespace' => $this->namespace, 'middleware'=> 'api'], function ($api) {
-            $api->group(['namespace' => 'Admin\Api', 'prefix' => 'admin'], function ($api){
+        $api->version('v1', ['namespace' => $this->namespace, 'middleware' => 'api'], function ($api) {
+            $api->group(['namespace' => 'Admin\Api', 'prefix' => 'admin'], function ($api) {
                 require base_path('routes/admin/api.php');
             });
         });

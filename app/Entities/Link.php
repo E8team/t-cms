@@ -14,6 +14,7 @@ class Link extends BaseModel
     public $timestamps = false;
     protected static $allowSortFields = ['name', 'type_id', 'order', 'is_visible'];
     protected static $allowSearchFields = ['name', 'url', 'linkman'];
+
     public function type()
     {
         return $this->belongsTo(Type::class);
@@ -26,14 +27,14 @@ class Link extends BaseModel
 
     public function scopeByType($query, $type)
     {
-        if(is_null($type)){
+        if (is_null($type)) {
             return $query;
         }
-        if($type instanceof Type) {
+        if ($type instanceof Type) {
             $typeId = $type->id;
-        }elseif(is_array($type)) {
+        } elseif (is_array($type)) {
             $typeId = $type['id'];
-        }else {
+        } else {
             $typeId = intval($type);
         }
 

@@ -48,7 +48,7 @@ class CategoriesController extends ApiController
     public function update(Category $category, CategoryUpdateRequest $request)
     {
         $request->performUpdate($category);
-        
+
         return $this->response->noContent();
     }
 
@@ -65,7 +65,7 @@ class CategoriesController extends ApiController
             ->ancient()
             ->get();
         return $this->response->collection($topCategories, new CategoryTransformer());
-            //->setMeta(Category::getAllowSearchFieldsMeta());
+        //->setMeta(Category::getAllowSearchFieldsMeta());
 
     }
 
@@ -81,7 +81,7 @@ class CategoriesController extends ApiController
             //->withSimpleSearch()
             ->get();
         return $this->response->collection($childrenCategories, new CategoryTransformer());
-            //->setMeta(Category::getAllowSearchFieldsMeta());
+        //->setMeta(Category::getAllowSearchFieldsMeta());
     }
 
     /**
@@ -92,8 +92,7 @@ class CategoriesController extends ApiController
      */
     public function posts(Category $category, Request $request)
     {
-        if(!$category->isPostList())
-        {
+        if (!$category->isPostList()) {
             //todo 国际化
             return $this->response->errorNotFound('该栏目不是列表栏目');
         }
@@ -108,8 +107,7 @@ class CategoriesController extends ApiController
 
     public function page(Category $category)
     {
-        if(!$category->isPage())
-        {
+        if (!$category->isPage()) {
             //todo 国际化
             return $this->response->errorNotFound('该栏目不是单网页');
         }
@@ -118,10 +116,10 @@ class CategoriesController extends ApiController
 
     public function getAllCategory(Request $request)
     {
-        if($request->get('show') == 'indent'){
+        if ($request->get('show') == 'indent') {
             //$indentStr = $request->get('indent_str');
             return $this->response->array(Category::allCategoryIndent($request->get('type'), '　∟　'));
-        }else{
+        } else {
             return $this->response->array(Category::allCategoryArray($request->get('type')));
         }
 

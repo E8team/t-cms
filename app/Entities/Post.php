@@ -11,8 +11,8 @@ use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Laracasts\Presenter\PresentableTrait;
-use Ty666\PictureManager\Traits\Picture;
 use PictureManager;
+use Ty666\PictureManager\Traits\Picture;
 
 class Post extends BaseModel
 {
@@ -20,7 +20,7 @@ class Post extends BaseModel
 
     protected $presenter = PostPresenters::class;
 
-    protected $fillable = ['title', 'user_id','author_info', 'excerpt', 'type', 'views_count', 'cover', 'status' , 'template', 'top', 'published_at'];
+    protected $fillable = ['title', 'user_id', 'author_info', 'excerpt', 'type', 'views_count', 'cover', 'status', 'template', 'top', 'published_at'];
     protected $dates = ['deleted_at', 'top', 'published_at'];
 
     protected static $allowSearchFields = ['title', 'author_info', 'excerpt'];
@@ -46,22 +46,20 @@ class Post extends BaseModel
     {
         $data = $data->only('q', 'type', 'status', 'orders');
         $query->orderByTop();
-        if(!is_null($data['q']))
-        {
+        if (!is_null($data['q'])) {
             $query->withSimpleSearch($data['q']);
         }
-        if(!is_null($data['orders']))
-        {
+        if (!is_null($data['orders'])) {
             $query->withSort($data['orders']);
         }
-        switch ($data['type']){
+        switch ($data['type']) {
             case 'page':
                 $query->type();
                 break;
             case 'draft':
                 $query->draft();
         }
-        switch ($data['status']){
+        switch ($data['status']) {
             case 'publish':
                 $query->publish();
                 break;
@@ -121,7 +119,7 @@ class Post extends BaseModel
     {
         $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
         $posts = static::findOrFail($postIds);
-        $posts->each(function ($post) use ($categoryIds){
+        $posts->each(function ($post) use ($categoryIds) {
             $post->categories()->sync($categoryIds);
         });
     }
@@ -133,10 +131,9 @@ class Post extends BaseModel
 
     public function saveCategories($categories)
     {
-        if($categories instanceof Collection)
-        {
+        if ($categories instanceof Collection) {
             $categories = $categories->pluck('id');
-        }else if(is_string($categories)){
+        } else if (is_string($categories)) {
             $categories = explode(',', $categories);
         }
         $this->categories()->sync($categories);
@@ -158,14 +155,14 @@ class Post extends BaseModel
     {
         $data['type'] = 'post';
         // 处理置顶
-        if(isset($data['top'])){
+        if (isset($data['top'])) {
             $data['top'] = Carbon::now();
         }
-        if(isset($data['cover_in_content'])){
+        if (isset($data['cover_in_content'])) {
             //todo size
             $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
         }
-        if(isset($data['published_at'])){
+        if (isset($data['published_at'])) {
             $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
         }
         return static::createWithContentAndCategories($data);
@@ -175,14 +172,14 @@ class Post extends BaseModel
     {
 
         $post = static::create($data);
-        if(isset($data['content'])){
+        if (isset($data['content'])) {
             $post->content()->create([
                 'content' => clean($data['content'])
             ]);
         }
 
         // 处理分类
-        if(!empty($data['category_ids'])){
+        if (!empty($data['category_ids'])) {
             $post->saveCategories($data['category_ids']);
         }
 

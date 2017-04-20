@@ -8,9 +8,9 @@ class CategoryPresenters extends Presenter
 {
     public function url()
     {
-        if(!$this->entity->isExtLink()){
+        if (!$this->entity->isExtLink()) {
             return route('category', $this->cate_slug);
-        }else{
+        } else {
             return $this->url;
         }
     }

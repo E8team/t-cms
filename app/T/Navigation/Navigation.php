@@ -17,10 +17,11 @@ class Navigation
      * @var Category
      */
     protected $topNav;
+
     public function getAllNav()
     {
-        if(is_null($this->allNav)){
-            $this->allNav = Category::nav()->topCategories()->with(['children'=>function($query){
+        if (is_null($this->allNav)) {
+            $this->allNav = Category::nav()->topCategories()->with(['children' => function ($query) {
                 $query->nav();
             }])->ordered()->ancient()->get();
         }
@@ -31,6 +32,7 @@ class Navigation
     {
         return $this->getAllNav();
     }
+
     /**
      * 获取当前导航
      * @param Request $request

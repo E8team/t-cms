@@ -12,6 +12,7 @@ class UserUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['user_name', 'nick_name', 'email', 'password', 'is_lock'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -28,7 +28,7 @@ class TypesController extends ApiController
     public function store(TypeCreateRequest $request)
     {
         $data = $request->all();
-        switch ($data['class_name']){
+        switch ($data['class_name']) {
             case 'link':
                 $data['class_name'] = Link::class;
                 break;

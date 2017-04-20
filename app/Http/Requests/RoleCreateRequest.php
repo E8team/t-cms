@@ -2,9 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Traits\Update;
-use Illuminate\Validation\Rule;
-
 
 class RoleCreateRequest extends Request
 {

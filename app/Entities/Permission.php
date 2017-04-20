@@ -19,6 +19,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     protected $fillable = ['name', 'display_name', 'description', 'parent_id', 'is_menu', 'icon', 'order'];
     protected static $allowSortFields = ['name', 'display_name', 'is_menu', 'order'];
     protected static $allowSearchFields = ['name', 'display_name'];
+
     protected function clearCache()
     {
         Cache::tags(Config::get('permissions_table'))->flush();
@@ -43,6 +44,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
             ->keyBy('id');
         //->groupBy('parent_id'); 如果需要groupBy请调用allPermissionWithCache()后自行groupBy()
     }
+
     public static function allPermissionWithCache()
     {
         return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
@@ -84,7 +86,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     {
         $permissions = static::findOrFail($permissionIds);
         $roleIds = Role::findOrFail($roleIds)->pluck('id');
-        $permissions->each(function ($permission) use ($roleIds){
+        $permissions->each(function ($permission) use ($roleIds) {
             $permission->roles()->sync($roleIds);
         });
     }

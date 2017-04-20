@@ -20,27 +20,30 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \DB::listen(function ($query) {
-            \Log::info('sql',[$query->sql
-            ,$query->bindings
-            ,$query->time]);
+            \Log::info('sql', [$query->sql
+                , $query->bindings
+                , $query->time]);
         });
 
         $this->registerCustomValidator();
     }
-    public function registerCustomValidator(){
-        Validator::extend('picture_id', function($attribute, $value, $parameters, $validator) {
-            return preg_match('/[0-9a-z]{32}\.'.'('.implode('|', config('picture.allowTypeList')).')'.'/i', $value)==1;
+
+    public function registerCustomValidator()
+    {
+        Validator::extend('picture_id', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/[0-9a-z]{32}\.' . '(' . implode('|', config('picture.allowTypeList')) . ')' . '/i', $value) == 1;
         }, '图片上传错误!');
-        Validator::extend('int_array', function($attribute, $value, $parameters, $validator) {
-            if(!is_array($value))
+        Validator::extend('int_array', function ($attribute, $value, $parameters, $validator) {
+            if (!is_array($value))
                 return false;
-            foreach($value as $v)
-                if(!is_numeric($v))
+            foreach ($value as $v)
+                if (!is_numeric($v))
                     return false;
 
             return true;
         }, ':attribute 必须为数字数组');
     }
+
     /**
      * Register any application services.
      *
@@ -55,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
         }
         $this->registerDingoApiExceptionHandler();
 
-        $this->app->singleton(Navigation::class, function (){
+        $this->app->singleton(Navigation::class, function () {
             return new Navigation();
         });
     }
@@ -73,7 +76,7 @@ class AppServiceProvider extends ServiceProvider
         $apiHandler->register(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
             return response([
                 'code' => 401.3,
-                'message' => $exception->getMessage()=='This action is unauthorized.'?trans('message.no_permission'):$exception->getMessage()
+                'message' => $exception->getMessage() == 'This action is unauthorized.' ? trans('message.no_permission') : $exception->getMessage()
             ], 401);
         });
         $apiHandler->register(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
@@ -88,10 +91,10 @@ class AppServiceProvider extends ServiceProvider
             throw new ValidationHttpException($exception->validator->errors());
         });
         $apiHandler->register(function (QueryException $exception) {
-            if($this->app->environment() !== 'production'){
+            if ($this->app->environment() !== 'production') {
                 //throw new HttpException(500, $exception->getSql());
                 throw $exception;
-            }else{
+            } else {
                 // todo log
                 throw new HttpException(500);
             }

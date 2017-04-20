@@ -69,8 +69,7 @@ class RolesController extends ApiController
     {
         $data = $request->all();
         $role = Role::create($data);
-        if(!empty($data['permission_ids']))
-        {
+        if (!empty($data['permission_ids'])) {
             $permissionIds = Permission::findOrfail($data['permission_ids'])->pluck('id');
             $role->attachPermissions($permissionIds);
         }
@@ -87,8 +86,7 @@ class RolesController extends ApiController
     {
         $request->performUpdate($role);
         $permissionIds = $request->get('permission_ids');
-        if(!empty($permissionIds))
-        {
+        if (!empty($permissionIds)) {
             $permissionIds = Permission::findOrfail($permissionIds)->pluck('id');
             $role->savePermissions($permissionIds);
         }

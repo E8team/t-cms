@@ -12,6 +12,7 @@ class SettingUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['name', 'value', 'description', 'is_autoload'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

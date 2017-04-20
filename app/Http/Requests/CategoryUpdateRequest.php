@@ -14,6 +14,7 @@ class CategoryUpdateRequest extends Request
     protected $allowModifyFields = ['type', 'image', 'parent_id', 'cate_name',
         'description', 'url', 'cate_slug', 'is_nav', 'order',
         'page_template', 'list_template', 'content_template', 'setting'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

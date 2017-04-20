@@ -44,12 +44,12 @@ class PostsController extends ApiController
 
     public function storePage(Category $category, Request $request)
     {
-        $data = array_filter($request->only('title', 'content'), function ($item){
+        $data = array_filter($request->only('title', 'content'), function ($item) {
             return !is_null($item);
         });
         $data['category_ids'] = [$category->id];
         $page = $category->page();
-        if(is_null($page)){
+        if (is_null($page)) {
             //todo 验证规则
             $this->validate($request, [
                 'title' => 'required',
@@ -59,7 +59,7 @@ class PostsController extends ApiController
             $data['published_at'] = Carbon::now();
             $data['user_id'] = Auth::id();
             Post::createPage($data);
-        }else{
+        } else {
             // 更新
             if (isset($data['content'])) {
                 $page->content()->update(['content' => clean($data['content'])]);
@@ -71,6 +71,7 @@ class PostsController extends ApiController
         }
         return $this->response->noContent();
     }
+
     /**
      * 创建文章
      *

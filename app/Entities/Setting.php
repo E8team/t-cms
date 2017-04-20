@@ -31,9 +31,9 @@ class Setting extends BaseModel
 
     public static function allSetting($isAutoload = null)
     {
-        if(!is_null($isAutoload)){
+        if (!is_null($isAutoload)) {
             $query = static::where('is_autoload', (boolean)$isAutoload);
-        }else{
+        } else {
             $query = static::query();
         }
         return $query->recent()
@@ -58,6 +58,7 @@ class Setting extends BaseModel
         }
         return $value;
     }
+
     public static function getSetting($name)
     {
 

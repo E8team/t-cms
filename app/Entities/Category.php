@@ -85,7 +85,6 @@ class Category extends BaseModel
     }*/
 
 
-
     public static function allCategoryArray($type = null)
     {
         $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
@@ -142,6 +141,7 @@ class Category extends BaseModel
     {
         return $query->where('is_nav', true);
     }
+
     public function scopeTopCategories($query)
     {
         return $query->where('parent_id', 0);
@@ -178,7 +178,8 @@ class Category extends BaseModel
      * @param Category $category
      * @return bool
      */
-    public function equals(Category $category){
+    public function equals(Category $category)
+    {
         return $this->id == $category->id;
     }
 

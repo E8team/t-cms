@@ -19,7 +19,7 @@ class ThemesController extends ApiController
     public function __construct()
     {
         $theme = app(Theme::class);
-        if(!is_null($currentTheme = Setting::getSetting($this->currentThemeSettingName))){
+        if (!is_null($currentTheme = Setting::getSetting($this->currentThemeSettingName))) {
             $theme->setCurrentTheme($currentTheme);
         }
     }
@@ -32,10 +32,8 @@ class ThemesController extends ApiController
         $theme = app(Theme::class);
         $currentThemeId = $theme->getCurrentTheme();
         $allThemeConfig = $theme->getAllThemeConfig();
-        foreach ($allThemeConfig as &$themeConfig)
-        {
-            if($themeConfig['theme_id']==$currentThemeId)
-            {
+        foreach ($allThemeConfig as &$themeConfig) {
+            if ($themeConfig['theme_id'] == $currentThemeId) {
                 $themeConfig['is_current'] = true;
                 break;
             }
@@ -71,12 +69,12 @@ class ThemesController extends ApiController
     public function setCurrentTheme(Request $request)
     {
         $themeId = $request->get('theme_id');
-        if(is_null($themeId)){
+        if (is_null($themeId)) {
             return $this->response->errorBadRequest(trans('theme_not_found'));
         }
-        try{
+        try {
             app(Theme::class)->getThemeConfig($themeId);
-        }catch (ThemeNotFound $e){
+        } catch (ThemeNotFound $e) {
             return $this->response->errorBadRequest(trans('theme_not_found'));
         }
         $setting = Setting::firstOrNew(['name' => $this->currentThemeSettingName]);

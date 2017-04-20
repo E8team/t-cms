@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
-use Illuminate\Validation\Rule;
 
 
 class TypeUpdateRequest extends Request
@@ -12,6 +11,7 @@ class TypeUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['name', 'description', 'order'];
+
     /**
      * Determine if the user is authorized to make this request.
      *

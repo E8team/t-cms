@@ -9,9 +9,9 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Transformers\RoleTransformer;
 use App\Transformers\UserTransformer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Hash;
 use Auth;
+use Hash;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UsersController extends ApiController
 {
@@ -46,7 +46,7 @@ class UsersController extends ApiController
      */
     public function show(User $user)
     {
-        $roleIds =$user->roles->pluck('id');
+        $roleIds = $user->roles->pluck('id');
         return $this->response->item($user, new UserTransformer())
             ->addMeta('role_ids', $roleIds);
     }
@@ -77,7 +77,7 @@ class UsersController extends ApiController
             $data['password'] = Hash::make($data['password']);
         }
         $request->performUpdate($user);
-        if(!empty($data['role_ids'])){
+        if (!empty($data['role_ids'])) {
             $roleIds = Role::findOrFail($data['role_ids'])->pluck('id');
             $user->save($roleIds);
         }
@@ -92,14 +92,14 @@ class UsersController extends ApiController
     public function store(UserCreateRequest $request)
     {
         $data = $request->all();
-        if(empty($data['password'])){
+        if (empty($data['password'])) {
             unset($data['password']);
-        }else{
+        } else {
             $data['password'] = Hash::make($data['password']);
         }
 
         $user = User::create($data);
-        if(!empty($data['role_ids'])){
+        if (!empty($data['role_ids'])) {
             $roleIds = Role::findOrFail($data['role_ids'])->pluck('id');
             $user->roles()->sync($roleIds);
         }
