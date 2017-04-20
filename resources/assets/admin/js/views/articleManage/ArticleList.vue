@@ -49,8 +49,15 @@
         </template>
       </CurrencyListPage>
       <panel v-show="currnetType == 1" :title="currentTitle">
-        <div id="ueditor_wrapper"></div>
-        <el-button type="success" class="submit_btn">提交</el-button>
+        <el-form :model="page" label-width="105px" label-position="top">
+          <el-form-item label-width="105px" label="标题">
+            <el-input placeholder="请输入标题" v-model="page.title"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <div id="ueditor_wrapper"></div>
+          </el-form-item>
+        </el-form>
+        <el-button @click="confirm" type="success">提交</el-button>
       </panel>
     </div>
   </div>
@@ -67,11 +74,18 @@ export default {
         label: 'cate_name',
         children: 'children'
       },
+      page: {
+        title: '',
+        content: '',
+        categories_ids: []
+      },
+      isCreated: true,
       allCategories: [],
       activeIndex: null,
       currnetType: -1,
       currentTitle: '文章列表',
-      editorInited: false
+      editorInited: false,
+      editor: null
     }
   },
   beforeCreate () {
@@ -113,6 +127,14 @@ export default {
         if(!this.editorInited){
           this.initEditor();
         }
+        this.$http.get(`categories/${this.activeIndex}/page`).then(res => {
+          if(res.data){
+            this.page = res.data;
+            this.isCreated = false;
+          }else{
+            this.isCreated = true;
+          }
+        })
       }
     }
   },
@@ -129,10 +151,31 @@ export default {
         }
       }
     },
+    confirm () {
+      let method, url;
+      if(!this.isCreated){
+        method = 'put';
+        url = `posts/${this.activeIndex}`;
+      }else{
+        method = 'post';
+        url = 'posts';
+        this.page.categories_ids = [this.activeIndex];
+      }
+      this.page.content = this.editor.getContent();
+
+      this.$http[method](url, {
+        ...this.page
+      }).then(res => {
+        this.$message({
+            message: '已保存',
+            type: 'success'
+        });
+      })
+    },
     initEditor () {
       this.editorInited = true;
       window.UEDITOR_CONFIG.serverUrl = window.t_meta.ueditor_server_url;
-      this.editor = window.UE.getEditor('ueditor_wrapper', {
+      this.editor = window.UE.getEditor('ueditor_container', {
         initialFrameHeight: 300
       });
       this.editor.ready(() => {
@@ -155,6 +198,11 @@ export default {
     }
   },
   mounted () {
+    let ueditorNode = document.createElement("script");
+    ueditorNode.setAttribute('id', 'ueditor_container');
+    ueditorNode.setAttribute('name', 'content');
+    ueditorNode.setAttribute('type', 'text/plain');
+    document.querySelector('#ueditor_wrapper').appendChild(ueditorNode);
     this.$http.get('categories/all').then(res => {
       this.allCategories = res.data
     })
@@ -199,12 +247,9 @@ export default {
   .main_list{
     padding-left: 200px;
     .title{
-      color: #20A0FF;
+      color: #2476B4;
       text-decoration: none;
     }
-  }
-  .submit_btn{
-    margin-top: 20px;
   }
   .default_show{
     text-align: center;
