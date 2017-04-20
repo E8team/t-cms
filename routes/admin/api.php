@@ -1,6 +1,6 @@
 <?php
 
-$api->group([/*'middleware'=>'auth'*/], function ($api) {
+$api->group(['middleware'=>'auth'], function ($api) {
 
     // -------------------------------------------------
     // 当前登录的用户
