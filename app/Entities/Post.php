@@ -163,7 +163,9 @@ class Post extends BaseModel
             $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
         }
         if (isset($data['published_at'])) {
-            $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
+            $data['published_at'] = new Carbon($data['published_at']);
+        }else{
+            $data['published_at'] = Carbon::now();
         }
         return static::createWithContentAndCategories($data);
     }

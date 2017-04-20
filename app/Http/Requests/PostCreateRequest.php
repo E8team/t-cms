@@ -29,13 +29,13 @@ class PostCreateRequest extends Request
             'author_info' => 'nullable|string|max:50',
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
-            'cover' => 'nullable|picture',
+            'cover' => 'nullable|picture_id',
             'status' => 'nullable|in:publish,draft',
             //'type' => 'in:post,page',
             'views_count' => 'nullable|int',
             'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
-            'category_ids' => 'nullable|int_array',
+            'category_ids' => 'int_array',
             'published_at' => 'nullable|date'
         ];
     }

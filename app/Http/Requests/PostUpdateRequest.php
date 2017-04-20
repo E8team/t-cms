@@ -34,7 +34,7 @@ class PostUpdateRequest extends Request
             })->ignore($post->id)*/],
             'author_info' => 'nullable|string|max:50',
             'excerpt' => 'nullable|string',
-            'cover' => 'nullable|picture',
+            'cover' => 'nullable|picture_id',
             'status' => 'nullable|in:publish,draft',
             //'type' => 'nullable|in:post,page',
             'views_count' => 'nullable|int',
