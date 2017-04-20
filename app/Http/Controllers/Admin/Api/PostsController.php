@@ -50,11 +50,13 @@ class PostsController extends ApiController
         $data['category_ids'] = [$category->id];
         $page = $category->page();
         if(is_null($page)){
+            //todo 验证规则
             $this->validate($request, [
-                'title' => 'nullable|required',
-                'content' => 'nullable|required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
             // 创建
+            $data['published_at'] = Carbon::now();
             $data['user_id'] = Auth::id();
             Post::createPage($data);
         }else{
