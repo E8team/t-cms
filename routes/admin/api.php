@@ -82,11 +82,9 @@ $api->group([/*'middleware'=>'auth'*/], function ($api) {
     $api->post('posts', 'PostsController@store');
     // 更新文章
     $api->put('posts/{post}', 'PostsController@update');
-    // 创建单网页
-    $api->post('page', 'PostsController@storePage');
-    // 更新单网页
-    $api->put('page/{post}', 'PostsController@updatePage');
-
+    // 创建或更新单网页
+    $api->post('categories/{category}/page', 'PostsController@storePage');
+    // 删除文章
     $api->delete('posts/{id}', 'PostsController@destroy');
     // -------------------------------------------------
     // 获取所有友情链接的类别

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Entities\Category;
 use App\Entities\Post;
 use App\Entities\PostContent;
 use App\Http\Requests\PageCreateRequest;
@@ -41,21 +42,30 @@ class PostsController extends ApiController
             ->addMeta('cate_ids', $cateids);
     }
 
-    public function storePage(PageCreateRequest $request)
+    public function storePage(Category $category, Request $request)
     {
-        $data = $request->only($request->getAllowModifyFields());
-        Post::createPage($data);
-        return $this->response->noContent();
-    }
-    
-    public function updatePage(Post $post, PageUpdateRequest $request)
-    {
-        $data = array_filter($request->only($request->getAllowModifyFields()), function ($item){
+        $data = array_filter($request->only('title', 'content'), function ($item){
             return !is_null($item);
         });
-        $post->fill($data)->saveOrFail();
-        if (isset($data['content'])) {
-            $post->content()->update(['content' => clean($data['content'])]);
+        $data['category_ids'] = [$category->id];
+        $page = $category->page();
+        if(is_null($page)){
+            $this->validate($request, [
+                'title' => 'nullable|required',
+                'content' => 'nullable|required',
+            ]);
+            // 创建
+            $data['user_id'] = Auth::id();
+            Post::createPage($data);
+        }else{
+            // 更新
+            if (isset($data['content'])) {
+                $page->content()->update(['content' => clean($data['content'])]);
+            }
+            // 处理分类
+            if (!empty($data['category_ids'])) {
+                $page->saveCategories($data['category_ids']);
+            }
         }
         return $this->response->noContent();
     }
