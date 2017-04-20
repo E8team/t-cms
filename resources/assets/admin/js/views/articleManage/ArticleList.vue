@@ -86,16 +86,19 @@ export default {
       editor: null
     }
   },
-  beforeCreate () {
-    if(document.querySelectorAll('[data-type=ueditor_include]').length == 0){
-      for(let item of window.t_meta.ueditor_include){
-          let scriptNode = document.createElement("script");
-          scriptNode.setAttribute("type", "text/javascript");
-          scriptNode.setAttribute("src",item);
-          scriptNode.setAttribute('data-type', 'ueditor_include')
-          document.body.appendChild(scriptNode);
-        }
+  beforeDestroy () {
+    try {
+      this.editor.destroy();
+    } catch (e) {
+    }finally{
+      this.editor = null
     }
+    document.querySelectorAll('[data-type=ueditor_include]').forEach(function(element) {
+      document.body.removeChild(element);
+    }, this);
+  },
+  beforeCreate () {
+    
   },
   components: {
     CurrencyListPage, Tree
@@ -123,12 +126,18 @@ export default {
           listRef.refresh(this.queryName);
         }
       }else{
-        if(!this.editorInited){
-          this.initEditor();
-        }
-        this.$http.get(`categories/${this.activeIndex}/page`).then(res => {
+        this.page.title = '';
+        this.page.content = '';
+        this.editor.setContent(this.page.content);
+        this.$http.get(`categories/${this.activeIndex}/page`, {
+          params: {
+            include: 'content'
+          }
+        }).then(res => {
           if(res.data){
-            this.page = res.data;
+            this.page.title = res.data.data.title;
+            this.page.content = res.data.data.content.data.content;
+            this.editor.setContent(this.page.content);
           }
         })
       }
@@ -164,7 +173,6 @@ export default {
       });
       this.editor.ready(() => {
         this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
-        
       });
     },
     del (id) {
@@ -182,6 +190,20 @@ export default {
     }
   },
   mounted () {
+    if(document.querySelectorAll('[data-type=ueditor_include]').length == 0){
+      for(let item of window.t_meta.ueditor_include){
+          let scriptNode = document.createElement("script");
+          scriptNode.setAttribute("type", "text/javascript");
+          scriptNode.setAttribute("src",item);
+          scriptNode.setAttribute('data-type', 'ueditor_include')
+          scriptNode.onload = () => {
+            if(window.UE.getEditor != undefined && this.editorInited == false){
+              this.initEditor()
+            }
+          }
+          document.body.appendChild(scriptNode);
+        }
+    }
     let ueditorNode = document.createElement("script");
     ueditorNode.setAttribute('id', 'ueditor_container');
     ueditorNode.setAttribute('name', 'content');

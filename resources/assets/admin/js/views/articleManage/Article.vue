@@ -161,6 +161,9 @@
       }
     },
     beforeCreate () {
+      
+    },
+    mounted () {
       if(document.querySelectorAll('[data-type=ueditor_include]').length == 0){
         for(let item of window.t_meta.ueditor_include){
             let scriptNode = document.createElement("script");
@@ -175,8 +178,6 @@
             document.body.appendChild(scriptNode);
           }
       }
-    },
-    mounted () {
       let ueditorNode = document.createElement("script");
       ueditorNode.setAttribute('id', 'ueditor_container');
       ueditorNode.setAttribute('name', 'content');
