@@ -100,9 +100,7 @@
         let method, url;
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
-        this.$http[method](url, {
-          ...this.article
-        }).then(res => {
+        this.$http[method](url, this.article).then(res => {
           this.$message({
               message: `${this.title}成功`,
               type: 'success'

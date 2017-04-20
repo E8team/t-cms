@@ -56,9 +56,7 @@
             confirm () {
                 let method, url;
                 this.id ? (method = 'put', url = `roles/${this.id}`) : (method = 'post', url = 'roles');
-                this.$http[method](url, {
-                    ...this.role
-                }).then(res => {
+                this.$http[method](url, this.role).then(res => {
                     this.$message({
                         message: `${this.title}成功`,
                         type: 'success'

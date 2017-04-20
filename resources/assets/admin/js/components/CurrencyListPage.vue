@@ -84,22 +84,24 @@
                 })
             },
             getList (page = 1, keyword = '', sort) {
-                this.loading = true
-                this.$http.get(this.queryName, {
-                    params: {
-                        per_page: this.perPage,
-                        page,
-                        q: keyword
-                    }
-                }).then(res => {
-                    this.loading = false
-                    this.list = res.data.data
-                    this.total = res.data.meta.pagination.total
-                    // this.perPage = res.data.meta.pagination.per_page
-                    this.allowSortFields = res.data.meta.allow_sort_fields
-                }).catch(err => {
-                    this.loading = false
-                })
+                if(this.queryName){
+                    this.loading = true
+                    this.$http.get(this.queryName, {
+                        params: {
+                            per_page: this.perPage,
+                            page,
+                            q: keyword
+                        }
+                    }).then(res => {
+                        this.loading = false
+                        this.list = res.data.data
+                        this.total = res.data.meta.pagination.total
+                        // this.perPage = res.data.meta.pagination.per_page
+                        this.allowSortFields = res.data.meta.allow_sort_fields
+                    }).catch(err => {
+                        this.loading = false
+                    })
+                }
             },
             change (currentPage) {
                 this.getList(currentPage)

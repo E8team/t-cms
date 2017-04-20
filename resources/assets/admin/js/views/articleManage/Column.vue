@@ -137,9 +137,7 @@ export default{
     confirm () {
         let method, url;
         this.id ? (method = 'put', url = `categories/${this.id}`) : (method = 'post', url = 'categories');
-        this.$http[method](url, {
-            ...this.column
-        }).then(res => {
+        this.$http[method](url, this.column).then(res => {
             this.$message({
                 message: `${this.title}成功`,
                 type: 'success'
