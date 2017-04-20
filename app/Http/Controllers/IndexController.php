@@ -21,7 +21,7 @@ class IndexController extends Controller
         app(Navigation::class)->setCurrentNav($currentCategory);
 
         if ($currentCategory->isPostList()) {
-            return $this->showList($currentCategory);
+            return $this->showList($currentCategory, $request);
         } else {
             return $this->showPage($currentCategory);
         }
