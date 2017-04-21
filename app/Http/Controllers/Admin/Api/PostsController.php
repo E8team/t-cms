@@ -96,7 +96,7 @@ class PostsController extends ApiController
      */
     public function update(Post $post, PostUpdateRequest $request)
     {
-        $data = $request->only($request->getAllowModifyFields());
+        $data = $request->all();
         // $data['type'] = 'post';
         // 处理置顶
         if (isset($data['top'])) {
@@ -108,7 +108,6 @@ class PostsController extends ApiController
         }
         $data['published_at'] = Carbon::createFromTimestamp(strtotime($data['published_at']));
         $post->fill($data)->saveOrFail();
-
         if (isset($data['content'])) {
             $post->content()->update(['content' => clean($data['content'])]);
         }

@@ -50,7 +50,7 @@
               <el-input-number :min="0" v-model="article.views_count"></el-input-number>
           </el-form-item>
           <el-button-group class="public_btn">
-              <el-button type="success" @click="confirm">发布</el-button>
+              <el-button type="success" @click="confirm" :loading="confirmLoading">{{confirmBtnTitle}}</el-button>
               <el-button @click="$router.back()">返回</el-button>
           </el-button-group>
         </el-form>
@@ -100,12 +100,16 @@
         let method, url;
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
+        this.confirmLoading = true;
         this.$http[method](url, this.article).then(res => {
           this.$message({
               message: `${this.title}成功`,
               type: 'success'
           });
+          this.confirmLoading = false;
           this.$router.push({name: 'articles'});
+        }).catch(err => {
+          this.confirmLoading = false;
         })
       },
       selImage () {
@@ -149,11 +153,14 @@
           if(this.id){
             this.$http.get(`posts/${this.id}`, {
               params: {
-                include: 'content,categories'
+                include: 'content, categories'
               }
             }).then(res => {
                 res.data.data.category_ids = res.data.meta.cate_ids;
                 this.article = res.data.data
+                if(this.article.cover){
+                  this.preViewCover = this.article.cover_urls.lg;
+                }
                 this.editor.setContent(this.article.content ? this.article.content.data.content : '');
             });
           }
@@ -161,7 +168,6 @@
       }
     },
     beforeCreate () {
-      
     },
     mounted () {
       if(document.querySelectorAll('[data-type=ueditor_include]').length == 0){
@@ -198,8 +204,10 @@
       if (this.$route.name === 'article-edit') {
         this.id = this.$route.params.id;
         this.title = '编辑文章';
+        this.confirmBtnTitle = '确认编辑'
       }else{
         this.title = '撰写新文章';
+        this.confirmBtnTitle = '确认发布'
       }
     },
     beforeDestroy () {
@@ -216,6 +224,8 @@
     data () {
       return{
         id: null,
+        confirmBtnTitle: '',
+        confirmLoading: false,
         editorInited: false,
         selImageDialog: false,
         contentImages: [],

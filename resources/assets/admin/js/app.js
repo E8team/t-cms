@@ -14,7 +14,7 @@ Object.keys(filters).forEach(key => {
 })
 Vue.prototype.$http = axios.create({
     baseURL: `${window.t_meta.base_url}/api/admin/`,
-    timeout: 3000,
+    timeout: 5000,
     responseType: 'json',
     headers:{
         'X-CSRF-TOKEN': window.t_meta.csrfToken,
@@ -49,5 +49,6 @@ Vue.prototype.$http.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 Vue.prototype.$t_meta = window.t_meta
-
+Vue.prototype.$diff = (oldObj, newObj) => {
+}
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');
