@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'zh_cn',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,7 @@ return [
         Ty666\LaravelTheme\LaravelThemeServiceProvider::class,
         Appstract\Opcache\OpcacheServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Overtrue\LaravelFilesystem\Qiniu\QiniuStorageServiceProvider::class,
         /*
          * Application Service Providers...
          */

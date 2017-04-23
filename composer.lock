@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "771397f0be59036722ba94e36b164f90",
+    "content-hash": "2be580066b69d91684ac808c4064bd95",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -1480,24 +1480,105 @@
             "time": "2017-03-05T18:23:57+00:00"
         },
         {
-            "name": "overtrue/laravel-ueditor",
-            "version": "1.1.0",
+            "name": "overtrue/flysystem-qiniu",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/overtrue/laravel-ueditor.git",
-                "reference": "57cb9cdefb478d318feaa88621f9a6b5c31a283b"
+                "url": "https://github.com/overtrue/flysystem-qiniu.git",
+                "reference": "1091825b2068694d1ec847a4c1784fd1939587ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/overtrue/laravel-ueditor/57cb9cdefb478d318feaa88621f9a6b5c31a283b.zip",
-                "reference": "57cb9cdefb478d318feaa88621f9a6b5c31a283b",
+                "url": "https://files.phpcomposer.com/files/overtrue/flysystem-qiniu/1091825b2068694d1ec847a4c1784fd1939587ee.zip",
+                "reference": "1091825b2068694d1ec847a4c1784fd1939587ee",
                 "shasum": ""
             },
             "require": {
-                "qiniu/php-sdk": "7.*"
+                "league/flysystem": "^1.0",
+                "php": ">=5.5.9",
+                "qiniu/php-sdk": "^7.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "1.0.x-dev",
+                "php": ">=5.6.0",
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\Flysystem\\Qiniu\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "i@overtrue.me"
+                }
+            ],
+            "description": "Flysystem adapter for the Qiniu storage.",
+            "time": "2017-04-02T05:52:45+00:00"
+        },
+        {
+            "name": "overtrue/laravel-filesystem-qiniu",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-filesystem-qiniu.git",
+                "reference": "4c6ba50b7bff737afa22e62b5c4d5bec384c00f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/overtrue/laravel-filesystem-qiniu/4c6ba50b7bff737afa22e62b5c4d5bec384c00f0.zip",
+                "reference": "4c6ba50b7bff737afa22e62b5c4d5bec384c00f0",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "^1.0",
+                "overtrue/flysystem-qiniu": "~0.0.2",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelFilesystem\\Qiniu\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "i@overtrue.me"
+                }
+            ],
+            "description": "A Qiniu storage filesystem for Laravel.",
+            "time": "2017-04-02T17:38:17+00:00"
+        },
+        {
+            "name": "overtrue/laravel-ueditor",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-ueditor.git",
+                "reference": "7bb62c59f939811c0065e1986a72df8c3607d72a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/overtrue/laravel-ueditor/7bb62c59f939811c0065e1986a72df8c3607d72a.zip",
+                "reference": "7bb62c59f939811c0065e1986a72df8c3607d72a",
+                "shasum": ""
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "^1.10"
+            },
+            "suggest": {
+                "overtrue/laravel-filesystem-qiniu": "如果你想要使用七牛云存储，也许你需要安装它哦~"
             },
             "type": "library",
             "autoload": {
@@ -1516,7 +1597,7 @@
                 }
             ],
             "description": "UEditor integration for Laravel.",
-            "time": "2017-02-26T06:37:31+00:00"
+            "time": "2017-04-17T10:14:31+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2944,16 +3025,16 @@
         },
         {
             "name": "ty666/picture-manager",
-            "version": "1.0.15",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/3tnet/pictureManager.git",
-                "reference": "d335d80be31263a2fb416081dfb34fec0dea3696"
+                "reference": "19d398c115fd28ac3822a00bed3aa616b5c2f86f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/d335d80be31263a2fb416081dfb34fec0dea3696.zip",
-                "reference": "d335d80be31263a2fb416081dfb34fec0dea3696",
+                "url": "https://files.phpcomposer.com/files/3tnet/pictureManager/19d398c115fd28ac3822a00bed3aa616b5c2f86f.zip",
+                "reference": "19d398c115fd28ac3822a00bed3aa616b5c2f86f",
                 "shasum": ""
             },
             "require": {
@@ -2976,7 +3057,7 @@
                 }
             ],
             "description": "a picture manager tool",
-            "time": "2017-04-08T10:44:33+00:00"
+            "time": "2017-04-23T10:43:38+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

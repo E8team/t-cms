@@ -6,7 +6,7 @@
  * Time: 下午 5:21
  */
 
-namespace App\Libs;
+namespace App\T;
 
 
 class Json2phpArray

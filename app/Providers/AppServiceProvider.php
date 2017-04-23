@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
     public function registerCustomValidator()
     {
         Validator::extend('picture_id', function ($attribute, $value, $parameters, $validator) {
-            return preg_match('/[0-9a-z]{32}\.' . '(' . implode('|', config('picture.allowTypeList')) . ')' . '/i', $value) == 1;
+            return preg_match('/[0-9a-z]{32}/i', $value) == 1;
         }, '图片上传错误!');
         Validator::extend('int_array', function ($attribute, $value, $parameters, $validator) {
             if (!is_array($value))

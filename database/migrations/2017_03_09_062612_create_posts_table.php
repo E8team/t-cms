@@ -25,7 +25,7 @@ class CreatePostsTable extends Migration
             $table->string('excerpt', 512)->nullable();
             // $table->longText('content');
             // 文章封面
-            $table->char('cover', 40)->nullable();
+            $table->char('cover', 32)->nullable();
             $table->char('status', 10)->default('publish');
             // post page(单页) //revision(修订) //attachment(附件)
             $table->char('type', 10)->default('post');

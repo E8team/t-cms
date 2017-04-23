@@ -17,7 +17,7 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->string('name', 20);
-            $table->string('logo', 40)->nullable();
+            $table->string('logo', 32)->nullable();
             $table->string('linkman', 30)->comment('联系人')->nullable();
             $table->unsignedInteger('type_id')->index();
             $table->integer('order')->default(0)->index();

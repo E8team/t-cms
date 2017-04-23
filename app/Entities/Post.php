@@ -159,8 +159,7 @@ class Post extends BaseModel
             $data['top'] = Carbon::now();
         }
         if (isset($data['cover_in_content'])) {
-            //todo size
-            $data['conver'] = PictureManager::convert(public_path($data['cover_in_content']), 200, 300);
+            $data['conver'] = PictureManager::convert($data['cover_in_content']);
         }
         if (isset($data['published_at'])) {
             $data['published_at'] = new Carbon($data['published_at']);

@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->unsignedTinyInteger('type')->comment('分类类型 0: 列表栏目 1: 单页栏目 2: 外部链接');
             // 缩略图
-            $table->string('image', 40)->nullable();
+            $table->string('image', 32)->nullable();
             // 父级id
             $table->unsignedInteger('parent_id')->default(0);
             // 分类名

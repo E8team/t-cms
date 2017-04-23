@@ -3,25 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use PictureManager;
-use Ty666\PictureManager\Exception\UploadException;
+use Ty666\PictureManager\Facades\PictureManager;
 
 class PicturesController extends Controller
 {
-
-    public function show($img_id, $size, $suffix)
+    public function show($pictureId, $size)
     {
-        return PictureManager::init($img_id, $size, $suffix)->show();
+
+        return app('pictureManager')->init($pictureId, $size)->show();
     }
 
     public function upload(Request $request)
     {
-        try {
-            $picture = PictureManager::upload($request->file($request->get('picture_key', 'file')));
-        } catch (UploadException $e) {
-            return $this->response->error('图片上传失败');
-        }
-
+        $picture = app('pictureManager.uploader')->upload($request->file($request->get('picture_key', 'file')));
         return ['picture' => $picture];
     }
 }

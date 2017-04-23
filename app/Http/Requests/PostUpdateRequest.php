@@ -3,12 +3,17 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
-
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use PictureManager;
 
 class PostUpdateRequest extends Request
 {
     use Update;
-    protected $allowModifyFields = ['title', 'author_info', 'excerpt', 'views_count', 'cover', 'status', 'template', 'top', 'published_at'];
+    protected $allowModifyFields = [
+        'title', 'author_info', 'excerpt', 'views_count', 'content', 'category_ids',
+        'cover', 'status', 'template', 'top', 'published_at', 'cover_in_content'
+    ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -41,14 +46,41 @@ class PostUpdateRequest extends Request
             'order' => 'nullable|int',
             'template' => 'nullable|string|max:30',
             'category_ids' => 'nullable|int_array',
-            'published_at' => 'nullable|date'
+            'published_at' => 'nullable|date',
+            'cover_in_content' => 'nullable|url'
         ];
     }
 
-    public function messages()
+    public function performUpdate(Model $post, callable $callback = null)
     {
-        return [
+        $data = array_filter($this->only($this->allowModifyFields), function ($item) {
+            return !is_null($item);
+        });
+        if (!is_null($callback)) {
+            $data = $callback($data);
+        }
+        // $data['type'] = 'post';
+        // 处理置顶
+        if (isset($data['top'])) {
+            $data['top'] = Carbon::now();
+        }
+        // 处理从正文中获取的封面
+        if (isset($data['cover_in_content'])) {
+            $data['conver'] = PictureManager::convert($data['cover_in_content']);
+        }
+        if(isset($data['published_at'])){
+            $data['published_at'] = new Carbon($data['published_at']);
+        }
+        $post->fill($data)->saveOrFail();
 
-        ];
+        if (isset($data['content'])) {
+            $post->content()->update(['content' => clean($data['content'])]);
+        }
+        // 处理分类
+        if (!empty($data['category_ids'])) {
+
+            $post->saveCategories($data['category_ids']);
+        }
+        return $post;
     }
 }
