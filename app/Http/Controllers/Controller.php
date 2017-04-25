@@ -11,7 +11,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
+    /**
+     * 分页时每页显示多少数据
+     * @return int
+     */
     public function perPage($default = null)
     {
         $maxPerPage = config('app.max_per_page');

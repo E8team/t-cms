@@ -16,7 +16,6 @@ class IndexController extends Controller
     use Picture;
     public function index()
     {
-        dd($this->getPicure('d20f5ac780753abaddf90257229744e3'));
         return theme_view('index');
     }
 

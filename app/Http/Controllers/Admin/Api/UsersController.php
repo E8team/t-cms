@@ -12,6 +12,7 @@ use App\Transformers\UserTransformer;
 use Auth;
 use Hash;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Entrust;
 
 class UsersController extends ApiController
 {
@@ -31,6 +32,7 @@ class UsersController extends ApiController
      */
     public function lists()
     {
+        //Entrust::can();
         $users = User::with('roles')->withSimpleSearch()
             ->withSort()
             ->recent()
@@ -72,14 +74,15 @@ class UsersController extends ApiController
      */
     public function update(User $user, UserUpdateRequest $request)
     {
-        $data = $request->all();
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-        $request->performUpdate($user);
+        $request->performUpdate($user, function ($data){
+            if (isset($data['password'])) {
+                $data['password'] = Hash::make($data['password']);
+            }
+            return $data;
+        });
         if (!empty($data['role_ids'])) {
             $roleIds = Role::findOrFail($data['role_ids'])->pluck('id');
-            $user->save($roleIds);
+            $user->roles()->sync($roleIds);
         }
         return $this->response->noContent();
     }

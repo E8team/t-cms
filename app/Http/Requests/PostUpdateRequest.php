@@ -32,7 +32,6 @@ class PostUpdateRequest extends Request
      */
     public function rules()
     {
-        $post = $this->route()->parameter('post');
         return [
             'title' => ['nullable', 'required', /*Rule::unique('posts')->where(function ($query) {
                 $query->where('type', 'post');

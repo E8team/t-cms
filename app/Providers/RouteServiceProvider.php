@@ -61,8 +61,7 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('admin')
             ->group(base_path('routes/admin/web.php'));
         // 获取图片无中间件
-        Route::get('pic/{PictureId}_{size}', 'App\Http\Controllers\PicturesController@show')->name('pic');
-
+        Route::get('pic/{pictureId}_{style?}', 'App\Http\Controllers\PicturesController@show')->name('pic');
     }
 
     /**

@@ -7,10 +7,9 @@ use Ty666\PictureManager\Facades\PictureManager;
 
 class PicturesController extends Controller
 {
-    public function show($pictureId, $size)
+    public function show($pictureId, $style = null)
     {
-
-        return app('pictureManager')->init($pictureId, $size)->show();
+        return app('pictureManager')->init($pictureId, $style)->show();
     }
 
     public function upload(Request $request)

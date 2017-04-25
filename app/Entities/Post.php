@@ -92,12 +92,12 @@ class Post extends BaseModel
         return $query->orderBy('top', 'DESC');
     }
 
-    public function getViewsCountAttribute($viewsCount)
+    /*public function getViewsCountAttribute($viewsCount)
     {
         return intval(Cache::rememberForever('post_views_count_' . $this->id, function () use ($viewsCount) {
             return $viewsCount;
         }));
-    }
+    }*/
 
     public function addViewCount()
     {
