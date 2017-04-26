@@ -14,6 +14,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PermissionsController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.user.permissions')->except('menus');
+    }
+
     /**
      * 获取后台菜单
      * @return mixed

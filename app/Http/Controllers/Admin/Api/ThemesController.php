@@ -14,14 +14,10 @@ use Ty666\LaravelTheme\Theme;
 
 class ThemesController extends ApiController
 {
-    protected $currentThemeSettingName = 'current_theme';
 
     public function __construct()
     {
-        $theme = app(Theme::class);
-        if (!is_null($currentTheme = Setting::getSetting($this->currentThemeSettingName))) {
-            $theme->setCurrentTheme($currentTheme);
-        }
+        $this->middleware('permission:admin.setting.theme');
     }
 
     /**
@@ -82,8 +78,7 @@ class ThemesController extends ApiController
             'value' => $themeId,
             'description' => '当前主题',
             'is_autoload' => true
-        ]);
-        $setting->saveOrFail();
+        ])->saveOrFail();
         return $this->response->noContent();
     }
 }

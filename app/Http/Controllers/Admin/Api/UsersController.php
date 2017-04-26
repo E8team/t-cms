@@ -12,10 +12,14 @@ use App\Transformers\UserTransformer;
 use Auth;
 use Hash;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Entrust;
 
 class UsersController extends ApiController
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:admin.user.show')->except('me');
+    }
 
     /**
      * 当前登录的用户信息
@@ -32,8 +36,7 @@ class UsersController extends ApiController
      */
     public function lists()
     {
-        //Entrust::can();
-        $users = User::with('roles')->withSimpleSearch()
+        $users = User::withSimpleSearch()
             ->withSort()
             ->recent()
             ->paginate($this->perPage());
@@ -80,8 +83,8 @@ class UsersController extends ApiController
             }
             return $data;
         });
-        if (!empty($data['role_ids'])) {
-            $roleIds = Role::findOrFail($data['role_ids'])->pluck('id');
+        if (!empty($roleIds = $request->get('role_ids'))) {
+            $roleIds = Role::findOrFail($roleIds)->pluck('id');
             $user->roles()->sync($roleIds);
         }
         return $this->response->noContent();

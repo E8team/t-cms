@@ -93,7 +93,7 @@ class PermissionsTableSeeder extends Seeder
                 'id'=>8,
                 'name' => 'admin.post.show',
                 'display_name' => '文章列表',
-                'description' => '写文章',
+                'description' => '文章列表',
                 'parent_id' => 2,
                 'is_menu' => true,
                 'order' => 0,

@@ -19,12 +19,10 @@ class User extends BaseModel implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, CanResetPassword;
     use Notifiable, Picture, Listable;
     use EntrustUserTrait {
         restore as private restoreEntrust;
-        EntrustUserTrait::can as may;
-        Authorizable::can insteadof EntrustUserTrait;
     }
 
     protected static $allowSortFields = ['id', 'user_name', 'nick_name', 'created_at', 'is_locked'];

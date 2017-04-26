@@ -14,6 +14,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostsController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.post.create')->only('store');
+        $this->middleware('permission:admin.post.show')->except('store');
+        $this->middleware('permission:admin.post.categories')->only('storePage');
+    }
     /**
      * 全部文章
      * @param Request $request

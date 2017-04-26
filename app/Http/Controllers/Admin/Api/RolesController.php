@@ -12,6 +12,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RolesController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.user.roles')->except('permissions');
+        $this->middleware('permission:admin.user.permissions')->only('permissions');
+    }
+
     /**
      * 显示指定角色
      * @param Role $role

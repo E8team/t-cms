@@ -14,6 +14,12 @@ use Illuminate\Http\Request;
 class CategoriesController extends ApiController
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:admin.post.categories')->except('post');
+        $this->middleware('permission:admin.post.show')->only('post', 'page');
+    }
+
     public function show(Category $category)
     {
         return $this->response->item($category, new CategoryTransformer());

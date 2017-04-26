@@ -12,6 +12,11 @@ use App\Http\Requests\SettingUpdateRequest;
 
 class SettingsController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.setting.configure');
+    }
+
     public function lists()
     {
         dd(Setting::allSetting());
