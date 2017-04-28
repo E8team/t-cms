@@ -8,6 +8,8 @@ use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use Predis\Connection\ConnectionException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Validator;
 
 class LoginController extends ApiController
@@ -23,19 +25,22 @@ class LoginController extends ApiController
      */
     public function login(Request $request)
     {
+
         $credentials = $this->credentials($request);
         $validator = $this->validateLogin($credentials);
         if ($validator->fails()) {
             throw new ValidationHttpException($validator->errors());
         }
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
-            return $this->sendLockoutResponse($request);
-        }
+
         try {
+            // If the class is using the ThrottlesLogins trait, we can automatically throttle
+            // the login attempts for this application. We'll key this by the username and
+            // the IP address of the client making these requests into this application.
+            if ($this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
+                return $this->sendLockoutResponse($request);
+            }
+
             $this->attemptLogin($credentials, $request->has('remember'));
             //该用户是否被锁定
             $user = Auth::user();

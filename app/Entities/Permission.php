@@ -7,6 +7,7 @@ use App\Entities\Traits\Cachable;
 use App\Entities\Traits\Listable;
 use Cache;
 use Config;
+use Illuminate\Cache\TaggableStore;
 use Zizaco\Entrust\Contracts\EntrustPermissionInterface;
 use Zizaco\Entrust\Traits\EntrustPermissionTrait;
 
@@ -22,7 +23,9 @@ class Permission extends BaseModel implements EntrustPermissionInterface
 
     protected function clearCache()
     {
-        Cache::tags(Config::get('permissions_table'))->flush();
+        if (Cache::getStore() instanceof TaggableStore) {
+            Cache::tags(Config::get('permissions_table'))->flush();
+        }
     }
 
     /**
@@ -47,9 +50,14 @@ class Permission extends BaseModel implements EntrustPermissionInterface
 
     public static function allPermissionWithCache()
     {
-        return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
+        if(Cache::getStore() instanceof TaggableStore) {
+            return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
+                return static::allPermission();
+            });
+        }else{
             return static::allPermission();
-        });
+        }
+
     }
 
     public static function getUserMenu($user)

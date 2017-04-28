@@ -7,6 +7,7 @@ use App\Entities\Traits\Listable;
 use Cache;
 use Config;
 use DB;
+use Illuminate\Cache\TaggableStore;
 use Zizaco\Entrust\Contracts\EntrustRoleInterface;
 use Zizaco\Entrust\Traits\EntrustRoleTrait;
 
@@ -36,17 +37,25 @@ class Role extends BaseModel implements EntrustRoleInterface
 
     public static function permissionRoleArrayWithCache()
     {
-        return Cache::tag(Config::get('entrust.permission_role_table'))->rememberForever('all_permission_role', function () {
+        if (Cache::getStore() instanceof TaggableStore) {
+            return Cache::tag(Config::get('entrust.permission_role_table'))->rememberForever('all_permission_role', function () {
+                return DB::table('permission_role')->get();
+            });
+        } else {
             return DB::table('permission_role')->get();
-        });
+        }
     }
 
     public function cachedPermissions()
     {
         $rolePrimaryKey = $this->primaryKey;
         $cacheKey = 'entrust_permissions_for_role_' . $this->$rolePrimaryKey;
-        return Cache::tags(Config::get('entrust.permission_role_table'))->rememberForever($cacheKey, function () {
+        if (Cache::getStore() instanceof TaggableStore) {
+            return Cache::tags(Config::get('entrust.permission_role_table'))->rememberForever($cacheKey, function () {
+                return $this->perms()->ordered()->recent()->get();
+            });
+        } else {
             return $this->perms()->ordered()->recent()->get();
-        });
+        }
     }
 }
