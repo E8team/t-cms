@@ -27,3 +27,4 @@ mix.webpackConfig({
 mix.js('resources/assets/admin/js/app.js', '/static/admin/js')
     .less('resources/assets/admin/less/app.less', '/static/admin/css')
     .version();
+
