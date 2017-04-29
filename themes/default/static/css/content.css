@@ -64,6 +64,7 @@ body{
     border-top: 1px #F2F2F0 solid;
     height: 445px;
     background-color: #F9F9F9;
+    text-align: initial;
 }
 .footer a{
     text-decoration: none;
