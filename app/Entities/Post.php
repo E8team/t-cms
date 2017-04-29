@@ -28,7 +28,7 @@ class Post extends BaseModel
 
     public function scopeRecent($query)
     {
-        return $query->orderBy('published_at', 'desc')->orderBy('created_at');
+        return $query->orderBy('published_at', 'desc')->orderBy('created_at', 'desc');
     }
 
     public function user()
@@ -185,5 +185,13 @@ class Post extends BaseModel
         }
 
         return $post;
+    }
+
+    /**
+     * 文章是否置顶
+     */
+    public function isTop()
+    {
+        return !is_null($this->top);
     }
 }

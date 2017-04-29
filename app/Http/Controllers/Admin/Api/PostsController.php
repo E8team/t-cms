@@ -47,6 +47,7 @@ class PostsController extends ApiController
 
     public function storePage(Category $category, Request $request)
     {
+
         $data = array_filter($request->only('title', 'content'), function ($item) {
             return !is_null($item);
         });

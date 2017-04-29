@@ -20,7 +20,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-news',
                 'is_nav' => true,
                 'parent_id' => 0,
-                'list_template' => 'list',
+                'list_template' => 'post.list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -32,7 +32,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-gk',
                 'is_nav' => true,
                 'parent_id' => 0,
-                'list_template' => 'list',
+                'list_template' => 'post.list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -44,7 +44,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-jj',
                 'is_nav' => true,
                 'parent_id' => 2,
-                'list_template' => 'list',
+                'list_template' => 'page.index',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -56,7 +56,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-xrld',
                 'is_nav' => true,
                 'parent_id' => 2,
-                'list_template' => 'list',
+                'list_template' => 'post.list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -68,7 +68,7 @@ class CategoriesTableSeeder extends Seeder
                 'cate_slug' => 'company-news123',
                 'is_nav' => true,
                 'parent_id' => 1,
-                'list_template' => 'list',
+                'list_template' => 'post.list',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

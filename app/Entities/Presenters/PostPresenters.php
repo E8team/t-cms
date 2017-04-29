@@ -3,6 +3,7 @@
 namespace App\Entities\Presenters;
 
 use App\Entities\Category;
+use App\T\Navigation\Navigation;
 use Laracasts\Presenter\Presenter;
 
 class PostPresenters extends Presenter
@@ -14,17 +15,22 @@ class PostPresenters extends Presenter
         static::$currentCategory = $category;
     }
 
-    public function suitedTitle()
+    public function suitedTitle($length = 88)
     {
-        return str_limit($this->title, 88);
+        return str_limit($this->title, $length);
     }
 
     public function getUrl()
     {
         if (is_null(static::$currentCategory)) {
-            return route('post', [$this->categories->first()->cate_slug, $this->id]);
-        } else {
-            return route('post', [static::$currentCategory->cate_slug, $this->id]);
+            if(!$category = app(Navigation::class)->getCurrentNav()){
+                $category = $this->categories->first();
+            }
+        }else{
+            $category = static::$currentCategory;
         }
+
+        return route('post', [$category->cate_slug, $this->id]);
+
     }
 }

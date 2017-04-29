@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.content')
 @section('style')
     <link rel="stylesheet" href="{!! asset('css/content.css') !!}">
 @endsection

@@ -37,9 +37,24 @@ class Category extends BaseModel
      * @param $query
      * @return mixed
      */
-    public function postList()
+    public function postListWithOrder($order = null)
     {
-        return $this->posts()->post()->orderByTop()->ordered()->recent();
+        $query = $this->posts()->post()->publish()->orderByTop();
+        switch ($order){
+            case 'default':
+                $query->ordered()->recent();
+                break;
+            case 'recent':
+                $query->recent()->ordered();
+                break;
+            case 'popular':
+                $query->orderBy('views_count', 'desc')->recent();
+                break;
+            default:
+                $query->ordered()->recent();
+                break;
+        }
+        return $query;
     }
 
     public function page()
@@ -208,5 +223,10 @@ class Category extends BaseModel
     public function isPostList()
     {
         return $this->type == 0;
+    }
+
+    public function getHotPosts($num)
+    {
+        return $this->posts()->post()->publish()->orderBy('views_count', 'desc')->recent()->limit($num)->get();
     }
 }

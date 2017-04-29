@@ -14,10 +14,7 @@
     <script type="text/javascript" src="{!! asset('lib/jquery/dist/jquery.min.js') !!}"></script>
 </head>
 <body>
-@include('layouts.particals.navbar')
 @yield('content')
-@include('layouts.particals.link')
-@include('layouts.particals.footer')
 @yield('js')
 @stack('js')
 </body>

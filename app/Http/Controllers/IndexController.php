@@ -16,12 +16,13 @@ class IndexController extends Controller
     use Picture;
     public function index(Request $request)
     {
-        return $this->postList('news12', $request);
+        return $this->postList('company-news', $request);
     }
 
     public function postList($cateSlug, Request $request)
     {
         $currentCategory = Category::findBySlug($cateSlug);
+
         app(Navigation::class)->setCurrentNav($currentCategory);
 
         if ($currentCategory->isPostList()) {
@@ -34,11 +35,10 @@ class IndexController extends Controller
 
     private function showList(Category $currentCategory, Request $request)
     {
-
-        $postList = $currentCategory->postList()->paginate($this->perPage());
+        $postList = $currentCategory->postListWithOrder($request->get('order'))->paginate($this->perPage());
         $postList->appends($request->all());
         return theme_view($currentCategory->list_template, [
-            'postList' => $postList
+            'postList' => $postList,
         ]);
     }
 
