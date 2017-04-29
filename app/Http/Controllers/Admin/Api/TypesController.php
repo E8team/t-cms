@@ -34,7 +34,7 @@ class TypesController extends ApiController
                 break;
         }
 
-        Type::create($request->all());
+        Type::create($data);
         return $this->response->noContent();
     }
 
