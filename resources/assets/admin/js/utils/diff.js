@@ -3,6 +3,9 @@ export default {
   	this.oldObj = {...oldObj};  	
   },
   diff (newObj) {
+    if(this.oldObj == {} || this.oldObj == undefined){
+      return newObj;
+    }
   	let diffObj = {};
   	for (var key in newObj) {
   		if(isValue(this.oldObj[key])){
