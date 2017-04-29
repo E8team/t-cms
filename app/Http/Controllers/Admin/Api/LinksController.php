@@ -27,6 +27,11 @@ class LinksController extends ApiController
             ->setMeta(Link::getAllowSortFieldsMeta() + Link::getAllowSearchFieldsMeta());
     }
 
+    public function show(Link $link)
+    {
+        return $this->response->item($link, new LinkTransformer());
+    }
+
     public function store(LinkCreateRequest $request)
     {
         Link::create($request->all());
