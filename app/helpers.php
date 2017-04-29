@@ -7,7 +7,7 @@ function filterNullWhenHasDefaultValue($data, $keyList)
         $keyList = [$keyList];
     }
     foreach ($keyList as $key) {
-        if (isset($data[$key]) && is_null($data[$key])) {
+        if (array_key_exists($key, $data) && is_null($data[$key])) {
             unset($data[$key]);
         }
     }
