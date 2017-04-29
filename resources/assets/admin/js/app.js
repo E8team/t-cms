@@ -8,10 +8,11 @@ Vue.use(ElementUI);
 import Panel from './components/Panel.vue'
 Vue.component(Panel.name, Panel)
 import * as filters from './filters.js'
-// register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+Vue.prototype.$diff = require('./utils/diff.js').default;
+console.log(Vue.prototype.$diff)
 Vue.prototype.$http = axios.create({
     baseURL: `${window.t_meta.base_url}/api/admin/`,
     timeout: 5000,
@@ -48,7 +49,5 @@ Vue.prototype.$http.interceptors.response.use((response) => {
     }
     return Promise.reject(error);
 });
-Vue.prototype.$t_meta = window.t_meta
-Vue.prototype.$diff = (oldObj, newObj) => {
-}
+Vue.prototype.$t_meta = window.t_meta;
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');

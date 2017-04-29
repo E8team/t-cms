@@ -137,7 +137,7 @@ export default{
     confirm () {
         let method, url;
         this.id ? (method = 'put', url = `categories/${this.id}`) : (method = 'post', url = 'categories');
-        this.$http[method](url, this.column).then(res => {
+        this.$http[method](url, this.$diff.diff(this.column)).then(res => {
             this.$message({
                 message: `${this.title}成功`,
                 type: 'success'
@@ -164,6 +164,7 @@ export default{
         this.id = this.$route.params.id;
         this.$http.get(`categories/${this.id}`).then(res => {
             this.column = res.data.data;
+            this.$diff.save(this.column);
         });
         this.title = '编辑栏目';
       }else{

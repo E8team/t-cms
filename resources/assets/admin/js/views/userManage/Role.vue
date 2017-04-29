@@ -56,7 +56,7 @@
             confirm () {
                 let method, url;
                 this.id ? (method = 'put', url = `roles/${this.id}`) : (method = 'post', url = 'roles');
-                this.$http[method](url, this.role).then(res => {
+                this.$http[method](url, this.$diff.diff(this.role)).then(res => {
                     this.$message({
                         message: `${this.title}成功`,
                         type: 'success'
@@ -76,6 +76,7 @@
                 this.$http.get(`roles/${this.id}`).then(res => {
                     res.data.data.permission_ids = res.data.meta.permission_ids;
                     this.role = res.data.data;
+                    this.$diff.save(this.role);
                 })
                 this.title = '编辑角色';
             }else{
