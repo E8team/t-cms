@@ -44,7 +44,13 @@ class IndexController extends Controller
 
     private function showPage(Category $currentCategory)
     {
-        return theme_view($currentCategory->page_template, ['pagePost' => $currentCategory->page()]);
+
+        $page = $currentCategory->page();
+        if(is_null($page)) {
+            //todo
+            abort(404, '该单页还没有初始化');
+        }
+        return theme_view($currentCategory->page_template, ['pagePost' => $page]);
     }
 
     public function post($cateSlug, Post $post)

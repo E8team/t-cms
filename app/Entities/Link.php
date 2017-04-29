@@ -11,7 +11,6 @@ class Link extends BaseModel
     use Picture, Listable;
 
     protected $fillable = ['name', 'url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
-    public $timestamps = false;
     protected static $allowSortFields = ['name', 'type_id', 'order', 'is_visible'];
     protected static $allowSearchFields = ['name', 'url', 'linkman'];
 

@@ -61,12 +61,7 @@ class Setting extends BaseModel
 
     public static function getSetting($name)
     {
-
-        $value = static::allSetting()->get($name);
-        if (is_null($value)) {
-            return static::findByName($name);
-        }
-        return $value;
+        return static::allSettingWithCache()->get($name);
     }
 
 }
