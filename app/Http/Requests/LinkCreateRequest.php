@@ -28,7 +28,7 @@ class LinkCreateRequest extends Request
             'name' => 'required|string|max:20',
             'logo' => 'nullable|picture_id',
             'linkman' => 'nullable|string|max:30',
-            'type_id' => 'required|int',
+            'type_id' => 'nullable|int',
             'order' => 'nullable|int',
             'is_visible' => 'nullable|boolean'
         ];
