@@ -66,7 +66,7 @@
             confirm () {
                 let method, url;
                 this.id ? (method = 'put', url = `permissions/${this.id}`) : (method = 'post', url = 'permissions');
-                this.$http[method](url, this.permission).then(res => {
+                this.$http[method](url, this.$diff.diff(this.permission)).then(res => {
                     this.$message({
                         message: `${this.title}成功`,
                         type: 'success'
@@ -85,6 +85,7 @@
                 this.id = this.$route.params.id;
                 this.$http.get(`permissions/${this.id}`).then(res => {
                     this.permission = res.data.data;
+                    this.$diff.save(this.permission);
                 });
                 this.title = '编辑权限';
             }else{

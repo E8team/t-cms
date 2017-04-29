@@ -101,7 +101,7 @@
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
         this.confirmLoading = true;
-        this.$http[method](url, this.article).then(res => {
+        this.$http[method](url, this.$diff.diff(this.article)).then(res => {
           this.$message({
               message: `${this.title}成功`,
               type: 'success'
@@ -136,7 +136,7 @@
             type: 'post'
           }
         }).then(res => {
-          return resolve(res.data.data)
+          return resolve(res.data.data);
         })
       },
       renderCategorie(h, { node, data, store }) {
@@ -161,6 +161,7 @@
                 if(this.article.cover){
                   this.preViewCover = this.article.cover_urls.lg;
                 }
+                this.$diff.save(this.article);
                 this.editor.setContent(this.article.content ? this.article.content.data.content : '');
             });
           }
@@ -195,7 +196,7 @@
           type: 'post'
         }
       }).then(res => {
-        this.allCategories = res.data
+        this.allCategories = res.data;
       })
       this.$http.get('themes/content_template').then(res => {
         this.contentTemplates = res.data
@@ -204,10 +205,10 @@
       if (this.$route.name === 'article-edit') {
         this.id = this.$route.params.id;
         this.title = '编辑文章';
-        this.confirmBtnTitle = '确认编辑'
+        this.confirmBtnTitle = '确认编辑';
       }else{
         this.title = '撰写新文章';
-        this.confirmBtnTitle = '确认发布'
+        this.confirmBtnTitle = '确认发布';
       }
     },
     beforeDestroy () {

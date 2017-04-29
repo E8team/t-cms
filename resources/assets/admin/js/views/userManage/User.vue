@@ -82,7 +82,7 @@
             confirm () {
                 let method, url;
                 this.id ? (method = 'put', url = `users/${this.id}`) : (method = 'post', url = 'users');
-                this.$http[method](url, this.user).then(res => {
+                this.$http[method](url, this.$diff.diff(this.user)).then(res => {
                     this.$message({
                         message: `${this.title}成功`,
                         type: 'success'
@@ -102,6 +102,7 @@
                 this.$http.get(`users/${this.id}`).then(res => {
                     res.data.data.role_ids = res.data.meta.role_ids;
                     this.user = res.data.data;
+                    this.$diff.save(this.user);
                 })
                 this.title = '编辑用户';
             }else{
