@@ -95,7 +95,9 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('types/{type}', 'TypesController@update');
     // ---------------------------------------------------
     // 指定类别下面的友情链接 type如果不传表示获取所有分类下的友情链接
-    $api->get('links/{type?}', 'LinksController@lists');
+    $api->get('links/type/{type?}', 'LinksController@lists');
+    // 创建友情链接
+    $api->get('links/{link}', 'LinksController@show');
     // 创建友情链接
     $api->post('links', 'LinksController@store');
     // 更新友情链接
