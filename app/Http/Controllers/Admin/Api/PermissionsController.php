@@ -106,7 +106,9 @@ class PermissionsController extends ApiController
      */
     public function store(PermissionCreateRequest $request)
     {
-        Permission::create($request->all());
+        $data = $request->all();
+        $data = filterNullWhenHasDefaultValue($data, ['parent_id', 'order']);
+        Permission::create($data);
         return $this->response->noContent();
     }
 

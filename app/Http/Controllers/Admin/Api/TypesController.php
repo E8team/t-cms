@@ -27,7 +27,7 @@ class TypesController extends ApiController
 
     public function store(TypeCreateRequest $request)
     {
-        $data = $request->all();
+        $data = filterNullWhenHasDefaultValue($request->all(), 'order');
         switch ($data['class_name']) {
             case 'link':
                 $data['class_name'] = Link::class;

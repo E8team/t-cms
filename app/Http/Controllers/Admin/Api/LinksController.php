@@ -34,7 +34,9 @@ class LinksController extends ApiController
 
     public function store(LinkCreateRequest $request)
     {
-        Link::create($request->all());
+        $data = $request->all();
+        $data = filterNullWhenHasDefaultValue($data, ['order', 'is_visible']);
+        Link::create($data);
         return $this->response->noContent();
     }
 

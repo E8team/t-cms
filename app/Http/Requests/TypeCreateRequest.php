@@ -26,7 +26,7 @@ class TypeCreateRequest extends Request
         return [
             'name' => 'required|string|max:30',
             'description' => 'nullable|string|max:255',
-            'order' => 'int',
+            'order' => 'nullable|int',
             // class_name指定Model类名 表示是该model的类别
             // 在store方法中给定真实的类名
             'class_name' => 'in:link'

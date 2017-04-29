@@ -41,7 +41,12 @@ class CategoriesController extends ApiController
      */
     public function store(CategoryCreateRequest $request)
     {
-        Category::create($request->all());
+
+        $data = filterNullWhenHasDefaultValue($request->all(), ['parent_id', 'order']);
+        if(is_null($data['parent_id'])){
+            unset($data['parent_id']);
+        }
+        Category::create($data);
         return $this->response->noContent();
     }
 

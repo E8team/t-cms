@@ -24,7 +24,9 @@ class SettingsController extends ApiController
 
     public function store(SettingCreateRequest $request)
     {
-        Setting::create($request->all());
+        $data = $request->all();
+        $data = filterNullWhenHasDefaultValue($data, 'is_autoload');
+        Setting::create($data);
         return $this->response->noContent();
     }
 
