@@ -13,7 +13,9 @@ class Link extends BaseModel
     protected $fillable = ['name', 'url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
     protected static $allowSortFields = ['name', 'type_id', 'order', 'is_visible'];
     protected static $allowSearchFields = ['name', 'url', 'linkman'];
-
+    protected $casts = [
+        'is_visible' => 'boolean'
+    ];
     public function type()
     {
         return $this->belongsTo(Type::class);
