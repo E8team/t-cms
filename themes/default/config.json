@@ -1,0 +1,31 @@
+{
+    "name": "默认主题",
+    "author": "3t",
+    "homepage": "https://www.3twd.cn/",
+    "version": "1.0",
+    "page_template": [
+        {
+            "file_name": "page",
+            "title": "默认单页模板",
+            "is_defalut": true
+        }
+    ],
+    "list_template": [
+        {
+            "file_name": "list",
+            "title": "默认列表模板",
+            "is_defalut": true
+        }
+    ],
+    "content_template":[
+        {
+            "file_name": "content",
+            "title": "默认正文模板",
+            "is_defalut": true
+        },
+        {
+            "file_name": "content_asd",
+            "title": "神奇的正文模板"
+        }
+    ]
+}
