@@ -73,7 +73,7 @@ class PostUpdateRequest extends Request
         $post->fill($data)->saveOrFail();
 
         if (isset($data['content'])) {
-            $post->content()->update(['content' => clean($data['content'])]);
+            $post->content()->updateOrCreate([], ['content' => clean($data['content'])]);
         }
         // 处理分类
         if (!empty($data['category_ids'])) {

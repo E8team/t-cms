@@ -65,7 +65,7 @@ class PostsController extends ApiController
         } else {
             // 更新
             if (isset($data['content'])) {
-                $page->content()->update(['content' => clean($data['content'])]);
+                $page->content()->updateOrCreate([], ['content' => clean($data['content'])]);
             }
             // 处理分类
             if (!empty($data['category_ids'])) {

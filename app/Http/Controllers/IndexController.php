@@ -14,9 +14,9 @@ use Ty666\PictureManager\Traits\Picture;
 class IndexController extends Controller
 {
     use Picture;
-    public function index()
+    public function index(Request $request)
     {
-        return theme_view('index');
+        return $this->postList('news12', $request);
     }
 
     public function postList($cateSlug, Request $request)
