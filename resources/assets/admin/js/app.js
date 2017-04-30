@@ -12,7 +12,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 Vue.prototype.$diff = require('./utils/diff.js').default;
-console.log(Vue.prototype.$diff)
+
 Vue.prototype.$http = axios.create({
     baseURL: `${window.t_meta.base_url}/api/admin/`,
     timeout: 5000,

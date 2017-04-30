@@ -167,39 +167,37 @@ export default{
             this.$diff.save(this.column);
         });
         this.title = '编辑栏目';
-      }else{
+    }else{
         this.title = '添加栏目';
-      }
+    }
   }
 }
 </script>
 
 <style lang="less">
-.column{
-    .avatar-uploader>.el-upload {
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        background-color: #fbfdff;
-        border: 1px dashed #c0ccda;
-    }
-    .avatar-uploader>.el-upload:hover {
-        border-color: #20a0ff;
-        color: #20a0ff;
-    }
-    .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 148px;
-        height: 148px;
-        line-height: 148px;
-        text-align: center;
-    }
-    .avatar {
-        width: 148px;
-        height: 148px;
-        display: block;
-    }
+.avatar-uploader>.el-upload {
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: #fbfdff;
+    border: 1px dashed #c0ccda;
+}
+.avatar-uploader>.el-upload:hover {
+    border-color: #20a0ff;
+    color: #20a0ff;
+}
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 148px;
+    height: 148px;
+    line-height: 148px;
+    text-align: center;
+}
+.avatar {
+    width: 148px;
+    height: 148px;
+    display: block;
 }
 </style>

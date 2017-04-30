@@ -98,6 +98,21 @@ export default new Router({
                             component: require('./views/articleManage/Column.vue')
                         },
                         {
+                            path: 'friendship-link-add',
+                            name: 'friendship-link-add',
+                            component: require('./views/articleManage/FriendshipLink.vue')
+                        },
+                        {
+                            path: 'friendship-link-edit/:id',
+                            name: 'friendship-link-edit',
+                            component: require('./views/articleManage/FriendshipLink.vue')
+                        },
+                        {
+                            path: 'friendship-links',
+                            name: 'friendship-links',
+                            component: require('./views/articleManage/FriendshipLinkList.vue')
+                        },
+                        {
                             path: 'configure',
                             name: 'configure',
                             component: require('./views/setting/Configure.vue')

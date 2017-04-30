@@ -11,7 +11,7 @@
           <el-form-item id="ueditor_wrapper"></el-form-item>
           <el-form-item label="摘要">
               <el-input v-model="article.excerpt" placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
-              <div class="tip">选填，如果不填写会默认抓取正文前54个字</div>
+              <div class="tip">选填，如果不填写会默认抓取正文前<input v-model="excerptSize" class="excerpt_size" type="text"/>个字</div>
           </el-form-item>
        </el-form>
     </panel>
@@ -101,6 +101,7 @@
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
         this.confirmLoading = true;
+        this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getPlainTxt().substr(0, this.excerptSize);
         this.$http[method](url, this.$diff.diff(this.article)).then(res => {
           this.$message({
               message: `${this.title}成功`,
@@ -251,7 +252,8 @@
           'template': null,
           'category_ids': [],
           'published_at': null
-        }
+        },
+        excerptSize: 54
       }
     },
     watch: {
@@ -312,6 +314,12 @@
       color: #999;
       position: relative;
       top: -3px;
+      .excerpt_size{
+          border: 0;
+          outline: none;
+          width: 35px;
+          padding: 0 10px;
+      }
     }
     .img_list{
       overflow: hidden;
