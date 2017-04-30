@@ -1,6 +1,6 @@
 <?php
 
-$api->group([/*'middleware'=>'auth'*/], function ($api) {
+$api->group(['middleware'=>'auth'], function ($api) {
 
     // -------------------------------------------------
     // 当前登录的用户
@@ -68,6 +68,8 @@ $api->group([/*'middleware'=>'auth'*/], function ($api) {
     $api->put('categories/{category}', 'CategoriesController@update');
     // 获取指定分类
     $api->get('categories/{category}', 'CategoriesController@show');
+    // 删除分类
+    $api->delete('categories/{category}', 'CategoriesController@destroy');
     // 获取指定分类下的文章
     $api->get('categories/{category}/posts', 'CategoriesController@posts');
     // 获取指定分类下的单页

@@ -16,7 +16,12 @@ use Illuminate\Http\Request;
 
 class TypesController extends ApiController
 {
-
+    public function __construct()
+    {
+        //todo middleware
+        //$this->middleware('permission:admin.post.categories')->except('post');
+        //$this->middleware('permission:admin.post.show')->only('post', 'page');
+    }
     /**
      * 友情链接的分类
      * @return \Dingo\Api\Http\Response
@@ -46,18 +51,23 @@ class TypesController extends ApiController
         return $this->response->noContent();
     }
 
+    /**
+     * 删除类型
+     * @param Type $type
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function destroy(Type $type, Request $request)
     {
         if(class_exists($type->class_name)){
             $model = app($type->class_name);
-            if($model instanceof InterfaceTypeable)
-            {
+            if($model instanceof InterfaceTypeable) {
                 if($request->has('delete_relation')){
                     // 需要删除关联数据
                     $model->byType($type)->delete();
                 }else{
                     // 关联数据中的type_id 置为null
-                    $model->byType($type)->update(['type_id', null]);
+                    $model->byType($type)->update(['type_id' => null]);
                 }
             }
         }

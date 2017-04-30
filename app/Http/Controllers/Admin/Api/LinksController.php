@@ -20,6 +20,8 @@ class LinksController extends ApiController
     public function lists(Type $type = null)
     {
         $links = Link::byType($type)
+            ->ordered()
+            ->recent()
             ->withSimpleSearch()
             ->withSort()
             ->paginate();

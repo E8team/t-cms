@@ -10,6 +10,7 @@ use App\Http\Requests\CategoryUpdateRequest;
 use App\Transformers\CategoryTransformer;
 use App\Transformers\PostTransformer;
 use Illuminate\Http\Request;
+use DB;
 
 class CategoriesController extends ApiController
 {
@@ -134,5 +135,23 @@ class CategoriesController extends ApiController
             return $this->response->array(Category::allCategoryArray($request->get('type')));
         }
 
+    }
+
+    /**
+     * 删除分类
+     * @param Category $category
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
+    public function destroy(Category $category, Request $request)
+    {
+
+        if($request->has('delete_relation')){
+            // 需要删除关联数据
+            $category->posts()->forceDelete();
+        }
+        DB::table('category_post')->where('category_id', $category->id)->delete();
+        $category->delete();
+        return $this->response->noContent();
     }
 }
