@@ -87,7 +87,7 @@ class PostsController extends ApiController
     {
         $data = $request->all();
         $data = filterNullWhenHasDefaultValue($data, ['order', 'views_count', 'status']);
-        $data['status'] = 'publish';
+        //$data['status'] = 'publish';
         $data['user_id'] = Auth::id();
         Post::createPost($data);
         return $this->response->noContent();

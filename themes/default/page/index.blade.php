@@ -4,7 +4,6 @@
 	<link rel="stylesheet" href="{!! asset('css/page.css') !!}">
 @endsection
 @section('content')
-	@include('particals.navbar')
 	<div class="content container">
 		{!! Breadcrumbs::render('category', $navigation) !!}
 		<div class="main col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -19,8 +18,6 @@
 				</div>
 			</div>
 		</div>
-		@include('particals.side')
+		@component('layouts.particals.side', ['category' => $navigation->getCurrentNav()])@endcomponent
 	</div>
-	@include('particals.link')
-	@include('particals.footer')
 @endsection

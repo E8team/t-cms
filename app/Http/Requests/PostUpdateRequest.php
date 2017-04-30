@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\Update;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use PictureManager;
 
 class PostUpdateRequest extends Request
@@ -33,7 +34,7 @@ class PostUpdateRequest extends Request
     public function rules()
     {
         return [
-            'title' => ['nullable', 'required', /*Rule::unique('posts')->where(function ($query) {
+            'title' => ['nullable', 'string', /*Rule::unique('posts')->where(function ($query) {
                 $query->where('type', 'post');
             })->ignore($post->id)*/],
             'author_info' => 'nullable|string|max:50',
@@ -43,6 +44,7 @@ class PostUpdateRequest extends Request
             //'type' => 'nullable|in:post,page',
             'views_count' => 'nullable|int',
             'order' => 'nullable|int',
+            //todo template 验证规则
             'template' => 'nullable|string|max:30',
             'category_ids' => 'nullable|int_array',
             'published_at' => 'nullable|date',
@@ -58,28 +60,8 @@ class PostUpdateRequest extends Request
         if (!is_null($callback)) {
             $data = $callback($data);
         }
-        // $data['type'] = 'post';
-        // 处理置顶
-        if (isset($data['top'])) {
-            $data['top'] = Carbon::now();
-        }
-        // 处理从正文中获取的封面
-        if (isset($data['cover_in_content'])) {
-            $data['conver'] = PictureManager::convert($data['cover_in_content']);
-        }
-        if(isset($data['published_at'])){
-            $data['published_at'] = new Carbon($data['published_at']);
-        }
         $post->fill($data)->saveOrFail();
-
-        if (isset($data['content'])) {
-            $post->content()->updateOrCreate([], ['content' => clean($data['content'])]);
-        }
-        // 处理分类
-        if (!empty($data['category_ids'])) {
-
-            $post->saveCategories($data['category_ids']);
-        }
+        $post->addition(Arr::only($data, ['content', 'category_ids']));
         return $post;
     }
 }

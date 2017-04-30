@@ -7,13 +7,10 @@ use App\Entities\Category;
 use App\Entities\Post;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
-use Intervention\Image\ImageManager;
-use Ty666\PictureManager\Facades\PictureManager;
-use Ty666\PictureManager\Traits\Picture;
+use Illuminate\Support\Arr;
 
 class IndexController extends Controller
 {
-    use Picture;
     public function index(Request $request)
     {
         return $this->postList('company-news', $request);

@@ -9,6 +9,7 @@ use Cache;
 use Carbon\Carbon;
 use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Laracasts\Presenter\PresentableTrait;
 use PictureManager;
@@ -151,9 +152,20 @@ class Post extends BaseModel
         return static::createWithContentAndCategories($data);
     }
 
-    public static function createPost($data)
+    public static function filterData($data)
     {
-        $data['type'] = 'post';
+        if(isset($data['title'])){
+            $data['title'] = e($data['title']);
+        }
+        if(isset($data['author_info'])){
+            $data['author_info'] = e($data['author_info']);
+        }
+        if(isset($data['excerpt'])){
+            $data['excerpt'] = e($data['excerpt']);
+        }
+        if(isset($data['content'])){
+            $data['excerpt'] = clean($data['excerpt']);
+        }
         // 处理置顶
         if (isset($data['top'])) {
             $data['top'] = Carbon::now();
@@ -163,28 +175,36 @@ class Post extends BaseModel
         }
         if (isset($data['published_at'])) {
             $data['published_at'] = new Carbon($data['published_at']);
-        }else{
-            $data['published_at'] = Carbon::now();
         }
-        return static::createWithContentAndCategories($data);
+        return $data;
     }
 
-    public static function createWithContentAndCategories($data)
+    public static function createPost($data)
     {
-
+        $data = static::filterData($data);
+        $data['type'] = 'post';
+        if(!isset($data['published_at'])) $data['published_at'] = Carbon::now();
         $post = static::create($data);
+        $post->addition(Arr::only($data, ['content', 'category_ids']));
+        return $post;
+    }
+
+    /**
+     * 添加附加表数据
+     * @param $data
+     */
+    public function addition($data)
+    {
         if (isset($data['content'])) {
-            $post->content()->create([
-                'content' => clean($data['content'])
+            $this->content()->updateOrCreate([], [
+                'content' => $data['content']
             ]);
         }
 
         // 处理分类
         if (!empty($data['category_ids'])) {
-            $post->saveCategories($data['category_ids']);
+            $this->saveCategories($data['category_ids']);
         }
-
-        return $post;
     }
 
     /**
