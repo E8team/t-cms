@@ -148,8 +148,11 @@ class Post extends BaseModel
 
     public static function createPage($data)
     {
+        $data = static::filterData($data);
         $data['type'] = 'page';
-        return static::createWithContentAndCategories($data);
+        $post = static::create($data);
+        $post->addition(Arr::only($data, ['content', 'category_ids']));
+        return $post;
     }
 
     public static function filterData($data)
@@ -164,7 +167,7 @@ class Post extends BaseModel
             $data['excerpt'] = e($data['excerpt']);
         }
         if(isset($data['content'])){
-            $data['excerpt'] = clean($data['excerpt']);
+            $data['content'] = clean($data['content']);
         }
         // 处理置顶
         if (isset($data['top'])) {
