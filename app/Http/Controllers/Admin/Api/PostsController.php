@@ -106,12 +106,11 @@ class PostsController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        if (!Post::destroy(intval($id))) {
-            throw new NotFoundHttpException(trans('message.post_not_found'));
-        }
-        PostContent::destroy(intval($id));
+        //todo 考虑软删除 和 分类
+        //$post->delete();
+        //$post->content()->delete();
         return $this->response->noContent();
     }
 

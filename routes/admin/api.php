@@ -1,6 +1,6 @@
 <?php
 
-$api->group(['middleware'=>'auth'], function ($api) {
+$api->group([/*'middleware'=>'auth'*/], function ($api) {
 
     // -------------------------------------------------
     // 当前登录的用户
@@ -14,7 +14,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新用户
     $api->put('users/{user}', 'UsersController@update');
     // 删除用户
-    $api->delete('users/{id}', 'UsersController@destroy');
+    $api->delete('users/{user}', 'UsersController@destroy');
     // 获取用户角色
     $api->get('users/{user}/roles', 'UsersController@roles');
     // 批量移动用户至角色 ?user_ids[0]=1&user_ids[1]=2&role_ids[0]=1&role_ids[1]=2
@@ -32,7 +32,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新角色
     $api->put('roles/{role}', 'RolesController@update');
     // 删除角色
-    $api->delete('roles/{id}', 'RolesController@destroy');
+    $api->delete('roles/{role}', 'RolesController@destroy');
     // -------------------------------------------------
     // 获取菜单
     $api->get('menus', 'PermissionsController@menus');
@@ -49,7 +49,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新权限
     $api->put('permissions/{permission}', 'PermissionsController@update');
     //删除指定权限
-    $api->delete('permissions/{id}', 'PermissionsController@destroy');
+    $api->delete('permissions/{permission}', 'PermissionsController@destroy');
     //将权限批量移动到角色 ?permission_ids[0]=1&permission_ids[1]=2&role_ids[0]=1&role_ids[1]=2
     $api->put('move_permissions_to_roles', 'PermissionsController@movePermissions2Roles');
     // -------------------------------------------------
@@ -85,7 +85,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 创建或更新单网页
     $api->post('categories/{category}/page', 'PostsController@storePage');
     // 删除文章·
-    $api->delete('posts/{id}', 'PostsController@destroy');
+    $api->delete('posts/{post}', 'PostsController@destroy');
     // -------------------------------------------------
     // 获取所有友情链接的类别
     $api->get('types/link', 'TypesController@links');
@@ -93,6 +93,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('types', 'TypesController@store');
     // 更新类别
     $api->put('types/{type}', 'TypesController@update');
+    // 删除分类
+    $api->delete('types/{type}', 'TypesController@destroy');
     // ---------------------------------------------------
     // 指定类别下面的友情链接 type如果不传表示获取所有分类下的友情链接
     $api->get('links/type/{type?}', 'LinksController@lists');
@@ -103,7 +105,7 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 更新友情链接
     $api->put('links/{link}', 'LinksController@update');
     // 删除指定的友情链接
-    $api->delete('links/{id}', 'LinksController@destroy');
+    $api->delete('links/{link}', 'LinksController@destroy');
     // -------------------------------------------------
     $api->get('settings', 'SettingsController@lists');
     // 创建设置项

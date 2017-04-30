@@ -4,11 +4,12 @@ namespace App\Entities;
 
 
 use App\Entities\Traits\Listable;
+use App\Entities\Traits\Typeable;
 use Ty666\PictureManager\Traits\Picture;
 
-class Link extends BaseModel
+class Link extends BaseModel implements InterfaceTypeable
 {
-    use Picture, Listable;
+    use Picture, Listable, Typeable;
 
     protected $fillable = ['name', 'url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
     protected static $allowSortFields = ['name', 'type_id', 'order', 'is_visible'];
@@ -24,22 +25,6 @@ class Link extends BaseModel
     public function scopeIsVisible($query, $isVisible = true)
     {
         return $query->where('is_visible', $isVisible)->ordered();
-    }
-
-    public function scopeByType($query, $type)
-    {
-        if (is_null($type)) {
-            return $query;
-        }
-        if ($type instanceof Type) {
-            $typeId = $type->id;
-        } elseif (is_array($type)) {
-            $typeId = $type['id'];
-        } else {
-            $typeId = intval($type);
-        }
-
-        return $query->where('type_id', $typeId)->ordered()->recent();
     }
 
     public function getLogoUrlsAttribute()

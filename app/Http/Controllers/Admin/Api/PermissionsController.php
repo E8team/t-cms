@@ -143,16 +143,12 @@ class PermissionsController extends ApiController
 
     /**
      * 删除指定权限
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Permission $permission
+     * @return \Dingo\Api\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        if (!Permission::destroy(intval($id))) {
-            throw new NotFoundHttpException('message.permission_not_found');
-        }
+        $permission->delete();
         return $this->response->noContent();
     }
 }

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @inject('navigation', 'App\T\Navigation\Navigation')
-@section('style')
-    <link rel="stylesheet" href="{!! asset('css/index.css') !!}">
-@endsection
+
 @section('content')
     <div class="content container">
         {!! Breadcrumbs::render('category', $navigation) !!}

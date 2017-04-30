@@ -46,11 +46,9 @@ class LinksController extends ApiController
         return $this->response->noContent();
     }
 
-    public function destroy($id)
+    public function destroy(Link $link)
     {
-        if (!Link::destroy(intval($id))) {
-            throw new NotFoundHttpException(trans('message.link_not_found'));
-        }
+        $link->delete();
         return $this->response->noContent();
     }
 }

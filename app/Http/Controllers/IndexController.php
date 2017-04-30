@@ -7,7 +7,6 @@ use App\Entities\Category;
 use App\Entities\Post;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class IndexController extends Controller
 {

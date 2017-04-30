@@ -1,17 +1,17 @@
-body{
+body.content{
     background-color: #fff;
 }
-.header{
+.content_header{
     text-align: center;
     line-height: 60px;
     font-size: 24px;
 }
-.header a{
+.content_header a{
     text-decoration: none;
     color: #555;
     font-weight: 300;
 }
-.title{
+.content_title{
     font-weight: 700;
     margin: 60px 0 35px 0;
     color: #555;
@@ -23,50 +23,51 @@ body{
 .info span{
     margin-right: 15px;
 }
-.main {
+.content_main {
     margin-top: 20px;
     position: relative;
+    min-height: 230px;
 }
-.main .content{
+.content_main .content{
     padding: 0 360px 0 0;
 }
-.main .side{
+.content_main .side{
     position: absolute;
     top: 30px;
     right: 0;
     width: 300px;
 }
-.main .side h4{
+.content_main .side h4{
     border-top: 1px solid #dededc;
     padding: 16px 7px;
     color: #b3b3b1;
     font-size: 14px;
 }
-.main .side .related_article{
+.content_main .side .related_article{
     padding: 0px 7px;
 }
-.main .side .related_article li{
+.content_main .side .related_article li{
     float: left;
     list-style: none;
     margin-bottom: 18px;
     font-size: 17px;
 }
-.main .side .related_article li a{
+.content_main .side .related_article li a{
     color: #333;
     text-decoration: none;
     border-bottom: 1px solid transparent;
 }
-.main .side .related_article li a:hover{
+.content_main .side .related_article li a:hover{
     border-bottom: 1px solid #666;
 }
-.footer{
+.contnet_footer{
     margin-top: 80px;
     border-top: 1px #F2F2F0 solid;
     height: 445px;
     background-color: #F9F9F9;
     text-align: initial;
 }
-.footer a{
+.contnet_footer a{
     text-decoration: none;
 }
 .nav-title{

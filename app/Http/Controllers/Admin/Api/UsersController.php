@@ -11,7 +11,6 @@ use App\Transformers\RoleTransformer;
 use App\Transformers\UserTransformer;
 use Auth;
 use Hash;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UsersController extends ApiController
 {
@@ -58,14 +57,12 @@ class UsersController extends ApiController
 
     /**
      * 删除指定用户
-     * @param $id
+     * @param User $user
      * @return \Dingo\Api\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        if (!User::destroy(intval($id))) {
-            throw new NotFoundHttpException(trans('message.user_not_found'));
-        }
+        $user->delete();
         return $this->response->noContent();
     }
 

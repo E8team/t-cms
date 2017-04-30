@@ -102,14 +102,12 @@ class RolesController extends ApiController
 
     /**
      * 删除角色
-     * @param $id
+     * @param Role $role
      * @return \Dingo\Api\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        if (!Role::destroy(intval($id))) {
-            throw new NotFoundHttpException(trans('message.role_not_found'));
-        }
+        $role->delete();
         return $this->response->noContent();
     }
 

@@ -16,7 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^3.2.1",
-    "bootstrap": "^3.3.7"
+    "jquery": "1",
+    "bootstrap": "^3.3.7",
+    "jquery-pjax": "^1.9.6",
+    "nprogress": "^0.2.0"
   }
 }
