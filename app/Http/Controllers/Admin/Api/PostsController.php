@@ -64,14 +64,8 @@ class PostsController extends ApiController
             $data['user_id'] = Auth::id();
             Post::createPage($data);
         } else {
-            // 更新
-            if (isset($data['content'])) {
-                $page->content()->updateOrCreate([], ['content' => clean($data['content'])]);
-            }
-            // 处理分类
-            if (!empty($data['category_ids'])) {
-                $page->saveCategories($data['category_ids']);
-            }
+            $data = Post::filterData($data);
+            $page->addition($data);
         }
         return $this->response->noContent();
     }
