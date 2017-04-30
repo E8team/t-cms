@@ -1,7 +1,10 @@
 <template>
     <div class="friendship-links">
-        <CurrencyListPage title="友情连接列表" ref="list" queryName="links/type/1">
+        <CurrencyListPage title="友情连接列表" ref="list" :queryName="queryName">
             <template scope="list">
+                <el-tabs v-model="activeLink">
+                    <el-tab-pane v-for="item in linkTypes" :label="item.name" :key="item.id" :name="String(item.id)"></el-tab-pane>
+                </el-tabs>
                 <el-table border :data="list.data" style="width: 100%">
                     <el-table-column property="name" label="链接名称"></el-table-column>
                     <el-table-column label="url">
@@ -49,11 +52,31 @@
         },
         data () {
             return {
+                linkTypes: [],
+                activeLink: null
+            }
+        },
+        computed: {
+            queryName () {
+                if(this.activeLink == null || this.activeLink == '0'){
+                    return null;
+                }else{
+                    return `links/type/${this.activeLink}`;
+                }
+            }
+        },
+        watch: {
+            activeLink () {
+                this.$refs['list'].refresh(this.queryName);
             }
         },
         methods: {
         },
         mounted () {
+            this.$http.get('types/link').then(res => {
+                this.linkTypes =  res.data.data;
+                this.activeLink = String(this.linkTypes[0].id);
+            });
         }
     }
 </script>

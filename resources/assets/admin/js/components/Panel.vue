@@ -7,7 +7,7 @@
       </div>
     </header>
     <el-row :gutter="10">
-      <el-col class="body" :xs="24" :sm="16" :md="10" :lg="8" :class="{'covered': covered}">
+      <el-col class="body" :xs="24" :sm="18" :md="12" :lg="10" :class="{'covered': covered}">
         <slot></slot>
       </el-col>
     </el-row>
