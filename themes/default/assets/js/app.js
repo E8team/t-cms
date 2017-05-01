@@ -15,7 +15,7 @@ var tcms = {
         $(document).on('pjax:complete', function() {
             original_title = document.title;
             NProgress.done();
-            //self._resetTitle();
+
         });
         // Exclude links with a specific class
         $(document).on("pjax:click", "a.no-pjax", false);
