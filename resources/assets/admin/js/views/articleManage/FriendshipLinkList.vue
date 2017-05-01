@@ -1,6 +1,9 @@
 <template>
     <div class="friendship-links">
         <CurrencyListPage title="友情连接列表" ref="list" :queryName="queryName">
+            <div slot="option">
+                <el-button type="primary" @click="$router.push({name: 'friendship-link-add'})" icon="plus">添加友情链接</el-button>
+            </div>
             <template scope="list">
                 <el-tabs v-model="activeLink">
                     <el-tab-pane v-for="item in linkTypes" :label="item.name" :key="item.id" :name="String(item.id)"></el-tab-pane>
@@ -71,6 +74,19 @@
             }
         },
         methods: {
+            del (id) {
+                this.$confirm('你确定要删除该友情链接?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http.delete(`links/${id}`).then(res => {
+                        this.$message('已删除');
+                        this.$refs['list'].refresh()
+                    })
+                }).catch(() => {
+                })
+            }
         },
         mounted () {
             this.$http.get('types/link').then(res => {

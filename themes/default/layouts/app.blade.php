@@ -8,17 +8,11 @@
     <meta name="description" content="@yield('description')">
     {{--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />--}}
     <title>@section('title')我的站点@show - powered by t-cms</title>
-    <link rel="stylesheet" href="{!! asset('lib/bootstrap/dist/css/bootstrap.min.css') !!}">
-    <link rel="stylesheet" href="{!! asset('lib/nprogress/nprogress.css') !!}">
-    <link rel="stylesheet" href="{!! asset('css/comm.css') !!}">
-    <link rel="stylesheet" href="{!! asset('css/index.css') !!}">
-    <link rel="stylesheet" href="{!! asset('css/content.css') !!}">
-    <link rel="stylesheet" href="{!! asset('css/page.css') !!}">
 
+    <script type="text/javascript" src="{!! mix_with_theme('/themes/default/js/app.js') !!}"></script>
+    <link rel="stylesheet" href="{!! mix_with_theme('/themes/default/css/app.css') !!}">
     @yield('style')
-    <script type="text/javascript" src="{!! asset('lib/jquery/dist/jquery.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('lib/jquery-pjax/jquery.pjax.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('lib/nprogress/nprogress.js') !!}"></script>
+
     <script type="text/javascript">
         $(function (){
             $(document).pjax('a:not(a[target="_blank"])', 'body', {

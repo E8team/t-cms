@@ -7,6 +7,9 @@
         var $items = $banner.find('ul');
         var $img = $item.find('img');
         $items.css('height', $img.height());
+        $img.load(function(){
+            $items.css('height', $img.height());
+        })
         function change(dir){
             var $current = $banner.find('.active');
             var $next = $current[dir]();

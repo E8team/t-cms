@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @inject('navigation', 'App\T\Navigation\Navigation')
 
 @section('content')

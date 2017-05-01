@@ -1,0 +1,13 @@
+{
+  "name": "t-cms-default",
+  "version": "1.0.0",
+  "description": "t-cms默认主题",
+  "author": "tw <t888y@qq.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^1.12.4",
+    "jquery-pjax": "git+https://github.com/defunkt/jquery-pjax.git",
+    "nprogress": "^0.2.0"
+  }
+}

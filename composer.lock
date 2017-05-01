@@ -3090,16 +3090,16 @@
         },
         {
             "name": "ty666/laravel-theme",
-            "version": "1.0.15",
+            "version": "1.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ty666/laravel-theme.git",
-                "reference": "20d0f83efa448c1654a6f7356d658937c947b360"
+                "reference": "900f251112d1ba3e4f95b542cee411c38be193b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/20d0f83efa448c1654a6f7356d658937c947b360.zip",
-                "reference": "20d0f83efa448c1654a6f7356d658937c947b360",
+                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/900f251112d1ba3e4f95b542cee411c38be193b5.zip",
+                "reference": "900f251112d1ba3e4f95b542cee411c38be193b5",
                 "shasum": ""
             },
             "require": {
@@ -3132,7 +3132,7 @@
                 "theme",
                 "view"
             ],
-            "time": "2017-04-30T16:34:25+00:00"
+            "time": "2017-05-01T05:38:06+00:00"
         },
         {
             "name": "ty666/picture-manager",
