@@ -6,6 +6,7 @@
             </div>
             <template scope="list">
                 <el-tabs v-model="activeLink">
+                    <el-tab-pane label="全部" name="all"></el-tab-pane>
                     <el-tab-pane v-for="item in linkTypes" :label="item.name" :key="item.id" :name="String(item.id)"></el-tab-pane>
                 </el-tabs>
                 <el-table border :data="list.data" style="width: 100%">
@@ -56,16 +57,12 @@
         data () {
             return {
                 linkTypes: [],
-                activeLink: null
+                activeLink: 'all'
             }
         },
         computed: {
             queryName () {
-                if(this.activeLink == null || this.activeLink == '0'){
-                    return null;
-                }else{
-                    return `links/type/${this.activeLink}`;
-                }
+                return `links/type/${this.activeLink}`;
             }
         },
         watch: {
@@ -91,7 +88,6 @@
         mounted () {
             this.$http.get('types/link').then(res => {
                 this.linkTypes =  res.data.data;
-                this.activeLink = String(this.linkTypes[0].id);
             });
         }
     }
