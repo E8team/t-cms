@@ -37,7 +37,7 @@
                             <span class="num">{!! $loop->iteration !!}</span>
                         </div>
                         <div class="media-body">
-                            <a class="link-dark" href="{!! $post->present()->getUrl() !!}" target="_blank" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(29) !!}</a>
+                            <a class="link-dark" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(29) !!}</a>
                         </div>
                     </div>
                 @endforeach

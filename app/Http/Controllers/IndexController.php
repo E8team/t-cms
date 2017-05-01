@@ -49,8 +49,14 @@ class IndexController extends Controller
         return theme_view($currentCategory->page_template, ['pagePost' => $page]);
     }
 
-    public function post($cateSlug, Post $post)
+    /**
+     * 正文
+     * @param $cateSlug
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function post($cateSlug, $post)
     {
+        $post = Post::findOrFail($post);
         $category = Category::findBySlug($cateSlug);
         app(Navigation::class)->setCurrentNav($category);
         return theme_view($post->template, ['post' => $post]);

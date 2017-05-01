@@ -6,7 +6,11 @@
         <h3>友情链接</h3>
         @foreach($link->getLinkWithoutTypeFromCache() as $linkItem)
             <a href="{!! $linkItem->url !!}" target="_blank" title="{!! $linkItem->name !!}">
-                <img src="{!! $linkItem->logoUrls['md'] !!}">
+                @if(!is_null($linkItem->logo))
+                    <img src="{!! $linkItem->getLogoUrl('md') !!}">
+                    @else
+                    {!! $linkItem->name !!}
+                @endif
             </a>
         @endforeach
     </div>

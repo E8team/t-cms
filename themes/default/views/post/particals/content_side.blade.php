@@ -21,7 +21,7 @@
     <h4>热门文章</h4>
     <ul class="related_article">
         @foreach($navigation->getCurrentNav()->getHotPosts(11, $thisPost) as $post)
-            <li><a href="{!! $post->present()->getUrl() !!}" target="_blank" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(29) !!}</a></li>
+            <li><a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(29) !!}</a></li>
         @endforeach
     </ul>
 </div>

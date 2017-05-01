@@ -29,7 +29,11 @@ class Link extends BaseModel implements InterfaceTypeable
 
     public function getLogoUrlsAttribute()
     {
-        //todo 找一个默认的logo
-        return $this->getPicure($this->attributes['logo'], ['sm', 'md', 'lg', 'o'], asset('images/default_avatar.jpg'));
+        return $this->getPicure($this->attributes['logo'], ['sm', 'md', 'lg', 'o']);
+    }
+
+    public function getLogoUrl($style, $defaultPic = '')
+    {
+        return $this->getPicure($this->attributes['logo'], [$style], $defaultPic)[$style];
     }
 }

@@ -6,12 +6,15 @@ use Laracasts\Presenter\Presenter;
 
 class CategoryPresenters extends Presenter
 {
-    public function url()
+    /**
+     * a标签的属性
+     */
+    public function aProperty()
     {
         if (!$this->entity->isExtLink()) {
-            return route('category', $this->cate_slug);
+            return 'href="'.route('category', $this->cate_slug).'"';
         } else {
-            return $this->url;
+            return 'href="'.$this->url.'" target="_blank"';
         }
     }
 }
