@@ -17,6 +17,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class LinksController extends ApiController
 {
 
+    public function allLinks()
+    {
+        $links = Link::ordered()
+            ->recent()
+            ->withSimpleSearch()
+            ->withSort()
+            ->paginate();
+        return $this->response->paginator($links, new LinkTransformer())
+            ->setMeta(Link::getAllowSortFieldsMeta() + Link::getAllowSearchFieldsMeta());
+    }
+
     public function lists(Type $type = null)
     {
         $links = Link::byType($type)

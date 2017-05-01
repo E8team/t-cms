@@ -11,11 +11,11 @@ class Type extends BaseModel
 
     public function scopeLink($query)
     {
-        return $query->where('class_name', Link::class)->ordered();
+        return $query->where('class_name', Link::class);
     }
 
     public function links()
     {
-        return $this->hasMany(Link::class)->ordered()->recent();
+        return $this->hasMany(Link::class);
     }
 }

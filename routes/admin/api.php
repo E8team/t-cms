@@ -98,7 +98,9 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 删除分类
     $api->delete('types/{type}', 'TypesController@destroy');
     // ---------------------------------------------------
-    // 指定类别下面的友情链接 type如果不传表示获取所有分类下的友情链接
+    // 获取所有的友情链接
+    $api->get('links/type/all', 'LinksController@allLinks');
+    // 指定类别下面的友情链接 type如果不传表示获取默认分类(type_id为null)的友情链接
     $api->get('links/type/{type?}', 'LinksController@lists');
     // 获取指定的友情链接
     $api->get('links/{link}', 'LinksController@show');

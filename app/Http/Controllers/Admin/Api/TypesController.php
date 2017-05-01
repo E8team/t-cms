@@ -28,7 +28,7 @@ class TypesController extends ApiController
      */
     public function links()
     {
-        $types = Type::link()->get();
+        $types = Type::link()->ordered()->get();
         return $this->response->collection($types, new TypeTransformer());
     }
 
