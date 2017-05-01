@@ -5,7 +5,7 @@
                 <ul>
                     <li v-for="item in themeList" class="theme_body":class="{'current': item.is_current}">
                         <div class="theme_img">
-                            <img :src="item.screenshot" :alt="item.name">
+                            <img :src="item.screenshot_url" :alt="item.name">
                             <div class="theme_enable_btn">
                                 <el-button @click="startTheme(item.theme_id)" type="success">启 用</el-button>
                             </div>

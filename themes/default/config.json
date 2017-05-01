@@ -3,7 +3,6 @@
     "author": "3t",
     "homepage": "https://www.3twd.cn/",
     "version": "1.0",
-    "static_folder": "static",
     "page_template": [
         {
             "file_name": "page.index",

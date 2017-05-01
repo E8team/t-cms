@@ -8,9 +8,9 @@
     <meta name="description" content="@yield('description')">
     {{--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />--}}
     <title>@section('title')我的站点@show - powered by t-cms</title>
-
-    <script type="text/javascript" src="{!! mix_with_theme('/themes/default/js/app.js') !!}"></script>
-    <link rel="stylesheet" href="{!! mix_with_theme('/themes/default/css/app.css') !!}">
+    <meta http-equiv="x-pjax-version" content="{!! mix('/js/app.js', 'static/default') !!} . {!! mix('/css/app.css', 'static/default') !!} }}">
+    <script type="text/javascript" src="{!! mix('/js/app.js', 'static/default') !!}"></script>
+    <link rel="stylesheet" href="{!! mix('/css/app.css', 'static/default') !!}">
     @yield('style')
 
     <script type="text/javascript">

@@ -20,26 +20,6 @@ if(argv && argv.substr(0,8) == "--theme:"){
     // 构建指定主题的前端资源
     let themeName = argv.split(":")[1];
     root = path.join(__dirname, 'themes', themeName);
-    let static_folder = require(path.join(root, 'config.json')).static_folder;
-    Mix.initialize = function(rootPath = '') {
-        if (rootPath) this.Paths.setRootPath(rootPath);
-        if (this.isUsingLaravel()) this.publicPath = 'public';
-        // This is where we load the user's webpack.mix.js config.
-        if (this.File.exists(this.Paths.mix() + '.js')) {
-            require(this.Paths.mix());
-        }
-
-        this.manifest = new Manifest(
-            path.join(path.join(root, static_folder), 'mix-manifest.json')
-        ).listen(this.events);
-
-        if (this.concat.any()) this.concat.watch();
-
-        if (this.versioning) this.enableVersioning();
-
-        this.detectHotReloading();
-    }.bind(Mix);
-
 }
 Mix.initialize(root);
 

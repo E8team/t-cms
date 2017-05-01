@@ -15,8 +15,8 @@ mix.webpackConfig({
         ]
     }
 });
-mix
-    .js(path.join(__dirname, 'assets/js/app.js'), 'public/themes/default/js/app.js')
-    .less(path.join(__dirname, 'assets/less/app.less'), 'public/themes/default/css/app.css')
+mix .setPublicPath('public/static/default')
+    .js(path.join(__dirname, 'assets/js/app.js'), 'js/app.js')
+    .less(path.join(__dirname, 'assets/less/app.less'), 'css/app.css')
     .version();
 
