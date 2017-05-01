@@ -19,6 +19,9 @@ var tcms = {
         });
         // Exclude links with a specific class
         $(document).on("pjax:click", "a.no-pjax", false);
+
+        // lazyload
+        $("img[lazy]").lazyload();
     }
 }
 $(document).ready(function()
