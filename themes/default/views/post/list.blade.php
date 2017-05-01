@@ -19,9 +19,9 @@
             <ul class="list">
                 @foreach($postList as $post)
                     <li>
-                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}" target="_blank" style="background-image: url('http://i0.hdslb.com/bfs/archive/dfa4385619bc1833c8c38d47146b0b857bc6813a.jpg@.webp')"></a>
+                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}" style="background-image: url('http://i0.hdslb.com/bfs/archive/dfa4385619bc1833c8c38d47146b0b857bc6813a.jpg@.webp')"></a>
                         <div class="info">
-                            <a href="{!! $post->present()->getUrl() !!}" target="_blank" title="{!! $post->title !!}">
+                            <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
                                 <h3>@if($post->isTop())<span class="label label-danger">置顶</span>@endif{!! $post->present()->suitedTitle() !!}</h3>
                             </a>
                             <p class="describe">{!! $post->excerpt !!}</p>

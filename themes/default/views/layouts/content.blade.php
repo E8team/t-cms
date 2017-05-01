@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="{!! mix('/css/app.css', 'static/default') !!}">
     @yield('style')
 </head>
-<body class="content">
-@yield('content')
-@yield('js')
-@stack('js')
+<body>
+<div class="body content">
+    @yield('content')
+    @yield('js')
+    @stack('js')
+</div>
 </body>
 </html>

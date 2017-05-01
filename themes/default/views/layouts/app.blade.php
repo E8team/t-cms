@@ -16,11 +16,13 @@
 
 </head>
 <body>
-@include('layouts.particals.navbar')
-@yield('content')
-@include('layouts.particals.link')
-@include('layouts.particals.footer')
-@yield('js')
-@stack('js')
+<div class="body">
+    @include('layouts.particals.navbar')
+    @yield('content')
+    @include('layouts.particals.link')
+    @include('layouts.particals.footer')
+    @yield('js')
+    @stack('js')
+</div>
 </body>
 </html>
