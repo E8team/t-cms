@@ -10,6 +10,7 @@
     <title>@section('title')我的站点@show - powered by t-cms</title>
     <meta http-equiv="x-pjax-version" content="{!! mix('/js/app.js', 'static/default') !!} . {!! mix('/css/app.css', 'static/default') !!} }}">
     <script type="text/javascript" src="{!! mix('/js/app.js', 'static/default') !!}"></script>
+    <link rel="stylesheet" href="{!! asset('static/default/css/bootstrap.min.css') !!}">
     <link rel="stylesheet" href="{!! mix('/css/app.css', 'static/default') !!}">
     @yield('style')
 

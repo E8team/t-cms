@@ -2,8 +2,8 @@
     <div class="theme">
         <panel title="主题选择">
             <div class="theme_main">
-                <ul>
-                    <li v-for="item in themeList" class="theme_body":class="{'current': item.is_current}">
+                <el-row :gutter="10">
+                    <el-col v-for="item in themeList" :key="item.theme_id" :xs="12" :sm="12" :md="8" :lg="6" class="theme_body" :class="{'current': item.is_current}">
                         <div class="theme_img">
                             <img :src="item.screenshot_url" :alt="item.name">
                             <div class="theme_enable_btn">
@@ -17,8 +17,8 @@
                                 <a class="text" :href="item.homepage" target="_blank">作者主页</a>
                             </div>
                         </footer>
-                    </li>
-                </ul>
+                    </el-col>
+                </el-row>
             </div>
         </panel>
     </div>
@@ -72,7 +72,6 @@
         float: left;
         margin: 0 4% 4% 0;
         position: relative;
-        width: 30.6%;
         border: 1px solid #ddd;
         -webkit-box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);
         box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);

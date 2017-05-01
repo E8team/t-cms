@@ -18,5 +18,7 @@ mix.webpackConfig({
 mix .setPublicPath('public/static/default')
     .js(path.join(__dirname, 'assets/js/app.js'), 'js/app.js')
     .less(path.join(__dirname, 'assets/less/app.less'), 'css/app.css')
+    .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', '../../public/static/default/css/bootstrap.min.css')
+    .copy('node_modules/bootstrap/fonts', '../../public/static/default/fonts')
     .version();
 
