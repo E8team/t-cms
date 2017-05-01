@@ -210,7 +210,7 @@ export default {
     ueditorNode.setAttribute('type', 'text/plain');
     document.querySelector('#ueditor_wrapper').appendChild(ueditorNode);
     this.$http.get('categories/all').then(res => {
-      this.allCategories = res.data
+      this.allCategories = res.data.filter(item => item.type != 2);
     })
   }
 }
