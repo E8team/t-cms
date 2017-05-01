@@ -1,5 +1,5 @@
 <div class="footer">
     <div class="container">
-        Copyright © 2017 3t
+        Copyright © {!! date('Y') !!} {!! setting('WEB_AUTHOR', '3t') !!}
     </div>
 </div>
