@@ -7,7 +7,7 @@
         @foreach($link->getLinkWithoutTypeFromCache() as $linkItem)
             <a href="{!! $linkItem->url !!}" target="_blank" title="{!! $linkItem->name !!}">
                 @if(!is_null($linkItem->logo))
-                    <img src="{!! $linkItem->getLogoUrl('md') !!}">
+                    <img lazy src="{!! $linkItem->getLogoUrl('md') !!}">
                     @else
                     {!! $linkItem->name !!}
                 @endif
