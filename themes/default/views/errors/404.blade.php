@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>404</title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		h1{
+			padding-top: 120px;
+		    font-weight: normal;
+		    font-size: 40px;
+		    color: #333;
+			font-family: -apple-system, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+		}
+		p{
+			font-size: 18px;
+		}
+		a{
+			text-decoration: none;
+			color: #337ab7;
+			margin-right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>404 没有找到相关内容</h1>
+	<p><a href="{!! url('/') !!}">返回首页</a>发现好文章</p>
+</body>
+</html>
