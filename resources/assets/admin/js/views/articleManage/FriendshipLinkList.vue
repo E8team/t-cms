@@ -11,7 +11,7 @@
                 </el-tabs>
                 <el-table border :data="list.data" style="width: 100%">
                     <el-table-column property="name" label="链接名称"></el-table-column>
-                    <el-table-column label="url">
+                    <el-table-column label="url" width="200">
                         <template scope="scope">
                             <a target="_blank" :href="scope.row.url">{{scope.row.url}}</a>
                         </template>
