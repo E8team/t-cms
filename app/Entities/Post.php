@@ -217,4 +217,9 @@ class Post extends BaseModel
     {
         return !is_null($this->top);
     }
+
+    public function getNextPost(Category $category)
+    {
+        return $category->posts()->post()->publish()->where('post_id', '>', $this->id)->first();
+    }
 }

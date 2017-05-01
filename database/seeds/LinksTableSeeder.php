@@ -31,6 +31,26 @@ class LinksTableSeeder extends Seeder
                 'is_visible' => true,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'id' => 1,
+                'name' => '淘宝网',
+                'url' => 'http://www.taobao.com',
+                'linkman' => 'ty',
+                'type_id' => null,
+                'is_visible' => true,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'id' => 2,
+                'name' => '新浪',
+                'url' => 'https://www.sina.com',
+                'linkman' => 'ty',
+                'type_id' => null,
+                'is_visible' => true,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             ]
         ]);
     }

@@ -33,6 +33,6 @@
             {{--分页--}}
             {!! $postList->links() !!}
         </div>
-        @component('layouts.particals.side', ['category' => $navigation->getCurrentNav()])@endcomponent
+        @include('post.particals.list_side')
     </div>
 @endsection

@@ -40,7 +40,7 @@ class Category extends BaseModel
     public function postListWithOrder($order = null)
     {
         $query = $this->posts()->post()->publish()->orderByTop();
-        switch ($order){
+        switch ($order) {
             case 'default':
                 $query->ordered()->recent();
                 break;
@@ -225,8 +225,16 @@ class Category extends BaseModel
         return $this->type == 0;
     }
 
-    public function getHotPosts($num)
+    public function getHotPosts($num, $exceptPost = null)
     {
-        return $this->posts()->post()->publish()->orderBy('views_count', 'desc')->recent()->limit($num)->get();
+        $posts = $this->posts()->post()->publish()->orderBy('views_count', 'desc')->recent()->limit($num)->get();
+        if ($exceptPost != null) {
+            if(is_numeric($exceptPost)){
+                return $posts->where('id', '!=', $exceptPost);
+            }else if($exceptPost instanceof Post){
+                return $posts->where('id', '!=', $exceptPost->id);
+            }
+        }
+        return $posts;
     }
 }

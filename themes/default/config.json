@@ -5,7 +5,7 @@
     "version": "1.0",
     "page_template": [
         {
-            "file_name": "page.index",
+            "file_name": "post.page",
             "title": "默认单页模板",
             "is_defalut": true
         }

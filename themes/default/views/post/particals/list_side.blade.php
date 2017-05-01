@@ -22,6 +22,7 @@
     })
 </script>
 @endpush
+@inject('navigation', 'App\T\Navigation\Navigation')
 
 <div class="side col-lg-3 col-md-3 hidden-sm hidden-xs">
     <div id="side" class="side_body">
@@ -30,7 +31,7 @@
                 热门文章
             </div>
             <div class="panel-body">
-                @foreach($category->getHotPosts(10) as $post)
+                @foreach($navigation->getCurrentNav()->getHotPosts(10) as $post)
                     <div class="media media-number">
                         <div class="media-left">
                             <span class="num">{!! $loop->iteration !!}</span>
