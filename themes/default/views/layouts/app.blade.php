@@ -14,27 +14,6 @@
     <link rel="stylesheet" href="{!! mix('/css/app.css', 'static/default') !!}">
     @yield('style')
 
-    <script type="text/javascript">
-        $(function (){
-            $(document).pjax('a:not(a[target="_blank"])', 'body', {
-                timeout: 1600,
-                maxCacheLength: 500
-            });
-            $(document).on('pjax:start', function() {
-                NProgress.start();
-            });
-            $(document).on('pjax:end', function() {
-                NProgress.done();
-            });
-            $(document).on('pjax:complete', function() {
-                original_title = document.title;
-                NProgress.done();
-                //self._resetTitle();
-            });
-            // Exclude links with a specific class
-            $(document).on("pjax:click", "a.no-pjax", false);
-        });
-    </script>
 </head>
 <body>
 @include('layouts.particals.navbar')
