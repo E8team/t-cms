@@ -222,4 +222,9 @@ class Post extends BaseModel
     {
         return $category->posts()->post()->publish()->where('post_id', '>', $this->id)->first();
     }
+
+    public function isPublish()
+    {
+        return $this->status == 'publish';
+    }
 }

@@ -18,6 +18,7 @@
 <body>
 <div class="body">
     @include('layouts.particals.navbar')
+    {!! Alert::render() !!}
     @yield('content')
     @include('layouts.particals.link')
     @include('layouts.particals.footer')

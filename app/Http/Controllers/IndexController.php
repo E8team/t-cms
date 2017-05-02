@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Entities\Category;
-use App\Entities\Post;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
+use Auth;
+use Alert;
 
 class IndexController extends Controller
 {
@@ -56,8 +57,19 @@ class IndexController extends Controller
      */
     public function post($cateSlug, $post)
     {
-        $post = Post::findOrFail($post);
+
         $category = Category::findBySlug($cateSlug);
+        $queryBuilder = $category->posts()->post()->where('id', $post);
+        if(Auth::check() && Auth::user()->can('admin.post.show')){
+            $post = $queryBuilder->firstOrFail();
+            if(!$post->isPublish())
+            {
+                // 管理员预览草稿或未发布的文章
+                Alert::setWarning('当前文章未发布，此页面只有管理员可见!');
+            }
+        }else{
+            $post = $queryBuilder->publish()->firstOrFail();
+        }
         app(Navigation::class)->setCurrentNav($category);
         return theme_view($post->template, ['post' => $post]);
     }

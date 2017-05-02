@@ -16,6 +16,7 @@
 </head>
 <body>
 <div class="body content">
+    {!! Alert::render() !!}
     @yield('content')
     @yield('js')
     @stack('js')
