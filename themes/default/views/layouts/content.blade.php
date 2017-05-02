@@ -16,6 +16,7 @@
 </head>
 <body>
 <div class="body content">
+    @include('layouts.particals.navbar')
     {!! Alert::render() !!}
     @yield('content')
     @yield('js')

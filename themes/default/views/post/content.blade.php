@@ -1,8 +1,8 @@
 @extends('layouts.content')
 @section('content')
-    <div class="content_header">
+    <!--<div class="content_header">
         <a href="#" class="title">t-cms</a>
-    </div>
+    </div>-->
     <div class="container">
         <h1 class="content_title">{!! $post->title !!}</h1>
         <p class="info">
