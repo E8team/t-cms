@@ -1,10 +1,13 @@
 require('./bootstrap');
 import axios from 'axios'
 import ElementUI from 'element-ui';
+import NProgress from 'vue-nprogress'
 import 'element-ui/lib/theme-default/index.css';
 import App from './App.vue';
 import router from './router'
 Vue.use(ElementUI);
+Vue.use(NProgress);
+const nprogress = new NProgress({ parent: '.nprogress-container' })
 import Panel from './components/Panel.vue'
 Vue.component(Panel.name, Panel)
 import * as filters from './filters.js'
@@ -23,7 +26,14 @@ Vue.prototype.$http = axios.create({
     }
 })
 Vue.prototype.$axios = axios;
+Vue.prototype.$http.interceptors.request.use((config) => {
+    nprogress.start();
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
 Vue.prototype.$http.interceptors.response.use((response) => {
+    nprogress.done();
     return response;
 }, (error) => {
     if(error.code === 'ECONNABORTED'){
@@ -50,4 +60,8 @@ Vue.prototype.$http.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 Vue.prototype.$t_meta = window.t_meta;
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+new Vue({
+    router,
+    ...App,
+    nprogress
+}).$mount('#app')
