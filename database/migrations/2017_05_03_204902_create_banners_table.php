@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLinksTable extends Migration
+class CreateBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('url');
-            $table->string('name', 20);
-            $table->string('logo', 32)->nullable();
-            $table->string('linkman', 30)->comment('联系人')->nullable();
-            $table->unsignedInteger('type_id')->nullable()->index();
+            $table->string('title')->nullable();
             $table->integer('order')->default(0)->index()->comment('排序字段');
-            $table->boolean('is_visible')->default(true);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateLinksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('links');
+        Schema::dropIfExists('banners');
     }
 }

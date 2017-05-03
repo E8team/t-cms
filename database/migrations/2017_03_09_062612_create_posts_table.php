@@ -35,7 +35,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('comments_num')->default(0);
             // 文章置顶
             $table->timestamp('top')->nullable()->index();
-            $table->integer('order')->default(0)->index();
+            $table->integer('order')->default(0)->index()->comment('排序字段');
             // 内容模板
             $table->string('template', 30)->nullable();
             //文章的一些其他配置
