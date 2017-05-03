@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
+use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -60,6 +61,7 @@ class PostUpdateRequest extends Request
         if (!is_null($callback)) {
             $data = $callback($data);
         }
+        $data = Post::filterData($data);
         $post->fill($data)->saveOrFail();
         $post->addition(Arr::only($data, ['content', 'category_ids']));
         return $post;
