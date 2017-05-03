@@ -25,8 +25,7 @@
                             <el-option label="10" :value="10"></el-option>
                             <el-option label="20" :value="20"></el-option>
                             <el-option label="30" :value="30"></el-option>
-                            <el-option label="50" :value="50"></el-option>
-                            <el-option label="100" :value="100"></el-option>
+                            <el-option label="40" :value="40"></el-option>
                         </el-select>
                         项结果
                     </div>
