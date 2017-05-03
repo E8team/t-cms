@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin\Api;
 
-use App\Entities\Category;
-use App\Entities\Post;
-use App\Entities\PostContent;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\PostContent;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Transformers\PostTransformer;

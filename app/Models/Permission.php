@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 
-use App\Entities\Traits\Cachable;
-use App\Entities\Traits\Listable;
+use App\Models\Traits\Cachable;
+use App\Models\Traits\Listable;
 use Cache;
 use Config;
 use Illuminate\Cache\TaggableStore;

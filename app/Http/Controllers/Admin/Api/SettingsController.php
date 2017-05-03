@@ -6,7 +6,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\Setting;
+use App\Models\Setting;
 use App\Http\Requests\SettingCreateRequest;
 use App\Http\Requests\SettingUpdateRequest;
 

@@ -3,8 +3,8 @@
 
 namespace App\T\Link;
 
-use App\Entities\Type;
-use App\Entities\Link as LinkModel;
+use App\Models\Type;
+use App\Models\Link as LinkModel;
 
 class Link
 {

@@ -7,12 +7,11 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\Link;
-use App\Entities\Type;
+use App\Models\Link;
+use App\Models\Type;
 use App\Http\Requests\LinkCreateRequest;
 use App\Http\Requests\LinkUpdateRequest;
 use App\Transformers\LinkTransformer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LinksController extends ApiController
 {

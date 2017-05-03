@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-use App\Entities\Role;
-use App\Entities\User;
+use App\Models\Role;
+use App\Models\User;
 use App\Http\Requests\Request;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;

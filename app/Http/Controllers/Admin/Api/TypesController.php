@@ -6,9 +6,9 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\InterfaceTypeable;
-use App\Entities\Link;
-use App\Entities\Type;
+use App\Models\InterfaceTypeable;
+use App\Models\Link;
+use App\Models\Type;
 use App\Http\Requests\TypeCreateRequest;
 use App\Http\Requests\TypeUpdateRequest;
 use App\Transformers\TypeTransformer;

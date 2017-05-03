@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 
-use App\Entities\Presenters\CategoryPresenters;
-use App\Entities\Traits\Listable;
+use App\Models\Presenters\CategoryPresenters;
+use App\Models\Traits\Listable;
 use Laracasts\Presenter\PresentableTrait;
 use Ty666\PictureManager\Traits\Picture;
 

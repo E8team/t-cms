@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Auth\UserProvider;
-use App\Entities\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Hashing\BcryptHasher;

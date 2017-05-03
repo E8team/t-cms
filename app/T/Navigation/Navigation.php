@@ -4,7 +4,7 @@
 namespace App\T\Navigation;
 
 
-use App\Entities\Category;
+use App\Models\Category;
 
 class Navigation
 {

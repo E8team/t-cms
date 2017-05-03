@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entities;
+namespace App\Models;
 
 
 interface InterfaceTypeable

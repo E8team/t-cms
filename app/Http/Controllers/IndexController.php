@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Entities\Category;
+use App\Models\Category;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
 use Auth;

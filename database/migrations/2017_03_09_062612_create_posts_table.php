@@ -27,8 +27,8 @@ class CreatePostsTable extends Migration
             // 文章封面
             $table->char('cover', 32)->nullable();
             $table->char('status', 10)->default('publish');
-            // post page(单页) //revision(修订) //attachment(附件)
-            $table->char('type', 10)->default('post');
+            // 类型
+            $table->char('type', 10)->default('post')->comment('类型: post文章 page单页');
             // 浏览量
             $table->unsignedInteger('views_count')->default(0)->index();
             $table->boolean('allow_comment')->default(false);

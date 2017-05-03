@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 
-use App\Entities\Presenters\PostPresenters;
-use App\Entities\Traits\Listable;
+use App\Models\Presenters\PostPresenters;
+use App\Models\Traits\Listable;
 use Cache;
 use Carbon\Carbon;
 use Config;

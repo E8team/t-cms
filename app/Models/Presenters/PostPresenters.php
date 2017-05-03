@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\Presenters;
+namespace App\Models\Presenters;
 
-use App\Entities\Category;
+use App\Models\Category;
 use App\T\Navigation\Navigation;
 use Laracasts\Presenter\Presenter;
 

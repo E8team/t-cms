@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\Category;
-use App\Entities\Presenters\PostPresenters;
+use App\Models\Category;
+use App\Models\Presenters\PostPresenters;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Transformers\CategoryTransformer;

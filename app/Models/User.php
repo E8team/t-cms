@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
-use App\Entities\Traits\Listable;
+use App\Models\Traits\Listable;
 use Config;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Ty666\PictureManager\Traits\Picture;
 use Zizaco\Entrust\Traits\EntrustUserTrait;

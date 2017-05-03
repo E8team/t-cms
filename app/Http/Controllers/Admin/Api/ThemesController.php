@@ -6,7 +6,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\Setting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Ty666\LaravelTheme\Exception\ThemeNotFound;
 use Ty666\LaravelTheme\Theme;
