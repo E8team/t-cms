@@ -26,7 +26,6 @@
     var $nav = $('.nav_container');
     var lastTop = 0;
     var $title = $('.content_title');
-    $('.content_main').css('height', '1000px');
     $(document).scroll(function (e) {
         var currentTop = $(this).scrollTop();
         if(currentTop <= lastTop){
