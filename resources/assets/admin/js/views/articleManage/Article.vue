@@ -317,8 +317,11 @@
       .excerpt_size{
           border: 0;
           outline: none;
-          width: 35px;
-          padding: 0 10px;
+          width: 36px;
+          padding: 2px 0px;
+          border-bottom: 1px solid #999;
+          margin: 0 5px;
+          text-align: center;
       }
     }
     .img_list{

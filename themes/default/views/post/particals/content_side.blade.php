@@ -3,7 +3,7 @@
         $(function () {
             var $side = $('#side');
             var $main = $('.content_main');
-            var sideTop = $side.offset().top;
+            var sideTop = 190;
             $(document).scroll(function(){
                 if($(document).scrollTop() >= sideTop){
                     $side.css('position', 'fixed');

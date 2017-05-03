@@ -22,5 +22,30 @@
     @yield('js')
     @stack('js')
 </div>
+<script>
+    var $nav = $('.nav_container');
+    var lastTop = 0;
+    var $title = $('.content_title');
+    $('.content_main').css('height', '1000px');
+    $(document).scroll(function (e) {
+        var currentTop = $(this).scrollTop();
+        if(currentTop <= lastTop){
+            if($nav.css('position') != 'fixed'){
+                $nav.css({
+                    'position': 'fixed',
+                    'top': '-62px'
+                });
+                $nav.animate({
+                    top: '0'
+                }, 300 );
+            }
+        }else{
+            $nav.css({
+                'position': 'absolute'
+            });
+        }
+        lastTop = currentTop;
+    })
+</script>
 </body>
 </html>
