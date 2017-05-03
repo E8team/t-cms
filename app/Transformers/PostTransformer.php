@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Entities\Post;
+use App\Models\Post;
 use League\Fractal\TransformerAbstract;
 
 class PostTransformer extends TransformerAbstract

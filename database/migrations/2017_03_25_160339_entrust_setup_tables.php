@@ -17,7 +17,7 @@ class EntrustSetupTables extends Migration
             $table->string('name', 50)->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
-            $table->integer('order')->default(0)->index();
+            $table->integer('order')->default(0)->index()->comment('排序字段');
             $table->timestamps();
         });
 
@@ -43,7 +43,7 @@ class EntrustSetupTables extends Migration
             $table->unsignedInteger('parent_id')->default(0)->index();
             $table->boolean('is_menu')->default(true);
             $table->string('icon', 20)->nullable();
-            $table->integer('order')->default(0)->index();
+            $table->integer('order')->default(0)->index()->comment('排序字段');
             $table->timestamps();
         });
 

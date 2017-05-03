@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\Permission;
+use App\Models\Permission;
 use App\Http\Requests\PermissionCreateRequest;
 use App\Http\Requests\PermissionUpdateRequest;
 use App\Transformers\PermissionTransformer;

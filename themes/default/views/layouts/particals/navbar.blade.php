@@ -26,7 +26,7 @@
 @endpush
 <div class="nav_container">
     <div class="container">
-        <a href="#" class="logo"><img src="http://ooqq2vj4w.bkt.clouddn.com/logo.png" alt="logo"></a>
+        <a href="{!! URL::to('/') !!}" class="logo"><img src="http://ooqq2vj4w.bkt.clouddn.com/logo.png" alt="logo"></a>
         <ul class="nav_list" id="nav_list">
             @foreach($navigation->getAllNavFromCache() as $nav)
                 <li @if(!is_null($navigation->getTopNav()) && $nav->equals($navigation->getTopNav())) class="active" @endif>

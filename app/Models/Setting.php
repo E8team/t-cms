@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
-use App\Entities\Traits\Cachable;
+use App\Models\Traits\Cachable;
 use Cache;
 
 class Setting extends BaseModel

@@ -15,6 +15,7 @@ trait Update
 
     public function performUpdate(Model $model, callable $callback = null)
     {
+        //todo  allowModifyFields 为空的话可以直接$this->all()
         if (!isset($this->allowModifyFields)) {
             $this->allowModifyFields = array_keys($this->rules());
         }

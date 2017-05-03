@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 
-use App\Entities\Presenters\PostPresenters;
-use App\Entities\Traits\Listable;
+use App\Models\Presenters\PostPresenters;
+use App\Models\Traits\Listable;
 use Cache;
 use Carbon\Carbon;
 use Config;
@@ -171,7 +171,11 @@ class Post extends BaseModel
         }
         // 处理置顶
         if (isset($data['top'])) {
-            $data['top'] = Carbon::now();
+            if($data['top']){
+                $data['top'] = Carbon::now();
+            }else{
+                $data['top'] = null;
+            }
         }
         if (isset($data['cover_in_content'])) {
             $data['conver'] = PictureManager::convert($data['cover_in_content']);

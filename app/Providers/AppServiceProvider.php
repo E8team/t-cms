@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Entities\Setting;
+use App\Models\Setting;
 use App\T\Alert\Alert;
 use App\T\Navigation\Navigation;
 use Dingo\Api\Exception\ValidationHttpException;

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'model' => \App\Entities\User::class,
+    'model' => \App\Models\User::class,
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'e8',
-            'model' => \App\Entities\User::class,
+            'model' => \App\Models\User::class,
             'table' => 'users',
         ],
 

@@ -27,15 +27,15 @@ class CreatePostsTable extends Migration
             // 文章封面
             $table->char('cover', 32)->nullable();
             $table->char('status', 10)->default('publish');
-            // post page(单页) //revision(修订) //attachment(附件)
-            $table->char('type', 10)->default('post');
+            // 类型
+            $table->char('type', 10)->default('post')->comment('类型: post文章 page单页');
             // 浏览量
             $table->unsignedInteger('views_count')->default(0)->index();
             $table->boolean('allow_comment')->default(false);
             $table->unsignedInteger('comments_num')->default(0);
             // 文章置顶
             $table->timestamp('top')->nullable()->index();
-            $table->integer('order')->default(0)->index();
+            $table->integer('order')->default(0)->index()->comment('排序字段');
             // 内容模板
             $table->string('template', 30)->nullable();
             //文章的一些其他配置

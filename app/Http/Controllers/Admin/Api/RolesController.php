@@ -2,13 +2,12 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
-use App\Entities\Permission;
-use App\Entities\Role;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleUpdateRequest;
 use App\Transformers\PermissionTransformer;
 use App\Transformers\RoleTransformer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RolesController extends ApiController
 {

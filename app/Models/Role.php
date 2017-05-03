@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 
-use App\Entities\Traits\Listable;
+use App\Models\Traits\Listable;
 use Cache;
 use Config;
 use DB;

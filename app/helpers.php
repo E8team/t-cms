@@ -29,7 +29,7 @@ function setting($key = null, $default = null)
 {
     static $allSetting = null;
     if(is_null($allSetting)){
-        $allSetting = \App\Entities\Setting::allSettingWithCache();
+        $allSetting = \App\Models\Setting::allSettingWithCache();
     }
     if(is_null($key)){
         return $allSetting;

@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Entities\Link;
+use App\Models\Link;
 use League\Fractal\TransformerAbstract;
 
 class LinkTransformer extends TransformerAbstract

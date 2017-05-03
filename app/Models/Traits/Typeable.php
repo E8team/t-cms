@@ -1,7 +1,7 @@
 <?php
-namespace App\Entities\Traits;
+namespace App\Models\Traits;
 
-use App\Entities\Type;
+use App\Models\Type;
 
 Trait Typeable{
     public function scopeByType($query, $type)

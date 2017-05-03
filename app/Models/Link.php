@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
 
-use App\Entities\Traits\Listable;
-use App\Entities\Traits\Typeable;
+use App\Models\Traits\Listable;
+use App\Models\Traits\Typeable;
 use Ty666\PictureManager\Traits\Picture;
 
 class Link extends BaseModel implements InterfaceTypeable

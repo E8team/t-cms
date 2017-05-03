@@ -19,7 +19,7 @@ return [
     | the role if it is in a different namespace.
     |
     */
-    'role' => \App\Entities\Role::class,
+    'role' => \App\Models\Role::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => \App\Entities\Permission::class,
+    'permission' => \App\Models\Permission::class,
 
     /*
     |--------------------------------------------------------------------------

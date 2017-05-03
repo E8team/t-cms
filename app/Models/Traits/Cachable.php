@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\Traits;
+namespace App\Models\Traits;
 
 
 trait Cachable

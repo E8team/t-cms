@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Entities\Type;
+use App\Models\Type;
 use League\Fractal\TransformerAbstract;
 
 class TypeTransformer extends TransformerAbstract
