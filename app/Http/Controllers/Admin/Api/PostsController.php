@@ -111,6 +111,18 @@ class PostsController extends ApiController
     }
 
     /**
+     * 还原指定的被软删除的文章
+     * @param $postId
+     * @return \Dingo\Api\Http\Response
+     */
+    public function restore($postId)
+    {
+        $post = Post::withTrashed()->where('id', $postId)->fisrtOrFail();
+        $post->restore();
+        return $this->response->noContent();
+    }
+
+    /**
      * 批量移动
      * @param Request $request
      * @return \Dingo\Api\Http\Response

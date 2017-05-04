@@ -88,6 +88,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('categories/{category}/page', 'PostsController@storePage');
     // 软删除指定的文章
     $api->delete('posts/{post}', 'PostsController@softDelete');
+    // 还原指定的被软删除的文章
+    $api->post('posts/{post}/restore', 'PostsController@restore');
     // -------------------------------------------------
     // 获取所有友情链接的类别
     $api->get('types/link', 'TypesController@links');
