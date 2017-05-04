@@ -86,8 +86,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->put('posts/{post}', 'PostsController@update');
     // 创建或更新单网页
     $api->post('categories/{category}/page', 'PostsController@storePage');
-    // 删除文章·
-    $api->delete('posts/{post}', 'PostsController@destroy');
+    // 软删除指定的文章
+    $api->delete('posts/{post}', 'PostsController@softDelete');
     // -------------------------------------------------
     // 获取所有友情链接的类别
     $api->get('types/link', 'TypesController@links');

@@ -26,7 +26,7 @@ class CreatePostsTable extends Migration
             // $table->longText('content');
             // 文章封面
             $table->char('cover', 32)->nullable();
-            $table->char('status', 10)->default('publish');
+            $table->char('status', 10)->default('publish')->comment('文章状态：publish发布 draft草稿');
             // 类型
             $table->char('type', 10)->default('post')->comment('类型: post文章 page单页');
             // 浏览量

@@ -59,18 +59,18 @@ class IndexController extends Controller
     {
 
         $category = Category::findBySlug($cateSlug);
-        $queryBuilder = $category->posts()->where('id', $post);
+        $queryBuilder = $category->posts()->post()->where('id', $post);
         if(Auth::check() && Auth::user()->can('admin.post.show')){
             $post = $queryBuilder->where(function ($query){
-                $query->postAndDraft();
-            })->firstOrFail();
-            if(!$post->isPublish() || $post->isDraft())
+                $query->publishAndDraft();
+            })->withTrashed()->firstOrFail();
+            if(!$post->isPublish() || $post->trashed())
             {
                 // 管理员预览草稿或未发布的文章
                 Alert::setWarning('当前文章未发布，此页面只有管理员可见!');
             }
         }else{
-            $post = $queryBuilder->post()->publish()->firstOrFail();
+            $post = $queryBuilder->publish()->firstOrFail();
         }
         app(Navigation::class)->setCurrentNav($category);
         return theme_view($post->template, ['post' => $post]);

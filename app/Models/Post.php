@@ -45,32 +45,26 @@ class Post extends BaseModel
 
     public function scopeApplyFilter($query, $data)
     {
-        $data = $data->only('q', 'type', 'status', 'orders', 'only_trashed');
+        $data = $data->only('q', 'status', 'orders', 'only_trashed');
         $query->orderByTop();
+        $query->post();
+
         if (!isset($data['q'])) {
             $query->withSimpleSearch($data['q']);
         }
+
         if (!isset($data['orders'])) {
             $query->withSort($data['orders']);
         }
-        switch ($data['type']) {
-            case 'post':
-                $query->post();
-                break;
-            case 'page':
-                $query->page();
-                break;
-            case 'draft':
-                $query->draft();
-                break;
-            default:
-                $query->postAndDraft();
-                break;
-        }
+
         switch ($data['status']) {
             case 'publish':
                 $query->publish();
                 break;
+            case 'draft':
+                $query->draft();
+            default:
+                $query->publishAndDraft();
         }
         if(isset($data['only_trashed']) && $data['only_trashed']){
             $query->onlyTrashed();
@@ -83,16 +77,6 @@ class Post extends BaseModel
         return $query->where('type', 'post');
     }
 
-    public function scopeDraft($query)
-    {
-        return $query->where('type', 'draft');
-    }
-
-    public function scopePostAndDraft($query)
-    {
-        return $query->where('type', 'post')->orWhere('type', 'draft');
-    }
-
     public function scopePage($query)
     {
         return $query->where('type', 'page');
@@ -101,6 +85,16 @@ class Post extends BaseModel
     public function scopePublish($query)
     {
         return $query->where('status', 'publish');
+    }
+
+    public function scopeDraft($query)
+    {
+        return $query->where('status', 'draft');
+    }
+
+    public function scopePublishAndDraft($query)
+    {
+        return $query->where('status', 'publish')->orWhere('status', 'draft');
     }
 
     public function scopeOrderByTop($query)

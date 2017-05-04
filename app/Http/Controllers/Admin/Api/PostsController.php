@@ -100,17 +100,13 @@ class PostsController extends ApiController
     }
 
     /**
-     * 删除指定文章
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * 软删除指定的文章
+     * @param Post $post
+     * @return \Dingo\Api\Http\Response
      */
-    public function destroy(Post $post)
+    public function softDelete(Post $post)
     {
-        //todo 考虑软删除 和 分类
-        //$post->delete();
-        //$post->content()->delete();
+        $post->delete();
         return $this->response->noContent();
     }
 
