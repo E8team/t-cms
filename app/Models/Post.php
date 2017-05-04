@@ -45,20 +45,27 @@ class Post extends BaseModel
 
     public function scopeApplyFilter($query, $data)
     {
-        $data = $data->only('q', 'type', 'status', 'orders');
+        $data = $data->only('q', 'type', 'status', 'orders', 'only_trashed');
         $query->orderByTop();
-        if (!is_null($data['q'])) {
+        if (!isset($data['q'])) {
             $query->withSimpleSearch($data['q']);
         }
-        if (!is_null($data['orders'])) {
+        if (!isset($data['orders'])) {
             $query->withSort($data['orders']);
         }
         switch ($data['type']) {
+            case 'post':
+                $query->post();
+                break;
             case 'page':
-                $query->type();
+                $query->page();
                 break;
             case 'draft':
                 $query->draft();
+                break;
+            default:
+                $query->postAndDraft();
+                break;
         }
         switch ($data['status']) {
             case 'publish':
@@ -76,14 +83,19 @@ class Post extends BaseModel
         return $query->where('type', 'post');
     }
 
-    public function scopePage($query)
-    {
-        return $query->where('type', 'page');
-    }
-
     public function scopeDraft($query)
     {
         return $query->where('type', 'draft');
+    }
+
+    public function scopePostAndDraft($query)
+    {
+        return $query->where('type', 'post')->orWhere('type', 'draft');
+    }
+
+    public function scopePage($query)
+    {
+        return $query->where('type', 'page');
     }
 
     public function scopePublish($query)

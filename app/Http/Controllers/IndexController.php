@@ -62,7 +62,7 @@ class IndexController extends Controller
         $queryBuilder = $category->posts()->where('id', $post);
         if(Auth::check() && Auth::user()->can('admin.post.show')){
             $post = $queryBuilder->where(function ($query){
-                $query->where('type', 'post')->orWhere('type', 'draft');
+                $query->postAndDraft();
             })->firstOrFail();
             if(!$post->isPublish() || $post->isDraft())
             {
