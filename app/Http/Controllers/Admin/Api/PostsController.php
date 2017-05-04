@@ -117,7 +117,7 @@ class PostsController extends ApiController
      */
     public function restore($postId)
     {
-        $post = Post::withTrashed()->where('id', $postId)->fisrtOrFail();
+        $post = Post::withTrashed()->where('id', $postId)->firstOrFail();
         $post->restore();
         return $this->response->noContent();
     }
