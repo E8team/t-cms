@@ -65,6 +65,9 @@ class Post extends BaseModel
                 $query->publish();
                 break;
         }
+        if(isset($data['only_trashed']) && $data['only_trashed']){
+            $query->onlyTrashed();
+        }
         return $query->ordered()->recent();
     }
 
@@ -230,5 +233,9 @@ class Post extends BaseModel
     public function isPublish()
     {
         return $this->status == 'publish';
+    }
+    public function isDraft()
+    {
+        return $this->type == 'draft';
     }
 }
