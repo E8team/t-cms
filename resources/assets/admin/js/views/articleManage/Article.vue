@@ -49,6 +49,13 @@
           <el-form-item required label="浏览次数">
               <el-input-number :min="0" v-model="article.views_count"></el-input-number>
           </el-form-item>
+            <el-form-item label="置顶开关">
+                <el-switch
+                    v-model="article.top"
+                    on-color="#13ce66"
+                    off-color="#ff4949">
+                </el-switch>
+            </el-form-item>
           <el-button-group class="public_btn">
               <el-button type="success" @click="confirm" :loading="confirmLoading">{{confirmBtnTitle}}</el-button>
               <el-button @click="$router.back()">返回</el-button>
@@ -251,7 +258,8 @@
           'order': null,
           'template': null,
           'category_ids': [],
-          'published_at': null
+          'published_at': null,
+           'top': false
         },
         excerptSize: 54
       }

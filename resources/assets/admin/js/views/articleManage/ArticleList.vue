@@ -17,7 +17,7 @@
           <el-table border :data="list.data" style="width: 100%">
             <el-table-column width="340px" label="标题">
               <template scope="scope">
-                <a :href="scope.row.url" class="title" target="_blank">{{scope.row.title}}</a>
+                <el-tag class="top" type="danger" v-if="scope.row.top">置顶</el-tag><a :href="scope.row.url" class="title" target="_blank">{{scope.row.title}}</a>
               </template>
             </el-table-column>
             <el-table-column property="user.nick_name" label="发布者"></el-table-column>
@@ -252,6 +252,9 @@ export default {
   }
   .main_list{
     padding-left: 200px;
+    .top{
+      margin-right: 10px;
+    }
     .title{
       color: #2476B4;
       text-decoration: none;
