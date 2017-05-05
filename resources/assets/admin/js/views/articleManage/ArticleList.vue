@@ -126,7 +126,11 @@ export default {
     activeTab () {
         this.$refs['list'].refresh(this.queryName);
     },
+    '$route' (to, from) {
+        this.activeIndex = this.$route.params.column;
+    },
     activeIndex () {
+      this.$router.push({name: 'articles', params: {column: this.activeIndex}});
       let res = {};
       this.search(this.activeIndex, this.allCategories, res);
       let current = res.current;
