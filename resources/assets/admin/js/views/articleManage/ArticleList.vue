@@ -233,6 +233,7 @@ export default {
     document.querySelector('#ueditor_wrapper').appendChild(ueditorNode);
     this.$http.get('categories/all').then(res => {
       this.allCategories = res.data.filter(item => item.type != 2);
+      this.activeIndex = Number(this.$route.params.column);
     })
   }
 }
