@@ -11,7 +11,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Entities\User::first();
+        $user = \App\Models\User::first();
         DB::table('posts')->insert([
             [
                 'id' => 1,
