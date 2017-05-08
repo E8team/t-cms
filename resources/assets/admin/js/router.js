@@ -68,7 +68,7 @@ export default new Router({
                             component: require('./views/userManage/Permission.vue')
                         },
                         {
-                            path: 'articles',
+                            path: 'articles/:column?',
                             name: 'articles',
                             component: require('./views/articleManage/ArticleList.vue')
                         },

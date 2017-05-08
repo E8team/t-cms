@@ -57,7 +57,8 @@
                 </el-switch>
             </el-form-item>
           <el-button-group class="public_btn">
-              <el-button type="success" @click="confirm" :loading="confirmLoading">{{confirmBtnTitle}}</el-button>
+              <el-button type="success" @click="confirm('public')" :loading="confirmLoading">{{confirmBtnTitle}}</el-button>
+              <el-button type="info" @click="confirm('draft')" :loading="confirmLoading">保存为草稿</el-button>
               <el-button @click="$router.back()">返回</el-button>
           </el-button-group>
         </el-form>
@@ -103,12 +104,13 @@
   export default {
     name: 'article',
     methods: {
-      confirm () {
+      confirm (status) {
         let method, url;
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
         this.confirmLoading = true;
         this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getPlainTxt().substr(0, this.excerptSize);
+        this.article.status = status;
         this.$http[method](url, this.$diff.diff(this.article)).then(res => {
           this.$message({
               message: `${this.title}成功`,

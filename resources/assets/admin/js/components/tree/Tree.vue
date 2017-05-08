@@ -29,6 +29,11 @@ export default{
       if(val != oldval){
         this.$emit('input', val);
       }
+    },
+    'value' (val) {
+        if (this.currentIndex !== val) {
+            this.currentIndex = val
+        }
     }
   },
   components: {

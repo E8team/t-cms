@@ -14,10 +14,16 @@
       </div>
       <CurrencyListPage v-show="currnetType == 0" :title="currentTitle" ref="list" :queryName="queryName">
         <template scope="list">
+          <el-tabs v-model="activeTab">
+            <el-tab-pane label="默认" name="default"></el-tab-pane>
+            <el-tab-pane label="回收站" name="trashed"></el-tab-pane>
+          </el-tabs>
           <el-table border :data="list.data" style="width: 100%">
             <el-table-column width="340px" label="标题">
               <template scope="scope">
-                <el-tag class="top" type="danger" v-if="scope.row.top">置顶</el-tag><a :href="scope.row.url" class="title" target="_blank">{{scope.row.title}}</a>
+                <el-tag class="tag" type="danger" v-if="scope.row.top">置顶</el-tag>
+                <el-tag class="tag" type="gray" v-if="scope.row.status == 'draft'">草稿</el-tag>
+                <a :href="scope.row.url" class="title" target="_blank">{{scope.row.title}}</a>
               </template>
             </el-table-column>
             <el-table-column property="user.nick_name" label="发布者"></el-table-column>
@@ -40,7 +46,8 @@
                   width="160">
               <template scope="scope">
                   <el-button-group>
-                      <el-button size="mini" @click="$router.push({name: 'article-edit', params: {id: scope.row.id}})" type="warning">编辑</el-button>
+                      <el-button v-if="activeTab == 'default'" size="mini" @click="$router.push({name: 'article-edit', params: {id: scope.row.id}})" type="warning">编辑</el-button>
+                      <el-button v-else size="mini" @click="restore(scope.row.id)" type="success">还原</el-button>
                       <el-button @click="del(scope.row.id)" size="mini" type="danger">删除</el-button>
                   </el-button-group>
               </template>
@@ -70,6 +77,7 @@ export default {
   name: 'articles',
   data () {
     return {
+      activeTab: 'default',
       props: {
         label: 'cate_name',
         children: 'children'
@@ -97,9 +105,6 @@ export default {
       document.body.removeChild(element);
     }, this);
   },
-  beforeCreate () {
-    
-  },
   components: {
     CurrencyListPage, Tree
   },
@@ -109,12 +114,25 @@ export default {
         // return 'posts?include=categories'
         return null;
       }else{
-        return `categories/${this.activeIndex}/posts?include=categories`;
+        let defaultUrl = `categories/${this.activeIndex}/posts?include=categories`;
+        if(this.activeTab == 'trashed'){
+            defaultUrl += "&only_trashed=true";
+        }
+        return defaultUrl;
       }
     }
   },
   watch: {
+    activeTab () {
+        this.$refs['list'].refresh(this.queryName);
+    },
+    '$route' (to, from) {
+        this.activeIndex = this.$route.params.column;
+    },
     activeIndex () {
+      if(this.activeIndex){
+          this.$router.push({name: 'articles', params: {column: this.activeIndex}});
+      }
       let res = {};
       this.search(this.activeIndex, this.allCategories, res);
       let current = res.current;
@@ -175,8 +193,14 @@ export default {
         this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
       });
     },
+    restore (id) {
+        this.$http.post(`posts/${id}/restore`).then(res => {
+            this.$message('已还原');
+            this.$refs['list'].refresh()
+        })
+    },
     del (id) {
-        this.$confirm('你确定要删除该文章?', '提示', {
+        this.$confirm(this.activeTab == 'default' ? '你确定要删除该文章?' : '在回收站中删除该文章将无法恢复你确定要删除？', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
@@ -211,6 +235,7 @@ export default {
     document.querySelector('#ueditor_wrapper').appendChild(ueditorNode);
     this.$http.get('categories/all').then(res => {
       this.allCategories = res.data.filter(item => item.type != 2);
+      this.activeIndex = Number(this.$route.params.column);
     })
   }
 }
@@ -252,7 +277,7 @@ export default {
   }
   .main_list{
     padding-left: 200px;
-    .top{
+    .tag{
       margin-right: 10px;
     }
     .title{
