@@ -1,9 +1,23 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "3tnet/t-cms",
+    "description": "t-cms",
+    "keywords": ["t-cms", "cms", "laravel"],
     "license": "MIT",
     "type": "project",
+    "support": {
+        "issues": "https://github.com/3tnet/t-cms/issues",
+        "source": "https://github.com/3tnet/t-cms"
+    },
+    "authors": [
+        {
+            "name": "taoyu",
+            "email": "1255803549@qq.com"
+        },
+        {
+            "name": "taowei",
+            "email": "t888y@qq.com"
+        }
+    ],
     "require": {
         "php": ">=5.6.4",
         "appstract/laravel-opcache": "^1.1",
