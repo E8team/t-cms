@@ -130,7 +130,9 @@ export default {
         this.activeIndex = this.$route.params.column;
     },
     activeIndex () {
-      this.$router.push({name: 'articles', params: {column: this.activeIndex}});
+      if(this.activeIndex){
+          this.$router.push({name: 'articles', params: {column: this.activeIndex}});
+      }
       let res = {};
       this.search(this.activeIndex, this.allCategories, res);
       let current = res.current;
