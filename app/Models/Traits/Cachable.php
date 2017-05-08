@@ -2,7 +2,6 @@
 
 namespace App\Models\Traits;
 
-
 trait Cachable
 {
     abstract protected function clearCache();

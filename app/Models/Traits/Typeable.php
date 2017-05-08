@@ -3,16 +3,17 @@ namespace App\Models\Traits;
 
 use App\Models\Type;
 
-Trait Typeable{
+trait Typeable
+{
     public function scopeByType($query, $type)
     {
         if ($type instanceof Type) {
             $typeId = $type->id;
         } elseif (is_array($type)) {
             $typeId = $type['id'];
-        } elseif (is_null($type)){
+        } elseif (is_null($type)) {
             $typeId = null;
-        }else{
+        } else {
             $typeId = intval($type);
         }
 

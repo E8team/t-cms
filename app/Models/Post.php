@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Models\Presenters\PostPresenters;
 use App\Models\Traits\Listable;
 use Cache;
@@ -66,7 +65,7 @@ class Post extends BaseModel
             default:
                 $query->publishAndDraft();
         }
-        if(isset($data['only_trashed']) && $data['only_trashed']){
+        if (isset($data['only_trashed']) && $data['only_trashed']) {
             $query->onlyTrashed();
         }
         return $query->ordered()->recent();
@@ -143,7 +142,7 @@ class Post extends BaseModel
     {
         if ($categories instanceof Collection) {
             $categories = $categories->pluck('id');
-        } else if (is_string($categories)) {
+        } elseif (is_string($categories)) {
             $categories = explode(',', $categories);
         }
         $this->categories()->sync($categories);
@@ -166,23 +165,23 @@ class Post extends BaseModel
 
     public static function filterData($data)
     {
-        if(isset($data['title'])){
+        if (isset($data['title'])) {
             $data['title'] = e($data['title']);
         }
-        if(isset($data['author_info'])){
+        if (isset($data['author_info'])) {
             $data['author_info'] = e($data['author_info']);
         }
-        if(isset($data['excerpt'])){
+        if (isset($data['excerpt'])) {
             $data['excerpt'] = e($data['excerpt']);
         }
-        if(isset($data['content'])){
+        if (isset($data['content'])) {
             $data['content'] = clean($data['content']);
         }
         // 处理置顶
         if (isset($data['top'])) {
-            if($data['top']){
+            if ($data['top']) {
                 $data['top'] = Carbon::now();
-            }else{
+            } else {
                 $data['top'] = null;
             }
         }
@@ -199,7 +198,9 @@ class Post extends BaseModel
     {
         $data = static::filterData($data);
         $data['type'] = 'post';
-        if(!isset($data['published_at'])) $data['published_at'] = Carbon::now();
+        if (!isset($data['published_at'])) {
+            $data['published_at'] = Carbon::now();
+        }
         $post = static::create($data);
         $post->addition(Arr::only($data, ['content', 'category_ids']));
         return $post;

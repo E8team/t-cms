@@ -63,5 +63,4 @@ class Setting extends BaseModel
     {
         return static::allSettingWithCache()->get($name);
     }
-
 }

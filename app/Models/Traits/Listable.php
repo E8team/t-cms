@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Traits;
 
-Trait Listable
+trait Listable
 {
     //protected static $allowSortFields = [];
     /**

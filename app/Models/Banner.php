@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Models\Traits\Listable;
 use App\Models\Traits\Typeable;
 use Ty666\PictureManager\Traits\Picture;

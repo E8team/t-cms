@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\Category;
 use App\Models\Presenters\PostPresenters;
 use App\Http\Requests\CategoryCreateRequest;
@@ -14,7 +13,6 @@ use DB;
 
 class CategoriesController extends ApiController
 {
-
     public function __construct()
     {
         $this->middleware('permission:admin.post.categories')->except('post');
@@ -42,9 +40,8 @@ class CategoriesController extends ApiController
      */
     public function store(CategoryCreateRequest $request)
     {
-
         $data = filterNullWhenHasDefaultValue($request->all(), ['parent_id', 'order']);
-        if(is_null($data['parent_id'])){
+        if (is_null($data['parent_id'])) {
             unset($data['parent_id']);
         }
         Category::create($data);
@@ -78,7 +75,6 @@ class CategoriesController extends ApiController
             ->get();
         return $this->response->collection($topCategories, new CategoryTransformer());
         //->setMeta(Category::getAllowSearchFieldsMeta());
-
     }
 
     /**
@@ -134,7 +130,6 @@ class CategoriesController extends ApiController
         } else {
             return $this->response->array(Category::allCategoryArray($request->get('type')));
         }
-
     }
 
     /**
@@ -145,8 +140,7 @@ class CategoriesController extends ApiController
      */
     public function destroy(Category $category, Request $request)
     {
-
-        if($request->has('delete_relation')){
+        if ($request->has('delete_relation')) {
             // 需要删除关联数据
             $category->posts()->forceDelete();
         }

@@ -8,10 +8,8 @@
 
 namespace App\T;
 
-
 class Json2phpArray
 {
-
     public static function convert($inFileName, $outFileName)
     {
         if (!file_exists($inFileName)) {
@@ -42,7 +40,7 @@ class Json2phpArray
             }
             if (is_array($v)) {
                 self::printArray($v, $str, $level + 1);
-            } else if (is_numeric($v)) {
+            } elseif (is_numeric($v)) {
                 $str .= $v;
             } else {
                 $str .= "'$v'";

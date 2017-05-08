@@ -42,11 +42,14 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/[0-9a-z]{32}/i', $value) == 1;
         }, '图片上传错误!');
         Validator::extend('int_array', function ($attribute, $value, $parameters, $validator) {
-            if (!is_array($value))
+            if (!is_array($value)) {
                 return false;
-            foreach ($value as $v)
-                if (!is_numeric($v))
+            }
+            foreach ($value as $v) {
+                if (!is_numeric($v)) {
                     return false;
+                }
+            }
 
             return true;
         }, ':attribute 必须为数字数组');
@@ -59,7 +62,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
@@ -108,7 +110,6 @@ class AppServiceProvider extends ServiceProvider
             ], 404);
         });
         $apiHandler->register(function (ValidationException $exception) {
-
             throw new ValidationHttpException($exception->validator->errors());
         });
         $apiHandler->register(function (QueryException $exception) {

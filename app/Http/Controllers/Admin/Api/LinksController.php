@@ -6,7 +6,6 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\Link;
 use App\Models\Type;
 use App\Http\Requests\LinkCreateRequest;
@@ -15,7 +14,6 @@ use App\Transformers\LinkTransformer;
 
 class LinksController extends ApiController
 {
-
     public function allLinks()
     {
         $links = Link::ordered()

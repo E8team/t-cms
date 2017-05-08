@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\Permission;
 use App\Models\Role;
 use App\Http\Requests\RoleCreateRequest;
@@ -109,5 +108,4 @@ class RolesController extends ApiController
         $role->delete();
         return $this->response->noContent();
     }
-
 }

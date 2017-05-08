@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 class Type extends BaseModel
 {
     protected $fillable = ['name', 'description', 'order', 'class_name'];

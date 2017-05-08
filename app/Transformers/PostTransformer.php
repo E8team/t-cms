@@ -35,12 +35,11 @@ class PostTransformer extends TransformerAbstract
     public function includeContent(Post $post)
     {
         $content = $post->content;
-        if(is_null($content)){
+        if (is_null($content)) {
             return $this->null();
-        }else{
+        } else {
             return $this->item($content, new PostContentTransformer());
         }
-
     }
 
     public function includeCategories(Post $post)

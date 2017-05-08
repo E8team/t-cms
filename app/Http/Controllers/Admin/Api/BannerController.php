@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\Banner;
 use App\Transformers\BannerTransformer;
 

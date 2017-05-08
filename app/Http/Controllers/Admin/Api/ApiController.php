@@ -9,6 +9,4 @@ use Dingo\Api\Routing\Helpers;
 class ApiController extends Controller
 {
     use Helpers;
-
-
 }

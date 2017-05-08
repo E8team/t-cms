@@ -2,7 +2,6 @@
 
 namespace App\T\Alert;
 
-
 use Illuminate\Contracts\Session\Session;
 
 class Alert

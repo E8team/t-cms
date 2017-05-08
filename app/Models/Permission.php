@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Models\Traits\Cachable;
 use App\Models\Traits\Listable;
 use Cache;
@@ -50,19 +49,17 @@ class Permission extends BaseModel implements EntrustPermissionInterface
 
     public static function allPermissionWithCache()
     {
-        if(Cache::getStore() instanceof TaggableStore) {
+        if (Cache::getStore() instanceof TaggableStore) {
             return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
                 return static::allPermission();
             });
-        }else{
+        } else {
             return static::allPermission();
         }
-
     }
 
     public static function getUserMenu($user)
     {
-
         if (is_numeric($user)) {
             $user = User::find($user);
         }

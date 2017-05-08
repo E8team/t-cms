@@ -5,10 +5,8 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
-
 class CategoryUpdateRequest extends Request
 {
-
     use Update;
 
     protected $allowModifyFields = ['type', 'image', 'parent_id', 'cate_name',
@@ -49,6 +47,4 @@ class CategoryUpdateRequest extends Request
             'setting' => 'nullable|string'
         ];
     }
-
-
 }

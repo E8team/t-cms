@@ -5,7 +5,6 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\InterfaceTypeable;
 use App\Models\Link;
 use App\Models\Type;
@@ -59,13 +58,13 @@ class TypesController extends ApiController
      */
     public function destroy(Type $type, Request $request)
     {
-        if(class_exists($type->class_name)){
+        if (class_exists($type->class_name)) {
             $model = app($type->class_name);
-            if($model instanceof InterfaceTypeable) {
-                if($request->has('delete_relation')){
+            if ($model instanceof InterfaceTypeable) {
+                if ($request->has('delete_relation')) {
                     // 需要删除关联数据
                     $model->byType($type)->delete();
-                }else{
+                } else {
                     // 关联数据中的type_id 置为null
                     $model->byType($type)->update(['type_id' => null]);
                 }

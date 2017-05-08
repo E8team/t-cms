@@ -5,10 +5,8 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
-
 class SettingUpdateRequest extends Request
 {
-
     use Update;
 
     protected $allowModifyFields = ['name', 'value', 'description', 'is_autoload'];

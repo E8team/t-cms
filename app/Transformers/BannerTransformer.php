@@ -2,7 +2,6 @@
 
 namespace App\Transformers;
 
-
 use App\Models\Banner;
 use League\Fractal\TransformerAbstract;
 

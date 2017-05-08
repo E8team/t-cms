@@ -4,10 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
 
-
 class TypeUpdateRequest extends Request
 {
-
     use Update;
 
     protected $allowModifyFields = ['name', 'description', 'order'];

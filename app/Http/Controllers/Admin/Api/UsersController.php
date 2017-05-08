@@ -14,7 +14,6 @@ use Hash;
 
 class UsersController extends ApiController
 {
-
     public function __construct()
     {
         $this->middleware('permission:admin.user.show')->except('me');
@@ -74,7 +73,7 @@ class UsersController extends ApiController
      */
     public function update(User $user, UserUpdateRequest $request)
     {
-        $request->performUpdate($user, function ($data){
+        $request->performUpdate($user, function ($data) {
             if (isset($data['password'])) {
                 $data['password'] = Hash::make($data['password']);
             }

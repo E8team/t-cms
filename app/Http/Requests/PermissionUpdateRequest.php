@@ -5,10 +5,8 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
-
 class PermissionUpdateRequest extends Request
 {
-
     use Update;
 
     protected $allowModifyFields = ['name', 'display_name', 'description', 'parent_id', 'is_menu', 'icon', 'order'];

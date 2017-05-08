@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-
 class CategoryCreateRequest extends Request
 {
     /**
@@ -38,6 +37,4 @@ class CategoryCreateRequest extends Request
             'setting' => 'nullable|string'
         ];
     }
-
-
 }

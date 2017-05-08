@@ -4,10 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
 
-
 class LinkUpdateRequest extends Request
 {
-
     use Update;
 
     protected $allowModifyFields = ['url', 'name', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];

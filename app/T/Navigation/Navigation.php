@@ -3,7 +3,6 @@
 
 namespace App\T\Navigation;
 
-
 use App\Models\Category;
 
 class Navigation

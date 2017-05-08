@@ -2,7 +2,6 @@
 
 namespace App\Auth;
 
-use App\Exceptions\StudentNotFoundException;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

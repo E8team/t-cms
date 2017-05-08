@@ -25,7 +25,6 @@ class LoginController extends ApiController
      */
     public function login(Request $request)
     {
-
         $credentials = $this->credentials($request);
         $validator = $this->validateLogin($credentials);
         if ($validator->fails()) {
@@ -153,5 +152,4 @@ class LoginController extends ApiController
     {
         return 'user_name';
     }
-
 }

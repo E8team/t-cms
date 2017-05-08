@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Models\Traits\Listable;
 use Cache;
 use Config;

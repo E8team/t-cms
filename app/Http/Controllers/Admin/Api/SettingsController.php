@@ -5,7 +5,6 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\Setting;
 use App\Http\Requests\SettingCreateRequest;
 use App\Http\Requests\SettingUpdateRequest;
@@ -35,5 +34,4 @@ class SettingsController extends ApiController
         $request->performUpdate($setting);
         return $this->response->noContent();
     }
-
 }

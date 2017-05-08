@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Traits;
 
-Trait Helpers
+trait Helpers
 {
     public function scopePage4Api($query)
     {

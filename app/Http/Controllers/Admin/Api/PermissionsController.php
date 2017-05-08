@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-
 use App\Models\Permission;
 use App\Http\Requests\PermissionCreateRequest;
 use App\Http\Requests\PermissionUpdateRequest;
@@ -78,7 +77,6 @@ class PermissionsController extends ApiController
             ->get();
         return $this->response->collection($topPermissions, new PermissionTransformer())
             ->setMeta(Permission::getAllowSearchFieldsMeta());
-
     }
 
     /**

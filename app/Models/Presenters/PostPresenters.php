@@ -23,14 +23,13 @@ class PostPresenters extends Presenter
     public function getUrl()
     {
         if (is_null(static::$currentCategory)) {
-            if(!$category = app(Navigation::class)->getCurrentNav()){
+            if (!$category = app(Navigation::class)->getCurrentNav()) {
                 $category = $this->categories->first();
             }
-        }else{
+        } else {
             $category = static::$currentCategory;
         }
 
         return route('post', [$category->cate_slug, $this->id]);
-
     }
 }

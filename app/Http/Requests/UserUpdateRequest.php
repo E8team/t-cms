@@ -5,10 +5,8 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\Update;
 use Illuminate\Validation\Rule;
 
-
 class UserUpdateRequest extends Request
 {
-
     use Update;
 
     protected $allowModifyFields = ['user_name', 'nick_name', 'email', 'password', 'is_lock'];

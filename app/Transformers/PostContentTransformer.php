@@ -2,7 +2,6 @@
 
 namespace App\Transformers;
 
-
 use App\Models\PostContent;
 use League\Fractal\TransformerAbstract;
 

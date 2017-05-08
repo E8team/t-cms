@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-
 use App\Models\Presenters\CategoryPresenters;
 use App\Models\Traits\Listable;
 use Laracasts\Presenter\PresentableTrait;
 use Ty666\PictureManager\Traits\Picture;
-
 
 class Category extends BaseModel
 {
@@ -229,9 +227,9 @@ class Category extends BaseModel
     {
         $posts = $this->posts()->post()->publish()->orderBy('views_count', 'desc')->recent()->limit($num)->get();
         if ($exceptPost != null) {
-            if(is_numeric($exceptPost)){
+            if (is_numeric($exceptPost)) {
                 return $posts->where('id', '!=', $exceptPost);
-            }else if($exceptPost instanceof Post){
+            } elseif ($exceptPost instanceof Post) {
                 return $posts->where('id', '!=', $exceptPost->id);
             }
         }

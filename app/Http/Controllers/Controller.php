@@ -9,7 +9,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Auth;
 
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -26,8 +25,7 @@ class Controller extends BaseController
     }
     public function rbacAuthorize($permission, $requireAll = false)
     {
-
-        if(!Auth::user()->may($permission, $requireAll)){
+        if (!Auth::user()->may($permission, $requireAll)) {
             throw new AuthorizationException('没有 '.$permission.' 权限');
         }
     }

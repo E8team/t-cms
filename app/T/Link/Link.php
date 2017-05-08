@@ -8,7 +8,6 @@ use App\Models\Link as LinkModel;
 
 class Link
 {
-
     public function getLink()
     {
         return Type::link()->with('links')->ordered()->recent()->get();
@@ -28,5 +27,4 @@ class Link
     {
         return $this->getLinkWithoutType();
     }
-
 }

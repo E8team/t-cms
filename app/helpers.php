@@ -28,13 +28,13 @@ function filterNullWhenHasDefaultValue($data, $keyList)
 function setting($key = null, $default = null)
 {
     static $allSetting = null;
-    if(is_null($allSetting)){
+    if (is_null($allSetting)) {
         $allSetting = \App\Models\Setting::allSettingWithCache();
     }
-    if(is_null($key)){
+    if (is_null($key)) {
         return $allSetting;
     }
-    if(array_key_exists($key, $allSetting)){
+    if (array_key_exists($key, $allSetting)) {
         return $allSetting[$key];
     }
     return $default;
