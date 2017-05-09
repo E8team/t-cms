@@ -33,7 +33,7 @@ class LinksTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
-                'id' => 1,
+                'id' => 3,
                 'name' => '淘宝网',
                 'url' => 'http://www.taobao.com',
                 'linkman' => 'ty',
@@ -43,7 +43,7 @@ class LinksTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
-                'id' => 2,
+                'id' => 4,
                 'name' => '新浪',
                 'url' => 'https://www.sina.com',
                 'linkman' => 'ty',
