@@ -11,7 +11,7 @@ services:
 sudo: false
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS t-cms;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
 
 install:
   - travis_retry composer install --no-interaction --prefer-source
