@@ -21,17 +21,18 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
 
 install:
-  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
-  - travis_retry npm install
-  - travis_retry cd themes/default; npm install
+#  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+#  - travis_retry npm install
+#  - travis_retry cd themes/default; npm install
   - cp .env.example .env
 
 before_script:
+  - ls -a
   - travis_retry php ./artisan key:generate
-  - travis_retry php ./artisan vendor:publish
-  - travis_retry php ./artisan migrate --seed
-  - travis_retry npm run production
-  - travis_retry npm run production --theme:default
+#  - travis_retry php ./artisan vendor:publish
+#  - travis_retry php ./artisan migrate --seed
+#  - travis_retry npm run production
+#  - travis_retry npm run production --theme:default
 
 script:
   vendor/bin/phpunit
