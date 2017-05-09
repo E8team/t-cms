@@ -31,9 +31,10 @@ class AppServiceProvider extends ServiceProvider
         $this->registerCustomValidator();
         // 获取当前主题
         $theme = app(Theme::class);
-        if (!is_null($currentTheme = Setting::getSetting('current_theme'))) {
+        /*if (!is_null($currentTheme = Setting::getSetting('current_theme'))) {
             $theme->setCurrentTheme($currentTheme);
-        }
+        }*/
+        $theme->setCurrentTheme('default');
     }
 
     public function registerCustomValidator()
