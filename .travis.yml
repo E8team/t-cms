@@ -9,7 +9,13 @@ services:
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - node_modules
+
 before_install:
+  - ls -a
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
   - travis_retry composer self-update
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
@@ -20,7 +26,7 @@ install:
   - travis_retry cd themes/default; npm install; cd ../../
 
 before_script:
-  - vendor/bin/phpunit
+  - cp .env.example .env
   - travis_retry php artisan key:generate
   - travis_retry php artisan vendor:publish
   - travis_retry php artisan migrate --seed
