@@ -127,6 +127,20 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('themes/current_theme_config', 'ThemesController@currentThemeConfig');
     // 设置当前主题
     $api->put('themes/current_theme', 'ThemesController@setCurrentTheme');
+
+    // ---------------------------------------------------
+    // 获取所有的banners
+    $api->get('banners/type/all', 'BannersController@allBanners');
+    // 指定类别下面的banners type如果不传表示获取默认分类(type_id为null)的banners
+    $api->get('banners/type/{type?}', 'BannersController@lists');
+    // 获取指定的banner
+    $api->get('banners/{banner}', 'BannersController@show');
+    // 创建banner
+    $api->post('banners', 'BannersController@store');
+    // 更新banner
+    $api->put('banners/{banner}', 'BannersController@update');
+    // 删除指定的banner
+    $api->delete('banners/{banner}', 'BannersController@destroy');
 });
 
 

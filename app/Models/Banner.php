@@ -6,7 +6,7 @@ use App\Models\Traits\Listable;
 use App\Models\Traits\Typeable;
 use Ty666\PictureManager\Traits\Picture;
 
-class Banner extends BaseModel
+class Banner extends BaseModel implements InterfaceTypeable
 {
     use Typeable, Listable, Picture;
     protected $fillable = ['url', 'title', 'picture', 'type_id', 'order', 'is_visible'];
@@ -25,4 +25,5 @@ class Banner extends BaseModel
     {
         return $query->where('is_visible', $isVisible)->ordered();
     }
+
 }

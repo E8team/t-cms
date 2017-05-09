@@ -1,0 +1,21 @@
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+
+sudo: false
+
+install:
+  - travis_retry composer install --no-interaction --prefer-source
+  - travis_retry npm install
+  - travis_retry cd themes/default; npm install
+
+before_script:
+  - travis_retry php artisan vendor:publish
+  - travis_retry npm run production
+  - travis_retry npm run production --theme:default
+
+script:
+  vendor/bin/phpunit
