@@ -24,7 +24,7 @@ install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - travis_retry npm install
   - travis_retry cd themes/default; npm install
-  - cp .env.example .env
+  - travis_retry php -r "file_exists('.env') || copy('.env.example', '.env');"
 
 before_script:
   - travis_retry php ./artisan key:generate
