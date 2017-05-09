@@ -18,9 +18,9 @@ install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - travis_retry npm install
   - travis_retry cd themes/default; npm install
-  - cp .env.example .env
 
 before_script:
+  - cp .env.example .env
   - travis_retry php artisan key:generate
   - travis_retry php artisan vendor:publish
   - travis_retry php artisan migrate --seed
