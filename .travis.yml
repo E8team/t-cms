@@ -3,17 +3,29 @@ language: php
 php:
   - 5.6
   - 7.1
-  - hhvm
+
+services:
+  - mysql
 
 sudo: false
 
+before_install:
+  - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
+  - travis_retry composer self-update
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
+
 install:
-  - travis_retry composer install --no-interaction --prefer-source
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - travis_retry npm install
+  - travis_retry cd themes/default; npm install; cd ../../
 
 before_script:
+  - vendor/bin/phpunit
+  - travis_retry php artisan key:generate
   - travis_retry php artisan vendor:publish
-  - travis_retry gulp --production
+  - travis_retry php artisan migrate --seed
+  - travis_retry npm run production
+  - travis_retry npm run production --theme:default
 
 script:
   vendor/bin/phpunit
