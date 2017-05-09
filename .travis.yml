@@ -15,6 +15,7 @@ cache:
     - node_modules
 
 before_install:
+  - ls -a
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
   - travis_retry composer self-update
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
@@ -23,7 +24,7 @@ install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - travis_retry npm install
   - travis_retry cd themes/default; npm install
-  - travis_retry cp .env.example .env
+  - cp .env.example .env
 
 before_script:
   - travis_retry php ./artisan key:generate
