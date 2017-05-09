@@ -5,15 +5,24 @@ php:
   - 7.0
   - 7.1
 
+services:
+  - mysql
+
 sudo: false
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS t-cms;'
 
 install:
   - travis_retry composer install --no-interaction --prefer-source
   - travis_retry npm install
   - travis_retry cd themes/default; npm install
+  - travis_retry php -r "file_exists('.env') || copy('.env.example', '.env');"
 
 before_script:
+  - travis_retry php artisan key:generate
   - travis_retry php artisan vendor:publish
+  - travis_retry php artisan migrate --seed
   - travis_retry npm run production
   - travis_retry npm run production --theme:default
 
