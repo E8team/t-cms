@@ -16,7 +16,7 @@ cache:
 addons:
   apt:
     packages:
-    - node
+    - nodejs
 
 
 before_install:
