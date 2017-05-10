@@ -1,4 +1,4 @@
-<p align="center"><img src="https://avatars2.githubusercontent.com/u/15854856?v=3&s=100"></p>
+<p align="center"><img src="https://avatars2.githubusercontent.com/u/15854856?v=3&s=150"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/3tnet/t-cms"><img src="https://travis-ci.org/3tnet/t-cms.svg" alt="Build Status"></a>
