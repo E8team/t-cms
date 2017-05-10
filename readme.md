@@ -1,4 +1,4 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<p align="center"><img src="https://avatars2.githubusercontent.com/u/15854856?v=3&s=200"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/3tnet/t-cms"><img src="https://poser.pugx.org/3tnet/t-cms/d/total.svg" alt="Total Downloads"></a>
