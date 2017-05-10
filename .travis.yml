@@ -19,7 +19,7 @@ before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
   - travis_retry composer self-update
   - travis_retry mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
-  - travis_retry npm install -g n
+  - travis_retry sudo npm install -g n
   - travis_retry sudo n stable
 
 install:
