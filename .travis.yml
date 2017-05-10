@@ -7,7 +7,7 @@ php:
 services:
   - mysql
 
-sudo: false
+sudo: true
 
 cache:
   directories:
