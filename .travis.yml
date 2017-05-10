@@ -13,11 +13,6 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-addons:
-  apt:
-    packages:
-    - nodejs
-
 
 before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
@@ -26,16 +21,13 @@ before_install:
 
 install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
-  - travis_retry npm install
-  - travis_retry cd themes/default; npm install; cd ../../
+
 
 before_script:
   - cp .env.example .env
   - travis_retry php artisan key:generate
   - travis_retry php artisan vendor:publish
   - travis_retry php artisan migrate --seed
-  - travis_retry npm run production
-  - travis_retry npm run production --theme:default
 
 script:
   vendor/bin/phpunit
