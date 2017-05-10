@@ -7,18 +7,20 @@ php:
 services:
   - mysql
 
-sudo: false
+sudo: true
 
 cache:
   directories:
     - $HOME/.composer/cache
 
+
+
 before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
   - travis_retry composer self-update
   - travis_retry mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
-  - travis setup node
-  - travis setup npm
+  - travis_retry npm install -g n
+  - travis_retry sudo n stable
 
 install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
