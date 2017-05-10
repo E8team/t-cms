@@ -4,12 +4,10 @@ php:
   - 5.6
   - 7.1
 
-node_js: stable
-
 services:
   - mysql
 
-sudo: true
+sudo: false
 
 cache:
   directories:
@@ -19,7 +17,8 @@ before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
   - travis_retry composer self-update
   - travis_retry mysql -e 'CREATE DATABASE IF NOT EXISTS `t-cms`;'
-
+  - travis setup node
+  - travis setup npm
 
 install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
