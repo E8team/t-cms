@@ -38,7 +38,7 @@ class BannersController extends ApiController
             ->setMeta(Banner::getAllowSortFieldsMeta() + Banner::getAllowSearchFieldsMeta());
     }
 
-    public function desctory(Banner $banner)
+    public function destroy(Banner $banner)
     {
         $banner->delete();
         return $this->response->noContent();
