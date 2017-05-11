@@ -37,7 +37,7 @@ class Navigation
      * @param Request $request
      * @return Category
      */
-    public function setActieNav(Category $activeNav)
+    public function setActiveNav(Category $activeNav)
     {
         if (!$activeNav->isTopCategory()) {
             $this->topNav = $activeNav->parent;
