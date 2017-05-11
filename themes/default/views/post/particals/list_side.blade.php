@@ -31,7 +31,7 @@
                 热门文章
             </div>
             <div class="panel-body">
-                @foreach($navigation->getCurrentNav()->getHotPosts(10) as $post)
+                @foreach($navigation->getActiveNav()->getHotPosts(10) as $post)
                     <div class="media media-number">
                         <div class="media-left">
                             <span class="num">{!! $loop->iteration !!}</span>

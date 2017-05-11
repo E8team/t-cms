@@ -63,7 +63,7 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id' => 5,
                 'type' => 0,
-                'cate_name' => '公司新闻123',
+                'cate_name' => '新闻111',
                 'description' => '这里的公司新闻123',
                 'cate_slug' => 'company-news123',
                 'is_nav' => true,

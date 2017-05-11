@@ -11,7 +11,7 @@ class Navigation
     /**
      * @var Category
      */
-    protected $currentNav;
+    protected $activeNav;
     /**
      * @var Category
      */
@@ -37,29 +37,29 @@ class Navigation
      * @param Request $request
      * @return Category
      */
-    public function setCurrentNav(Category $currentNav)
+    public function setActieNav(Category $activeNav)
     {
-        if (!$currentNav->isTopCategory()) {
-            $this->topNav = $currentNav->parent;
+        if (!$activeNav->isTopCategory()) {
+            $this->topNav = $activeNav->parent;
         } else {
-            $this->topNav = $currentNav;
+            $this->topNav = $activeNav;
         }
-        $this->currentNav = $currentNav;
+        $this->activeNav = $activeNav;
     }
 
     /**
      * 获取当前导航
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      * @return Category
      */
-    public function getCurrentNav()
+    public function getActiveNav()
     {
-        return $this->currentNav;
+        return $this->activeNav;
     }
 
     /**
      * 获取当前导航的顶级导航
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      * @return Category
      */
     public function getTopNav()

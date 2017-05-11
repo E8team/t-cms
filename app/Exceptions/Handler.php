@@ -5,8 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Ty666\LaravelTheme\Theme;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Ty666\LaravelTheme\ThemeManager;
 
 class Handler extends ExceptionHandler
 {
@@ -74,9 +74,9 @@ class Handler extends ExceptionHandler
     protected function renderHttpException(HttpException $e)
     {
         $status = $e->getStatusCode();
-        $theme = app(Theme::class);
+        $theme = app(ThemeManager::class);
         view()->replaceNamespace('errors', [
-            ($theme->getCurrentThemePath().'/views/errors'),
+            ($theme->getActiveThemePath().'/views/errors'),
             __DIR__.'/views',
         ]);
 

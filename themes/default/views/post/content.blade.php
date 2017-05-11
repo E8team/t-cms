@@ -18,7 +18,7 @@
     </div>
     @inject('navigation', 'App\T\Navigation\Navigation')
     @php
-        $nextPost = $post->getNextPost($navigation->getCurrentNav());
+        $nextPost = $post->getNextPost($navigation->getActiveNav());
     @endphp
     @if($nextPost)
     <div class="contnet_footer">

@@ -105,7 +105,7 @@ class CategoriesController extends ApiController
             return $this->response->errorNotFound('该栏目不是列表栏目');
         }
         // 这一步为了获取文章url
-        PostPresenters::setCurrentCategory($category);
+        PostPresenters::setActiveCategory($category);
         $posts = $category->posts()
             ->applyFilter($request)
             ->with('user')

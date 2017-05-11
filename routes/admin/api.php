@@ -122,11 +122,11 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 获取所有主题
     $api->get('themes', 'ThemesController@lists');
     // 获取正文模板
-    $api->get('themes/content_template', 'ThemesController@contentTemplate');
+    $api->get('themes/active_template', 'ThemesController@contentTemplate');
     // 当前主题的配置
-    $api->get('themes/current_theme_config', 'ThemesController@currentThemeConfig');
+    $api->get('themes/active_theme_config', 'ThemesController@activeThemeConfig');
     // 设置当前主题
-    $api->put('themes/current_theme', 'ThemesController@setCurrentTheme');
+    $api->put('themes/active_theme', 'ThemesController@setActiveTheme');
 
     // ---------------------------------------------------
     // 获取所有的banners

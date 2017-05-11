@@ -17,34 +17,34 @@ class IndexController extends Controller
 
     public function postList($cateSlug, Request $request)
     {
-        $currentCategory = Category::findBySlug($cateSlug);
+        $category = Category::findBySlug($cateSlug);
 
-        app(Navigation::class)->setCurrentNav($currentCategory);
+        app(Navigation::class)->setActiveNav($category);
 
-        if ($currentCategory->isPostList()) {
-            return $this->showList($currentCategory, $request);
+        if ($category->isPostList()) {
+            return $this->showList($category, $request);
         } else {
-            return $this->showPage($currentCategory);
+            return $this->showPage($category);
         }
     }
 
-    private function showList(Category $currentCategory, Request $request)
+    private function showList(Category $category, Request $request)
     {
-        $postList = $currentCategory->postListWithOrder($request->get('order'))->paginate($this->perPage());
+        $postList = $category->postListWithOrder($request->get('order'))->paginate($this->perPage());
         $postList->appends($request->all());
-        return theme_view($currentCategory->list_template, [
+        return theme_view($category->list_template, [
             'postList' => $postList,
         ]);
     }
 
-    private function showPage(Category $currentCategory)
+    private function showPage(Category $category)
     {
-        $page = $currentCategory->page();
+        $page = $category->page();
         if (is_null($page)) {
             //todo
             abort(404, '该单页还没有初始化');
         }
-        return theme_view($currentCategory->page_template, ['pagePost' => $page]);
+        return theme_view($category->page_template, ['pagePost' => $page]);
     }
 
     /**
@@ -67,7 +67,7 @@ class IndexController extends Controller
         } else {
             $post = $queryBuilder->publish()->firstOrFail();
         }
-        app(Navigation::class)->setCurrentNav($category);
+        app(Navigation::class)->setActiveNav($category);
         return theme_view($post->template, ['post' => $post]);
     }
 }

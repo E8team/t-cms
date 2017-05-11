@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Setting;
 use App\T\Alert\Alert;
 use App\T\Navigation\Navigation;
 use Dingo\Api\Exception\ValidationHttpException;
@@ -11,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Ty666\LaravelTheme\Theme;
+use Ty666\LaravelTheme\ThemeManager;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,11 +30,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerCustomValidator();
         // 获取当前主题
-        $theme = app(Theme::class);
-        /*if (!is_null($currentTheme = Setting::getSetting('current_theme'))) {
-            $theme->setCurrentTheme($currentTheme);
+        $theme = app(ThemeManager::class);
+        /*if (!is_null($activeTheme = Setting::getSetting('active_theme'))) {
+            $theme->setActiveTheme($ActiveTheme);
         }*/
-        $theme->setCurrentTheme('default');
+        $theme->setActiveTheme('default');
     }
 
     public function registerCustomValidator()

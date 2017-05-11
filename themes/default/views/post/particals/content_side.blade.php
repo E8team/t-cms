@@ -20,7 +20,7 @@
 <div id="side" class="side hidden-xs hidden-sm">
     <h4>热门文章</h4>
     <ul class="related_article">
-        @foreach($navigation->getCurrentNav()->getHotPosts(11, $thisPost) as $post)
+        @foreach($navigation->getActiveNav()->getHotPosts(11, $thisPost) as $post)
             <li><a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(29) !!}</a></li>
         @endforeach
     </ul>

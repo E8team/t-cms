@@ -8,11 +8,11 @@ use Laracasts\Presenter\Presenter;
 
 class PostPresenters extends Presenter
 {
-    protected static $currentCategory = null;
+    protected static $activeCategory = null;
 
-    public static function setCurrentCategory(Category $category)
+    public static function setActiveCategory(Category $category)
     {
-        static::$currentCategory = $category;
+        static::$activeCategory = $category;
     }
 
     public function suitedTitle($length = 88)
@@ -22,12 +22,12 @@ class PostPresenters extends Presenter
 
     public function getUrl()
     {
-        if (is_null(static::$currentCategory)) {
-            if (!$category = app(Navigation::class)->getCurrentNav()) {
+        if (is_null(static::$activeCategory)) {
+            if (!$category = app(Navigation::class)->getActiveNav()) {
                 $category = $this->categories->first();
             }
         } else {
-            $category = static::$currentCategory;
+            $category = static::$activeCategory;
         }
 
         return route('post', [$category->cate_slug, $this->id]);

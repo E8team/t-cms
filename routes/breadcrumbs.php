@@ -9,12 +9,12 @@ Breadcrumbs::register('category', function ($breadcrumbs, \App\T\Navigation\Navi
     $breadcrumbs->parent('index');
     $breadcrumbs->push($navigation->getTopNav()->cate_name, route('category', $navigation->getTopNav()->cate_slug));
 
-    if (!$navigation->getCurrentNav()->equals($navigation->getTopNav())) {
-        $breadcrumbs->push($navigation->getCurrentNav()->cate_name, route('category', $navigation->getCurrentNav()->cate_slug));
+    if (!$navigation->getActiveNav()->equals($navigation->getTopNav())) {
+        $breadcrumbs->push($navigation->getActiveNav()->cate_name, route('category', $navigation->getActiveNav()->cate_slug));
     }
 });
 
 Breadcrumbs::register('post', function ($breadcrumbs, \App\T\Navigation\Navigation $navigation, $post) {
     $breadcrumbs->parent('category', $navigation);
-    $breadcrumbs->push($post->title, route('post', [$navigation->getCurrentNav()->cate_slug, $post->id]));
+    $breadcrumbs->push($post->title, route('post', [$navigation->getActiveNav()->cate_slug, $post->id]));
 });

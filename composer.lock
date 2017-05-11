@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f47ecb1f4940a69a0e4977fa25028ae1",
+    "content-hash": "f4fe5efe99553250d12b25eafee9acb3",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -3090,16 +3090,16 @@
         },
         {
             "name": "ty666/laravel-theme",
-            "version": "1.0.19",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ty666/laravel-theme.git",
-                "reference": "2f518ea6b17731e3345e9ebc717c061c269344fe"
+                "reference": "cf6686fdacf2d0695b5b196872507eedb41f21e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/2f518ea6b17731e3345e9ebc717c061c269344fe.zip",
-                "reference": "2f518ea6b17731e3345e9ebc717c061c269344fe",
+                "url": "https://files.phpcomposer.com/files/ty666/laravel-theme/cf6686fdacf2d0695b5b196872507eedb41f21e8.zip",
+                "reference": "cf6686fdacf2d0695b5b196872507eedb41f21e8",
                 "shasum": ""
             },
             "require": {
@@ -3132,7 +3132,7 @@
                 "theme",
                 "view"
             ],
-            "time": "2017-05-01T12:20:33+00:00"
+            "time": "2017-05-11T13:06:15+00:00"
         },
         {
             "name": "ty666/picture-manager",
