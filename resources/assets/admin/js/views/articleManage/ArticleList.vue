@@ -19,11 +19,14 @@
             <el-tab-pane label="回收站" name="trashed"></el-tab-pane>
           </el-tabs>
           <el-table border :data="list.data" style="width: 100%">
-            <el-table-column width="340px" label="标题">
+            <el-table-column class="asdas" width="340px" label="标题">
               <template scope="scope">
-                <el-tag class="tag" type="danger" v-if="scope.row.top">置顶</el-tag>
-                <el-tag class="tag" type="gray" v-if="scope.row.status == 'draft'">草稿</el-tag>
-                <a :href="scope.row.url" class="title" target="_blank">{{scope.row.title}}</a>
+                <div class="title_box">
+                  <el-tag class="tag" type="danger" v-if="scope.row.top">置顶</el-tag>
+                  <el-tag class="tag" type="gray" v-if="scope.row.status == 'draft'">草稿</el-tag>
+                  <router-link :to="{name: 'article-edit', params: {id: scope.row.id}}" tag="a" class="title" title="编辑">{{scope.row.title}}</router-link>
+                  <a :href="scope.row.url" class="preview" target="_blank">预览</a>
+                </div>
               </template>
             </el-table-column>
             <el-table-column property="user.nick_name" label="发布者"></el-table-column>
@@ -277,13 +280,22 @@ export default {
   }
   .main_list{
     padding-left: 200px;
-    .tag{
-      margin-right: 10px;
+    .title_box{
+      &:hover .preview{
+        display: inline;
+      }
+      .title{
+        color: #2476B4;
+        text-decoration: none;
+      }
+      .preview{
+        display: none;
+        font-size: 12px;
+        color: #2476B4;
+        padding-left: 5px;
+      }
     }
-    .title{
-      color: #2476B4;
-      text-decoration: none;
-    }
+
     #ueditor_wrapper{
       overflow: hidden;
       #edui1 {

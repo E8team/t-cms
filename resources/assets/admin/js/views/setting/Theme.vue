@@ -3,7 +3,7 @@
         <panel title="主题选择">
             <div class="theme_main">
                 <el-row :gutter="10">
-                    <el-col v-for="item in themeList" :key="item.theme_id" :xs="12" :sm="12" :md="8" :lg="6" class="theme_body" :class="{'current': item.is_current}">
+                    <el-col v-for="item in themeList" :key="item.theme_id" :xs="12" :sm="12" :md="8" :lg="6" class="theme_body" :class="{'active': item.is_active}">
                         <div class="theme_img">
                             <img :src="item.screenshot_url" :alt="item.name">
                             <div class="theme_enable_btn">
@@ -11,7 +11,7 @@
                             </div>
                         </div>
                         <footer>
-                            <h2>{{item.name}}{{item.is_current ? '(当前)' : ''}}<span> ({{item.version}})</span></h2>
+                            <h2>{{item.name}}{{item.is_active ? '(当前)' : ''}}<span> ({{item.version}})</span></h2>
                             <div class="author">
                                 <span>作者: {{item.author}}</span>
                                 <a class="text" :href="item.homepage" target="_blank">作者主页</a>
@@ -42,7 +42,7 @@
                 })
             },
             startTheme(themeId){
-                this.$http.put('themes/current_theme', {
+                this.$http.put('themes/active_theme', {
                     params: {
                         theme_id: themeId
                     }
@@ -60,11 +60,11 @@
         padding: 0;
         overflow: hidden;    
     }
-    .theme_body.current{
+    .theme_body.active{
         border: 1px solid #20a0ff;
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
-    .theme_body.current:hover>.theme_img>.theme_enable_btn{
+    .theme_body.active:hover>.theme_img>.theme_enable_btn{
         display: none!important;
     }
     .theme_body{

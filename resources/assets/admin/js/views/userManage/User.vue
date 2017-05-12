@@ -20,7 +20,7 @@
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload"
                             :show-file-list="false" >
-                        <img v-if="user.avatar_urls.xs" :src="user.avatar_urls.xs" class="avatar" />
+                        <img v-if="user.avatar_urls.md" :src="user.avatar_urls.md" class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>

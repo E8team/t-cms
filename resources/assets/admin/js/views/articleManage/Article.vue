@@ -57,8 +57,8 @@
                 </el-switch>
             </el-form-item>
           <el-button-group class="public_btn">
-              <el-button type="success" @click="confirm('public')" :loading="confirmLoading">{{confirmBtnTitle}}</el-button>
-              <el-button type="info" @click="confirm('draft')" :loading="confirmLoading">保存为草稿</el-button>
+              <el-button type="success" @click="confirm('publish')" :loading="confirmLoading == 'publish'">{{confirmBtnTitle}}</el-button>
+              <el-button type="info" @click="confirm('draft')" :loading="confirmLoading == 'draft'">保存为草稿</el-button>
               <el-button @click="$router.back()">返回</el-button>
           </el-button-group>
         </el-form>
@@ -108,7 +108,7 @@
         let method, url;
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
-        this.confirmLoading = true;
+        this.confirmLoading = status;
         this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getPlainTxt().substr(0, this.excerptSize);
         this.article.status = status;
         this.$http[method](url, this.$diff.diff(this.article)).then(res => {
@@ -117,7 +117,7 @@
               type: 'success'
           });
           this.confirmLoading = false;
-          this.$router.push({name: 'articles'});
+          this.$router.back();
         }).catch(err => {
           this.confirmLoading = false;
         })
@@ -236,7 +236,7 @@
       return{
         id: null,
         confirmBtnTitle: '',
-        confirmLoading: false,
+        confirmLoading: null,
         editorInited: false,
         selImageDialog: false,
         contentImages: [],
