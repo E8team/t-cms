@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Tools\EnvSettingManager;
-use ClassesWithParents\D;
 use Illuminate\Console\Command;
 use PDO;
 use Exception;
 use Illuminate\Support\Str;
+use Config;
 
 class Install extends Command
 {
@@ -51,18 +51,19 @@ class Install extends Command
         $appEnv = $this->choice('App Environment', ['local', 'production'], 0);
         $this->envSettingManager->setEnv('APP_ENV', $appEnv);
 
-        $debug = (bool) $this->confirm('Enable Debug Mode?', true)?'true':'false';
-        $this->envSettingManager->setEnv('APP_DEBUG', $debug);
-        $this->envSettingManager->setEnv('API_DEBUG', $debug);
+        $debug = (bool) $this->confirm('Enable Debug Mode?', true);
+        $this->envSettingManager->setEnv('APP_DEBUG', $debug?'true':'false');
+        $this->envSettingManager->setEnv('API_DEBUG', $debug?'true':'false');
 
         $this->setupDatabaseConfig();
 
         $this->envSettingManager->writeToEnv();
         $this->call('key:generate');
         $this->call('storage:link');
-
-        //$this->call('migrate');
-        //$this->call('db:seed');
+        Config::set('app.env', $appEnv);
+        Config::set('app.debug', $debug);
+        $this->call('migrate');
+        $this->call('db:seed');
     }
 
     //
