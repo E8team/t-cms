@@ -9,6 +9,7 @@
     "jquery": "^1.12.4",
     "jquery-lazyload": "^1.9.7",
     "jquery-pjax": "git+https://github.com/defunkt/jquery-pjax.git",
-    "nprogress": "^0.2.0"
+    "nprogress": "^0.2.0",
+    "phaser": "^2.6.2"
   }
 }
