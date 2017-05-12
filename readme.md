@@ -35,7 +35,7 @@ php artisan app:install
 ```shell
 npm install
 // install theme
-cd theme/default
+cd themes/default
 npm install
 cd ../../
 ```
