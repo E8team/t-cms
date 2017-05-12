@@ -65,6 +65,7 @@ class Install extends BaseCommand
             $this->envSettingManager->writeToEnv();
             $this->call('key:generate');
             $this->call('storage:link');
+            $this->call('vendor:publish');
             $this->execShellWithPrettyPrint('php artisan migrate --seed');
         }catch (Exception $e){
             $this->error('Install error:'.$e->getMessage());
