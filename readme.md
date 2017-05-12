@@ -43,17 +43,8 @@ cd ../../
 ### 4. Compile the frontend resources
 ```shell
 npm run dev
+// Compile theme resources
 npm run dev --theme:default
-
-// OR
-
-npm run watch
-npm run watch --theme:default
-
-// OR
-
-npm run production
-npm run production --theme:default
 ```
 
 ## License
