@@ -11,6 +11,51 @@
 
 t-cms is a cms based on laravel.
 
+## Install
+
+### 1. Clone the source code or create new project.
+
+```shell
+git clone https://github.com/3tnet/t-cms.git
+composer install
+```
+
+OR
+
+```shell
+composer create-project 3tnet/t-cms
+```
+
+### 3. Run the cms install command, the command will run the `migrate` command and generate test data.
+```shell
+php artisan app:install
+```
+
+### 4. Installation frontend
+```shell
+npm install
+// install theme
+cd theme/default
+npm install
+cd ../../
+```
+
+### 5. Compile the frontend resources
+```shell
+npm run dev
+npm run dev --theme:default
+
+// OR
+
+npm run watch
+npm run watch --theme:default
+
+// OR
+
+npm run production
+npm run production --theme:default
+```
+
 ## License
 
 The T-cms is open-sourced software licensed under the [MIT license](https://mit-license.org/).
