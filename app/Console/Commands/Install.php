@@ -3,13 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Tools\EnvSettingManager;
-use Illuminate\Console\Command;
-use PDO;
 use Exception;
 use Illuminate\Support\Str;
-use Config;
+use PDO;
 
-class Install extends Command
+class Install extends BaseCommand
 {
     /**
      * The name and signature of the console command.
@@ -45,27 +43,40 @@ class Install extends Command
      */
     public function handle()
     {
-        $url = $this->ask('Application URL', $this->envSettingManager->getDefaultValue('APP_URL')?:false)?:'';
-        $this->envSettingManager->setEnv('APP_URL', $url);
+        if (
+            $this->isInstalled() &&
+            !$this->confirm('Application appears to be installed already. Continue anyway?', false)
+        ) {
+            return;
+        }
+        try{
+            $appEnv = $this->choice('App Environment', ['local', 'production'], 0);
+            $this->envSettingManager->setEnv('APP_ENV', $appEnv);
 
-        $appEnv = $this->choice('App Environment', ['local', 'production'], 0);
-        $this->envSettingManager->setEnv('APP_ENV', $appEnv);
+            $debug = (bool) $this->confirm('Enable Debug Mode?', true);
+            $this->envSettingManager->setEnv('APP_DEBUG', $debug?'true':'false');
+            $this->envSettingManager->setEnv('API_DEBUG', $debug?'true':'false');
 
-        $debug = (bool) $this->confirm('Enable Debug Mode?', true);
-        $this->envSettingManager->setEnv('APP_DEBUG', $debug?'true':'false');
-        $this->envSettingManager->setEnv('API_DEBUG', $debug?'true':'false');
+            $this->setupDatabaseConfig();
 
-        $this->setupDatabaseConfig();
+            $url = $this->ask('Application URL', $this->envSettingManager->getDefaultValue('APP_URL')?:false)?:'';
+            $this->envSettingManager->setEnv('APP_URL', $url);
 
+            $this->envSettingManager->writeToEnv();
+            $this->call('key:generate');
+            $this->call('storage:link');
+            $this->execShellWithPrettyPrint('php artisan migrate --seed');
+        }catch (Exception $e){
+            $this->error('Install error:'.$e->getMessage());
+        }
+        $this->envSettingManager->setEnv('IS_INSTALLED', 'true');
         $this->envSettingManager->writeToEnv();
-        $this->call('key:generate');
-        $this->call('storage:link');
-        Config::set('app.env', $appEnv);
-        Config::set('app.debug', $debug);
-        $this->call('migrate');
-        $this->call('db:seed');
-    }
 
+    }
+    protected function isInstalled()
+    {
+        return env('IS_INSTALLED')=='true';
+    }
     //
     // Database config
     //
@@ -117,7 +128,7 @@ class Install extends Command
         $dbHost = $this->envSettingManager->getDefaultValue('DB_HOST', '127.0.0.1');
         $result['DB_HOST'] = $this->ask('Postgres Host', $dbHost);
 
-        $dbPort = $this->envSettingManager->getDefaultValue('DB_PORT', '3306');
+        $dbPort = $this->envSettingManager->getDefaultValue('DB_PORT', '5432');
         $result['DB_PORT'] = $this->ask('Postgres Port', $dbPort);
 
         $databaseName = $this->envSettingManager->getDefaultValue('DB_DATABASE', '');
@@ -157,7 +168,7 @@ class Install extends Command
         $dbHost = $this->envSettingManager->getDefaultValue('DB_HOST', '127.0.0.1');
         $result['DB_HOST'] = $this->ask('SQL Host', $dbHost);
 
-        $dbPort = $this->envSettingManager->getDefaultValue('DB_PORT', '3306');
+        $dbPort = $this->envSettingManager->getDefaultValue('DB_PORT', '1433');
         $result['DB_PORT'] = $this->ask('SQL Port', $dbPort);
 
         $databaseName = $this->envSettingManager->getDefaultValue('DB_DATABASE', '');

@@ -64,6 +64,7 @@ class EnvSettingManager
         } else {
             $this->appendEnv($key, $value);
         }
+
     }
 
     /**
@@ -87,7 +88,6 @@ class EnvSettingManager
             $line = sprintf('%s=%s', $key, $value);
             $this->envContent = preg_replace($pattern, $line, $this->envContent, 1);
         }
-
     }
 
     /**
@@ -96,7 +96,7 @@ class EnvSettingManager
      */
     private function buildPattern($configKey)
     {
-        return '/' . $configKey . '\s*=\s*[^\r\n]*/';
+        return '/' . $configKey . '[\t ]*=[\t ]*[^\r\n]*/';
     }
 
     /**
