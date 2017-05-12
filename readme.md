@@ -9,7 +9,7 @@
 
 ## About t-cms
 
-t-cms is a cms based on laravel.
+t-cms is a simple cms based on laravel.
 
 ## Install
 
