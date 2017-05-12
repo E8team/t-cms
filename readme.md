@@ -26,12 +26,12 @@ OR
 composer create-project 3tnet/t-cms
 ```
 
-### 3. Run the cms install command, the command will run the `migrate` command and generate test data.
+### 2. Run the cms install command, the command will run the `migrate` command and generate test data.
 ```shell
 php artisan app:install
 ```
 
-### 4. Installation frontend
+### 3. Installation frontend
 ```shell
 npm install
 // install theme
@@ -40,7 +40,7 @@ npm install
 cd ../../
 ```
 
-### 5. Compile the frontend resources
+### 4. Compile the frontend resources
 ```shell
 npm run dev
 npm run dev --theme:default
