@@ -10,9 +10,14 @@ use Alert;
 
 class IndexController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return theme_view('index');
+    }
+
+    public function blog(Request $request)
+    {
+        return $this->postList('company-news', $request);
     }
 
     public function postList($cateSlug, Request $request)

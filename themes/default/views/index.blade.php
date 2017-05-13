@@ -97,13 +97,13 @@
     <div class="logo" time="10" onclick="clickLogo(this)"><img src="{!! asset('static/default/assets/logo.png') !!}"></div>
     <ul class="nav">
         <li>
-            <a href="#">Blog</a>
+            <a href="{!! route('blog') !!}">Blog</a>
         </li>
         <li>
-            <a href="#">WeiBo</a>
+            <a href="http://weibo.com/e8net" target="_blank">WeiBo</a>
         </li>
         <li>
-            <a href="#">GitHub</a>
+            <a href="https://github.com/E8team" target="_blank">GitHub</a>
         </li>
         <li>
             <a href="#">About US</a>

@@ -1,5 +1,6 @@
 <?php
 Route::get('/', 'IndexController@index')->name('index');
+Route::get('/blog', 'IndexController@blog')->name('blog');
 Route::get('/category/{cateSlug}', 'IndexController@postList')->name('category');
 Route::get('/category/{cateSlug}/post/{post}', 'IndexController@post')->name('post');
 
