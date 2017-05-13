@@ -29,7 +29,13 @@
                                 <h3>@if($post->isTop())<span class="label label-danger">置顶</span>@endif{!! $post->present()->suitedTitle() !!}</h3>
                             </a>
                             <p class="describe">{!! $post->excerpt !!}</p>
-                            <p class="time">{!! $post->published_at !!}</p>
+                            <div class="list_footer">
+                                <p class="avatar">
+                                    <img src="http://i0.hdslb.com/bfs/archive/dfa4385619bc1833c8c38d47146b0b857bc6813a.jpg@.webp" alt="">
+                                    <span class="uname">一家专卖店</span>
+                                </p>
+                                <p class="time">{!! $post->published_at !!}</p>
+                            </div>
                         </div>
                     </li>
                 @endforeach
