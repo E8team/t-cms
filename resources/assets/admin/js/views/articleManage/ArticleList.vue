@@ -19,7 +19,7 @@
             <el-tab-pane label="回收站" name="trashed"></el-tab-pane>
           </el-tabs>
           <el-table border :data="list.data" style="width: 100%">
-            <el-table-column class="asdas" width="340px" label="标题">
+            <el-table-column width="340px" label="标题">
               <template scope="scope">
                 <div class="title_box">
                   <el-tag class="tag" type="danger" v-if="scope.row.top">置顶</el-tag>

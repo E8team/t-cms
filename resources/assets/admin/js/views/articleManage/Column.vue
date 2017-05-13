@@ -152,7 +152,7 @@ export default{
     this.$http.get('top_categories').then(res => {
         this.topCategories = res.data.data;
     });
-    this.$http.get('themes/current_theme_config').then(res => {
+    this.$http.get('themes/active_theme_config').then(res => {
         this.contentTemplates = res.data.content_template;
         this.listTemplates = res.data.list_template;
         this.pageTemplate = res.data.page_template;
