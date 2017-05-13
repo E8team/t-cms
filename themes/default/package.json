@@ -4,6 +4,7 @@
   "description": "t-cms默认主题",
   "author": "tw <t888y@qq.com>",
   "license": "ISC",
+  "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^1.12.4",
