@@ -25,7 +25,8 @@ class PostTransformer extends TransformerAbstract
             'comments_num' => $post->comments_num,
             'template' => $post->template,
             'url' => $post->present()->getUrl(),
-            'top' => is_null($post->top)?:$post->top->toDateTimeString(),
+            'top' => !is_null($post->top),
+            'top_time' => is_null($post->top)?null:$post->top->toDateTimeString(),
             'published_at' => $post->published_at->toDateTimeString(),
             'created_at' => $post->created_at->toDateTimeString(),
             'updated_at' => $post->updated_at->toDateTimeString()
