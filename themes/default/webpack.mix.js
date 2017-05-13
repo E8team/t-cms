@@ -21,5 +21,6 @@ mix .setPublicPath('public/static/default')
     .less(path.join(__dirname, 'assets/less/app.less'), 'css/app.css')
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', '../../public/static/default/css/bootstrap.min.css')
     .copy('node_modules/bootstrap/fonts', '../../public/static/default/fonts')
+	.copy(path.join(__dirname, 'assets/resources/*'), '../../public/static/default/assets/')
     .version();
 
