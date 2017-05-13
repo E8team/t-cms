@@ -19,7 +19,7 @@
 			overflow: hidden;
 		}
         .content{
-            width: 450px;
+            width: 460px;
             height: 260px;
             position: absolute;
             top: 50%;
