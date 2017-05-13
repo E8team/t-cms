@@ -15,6 +15,9 @@
         img{border:0;vertical-align:middle}
         table{border-collapse:collapse;border-spacing:0}
         p{word-wrap:break-word}
+		html,body{
+			overflow: hidden;
+		}
         .content{
             width: 450px;
             height: 260px;
@@ -29,11 +32,11 @@
             height: 100px;
             border-radius: 50%;
             margin: 0 auto;
-            box-shadow: rgba(0,0,0,.05) 0 0 2px 3px;
-            transition: transform 800ms;
+            transition: all 800ms;
             cursor: pointer;
         }
         .logo:hover{
+            box-shadow: rgba(0,0,0,.05) 0 0 2px 3px;
             transform: rotate(360deg);
         }
         .logo > img{
@@ -67,6 +70,26 @@
             position: relative;
             z-index: 9;
         }
+		.loading_mask{
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			background-color: #000;
+			display: none;
+			opacity: 0;
+			transition: opacity .3s;
+		}
+		.loading_mask p{
+			color: #e3e3e3;
+			font-size: 24px;
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: 100%;
+		}
     </style>
 </head>
 <body>
@@ -87,20 +110,35 @@
         </li>
     </ul>
 </div>
-<script type="text/javascript" src="{!! mix('/js/phaser.js', 'static/default') !!}"></script>
+<div id="loading_mask" class="loading_mask">
+<p>loading...</p>
+</div>
 <script type="text/javascript">
     var game;
     states = {};
+	var loadingMask = document.getElementById('loading_mask');
+	var phaserPath = '{!! mix('/js/phaser.js', 'static/default') !!}';
+	
     function clickLogo(dom){
         var time = dom.getAttribute('time');
         time --;
         dom.setAttribute('time', time)
         if(time == 0){
-            game = new Phaser.Game(1366,768, Phaser.AUTO, 'game');
-            game.state.add('preload', states.preload);
-            game.state.add('play', states.play);
+			loadingMask.style.display = "block";
+			loadingMask.style.opacity = "1";
+			
+			var scriptNode = document.createElement("script");
+            scriptNode.setAttribute("type", "text/javascript");
+            scriptNode.setAttribute("src",phaserPath);
+            scriptNode.onload = () => {
+				game = new Phaser.Game(1366,768, Phaser.AUTO, 'game');
+				game.state.add('preload', states.preload);
+				game.state.add('play', states.play);
 
-            game.state.start('preload');
+				game.state.start('preload');
+            }
+            document.body.appendChild(scriptNode);
+			
         }
     }
     states.preload = function() {
