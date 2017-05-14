@@ -21,7 +21,7 @@
                     <li>
                         @if(!is_null($post->cover))
                         <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}" style="">
-                            <img lazy src="http://i0.hdslb.com/bfs/archive/dfa4385619bc1833c8c38d47146b0b857bc6813a.jpg@.webp"/>
+                            <img lazy src="{!! $post->getCover('cover_sm') !!}"/>
                         </a>
                         @endif
                         <div class="info @if(is_null($post->cover)) no_cover @endif">
