@@ -30,7 +30,7 @@ class IndexController extends Controller
 
     private function showList(Category $category, Request $request)
     {
-        $postList = $category->postListWithOrder($request->get('order'))->paginate($this->perPage());
+        $postList = $category->postListWithOrder($request->get('order'))->with('user')->paginate($this->perPage());
         $postList->appends($request->all());
         return theme_view($category->list_template, [
             'postList' => $postList,

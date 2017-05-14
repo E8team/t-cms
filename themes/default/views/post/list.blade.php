@@ -31,8 +31,8 @@
                             <p class="describe">{!! $post->excerpt !!}</p>
                             <div class="list_footer">
                                 <p class="avatar">
-                                    <img src="http://i0.hdslb.com/bfs/archive/dfa4385619bc1833c8c38d47146b0b857bc6813a.jpg@.webp" alt="">
-                                    <span class="uname">一家专卖店</span>
+                                    <img src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
+                                    <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
                                 </p>
                                 <p class="time">{!! $post->published_at !!}</p>
                             </div>
