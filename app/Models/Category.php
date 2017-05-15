@@ -221,6 +221,12 @@ class Category extends BaseModel
         return $this->type == 0;
     }
 
+    /**
+     * 获取当前分类下的热门文章
+     * @param $num
+     * @param null $exceptPost
+     * @return mixed
+     */
     public function getHotPosts($num, $exceptPost = null)
     {
         $posts = $this->posts()->post()->publish()->orderBy('views_count', 'desc')->recent()->limit($num)->get();
