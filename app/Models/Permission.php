@@ -16,6 +16,7 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     protected $casts = [
         'is_menu' => 'boolean'
     ];
+    protected $hasDefaultValuesFields = ['parent_id', 'order'];
     protected $fillable = ['name', 'display_name', 'description', 'parent_id', 'is_menu', 'icon', 'order'];
     protected static $allowSortFields = ['name', 'display_name', 'is_menu', 'order'];
     protected static $allowSearchFields = ['name', 'display_name'];

@@ -9,6 +9,7 @@ use Ty666\PictureManager\Traits\Picture;
 class Banner extends BaseModel implements InterfaceTypeable
 {
     use Typeable, Listable, Picture;
+    protected $hasDefaultValuesFields = ['order', 'is_visible'];
     protected $fillable = ['url', 'title', 'picture', 'type_id', 'order', 'is_visible'];
     protected static $allowSortFields = ['type_id', 'order', 'is_visible'];
     protected static $allowSearchFields = ['title', 'url'];

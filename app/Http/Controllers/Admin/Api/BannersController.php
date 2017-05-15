@@ -46,9 +46,7 @@ class BannersController extends ApiController
 
     public function store(BannerCreateRequest $request)
     {
-        $data = $request->all();
-        $data = filterNullWhenHasDefaultValue($data, ['order', 'is_visible']);
-        Banner::create($data);
+        Banner::create($request->all());
         return $this->response->noContent();
     }
 

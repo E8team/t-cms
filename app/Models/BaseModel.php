@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
+    protected $hasDefaultValuesFields = [];
+
     public function scopeRecent($query)
     {
         return $query->orderBy('created_at', 'desc');
@@ -20,5 +22,25 @@ class BaseModel extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('order', 'desc');
+    }
+
+    /**
+     * 过滤有默认值的字段并且字段的值为null的数组
+     * @param $data
+     * @return mixed
+     */
+    public function filterNullWhenHasDefaultValue($data)
+    {
+        foreach ($this->hasDefaultValuesFields as $key) {
+            if (array_key_exists($key, $data) && is_null($data[$key])) {
+                unset($data[$key]);
+            }
+        }
+        return $data;
+    }
+
+    public function fill(array $attributes)
+    {
+        return parent::fill($this->filterNullWhenHasDefaultValue($attributes));
     }
 }

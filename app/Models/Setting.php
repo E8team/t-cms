@@ -9,6 +9,8 @@ class Setting extends BaseModel
 {
     use Cachable;
 
+    protected $hasDefaultValuesFields = ['is_autoload'];
+
     protected $fillable = ['name', 'value', 'description', 'is_autoload'];
 
     protected $casts = [

@@ -9,7 +9,7 @@ use Ty666\PictureManager\Traits\Picture;
 class Link extends BaseModel implements InterfaceTypeable
 {
     use Picture, Listable, Typeable;
-
+    protected $hasDefaultValuesFields = ['order', 'is_visible'];
     protected $fillable = ['name', 'url', 'logo', 'linkman', 'type_id', 'order', 'is_visible'];
     protected static $allowSortFields = ['name', 'type_id', 'order', 'is_visible'];
     protected static $allowSearchFields = ['name', 'url', 'linkman'];
