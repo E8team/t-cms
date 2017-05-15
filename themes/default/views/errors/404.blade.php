@@ -28,6 +28,13 @@
 </head>
 <body>
 	<h1>404 没有找到相关内容</h1>
-	<p><a href="{!! url('/') !!}">返回首页</a>发现好文章</p>
+	@php
+		$previous = URL::previous();
+	@endphp
+	<p>
+		@if($previous != URL::current() && isSameHost($previous))
+			<a href="{!! $previous !!}">返回上一页</a>
+		@endif
+		<a href="{!! URL::to('/') !!}">返回首页</a>发现好文章</p>
 </body>
 </html>
