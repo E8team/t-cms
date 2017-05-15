@@ -2,6 +2,7 @@ import './bootstrap.js'
 var original_title = document.title;
 var tcms = {
     init: function () {
+
         $(document).pjax('a:not(a[target="_blank"])', 'body', {
             timeout: 1600,
             maxCacheLength: 500
@@ -17,8 +18,8 @@ var tcms = {
             NProgress.done();
 
         });
-        // Exclude links with a specific class
-        $(document).on("pjax:click", "a.no-pjax", false);
+        // Exclude links with a specific attr
+        $(document).on("pjax:click", "a[no-pjax]", false);
 
         // lazyload
         $("img[lazy]").lazyload();
