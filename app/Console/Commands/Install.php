@@ -59,14 +59,17 @@ class Install extends BaseCommand
 
             $this->setupDatabaseConfig();
 
+
             $url = $this->ask('Application URL', $this->envSettingManager->getDefaultValue('APP_URL')?:false)?:'';
             $this->envSettingManager->setEnv('APP_URL', $url);
-
+            $randomKey = $this->generateRandomKey();
+            $this->envSettingManager->setEnv('APP_KEY', $randomKey);
             $this->envSettingManager->writeToEnv();
-            $this->call('key:generate');
+            @mkdir(config('filesystems.disks.public.root'));
             $this->call('storage:link');
             $this->call('vendor:publish');
             $this->execShellWithPrettyPrint('php artisan migrate --seed');
+
         }catch (Exception $e){
             $this->error('Install error:'.$e->getMessage());
         }
@@ -94,6 +97,14 @@ class Install extends BaseCommand
         $method = 'setupDatabase' . Str::studly($driver);
         $newConfigs = $this->$method();
         $newConfigs['DB_CONNECTION'] = $driver;
+        $rows = [];
+        foreach ($newConfigs as $key => $value){
+            $rows[] = [$key, $value];
+        }
+        $this->table(['key', 'value'], $rows);
+        if (!$this->confirm('Is the information correct?', true)) {
+            return $this->setupDatabaseConfig();
+        }
         foreach ($newConfigs as $key => $value)
         {
             $this->envSettingManager->setEnv($key, $value);
@@ -184,5 +195,16 @@ class Install extends BaseCommand
         return $result;
     }
 
+    /**
+     * Generate a random key for the application.
+     *
+     * @return string
+     */
+    protected function generateRandomKey()
+    {
+        return 'base64:'.base64_encode(random_bytes(
+                config('app.cipher') == 'AES-128-CBC' ? 16 : 32
+            ));
+    }
 
 }
