@@ -11,6 +11,8 @@
 
 t-cms is a simple cms based on laravel.
 
+[完整中文文档](https://github.com/3tnet/t-cms/wiki)
+
 ## Install
 
 ### 1. Clone the source code or create new project.
