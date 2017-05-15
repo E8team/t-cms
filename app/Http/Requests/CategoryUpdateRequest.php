@@ -10,7 +10,7 @@ class CategoryUpdateRequest extends Request
     use Update;
 
     protected $allowModifyFields = ['type', 'image', 'parent_id', 'cate_name',
-        'description', 'url', 'cate_slug', 'is_nav', 'order',
+        'description', 'url', 'is_target_blank', 'cate_slug', 'is_nav', 'order',
         'page_template', 'list_template', 'content_template', 'setting'];
 
     /**
@@ -38,8 +38,9 @@ class CategoryUpdateRequest extends Request
             'cate_name' => 'nullable|string|max:30',
             'description' => 'nullable|string',
             'url' => 'nullable|url',
+            'is_target_blank' => 'nullable|boolean',
             'cate_slug' => ['nullable', 'string', 'max:30', Rule::unique('categories')->ignore($category->id)],
-            'is_nav' => 'boolean',
+            'is_nav' => 'nullable|boolean',
             'order' => 'nullable|int',
             'page_template' => 'nullable|string|max:30',
             'list_template' => 'nullable|string|max:30',

@@ -14,14 +14,12 @@ class Category extends BaseModel
     protected $presenter = CategoryPresenters::class;
 
     protected static $allowSearchFields = ['cate_name', 'description', 'url', 'cate_slug'];
-
+    protected $hasDefaultValuesFields = ['parent_id', 'order', 'is_nav', 'is_target_blank'];
     protected $casts = [
         'is_nav' => 'boolean',
     ];
-
-
     protected $fillable = ['type', 'image', 'parent_id', 'cate_name',
-        'description', 'url', 'cate_slug', 'is_nav', 'order',
+        'description', 'url', 'is_target_blank', 'cate_slug', 'is_nav', 'order',
         'page_template', 'list_template', 'content_template', 'setting'];
 
 

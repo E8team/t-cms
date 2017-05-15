@@ -3,15 +3,15 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\Update;
+use App\Models\BaseModel;
 use App\Models\Post;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use PictureManager;
 
 class PostUpdateRequest extends Request
 {
-    use Update;
+    use Update{
+        performUpdate as defaultPerformUpdate;
+    }
+
     protected $allowModifyFields = [
         'title', 'author_info', 'excerpt', 'views_count', 'content', 'category_ids',
         'cover', 'status', 'template', 'top', 'published_at', 'cover_in_content'
@@ -53,17 +53,15 @@ class PostUpdateRequest extends Request
         ];
     }
 
-    public function performUpdate(Model $post, callable $callback = null)
+    public function performUpdate(BaseModel $post, callable $callback = null)
     {
-        $data = array_filter($this->only($this->allowModifyFields), function ($item) {
-            return !is_null($item);
+        $this->defaultPerformUpdate($post, function (array $data) use ($callback){
+            $data = Post::filterData($data);
+            if(!is_null($callback)){
+                $data = $callback($data);
+            }
+            return $data;
         });
-        if (!is_null($callback)) {
-            $data = $callback($data);
-        }
-        $data = Post::filterData($data);
-        $post->fill($data)->saveOrFail();
-        $post->addition(Arr::only($data, ['content', 'category_ids']));
-        return $post;
+        $post->addition($this->only(['content', 'category_ids']));
     }
 }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 class Type extends BaseModel
 {
+    protected $hasDefaultValuesFields = ['order'];
+
     protected $fillable = ['name', 'description', 'order', 'class_name'];
 
     public $timestamps = false;

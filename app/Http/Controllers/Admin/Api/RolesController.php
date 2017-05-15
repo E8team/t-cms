@@ -71,9 +71,7 @@ class RolesController extends ApiController
      */
     public function store(RoleCreateRequest $request)
     {
-        $data = $request->all();
-        $data = filterNullWhenHasDefaultValue($data, 'order');
-        $role = Role::create($data);
+        $role = Role::create($request->all());
         if (!empty($data['permission_ids'])) {
             $permissionIds = Permission::findOrfail($data['permission_ids'])->pluck('id');
             $role->attachPermissions($permissionIds);

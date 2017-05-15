@@ -40,11 +40,7 @@ class CategoriesController extends ApiController
      */
     public function store(CategoryCreateRequest $request)
     {
-        $data = filterNullWhenHasDefaultValue($request->all(), ['parent_id', 'order']);
-        if (is_null($data['parent_id'])) {
-            unset($data['parent_id']);
-        }
-        Category::create($data);
+        Category::create($request->all());
         return $this->response->noContent();
     }
 
@@ -57,7 +53,6 @@ class CategoriesController extends ApiController
     public function update(Category $category, CategoryUpdateRequest $request)
     {
         $request->performUpdate($category);
-
         return $this->response->noContent();
     }
 

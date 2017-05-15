@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Traits;
 
-use Illuminate\Database\Eloquent\Model;
+
+use App\Models\BaseModel;
+use Illuminate\Support\Arr;
 
 trait Update
 {
@@ -13,21 +15,21 @@ trait Update
         return $this->allowModifyFields;
     }
 
-    public function performUpdate(Model $model, callable $callback = null)
+    public function performUpdate(BaseModel $model, callable $callback = null)
     {
-        //todo  allowModifyFields 为空的话可以直接$this->all()
         if (!isset($this->allowModifyFields)) {
-            $this->allowModifyFields = array_keys($this->rules());
+            $allowedFields = $this->all();
+        }else{
+            $allowedFields = Arr::only($this->all(), $this->allowModifyFields);
         }
 
-        //$allowedFields = array_filter($this->only($this->allowModifyFields));
-        $allowedFields = array_filter($this->only($this->allowModifyFields), function ($item) {
-            return !is_null($item);
-        });
-        ;
         if (!is_null($callback)) {
             $allowedFields = $callback($allowedFields);
         }
-        $model->fill($allowedFields)->saveOrFail();
+
+        if(!empty($allowedFields)){
+            $model->fill($allowedFields)->saveOrFail();
+        }
+
     }
 }

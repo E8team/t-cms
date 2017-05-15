@@ -26,6 +26,8 @@ class CreateCategoriesTable extends Migration
             $table->string('description')->nullable();
             // 外部链接
             $table->string('url')->nullable();
+            // 链接是否在新窗口打开
+            $table->boolean('is_target_blank')->default(true);
             // 分类slug
             $table->string('cate_slug', 30)->nullable()->unique();
             // 是否在导航栏显示
