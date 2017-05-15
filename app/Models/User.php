@@ -62,7 +62,12 @@ class User extends BaseModel implements
     {
         return $this->getPicure($this->avatar, ['is', 'xs', 'sm', 'md'], asset('images/default_avatar.jpg'));
     }
-    
+
+    public function getAvatar($style = 'md', $defaultAvatar = '')
+    {
+        return $this->getPicure($this->avatar, [$style], $defaultAvatar)[$style];
+    }
+
     public static function moveUsers2Roles($userIds, $roleIds)
     {
         $users = static::findOrFail($userIds);

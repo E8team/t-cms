@@ -17,6 +17,7 @@ t-cms is a simple cms based on laravel.
 
 ```shell
 git clone https://github.com/3tnet/t-cms.git
+cd t-cms
 composer install
 ```
 
