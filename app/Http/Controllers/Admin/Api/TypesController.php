@@ -25,11 +25,22 @@ class TypesController extends ApiController
      * 友情链接的分类
      * @return \Dingo\Api\Http\Response
      */
-    public function links()
+    public function link()
     {
         $types = Type::link()->ordered()->get();
         return $this->response->collection($types, new TypeTransformer());
     }
+
+    /**
+     * banner的分类
+     * @return \Dingo\Api\Http\Response
+     */
+    public function banner()
+    {
+        $types = Type::banner()->ordered()->get();
+        return $this->response->collection($types, new TypeTransformer());
+    }
+
 
     public function store(TypeCreateRequest $request)
     {

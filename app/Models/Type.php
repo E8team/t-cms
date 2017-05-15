@@ -15,6 +15,11 @@ class Type extends BaseModel
         return $query->where('class_name', Link::class);
     }
 
+    public function scopeBanner($query)
+    {
+        return $query->where('class_name', Banner::class);
+    }
+
     public function links()
     {
         return $this->hasMany(Link::class);

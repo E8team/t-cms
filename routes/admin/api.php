@@ -92,7 +92,9 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->post('posts/{post}/restore', 'PostsController@restore');
     // -------------------------------------------------
     // 获取所有友情链接的类别
-    $api->get('types/link', 'TypesController@links');
+    $api->get('types/link', 'TypesController@link');
+    // 获取所有banner的类别
+    $api->get('types/banner', 'TypesController@banner');
     // 创建类别
     $api->post('types', 'TypesController@store');
     // 更新类别
