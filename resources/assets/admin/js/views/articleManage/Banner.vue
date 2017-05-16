@@ -53,9 +53,11 @@
                 </el-form-item>
             </el-form>
         </panel>
+        <TypeManagementDialog @new_type="refreshType()" type="banner" v-model="typeDialogVisible"></TypeManagementDialog>
     </div>
 </template>
 <script>
+import TypeManagementDialog from '../../components/TypeManagementDialog.vue'
 export default{
     data () {
         return {
@@ -70,8 +72,12 @@ export default{
                 'is_visible': true,
                 'picture_urls': {}
             },
-            bannerTypes: []
+            bannerTypes: [],
+            typeDialogVisible: false
         }
+    },
+    components: {
+        TypeManagementDialog
     },
     methods: {
         handleAvatarSuccess (res, file) {
