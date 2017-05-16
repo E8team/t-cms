@@ -43,9 +43,8 @@ class Install extends BaseCommand
      */
     public function handle()
     {
-        if (
-            $this->isInstalled() &&
-            !$this->confirm('Application appears to be installed already. Continue anyway?', false)
+        if ($this->isInstalled() 
+            && !$this->confirm('Application appears to be installed already. Continue anyway?', false)
         ) {
             return;
         }
@@ -202,9 +201,11 @@ class Install extends BaseCommand
      */
     protected function generateRandomKey()
     {
-        return 'base64:'.base64_encode(random_bytes(
+        return 'base64:'.base64_encode(
+            random_bytes(
                 config('app.cipher') == 'AES-128-CBC' ? 16 : 32
-            ));
+            )
+        );
     }
 
 }

@@ -64,10 +64,12 @@ class LoginController extends ApiController
      */
     protected function validateLogin($credentials)
     {
-        $validator = Validator::make($credentials, [
+        $validator = Validator::make(
+            $credentials, [
             $this->username() => ['bail', 'required', 'regex:/^[a-zA-Z0-9_]+$/'],
             'password' => ['required']
-        ]);
+            ]
+        );
         return $validator;
     }
 

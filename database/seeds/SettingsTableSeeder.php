@@ -11,7 +11,8 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('settings')->insert([
+        DB::table('settings')->insert(
+            [
             [
                 'id' => 1,
                 'name' => 'web_name',
@@ -32,6 +33,7 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
-        ]);
+            ]
+        );
     }
 }

@@ -29,11 +29,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //注册provider
-        Auth::provider('e8', function ($app) {
-            return new UserProvider(
-                new BcryptHasher(),
-                User::class
-            );
-        });
+        Auth::provider(
+            'e8', function ($app) {
+                return new UserProvider(
+                    new BcryptHasher(),
+                    User::class
+                );
+            }
+        );
     }
 }

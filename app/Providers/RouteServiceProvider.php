@@ -24,9 +24,11 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //注册全局路由参数规则
-        Route::patterns([
+        Route::patterns(
+            [
             'id' => '[0-9]+',
-        ]);
+            ]
+        );
         parent::boot();
     }
 
@@ -74,10 +76,14 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         $api = app('Dingo\Api\Routing\Router');
-        $api->version('v1', ['namespace' => $this->namespace, 'middleware' => 'api'], function ($api) {
-            $api->group(['namespace' => 'Admin\Api', 'prefix' => 'admin'], function ($api) {
-                require base_path('routes/admin/api.php');
-            });
-        });
+        $api->version(
+            'v1', ['namespace' => $this->namespace, 'middleware' => 'api'], function ($api) {
+                $api->group(
+                    ['namespace' => 'Admin\Api', 'prefix' => 'admin'], function ($api) {
+                        include base_path('routes/admin/api.php');
+                    }
+                );
+            }
+        );
     }
 }

@@ -11,7 +11,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('users')->insert(
+            [
             [
                 'id' => 1,
                 'user_name' => 'ty666',
@@ -31,6 +32,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
-        ]);
+            ]
+        );
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+
+use Illuminate\Database\Eloquent\Builder;
+
 class Type extends BaseModel
 {
     protected $hasDefaultValuesFields = ['order'];
@@ -16,13 +19,14 @@ class Type extends BaseModel
         'setting' => Setting::class,
     ];
 
-    public function scopeByModel($query, $model)
+    public function scopeByModel(Builder $query, $model)
     {
         if (isset(self::$modelMapWithType[$model])) {
             return $query->where('class_name', self::$modelMapWithType[$model]);
-        } else {
-            return $query;
+        }else{
+            return $query->whereNull('class_name');
         }
+
     }
 
     public function __get($key)
@@ -48,7 +52,7 @@ class Type extends BaseModel
     public static function createType(array $data)
     {
 
-        if(isset(self::$modelMapWithType[$data['class_name']])){
+        if(isset(self::$modelMapWithType[$data['class_name']])) {
             $data['class_name'] = self::$modelMapWithType[$data['class_name']];
             return static::create($data);
         }

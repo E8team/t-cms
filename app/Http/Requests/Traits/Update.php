@@ -27,7 +27,7 @@ trait Update
             $allowedFields = $callback($allowedFields);
         }
 
-        if(!empty($allowedFields)){
+        if(!empty($allowedFields)) {
             $model->fill($allowedFields)->saveOrFail();
         }
 

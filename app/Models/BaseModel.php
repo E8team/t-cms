@@ -26,7 +26,8 @@ class BaseModel extends Model
 
     /**
      * 过滤有默认值的字段并且字段的值为null的数组
-     * @param $data
+     *
+     * @param  $data
      * @return mixed
      */
     public function filterNullWhenHasDefaultValue($data)

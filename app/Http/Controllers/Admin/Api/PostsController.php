@@ -22,7 +22,8 @@ class PostsController extends ApiController
     }
     /**
      * 全部文章
-     * @param Request $request
+     *
+     * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
     public function lists(Request $request)
@@ -35,7 +36,8 @@ class PostsController extends ApiController
 
     /**
      * 显示指定文章
-     * @param Post $post
+     *
+     * @param  Post $post
      * @return \Dingo\Api\Http\Response
      */
     public function show(Post $post)
@@ -47,17 +49,21 @@ class PostsController extends ApiController
 
     public function storePage(Category $category, Request $request)
     {
-        $data = array_filter($request->only('title', 'content'), function ($item) {
-            return !is_null($item);
-        });
+        $data = array_filter(
+            $request->only('title', 'content'), function ($item) {
+                return !is_null($item);
+            }
+        );
         $data['category_ids'] = [$category->id];
         $page = $category->page();
         if (is_null($page)) {
             //todo 验证规则
-            $this->validate($request, [
+            $this->validate(
+                $request, [
                 'title' => 'required',
                 'content' => 'required',
-            ]);
+                ]
+            );
             // 创建
             $data['published_at'] = Carbon::now();
             $data['user_id'] = Auth::id();
@@ -72,7 +78,7 @@ class PostsController extends ApiController
     /**
      * 创建文章
      *
-     * @param  PostCreateRequest $request
+     * @param PostCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,8 +93,9 @@ class PostsController extends ApiController
 
     /**
      * 更新指定文章
-     * @param Post $post
-     * @param PostUpdateRequest $request
+     *
+     * @param  Post              $post
+     * @param  PostUpdateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function update(Post $post, PostUpdateRequest $request)
@@ -99,7 +106,8 @@ class PostsController extends ApiController
 
     /**
      * 软删除指定的文章
-     * @param Post $post
+     *
+     * @param  Post $post
      * @return \Dingo\Api\Http\Response
      */
     public function softDelete(Post $post)
@@ -110,7 +118,8 @@ class PostsController extends ApiController
 
     /**
      * 还原指定的被软删除的文章
-     * @param $postId
+     *
+     * @param  $postId
      * @return \Dingo\Api\Http\Response
      */
     public function restore($postId)
@@ -122,15 +131,18 @@ class PostsController extends ApiController
 
     /**
      * 批量移动
-     * @param Request $request
+     *
+     * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
     public function movePosts2Categories(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(
+            $request, [
             'post_ids' => 'int_array',
             'category_ids' => 'int_array',
-        ]);
+            ]
+        );
         $postIds = $request->get('post_ids');
         $categoryIds = $request->get('category_ids');
         Post::movePosts2Categories($postIds, $categoryIds);

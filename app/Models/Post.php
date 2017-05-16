@@ -57,13 +57,13 @@ class Post extends BaseModel
         }
 
         switch ($data['status']) {
-            case 'publish':
-                $query->publish();
-                break;
-            case 'draft':
-                $query->draft();
-            default:
-                $query->publishAndDraft();
+        case 'publish':
+            $query->publish();
+            break;
+        case 'draft':
+            $query->draft();
+        default:
+            $query->publishAndDraft();
         }
         if (isset($data['only_trashed']) && $data['only_trashed']) {
             $query->onlyTrashed();
@@ -128,9 +128,11 @@ class Post extends BaseModel
     {
         $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
         $posts = static::findOrFail($postIds);
-        $posts->each(function ($post) use ($categoryIds) {
-            $post->categories()->sync($categoryIds);
-        });
+        $posts->each(
+            function ($post) use ($categoryIds) {
+                $post->categories()->sync($categoryIds);
+            }
+        );
     }
 
     public function content()
@@ -213,14 +215,17 @@ class Post extends BaseModel
 
     /**
      * 添加附加表数据
+     *
      * @param $data
      */
     public function addition($data)
     {
         if (isset($data['content'])) {
-            $this->content()->updateOrCreate([], [
+            $this->content()->updateOrCreate(
+                [], [
                 'content' => $data['content']
-            ]);
+                ]
+            );
         }
 
         // 处理分类

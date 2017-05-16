@@ -11,7 +11,8 @@ class CategoryPostTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('category_post')->insert([
+        DB::table('category_post')->insert(
+            [
             [
                 'category_id' => 1,
                 'post_id' => 1
@@ -20,6 +21,7 @@ class CategoryPostTableSeeder extends Seeder
                 'category_id' => 5,
                 'post_id' => 2
             ],
-        ]);
+            ]
+        );
     }
 }

@@ -72,9 +72,11 @@ class User extends BaseModel implements
     {
         $users = static::findOrFail($userIds);
         $roleIds = Role::findOrFail($roleIds)->pluck('id');
-        $users->each(function ($user) use ($roleIds) {
-            $user->roles()->sync($roleIds);
-        });
+        $users->each(
+            function ($user) use ($roleIds) {
+                $user->roles()->sync($roleIds);
+            }
+        );
     }
 
     /**

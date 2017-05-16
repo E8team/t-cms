@@ -44,8 +44,9 @@ class TypesController extends ApiController
 
     /**
      * 删除类型
-     * @param Type $type
-     * @param Request $request
+     *
+     * @param  Type    $type
+     * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
     public function destroy(Type $type, Request $request)

@@ -27,12 +27,14 @@ class Alert
         if (is_null($needContainer)) {
             $needContainer = $this->config['default_need_container'];
         }
-        $this->session->flash(static::ALERT_KEY, [
+        $this->session->flash(
+            static::ALERT_KEY, [
             'type' => $type,
             'message' => $message,
             'hasCloseButton' => (boolean)$hasCloseButton,
             'needContainer' => (boolean)$needContainer
-        ]);
+            ]
+        );
     }
 
     public function setInfo($message)

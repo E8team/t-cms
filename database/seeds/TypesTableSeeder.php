@@ -11,7 +11,8 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('types')->insert([
+        DB::table('types')->insert(
+            [
             [
                 'id'=>1,
                 'name' => '默认分类',
@@ -24,6 +25,7 @@ class TypesTableSeeder extends Seeder
                 'description' => '最大的中文搜索引擎',
                 'class_name' => \App\Models\Link::class
             ],
-        ]);
+            ]
+        );
     }
 }

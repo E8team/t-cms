@@ -55,13 +55,15 @@ class PostUpdateRequest extends Request
 
     public function performUpdate(BaseModel $post, callable $callback = null)
     {
-        $this->defaultPerformUpdate($post, function (array $data) use ($callback){
-            $data = Post::filterData($data);
-            if(!is_null($callback)){
-                $data = $callback($data);
+        $this->defaultPerformUpdate(
+            $post, function (array $data) use ($callback) {
+                $data = Post::filterData($data);
+                if(!is_null($callback)) {
+                    $data = $callback($data);
+                }
+                return $data;
             }
-            return $data;
-        });
+        );
         $post->addition($this->only(['content', 'category_ids']));
     }
 }

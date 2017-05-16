@@ -11,7 +11,8 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert([
+        DB::table('permissions')->insert(
+            [
             [
                 'id'=>1,
                 'name' => 'admin.user',
@@ -133,6 +134,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
-        ]);
+            ]
+        );
     }
 }

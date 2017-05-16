@@ -12,7 +12,8 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         $user = \App\Models\User::first();
-        DB::table('posts')->insert([
+        DB::table('posts')->insert(
+            [
             [
                 'id' => 1,
                 'user_id' => $user->id,
@@ -41,9 +42,11 @@ class PostsTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
-        ]);
+            ]
+        );
 
-        DB::table('post_contents')->insert([
+        DB::table('post_contents')->insert(
+            [
             [
                 'post_id' => 1,
                 'content' => '这是第一篇文章',
@@ -56,6 +59,7 @@ class PostsTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
-        ]);
+            ]
+        );
     }
 }

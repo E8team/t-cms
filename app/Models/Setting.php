@@ -50,18 +50,22 @@ class Setting extends BaseModel implements InterfaceTypeable
 
     public static function allSettingWithCache()
     {
-        return Cache::rememberForever('setting_autoload', function () {
-            return static::allSetting();
-        });
+        return Cache::rememberForever(
+            'setting_autoload', function () {
+                return static::allSetting();
+            }
+        );
     }
 
     public static function getSettingWithCache($name)
     {
         $value = static::allSettingWithCache()->get($name);
         if (is_null($value)) {
-            $value = Cache::rememberForever('setting_' . $name, function () use ($name) {
-                return static::findByName($name);
-            });
+            $value = Cache::rememberForever(
+                'setting_' . $name, function () use ($name) {
+                    return static::findByName($name);
+                }
+            );
         }
         return $value;
     }

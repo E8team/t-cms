@@ -20,6 +20,7 @@ class PermissionsController extends ApiController
 
     /**
      * 获取后台菜单
+     *
      * @return mixed
      */
     public function menus()
@@ -37,7 +38,8 @@ class PermissionsController extends ApiController
 
     /**
      * 获取指定权限信息
-     * @param Permission $permission
+     *
+     * @param  Permission $permission
      * @return \Dingo\Api\Http\Response
      */
     public function show(Permission $permission)
@@ -47,6 +49,7 @@ class PermissionsController extends ApiController
 
     /**
      * 获取所有权限(不分页 用于创建角色时显示)
+     *
      * @return mixed
      */
     public function allPermissions()
@@ -63,6 +66,7 @@ class PermissionsController extends ApiController
 
     /**
      * 获取一级权限
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function getTopPermissions()
@@ -81,7 +85,8 @@ class PermissionsController extends ApiController
 
     /**
      * 获取子级权限
-     * @param Permission $permission
+     *
+     * @param  Permission $permission
      * @return \Dingo\Api\Http\Response
      */
     public function getChildren(Permission $permission)
@@ -99,7 +104,8 @@ class PermissionsController extends ApiController
 
     /**
      * 创建权限
-     * @param PermissionCreateRequest $request
+     *
+     * @param  PermissionCreateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function store(PermissionCreateRequest $request)
@@ -111,8 +117,9 @@ class PermissionsController extends ApiController
 
     /**
      * 更新权限
-     * @param Permission $permission
-     * @param PermissionUpdateRequest $request
+     *
+     * @param  Permission              $permission
+     * @param  PermissionUpdateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function update(Permission $permission, PermissionUpdateRequest $request)
@@ -123,15 +130,18 @@ class PermissionsController extends ApiController
 
     /**
      * 批量移动权限
-     * @param Request $request
+     *
+     * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
     public function movePermissions2Roles(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(
+            $request, [
             'permission_ids' => 'int_array',
             'role_ids' => 'int_array'
-        ]);
+            ]
+        );
         $permissionIds = $request->get('permission_ids');
         $roleIds = $request->get('role_ids');
         Permission::movePermissions2Roles($permissionIds, $roleIds);
@@ -140,7 +150,8 @@ class PermissionsController extends ApiController
 
     /**
      * 删除指定权限
-     * @param Permission $permission
+     *
+     * @param  Permission $permission
      * @return \Dingo\Api\Http\Response
      */
     public function destroy(Permission $permission)
