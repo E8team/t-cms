@@ -24,7 +24,7 @@
                             :show-file-list="false"
                             accept="image/jpeg,image/png"
                             :action="`${$t_meta.base_url}/ajax_upload_picture`"
-                            :with-credentials="true"
+                            :with-credentials="true"ds
                             :headers="{'X-CSRF-TOKEN': $t_meta.csrfToken}"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload">
@@ -138,6 +138,9 @@ export default{
                 width: 100%;
             }
         }
+    }
+    .el-select{
+        vertical-align: top;
     }
 </style>
 
