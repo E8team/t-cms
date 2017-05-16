@@ -34,6 +34,7 @@ Vue.prototype.$http.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 Vue.prototype.$http.interceptors.response.use((response) => {
+    nprogress.start();
     return response;
 }, (error) => {
     nprogress.done();
