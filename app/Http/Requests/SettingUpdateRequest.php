@@ -9,7 +9,7 @@ class SettingUpdateRequest extends Request
 {
     use Update;
 
-    protected $allowModifyFields = ['name', 'value', 'description', 'is_autoload'];
+    protected $allowModifyFields = ['name', 'value', 'description', 'is_autoload', 'type_id'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,8 @@ class SettingUpdateRequest extends Request
             'name' => ['max:30', Rule::unique('settings')->ignore($setting->id)],
             'value' => 'nullable|string',
             'description' => 'nullable|string|max:255',
-            'is_autoload' => 'nullable|boolean'
+            'is_autoload' => 'nullable|boolean',
+            'type_id' => 'nullable|int'
         ];
     }
 

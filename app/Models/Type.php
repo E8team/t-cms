@@ -10,18 +10,47 @@ class Type extends BaseModel
 
     public $timestamps = false;
 
-    public function scopeLink($query)
+    public static $modelMapWithType = [
+        'link' => Link::class,
+        'banner' => Banner::class,
+        'setting' => Setting::class,
+    ];
+
+    public function scopeByModel($query, $model)
     {
-        return $query->where('class_name', Link::class);
+        if (isset(self::$modelMapWithType[$model])) {
+            return $query->where('class_name', self::$modelMapWithType[$model]);
+        } else {
+            return $query;
+        }
     }
 
-    public function scopeBanner($query)
+    public function __get($key)
     {
-        return $query->where('class_name', Banner::class);
+        $mapKey = substr($key, 0, -1);
+        if (isset(self::$modelMapWithType[$mapKey])) {
+            return $this->hasMany(self::$modelMapWithType[$mapKey]);
+        } else {
+            return parent::__get($key);
+        }
     }
 
-    public function links()
+    public function __call($method, $args)
     {
-        return $this->hasMany(Link::class);
+        $mapKey = substr($method, 0, -1);
+        if (isset(self::$modelMapWithType[$mapKey])) {
+            return $this->hasMany(self::$modelMapWithType[$mapKey]);
+        } else {
+            return parent::__call($method, $args);
+        }
+    }
+
+    public static function createType(array $data)
+    {
+
+        if(isset(self::$modelMapWithType[$data['class_name']])){
+            $data['class_name'] = self::$modelMapWithType[$data['class_name']];
+            return static::create($data);
+        }
     }
 }

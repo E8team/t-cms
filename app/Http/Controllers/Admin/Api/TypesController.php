@@ -15,43 +15,24 @@ use Illuminate\Http\Request;
 
 class TypesController extends ApiController
 {
+
     public function __construct()
     {
         //todo middleware
         //$this->middleware('permission:admin.post.categories')->except('post');
         //$this->middleware('permission:admin.post.show')->only('post', 'page');
     }
-    /**
-     * 友情链接的分类
-     * @return \Dingo\Api\Http\Response
-     */
-    public function link()
-    {
-        $types = Type::link()->ordered()->get();
-        return $this->response->collection($types, new TypeTransformer());
-    }
 
-    /**
-     * banner的分类
-     * @return \Dingo\Api\Http\Response
-     */
-    public function banner()
+    public function getTypeByModel($model)
     {
-        $types = Type::banner()->ordered()->get();
+        $types = Type::byModel($model)->ordered()->get();
         return $this->response->collection($types, new TypeTransformer());
     }
 
 
     public function store(TypeCreateRequest $request)
     {
-        $data = $request->all();
-        switch ($data['class_name']) {
-            case 'link':
-                $data['class_name'] = Link::class;
-                break;
-        }
-
-        Type::create($data);
+        Type::createType($request->all());
         return $this->response->noContent();
     }
 

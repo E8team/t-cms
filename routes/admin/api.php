@@ -91,12 +91,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 还原指定的被软删除的文章
     $api->post('posts/{post}/restore', 'PostsController@restore');
     // -------------------------------------------------
-    // 获取所有友情链接的类别
-    $api->get('types/link', 'TypesController@link');
-    // 获取所有banner的类别
-    $api->get('types/banner', 'TypesController@banner');
-    // 获取所有setting的类别
-    $api->get('types/setting', 'TypesController@setting');
+    // 获取某个model的所有类别
+    $api->get('types/{model}', 'TypesController@getTypeByModel');
     // 创建类别
     $api->post('types', 'TypesController@store');
     // 更新类别
