@@ -95,6 +95,8 @@ $api->group(['middleware'=>'auth'], function ($api) {
     $api->get('types/link', 'TypesController@link');
     // 获取所有banner的类别
     $api->get('types/banner', 'TypesController@banner');
+    // 获取所有setting的类别
+    $api->get('types/setting', 'TypesController@setting');
     // 创建类别
     $api->post('types', 'TypesController@store');
     // 更新类别
@@ -115,12 +117,16 @@ $api->group(['middleware'=>'auth'], function ($api) {
     // 删除指定的友情链接
     $api->delete('links/{link}', 'LinksController@destroy');
     // -------------------------------------------------
-    $api->get('settings', 'SettingsController@lists');
-    // 创建设置项
+    // 获取所有的配置
+    $api->get('settings/type/all', 'SettingsController@allSettings');
+    // 指定类别下面的配置 type如果不传表示获取默认分类(type_id为null)的配置
+    $api->get('settings/type/{type?}', 'SettingsController@lists');
+    // 创建配置
     $api->post('settings', 'SettingsController@store');
-    // 更新设置项
+    // 更新配置
     $api->put('settings/setting', 'SettingsController@update');
 
+    // ------------------------------------------------
     // 获取所有主题
     $api->get('themes', 'ThemesController@lists');
     // 获取正文模板

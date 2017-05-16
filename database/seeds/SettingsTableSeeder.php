@@ -18,6 +18,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => 't-cms',
                 'description' => '',
                 'is_autoload' => true,
+                'type_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -27,6 +28,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => '京ICP备0000001号',
                 'description' => '',
                 'is_autoload' => false,
+                'type_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]

@@ -17,11 +17,6 @@ class Banner extends BaseModel implements InterfaceTypeable
         'is_visible' => 'boolean'
     ];
 
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
-
     public function scopeIsVisible($query, $isVisible = true)
     {
         return $query->where('is_visible', $isVisible)->ordered();

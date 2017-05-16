@@ -3,15 +3,20 @@
 namespace App\Models;
 
 use App\Models\Traits\Cachable;
+use App\Models\Traits\Listable;
+use App\Models\Traits\Typeable;
 use Cache;
 
-class Setting extends BaseModel
+class Setting extends BaseModel implements InterfaceTypeable
 {
-    use Cachable;
+    use Cachable, Typeable, Listable;
 
     protected $hasDefaultValuesFields = ['is_autoload'];
 
-    protected $fillable = ['name', 'value', 'description', 'is_autoload'];
+    protected $fillable = ['name', 'value', 'description', 'is_autoload', 'type_id'];
+
+    protected static $allowSortFields = ['name', 'value', 'description', 'type_id'];
+    protected static $allowSearchFields = ['name', 'value', 'is_autoload'];
 
     protected $casts = [
         'is_autoload' => 'boolean',

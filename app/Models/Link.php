@@ -16,10 +16,7 @@ class Link extends BaseModel implements InterfaceTypeable
     protected $casts = [
         'is_visible' => 'boolean'
     ];
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
+
 
     public function scopeIsVisible($query, $isVisible = true)
     {

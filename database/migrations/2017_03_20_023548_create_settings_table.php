@@ -19,6 +19,7 @@ class CreateSettingsTable extends Migration
             $table->text('value');
             $table->string('description')->nullable();
             $table->boolean('is_autoload')->default(true);
+            $table->unsignedInteger('type_id')->nullable()->index();
             $table->timestamps();
         });
     }
