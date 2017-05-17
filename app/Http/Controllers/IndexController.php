@@ -71,6 +71,7 @@ class IndexController extends Controller
         } else {
             $post = $queryBuilder->publish()->firstOrFail();
         }
+        $post->addViewCount();
         app(Navigation::class)->setActiveNav($category);
         return theme_view($post->template, ['post' => $post]);
     }

@@ -4,9 +4,7 @@ namespace App\Models;
 
 use App\Models\Presenters\PostPresenters;
 use App\Models\Traits\Listable;
-use Cache;
 use Carbon\Carbon;
-use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -111,17 +109,18 @@ class Post extends BaseModel
     public function addViewCount()
     {
         //todo 感觉这里并发会有问题 2017年3月27日23:18:41
-        $cacheKey = 'post_views_count_' . $this->id;
+        /*$cacheKey = 'post_views_count_' . $this->id;
         if (Cache::has($cacheKey)) {
             $currentViewCount = Cache::increment($cacheKey);
             if ($currentViewCount - $this->views_count >= Config::get('cache.post.cache_views_count_num')) {
                 //将阅读量写入数据库
-                //User::where($this->getKeyName(), $this->getKey())->increment('views_count', config('cache.post.cache_views_count_num'));
-                User::where($this->getKeyName(), $this->getKey())->update('views_count', $currentViewCount);
+                Post::where($this->getKeyName(), $this->getKey())->update(['views_count' => $currentViewCount]);
             }
         } else {
             Cache::forever($cacheKey, $this->views_count + 1);
-        }
+        }*/
+        Post::where($this->getKeyName(), $this->getKey())->increment('views_count');
+        $this->views_count++;
     }
 
     public static function movePosts2Categories($categoryIds, $postIds)

@@ -2,6 +2,7 @@
 namespace App\T\Widgets;
 
 use App\Models\Banner as BannerModel;
+
 //todo need cache
 class Banner extends BaseWidget
 {
