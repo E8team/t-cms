@@ -53,7 +53,7 @@
                 </el-form-item>
             </el-form>
         </panel>
-        <TypeManagementDialog @new_type="refreshType()" type="banner" v-model="typeDialogVisible"></TypeManagementDialog>
+        <TypeManagementDialog @new_type="refreshType" type="banner" v-model="typeDialogVisible"></TypeManagementDialog>
     </div>
 </template>
 <script>
@@ -92,10 +92,14 @@ export default{
             }
             return isPIC;
         },
-        refreshType () {
-            this.$http.get('types/banner').then(res => {
-                this.bannerTypes =  res.data.data;
-            });
+        refreshType (typeList) {
+            if(typeList){
+                this.bannerTypes = typeList;
+            }else{
+                this.$http.get('types/banner').then(res => {
+                    this.bannerTypes =  res.data.data;
+                });
+            }
         },
         confirm () {
             let method, url;
