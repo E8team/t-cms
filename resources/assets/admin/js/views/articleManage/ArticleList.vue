@@ -135,6 +135,8 @@ export default {
     activeIndex () {
       if(this.activeIndex){
           this.$router.push({name: 'articles', params: {column: this.activeIndex}});
+      }else{
+          return;
       }
       let res = {};
       this.search(this.activeIndex, this.allCategories, res);
