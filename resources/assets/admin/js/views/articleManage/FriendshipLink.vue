@@ -50,7 +50,7 @@
                 </el-form-item>
             </el-form>
         </panel>
-        <TypeManagementDialog @new_type="refreshType()" type="link" v-model="typeDialogVisible"></TypeManagementDialog>
+        <TypeManagementDialog @new_type="refreshType" type="link" v-model="typeDialogVisible"></TypeManagementDialog>
     </div>
 </template>
 
@@ -91,10 +91,14 @@
                 }
                 return isPIC;
             },
-            refreshType () {
-                this.$http.get('types/link').then(res => {
-                    this.linkTypes =  res.data.data;
-                });
+            refreshType (typeList) {
+                if(typeList){
+                    this.linkTypes = typeList;
+                }else {
+                    this.$http.get('types/link').then(res => {
+                        this.linkTypes = res.data.data;
+                    });
+                }
             },
             confirm () {
                 let method, url;
