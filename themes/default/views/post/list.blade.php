@@ -7,13 +7,13 @@
         {!! Breadcrumbs::render('category', $navigation) !!}
         <div class="main col-lg-9 col-md-9 col-sm-12 col-xs-12">
             {!! Facades\App\T\Widgets\Banner::render() !!}
-            <div id="order" class="header">
+            <div id="list" class="header">
                 @php
                     $request = request();
                     $order = $request->get('order', 'default');
                 @endphp
                 @foreach(['default', 'recent', 'popular'] as $item)
-                    <a href="{!! $request->fullUrlWithQuery(['order' => $item]).'#order' !!}"@if($order==$item) class="active"@endif>{!! trans('app.'.$item) !!}</a>
+                    <a href="{!! $request->fullUrlWithQuery(['order' => $item]).'#list' !!}"@if($order==$item) class="active"@endif>{!! trans('app.'.$item) !!}</a>
                 @endforeach
             </div>
             <ul class="list">
@@ -41,7 +41,7 @@
                 @endforeach
             </ul>
             {{--分页--}}
-            {!! $postList->links() !!}
+            {!! $postList->fragment('list')->links() !!}
         </div>
         @include('post.particals.list_side')
     </div>
