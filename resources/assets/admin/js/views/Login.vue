@@ -9,7 +9,7 @@
                 <el-form-item :error="errors.password" label="密码">
                     <el-input @change="errors.password = ''" v-model="password" type="password" placeholder="请输入密码" @keyup.native.enter="login"></el-input>
                 </el-form-item>
-                <el-checkbox v-model="rember" class="remove_pwd_checkbox">记住密码</el-checkbox>
+                <el-checkbox v-model="remember" class="remove_pwd_checkbox">记住密码</el-checkbox>
                 <el-form-item>
                     <el-button @click="login" :loading="loading" class="login_button" type="primary">登录</el-button>
                 </el-form-item>
@@ -25,7 +25,7 @@
             return {
                 user_name: '',
                 password: '',
-                rember: false,
+                remember: false,
                 loading: false,
                 errors: []
             }
@@ -36,7 +36,7 @@
                 this.$http.post('login', {
                     user_name: this.user_name,
                     password: this.password,
-                    rember: this.rember
+                    remember: this.remember
                 }).then(res => {
                     this.loading = false;
                     this.$router.push({path: '/admin/home'})
