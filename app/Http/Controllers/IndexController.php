@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostHasBeenRead;
 use App\Models\Category;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ class IndexController extends Controller
      * @param  $cateSlug
      * @return \Illuminate\Contracts\View\View
      */
-    public function post($cateSlug, $post)
+    public function post($cateSlug, $post, Request $request)
     {
         $category = Category::findBySlug($cateSlug);
         $queryBuilder = $category->posts()->post()->where('id', $post);
@@ -71,7 +72,7 @@ class IndexController extends Controller
         } else {
             $post = $queryBuilder->publish()->firstOrFail();
         }
-        $post->addViewCount();
+        event(new PostHasBeenRead($post, $request->getClientIp()));
         app(Navigation::class)->setActiveNav($category);
         return theme_view($post->template, ['post' => $post]);
     }
