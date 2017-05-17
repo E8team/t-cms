@@ -26,4 +26,9 @@ class Banner extends BaseModel implements InterfaceTypeable
     {
         return $this->getPicure($this->picture, $style, $defaultPic);
     }
+
+    public function getPictureUrlsAttribute()
+    {
+        return $this->getPicure($this->picture, ['banner_sm', 'banner_index']);
+    }
 }
