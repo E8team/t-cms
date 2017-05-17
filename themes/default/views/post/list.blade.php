@@ -6,7 +6,7 @@
     <div class="content container">
         {!! Breadcrumbs::render('category', $navigation) !!}
         <div class="main col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            @include('layouts.particals.banner')
+            {!! Facades\App\T\Widgets\Banner::render() !!}
             <div id="order" class="header">
                 @php
                     $request = request();

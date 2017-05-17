@@ -30,6 +30,6 @@ class Link extends BaseModel implements InterfaceTypeable
 
     public function getLogoUrl($style, $defaultPic = '')
     {
-        return $this->getPicure($this->attributes['logo'], [$style], $defaultPic)[$style];
+        return $this->getPicure($this->attributes['logo'], $style, $defaultPic);
     }
 }

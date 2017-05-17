@@ -25,7 +25,7 @@ class BannerCreateRequest extends Request
         return [
             'url' => 'required|url|max:255',
             'title' => 'required|string|max:20',
-            'picture' => 'nullable|picture_id',
+            'picture' => 'picture_id',
             'type_id' => 'nullable|int',
             'order' => 'nullable|int',
             'is_visible' => 'nullable|boolean'

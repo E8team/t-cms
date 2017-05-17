@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
 use Auth;
-use Alert;
 
 class IndexController extends Controller
 {

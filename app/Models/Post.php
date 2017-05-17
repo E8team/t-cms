@@ -156,9 +156,9 @@ class Post extends BaseModel
         return $this->getPicure($this->cover, ['sm', 'md', 'lg', 'o'], asset('images/default_avatar.jpg'));
     }
 
-    public function getCover($style = 'lg', $defaultCover = '')
+    public function getCover($style, $defaultCover = '')
     {
-        return $this->getPicure($this->cover, [$style], $defaultCover)[$style];
+        return $this->getPicure($this->cover, $style, $defaultCover);
     }
 
     public static function createPage($data)

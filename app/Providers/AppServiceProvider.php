@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\T\Alert\Alert;
 use App\T\Navigation\Navigation;
+use App\T\Widgets\Alert;
 use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;

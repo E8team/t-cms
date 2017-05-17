@@ -1,10 +1,10 @@
 <?php
 
-namespace App\T\Alert;
+namespace App\T\Widgets;
 
 use Illuminate\Contracts\Session\Session;
 
-class Alert
+class Alert extends BaseWidget
 {
     const ALERT_KEY = 'ALERT_FLASH';
     protected $config;
@@ -57,11 +57,20 @@ class Alert
         $this->setMessage('danger', $message);
     }
 
-    public function render($alertView = '')
+    public function getData()
     {
-        if ($this->session->has(static::ALERT_KEY)) {
-            return theme_view($alertView ?: 'components.alert', $this->session->get(static::ALERT_KEY))->render();
+        if($this->session->has(static::ALERT_KEY)){
+            return $this->session->get(static::ALERT_KEY);
+        }else{
+            return [];
         }
-        return '';
+    }
+    public function render()
+    {
+        if($this->session->has(static::ALERT_KEY)){
+            return parent::render();
+        }else{
+            return '';
+        }
     }
 }
