@@ -10,6 +10,11 @@
                     <el-tab-pane v-for="item in linkTypes" :label="item.name" :key="item.id" :name="String(item.id)"></el-tab-pane>
                 </el-tabs>
                 <el-table border :data="list.data" style="width: 100%">
+                    <el-table-column label="图片" width="200">
+                        <template scope="scope">
+                            <img class="pic" v-if="scope.row.picture_urls.banner_sm" :src="scope.row.picture_urls.banner_sm" alt="scope.row.title">
+                        </template>
+                    </el-table-column>
                     <el-table-column property="title" label="标题"></el-table-column>
                     <el-table-column label="url" width="200">
                         <template scope="scope">
