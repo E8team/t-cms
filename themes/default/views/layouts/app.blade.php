@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="body">
-    @include('layouts.particals.navbar')
+    {!! Facades\App\T\Widgets\Navbar::render() !!}
     {!! Facades\App\T\Widgets\Alert::render() !!}
     @yield('content')
     @include('layouts.particals.link')

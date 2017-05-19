@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="body content">
-    @include('layouts.particals.navbar')
+    {!! Facades\App\T\Widgets\Navbar::render() !!}
     {!! Facades\App\T\Widgets\Alert::render() !!}
     @yield('content')
     @yield('js')
