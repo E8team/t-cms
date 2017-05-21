@@ -1,11 +1,14 @@
 @extends('layouts.content')
 @section('content')
-    <!--<div class="content_header">
-        <a href="#" class="title">t-cms</a>
-    </div>-->
     <div class="container">
+    <ol class="breadcrumb">
+        <li><a href="http://t-cms.dev">首页</a></li>
+        <li><a href="http://t-cms.dev/category/company-news">公司新闻</a></li>
+        <li class="active">新闻111</li>
+    </ol>
         <h1 class="content_title">{!! $post->title !!}</h1>
         <p class="info">
+            <span>admin</span>
             <span>{!! $post->views_count !!} 次阅读</span>
             <span>{!! $post->published_at !!}</span>
         </p>
