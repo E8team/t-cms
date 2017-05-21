@@ -7,7 +7,7 @@
         <p class="info">
             <span class="avatar">
                 <img src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
-                <span>admin</span>
+                <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
             </span>
             <span>{!! $post->views_count !!} 次阅读</span>
             <span>{!! $post->published_at !!}</span>
