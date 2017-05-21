@@ -1,11 +1,8 @@
+@inject('navigation', 'App\T\Navigation\Navigation')
 @extends('layouts.content')
 @section('content')
     <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="http://t-cms.dev">首页</a></li>
-        <li><a href="http://t-cms.dev/category/company-news">公司新闻</a></li>
-        <li class="active">新闻111</li>
-    </ol>
+        {!! Breadcrumbs::render('category', $navigation) !!}
         <h1 class="content_title">{!! $post->title !!}</h1>
         <p class="info">
             <span>admin</span>
