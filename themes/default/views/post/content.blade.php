@@ -5,7 +5,10 @@
         {!! Breadcrumbs::render('category', $navigation) !!}
         <h1 class="content_title">{!! $post->title !!}</h1>
         <p class="info">
-            <span>admin</span>
+            <span class="avatar">
+                <img src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
+                <span>admin</span>
+            </span>
             <span>{!! $post->views_count !!} 次阅读</span>
             <span>{!! $post->published_at !!}</span>
         </p>
