@@ -13,11 +13,13 @@ class CreatePostContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_contents', function (Blueprint $table) {
-            $table->unsignedInteger('post_id')->unique();
-            $table->text('content');
-            $table->timestamps();
-        });
+        Schema::create(
+            'post_contents', function (Blueprint $table) {
+                $table->unsignedInteger('post_id')->unique();
+                $table->text('content');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

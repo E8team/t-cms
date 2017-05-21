@@ -21,6 +21,7 @@ class UsersController extends ApiController
 
     /**
      * 当前登录的用户信息
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function me()
@@ -30,6 +31,7 @@ class UsersController extends ApiController
 
     /**
      * 用户列表
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function lists()
@@ -44,7 +46,8 @@ class UsersController extends ApiController
 
     /**
      * 显示指定用户信息
-     * @param User $user
+     *
+     * @param  User $user
      * @return \Dingo\Api\Http\Response
      */
     public function show(User $user)
@@ -56,7 +59,8 @@ class UsersController extends ApiController
 
     /**
      * 删除指定用户
-     * @param User $user
+     *
+     * @param  User $user
      * @return \Dingo\Api\Http\Response
      */
     public function destroy(User $user)
@@ -67,18 +71,21 @@ class UsersController extends ApiController
 
     /**
      * 更新指定用户
-     * @param User $user
-     * @param UserUpdateRequest $request
+     *
+     * @param  User              $user
+     * @param  UserUpdateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function update(User $user, UserUpdateRequest $request)
     {
-        $request->performUpdate($user, function ($data) {
-            if (isset($data['password'])) {
-                $data['password'] = Hash::make($data['password']);
+        $request->performUpdate(
+            $user, function ($data) {
+                if (isset($data['password'])) {
+                    $data['password'] = Hash::make($data['password']);
+                }
+                return $data;
             }
-            return $data;
-        });
+        );
         if (!empty($roleIds = $request->get('role_ids'))) {
             $roleIds = Role::findOrFail($roleIds)->pluck('id');
             $user->roles()->sync($roleIds);
@@ -88,7 +95,8 @@ class UsersController extends ApiController
 
     /**
      * 创建用户
-     * @param UserCreateRequest $request
+     *
+     * @param  UserCreateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function store(UserCreateRequest $request)
@@ -110,7 +118,8 @@ class UsersController extends ApiController
 
     /**
      * 获取当前用户的角色
-     * @param User $user
+     *
+     * @param  User $user
      * @return \Dingo\Api\Http\Response
      */
     public function roles(User $user)
@@ -120,15 +129,18 @@ class UsersController extends ApiController
 
     /**
      * 批量移动
-     * @param Request $request
+     *
+     * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
     public function moveUsers2Roles(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(
+            $request, [
             'user_ids' => 'int_array',
             'role_ids' => 'int_array',
-        ]);
+            ]
+        );
         $userIds = $request->get('user_ids');
         $roleIds = $request->get('role_ids');
         User::moveUsers2Roles($userIds, $roleIds);

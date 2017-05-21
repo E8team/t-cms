@@ -19,6 +19,7 @@
                 <el-menu-item index="/admin/home/articles">文章列表</el-menu-item>
                 <el-menu-item index="/admin/home/columns">栏目管理</el-menu-item>
                 <el-menu-item index="/admin/home/friendship-links">友情链接管理</el-menu-item>
+                <el-menu-item index="/admin/home/banners">Banners</el-menu-item>
             </el-submenu>
             <el-submenu index="setting">
                 <template slot="title"><i class="el-icon-setting"></i>设置</template>

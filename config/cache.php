@@ -88,8 +88,5 @@ return [
     'prefix' => '3t',
     //默认缓存时间
     'ttl' => 60,
-    'post' => [
-        //文章阅读量每次从缓存写入数据库的数量
-        'cache_views_count_num' => 10
-    ]
+
 ];

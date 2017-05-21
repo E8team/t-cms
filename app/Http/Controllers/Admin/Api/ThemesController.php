@@ -71,11 +71,13 @@ class ThemesController extends ApiController
             return $this->response->errorBadRequest(trans('theme_not_found'));
         }
         $setting = Setting::firstOrNew(['name' => $this->activeThemeSettingName]);
-        $setting->fill([
+        $setting->fill(
+            [
             'value' => $themeId,
             'description' => '当前主题',
             'is_autoload' => true
-        ])->saveOrFail();
+            ]
+        )->saveOrFail();
         return $this->response->noContent();
     }
 }

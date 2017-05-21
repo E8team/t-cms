@@ -38,9 +38,11 @@ class Role extends BaseModel implements EntrustRoleInterface
     public static function permissionRoleArrayWithCache()
     {
         if (Cache::getStore() instanceof TaggableStore) {
-            return Cache::tag(Config::get('entrust.permission_role_table'))->rememberForever('all_permission_role', function () {
-                return DB::table('permission_role')->get();
-            });
+            return Cache::tag(Config::get('entrust.permission_role_table'))->rememberForever(
+                'all_permission_role', function () {
+                    return DB::table('permission_role')->get();
+                }
+            );
         } else {
             return DB::table('permission_role')->get();
         }
@@ -51,9 +53,11 @@ class Role extends BaseModel implements EntrustRoleInterface
         $rolePrimaryKey = $this->primaryKey;
         $cacheKey = 'entrust_permissions_for_role_' . $this->$rolePrimaryKey;
         if (Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('entrust.permission_role_table'))->rememberForever($cacheKey, function () {
-                return $this->perms()->ordered()->recent()->get();
-            });
+            return Cache::tags(Config::get('entrust.permission_role_table'))->rememberForever(
+                $cacheKey, function () {
+                    return $this->perms()->ordered()->recent()->get();
+                }
+            );
         } else {
             return $this->perms()->ordered()->recent()->get();
         }

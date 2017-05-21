@@ -19,4 +19,9 @@ trait Typeable
 
         return $query->where('type_id', $typeId);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

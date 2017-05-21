@@ -13,36 +13,38 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedTinyInteger('type')->comment('分类类型 0: 列表栏目 1: 单页栏目 2: 外部链接');
-            // 缩略图
-            $table->string('image', 32)->nullable();
-            // 父级id
-            $table->unsignedInteger('parent_id')->default(0);
-            // 分类名
-            $table->string('cate_name', 30);
-            // 分类描述
-            $table->string('description')->nullable();
-            // 外部链接
-            $table->string('url')->nullable();
-            // 链接是否在新窗口打开
-            $table->boolean('is_target_blank')->default(true);
-            // 分类slug
-            $table->string('cate_slug', 30)->nullable()->unique();
-            // 是否在导航栏显示
-            $table->boolean('is_nav')->default(false);
-            $table->integer('order')->default(0)->index()->comment('排序字段');
-            // 单页模板
-            $table->string('page_template', 30)->nullable();
-            // 列表页模板
-            $table->string('list_template', 30)->nullable();
-            // 默认内容模板
-            $table->string('content_template', 30)->nullable();
-            // 分类的一些其他配置
-            $table->mediumText('setting')->nullable();
-            $table->timestamps();
-        });
+        Schema::create(
+            'categories', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedTinyInteger('type')->comment('分类类型 0: 列表栏目 1: 单页栏目 2: 外部链接');
+                // 缩略图
+                $table->string('image', 32)->nullable();
+                // 父级id
+                $table->unsignedInteger('parent_id')->default(0);
+                // 分类名
+                $table->string('cate_name', 30);
+                // 分类描述
+                $table->string('description')->nullable();
+                // 外部链接
+                $table->string('url')->nullable();
+                // 链接是否在新窗口打开
+                $table->boolean('is_target_blank')->default(true);
+                // 分类slug
+                $table->string('cate_slug', 30)->nullable()->unique();
+                // 是否在导航栏显示
+                $table->boolean('is_nav')->default(false);
+                $table->integer('order')->default(0)->index()->comment('排序字段');
+                // 单页模板
+                $table->string('page_template', 30)->nullable();
+                // 列表页模板
+                $table->string('list_template', 30)->nullable();
+                // 默认内容模板
+                $table->string('content_template', 30)->nullable();
+                // 分类的一些其他配置
+                $table->mediumText('setting')->nullable();
+                $table->timestamps();
+            }
+        );
     }
 
     /**

@@ -15,6 +15,7 @@ class Controller extends BaseController
 
     /**
      * 分页时每页显示多少数据
+     *
      * @return int
      */
     public function perPage($default = null)

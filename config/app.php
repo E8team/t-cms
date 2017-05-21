@@ -239,8 +239,6 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'Navigation' => \App\T\Navigation\Facade::class,
-        'Alert' => \App\T\Alert\Facade::class,
     ],
 
 ];

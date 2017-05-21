@@ -51,9 +51,11 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     public static function allPermissionWithCache()
     {
         if (Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('permissions_table'))->rememberForever('permissions', function () {
-                return static::allPermission();
-            });
+            return Cache::tags(Config::get('permissions_table'))->rememberForever(
+                'permissions', function () {
+                    return static::allPermission();
+                }
+            );
         } else {
             return static::allPermission();
         }
@@ -69,9 +71,11 @@ class Permission extends BaseModel implements EntrustPermissionInterface
         }
 
         $menu = collect();
-        $user->roles->each(function ($item) use (&$menu) {
-            $menu = $menu->merge($item->cachedPermissions());
-        });
+        $user->roles->each(
+            function ($item) use (&$menu) {
+                $menu = $menu->merge($item->cachedPermissions());
+            }
+        );
         if ($menu->isEmpty()) {
             return $menu;
         }
@@ -92,8 +96,10 @@ class Permission extends BaseModel implements EntrustPermissionInterface
     {
         $permissions = static::findOrFail($permissionIds);
         $roleIds = Role::findOrFail($roleIds)->pluck('id');
-        $permissions->each(function ($permission) use ($roleIds) {
-            $permission->roles()->sync($roleIds);
-        });
+        $permissions->each(
+            function ($permission) use ($roleIds) {
+                $permission->roles()->sync($roleIds);
+            }
+        );
     }
 }

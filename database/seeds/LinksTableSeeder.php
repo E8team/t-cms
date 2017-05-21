@@ -11,7 +11,8 @@ class LinksTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('links')->insert([
+        DB::table('links')->insert(
+            [
             [
                 'id' => 1,
                 'name' => '3t官网',
@@ -52,6 +53,7 @@ class LinksTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
-        ]);
+            ]
+        );
     }
 }

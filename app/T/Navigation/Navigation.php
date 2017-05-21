@@ -20,9 +20,11 @@ class Navigation
     public function getAllNav()
     {
         if (is_null($this->allNav)) {
-            $this->allNav = Category::nav()->topCategories()->with(['children' => function ($query) {
-                $query->nav();
-            }])->ordered()->ancient()->get();
+            $this->allNav = Category::nav()->topCategories()->with(
+                ['children' => function ($query) {
+                    $query->nav();
+                }]
+            )->ordered()->ancient()->get();
         }
         return $this->allNav;
     }
@@ -34,7 +36,8 @@ class Navigation
 
     /**
      * 获取当前导航
-     * @param Request $request
+     *
+     * @param  Request $request
      * @return Category
      */
     public function setActiveNav(Category $activeNav)
@@ -49,7 +52,8 @@ class Navigation
 
     /**
      * 获取当前导航
-     * @param \Illuminate\Http\Request $request
+     *
+     * @param  \Illuminate\Http\Request $request
      * @return Category
      */
     public function getActiveNav()
@@ -59,7 +63,8 @@ class Navigation
 
     /**
      * 获取当前导航的顶级导航
-     * @param \Illuminate\Http\Request $request
+     *
+     * @param  \Illuminate\Http\Request $request
      * @return Category
      */
     public function getTopNav()

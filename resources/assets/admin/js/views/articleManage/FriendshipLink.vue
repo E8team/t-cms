@@ -50,56 +50,17 @@
                 </el-form-item>
             </el-form>
         </panel>
-        <el-dialog @close="editLinkTypeId = null, resetTypeForm()" title="编辑分类" v-model="typeDialogVisible">
-            <el-table :data="linkTypes">
-                <el-table-column property="name" label="分类名" width="200"></el-table-column>
-                <el-table-column property="description" label="描述"></el-table-column>
-                <el-table-column property="order" label="排序"></el-table-column>
-                <el-table-column
-                        fixed="right"
-                        label="操作"
-                        width="160">
-                    <template scope="scope">
-                        <el-button-group>
-                            <el-button size="mini" @click="edit(scope.row)" type="warning">编辑</el-button>
-                            <el-button @click="del(scope.row.id)" size="mini" type="danger">删除</el-button>
-                        </el-button-group>
-                    </template>
-                </el-table-column>
-            </el-table>
-
-            <el-form class="type_form" :model="linkType" label-width="85px">
-                <el-form-item>
-                    <el-radio-group v-model="typeEditStatus">
-                        <el-radio-button :label="false">添加</el-radio-button>
-                        <el-radio-button :disabled="!typeEditStatus" :label="true">编辑</el-radio-button>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item :error="typeErrors.name" required label="分类名">
-                    <el-input @change="typeErrors.name = ''" placeholder="请设置分类名称" v-model="linkType.name"></el-input>
-                </el-form-item>
-                <el-form-item label="描述">
-                    <el-input placeholder="请设置分类描述" type="textarea" :rows="4" v-model="linkType.description"></el-input>
-                </el-form-item>
-                <el-form-item label="排序">
-                    <el-input-number v-model="friendshipLink.order"></el-input-number>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="typeDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="confirmType()">{{typeEditStatus ? '确认编辑' : '确认添加'}}</el-button>
-            </span>
-        </el-dialog>
+        <TypeManagementDialog @new_type="refreshType" type="link" v-model="typeDialogVisible"></TypeManagementDialog>
     </div>
 </template>
 
 <script>
+    import TypeManagementDialog from '../../components/TypeManagementDialog.vue'
     export default{
         data () {
             return {
                 typeDialogVisible: false,
                 errors: [],
-                typeErrors: [],
                 linkTypes: [],
                 friendshipLink: {
                     'url': null,
@@ -111,25 +72,11 @@
                     'logo_urls': {},
                     'is_visible': true
                 },
-                linkType: {
-                    'name': null,
-                    'description': null,
-                    'order': null
-                },
-                editLinkTypeId: null,
                 title: ''
             }
         },
-        computed: {
-            'typeEditStatus': {
-                get: function () {
-                    return this.editLinkTypeId != null;
-                },
-                set: function (newValue) {
-                    this.editLinkTypeId = null;
-                    this.resetTypeForm();
-                }
-            }
+        components: {
+            TypeManagementDialog
         },
         methods: {
             handleAvatarSuccess (res, file) {
@@ -144,6 +91,15 @@
                 }
                 return isPIC;
             },
+            refreshType (typeList) {
+                if(typeList){
+                    this.linkTypes = typeList;
+                }else {
+                    this.$http.get('types/link').then(res => {
+                        this.linkTypes = res.data.data;
+                    });
+                }
+            },
             confirm () {
                 let method, url;
                 this.id ? (method = 'put', url = `links/${this.id}`) : (method = 'post', url = 'links');
@@ -156,52 +112,7 @@
                 }).catch(err => {
                     this.errors = err.response.data.errors;
                 });
-            },
-            refreshType () {
-                this.$http.get('types/link').then(res => {
-                    this.linkTypes =  res.data.data;
-                });
-            },
-            resetTypeForm () {
-                this.linkType = {
-                    'name': null,
-                    'description': null,
-                    'order': null
-                };
-            },
-            confirmType () {
-                let method, url;
-                this.typeEditStatus ? (method = 'put', url = `types/${this.editLinkTypeId}`) : (method = 'post', url = 'types');
-                this.linkType.class_name = 'link';
-                delete this.linkType.id;
-                this.$http[method](url, this.linkType).then(res => {
-                    this.$message({
-                        message: `${this.typeEditStatus ? '编辑' : '添加'}成功`,
-                        type: 'success'
-                    });
-                    this.typeDialogVisible = false;
-                    this.refreshType();
-                }).catch(err => {
-                    this.typeErrors = err.response.data.errors;
-                });
-            },
-            edit (type) {
-                this.editLinkTypeId = type.id;
-                this.linkType = type;
-            },
-            del (id) {
-                this.$confirm('你确定要删除该分类?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    this.$http.delete(`types/${id}`).then(res => {
-                        this.$message('已删除');
-                        this.refreshType();
-                    })
-                }).catch(() => {
-                })
-            },
+            }
         },
         mounted () {
             this.refreshType();
@@ -220,7 +131,5 @@
 </script>
 
 <style lang="less">
-    .type_form{
-        padding: 40px 40px 0 40px;
-    }
+
 </style>

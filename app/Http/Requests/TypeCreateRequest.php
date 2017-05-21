@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Type;
+
 class TypeCreateRequest extends Request
 {
 
@@ -28,7 +30,7 @@ class TypeCreateRequest extends Request
             'order' => 'nullable|int',
             // class_name指定Model类名 表示是该model的类别
             // 在store方法中给定真实的类名
-            'class_name' => 'in:link'
+            'class_name' => 'in:'.implode(',', array_keys(Type::$modelMapWithType))
         ];
     }
 

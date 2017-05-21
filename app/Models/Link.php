@@ -16,10 +16,7 @@ class Link extends BaseModel implements InterfaceTypeable
     protected $casts = [
         'is_visible' => 'boolean'
     ];
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
+
 
     public function scopeIsVisible($query, $isVisible = true)
     {
@@ -33,6 +30,6 @@ class Link extends BaseModel implements InterfaceTypeable
 
     public function getLogoUrl($style, $defaultPic = '')
     {
-        return $this->getPicure($this->attributes['logo'], [$style], $defaultPic)[$style];
+        return $this->getPicure($this->attributes['logo'], $style, $defaultPic);
     }
 }

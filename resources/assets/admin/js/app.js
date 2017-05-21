@@ -37,6 +37,7 @@ Vue.prototype.$http.interceptors.response.use((response) => {
     nprogress.done();
     return response;
 }, (error) => {
+    nprogress.done();
     if(error.code === 'ECONNABORTED'){
         Vue.prototype.$message({
             showClose: true,

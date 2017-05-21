@@ -113,6 +113,21 @@ export default new Router({
                             component: require('./views/articleManage/FriendshipLinkList.vue')
                         },
                         {
+                            path: 'banners',
+                            name: 'banners',
+                            component: require('./views/articleManage/BannerList.vue')
+                        },
+                        {
+                            path: 'banner-add',
+                            name: 'banner-add',
+                            component: require('./views/articleManage/Banner.vue')
+                        },
+                        {
+                            path: 'banner-edit/:id',
+                            name: 'banner-edit',
+                            component: require('./views/articleManage/Banner.vue')
+                        },
+                        {
                             path: 'configure',
                             name: 'configure',
                             component: require('./views/setting/Configure.vue')

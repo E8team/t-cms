@@ -8,6 +8,8 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Models\Setting;
 use App\Http\Requests\SettingCreateRequest;
 use App\Http\Requests\SettingUpdateRequest;
+use App\Models\Type;
+use App\Transformers\SettingTransformer;
 
 class SettingsController extends ApiController
 {
@@ -16,9 +18,27 @@ class SettingsController extends ApiController
         $this->middleware('permission:admin.setting.configure');
     }
 
-    public function lists()
+    public function allSettings()
     {
-        dd(Setting::allSetting());
+        $settings = Setting::ordered()
+            ->recent()
+            ->withSimpleSearch()
+            ->withSort()
+            ->paginate();
+        return $this->response->paginator($settings, new SettingTransformer())
+            ->setMeta(Setting::getAllowSortFieldsMeta() + Setting::getAllowSearchFieldsMeta());
+    }
+
+    public function lists(Type $type = null)
+    {
+        $settings = Setting::byType($type)
+            ->ordered()
+            ->recent()
+            ->withSimpleSearch()
+            ->withSort()
+            ->paginate();
+        return $this->response->paginator($settings, new SettingTransformer())
+            ->setMeta(Setting::getAllowSortFieldsMeta() + Setting::getAllowSearchFieldsMeta());
     }
 
     public function store(SettingCreateRequest $request)

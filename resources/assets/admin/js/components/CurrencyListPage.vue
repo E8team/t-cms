@@ -134,4 +134,7 @@
         .option{
         }
     }
+    .el-select {
+        vertical-align: inherit;
+    }
 </style>

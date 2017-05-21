@@ -26,7 +26,8 @@ class SettingCreateRequest extends Request
             'name' => 'required|max:30|unique:settings',
             'value' => 'nullable|string',
             'description' => 'nullable|string|max:255',
-            'is_autoload' => 'nullable|boolean'
+            'is_autoload' => 'nullable|boolean',
+            'type_id' => 'nullable|int',
         ];
     }
 

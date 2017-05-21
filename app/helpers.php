@@ -3,8 +3,9 @@
 
 /**
  * 获取站点设置
- * @param null $key
- * @param null $default
+ *
+ * @param  null $key
+ * @param  null $default
  * @return mixed|null
  */
 function setting($key = null, $default = null)

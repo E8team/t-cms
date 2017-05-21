@@ -18,7 +18,8 @@ class RolesController extends ApiController
 
     /**
      * 显示指定角色
-     * @param Role $role
+     *
+     * @param  Role $role
      * @return \Dingo\Api\Http\Response
      */
     public function show(Role $role)
@@ -30,6 +31,7 @@ class RolesController extends ApiController
 
     /**
      * 获取所有角色(不分页 用于添加用户时显示)
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function allRoles()
@@ -40,6 +42,7 @@ class RolesController extends ApiController
 
     /**
      * 角色列表
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function lists()
@@ -55,7 +58,8 @@ class RolesController extends ApiController
 
     /**
      * 获取指定角色下面的权限
-     * @param Role $role
+     *
+     * @param  Role $role
      * @return \Dingo\Api\Http\Response
      */
     public function permissions(Role $role)
@@ -66,7 +70,8 @@ class RolesController extends ApiController
 
     /**
      * 创建角色
-     * @param RoleCreateRequest $request
+     *
+     * @param  RoleCreateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function store(RoleCreateRequest $request)
@@ -81,8 +86,9 @@ class RolesController extends ApiController
 
     /**
      * 更新角色
-     * @param Role $role
-     * @param RoleUpdateRequest $request
+     *
+     * @param  Role              $role
+     * @param  RoleUpdateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function update(Role $role, RoleUpdateRequest $request)
@@ -98,7 +104,8 @@ class RolesController extends ApiController
 
     /**
      * 删除角色
-     * @param Role $role
+     *
+     * @param  Role $role
      * @return \Dingo\Api\Http\Response
      */
     public function destroy(Role $role)

@@ -7,8 +7,9 @@ trait Listable
     /**
      * 例子: ?orders[0][field]=id&orders[0][dir]=asc&orders[1][field]=user_name&orders[1][dir]=desc
      * 或者 orders=id-asc,user_name-desc 不推荐
-     * @param $query
-     * @param null $order
+     *
+     * @param  $query
+     * @param  null  $order
      * @return mixed
      */
     public function scopeWithSort($query, $orders = null)
@@ -41,19 +42,22 @@ trait Listable
     //protected static $allowSearchFields = [];
     /**
      * 例子：?q=ty
-     * @param $query
-     * @param null $keywords
+     *
+     * @param  $query
+     * @param  null  $keywords
      * @return mixed
      */
     public function scopeWithSimpleSearch($query, $keywords = null)
     {
         $keywords = is_null($keywords) ? request('q', null) : $keywords;
         if (!empty($keywords) && !empty(static::$allowSearchFields)) {
-            $query->where(function ($query) use ($keywords) {
-                foreach (static::$allowSearchFields as $field) {
-                    $query->orWhere($field, 'like', '%' . $keywords . '%');
+            $query->where(
+                function ($query) use ($keywords) {
+                    foreach (static::$allowSearchFields as $field) {
+                        $query->orWhere($field, 'like', '%' . $keywords . '%');
+                    }
                 }
-            });
+            );
         }
         return $query;
     }

@@ -11,13 +11,15 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('settings')->insert([
+        DB::table('settings')->insert(
+            [
             [
                 'id' => 1,
                 'name' => 'web_name',
                 'value' => 't-cms',
                 'description' => '',
                 'is_autoload' => true,
+                'type_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -27,9 +29,11 @@ class SettingsTableSeeder extends Seeder
                 'value' => '京ICP备0000001号',
                 'description' => '',
                 'is_autoload' => false,
+                'type_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
-        ]);
+            ]
+        );
     }
 }

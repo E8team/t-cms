@@ -1,11 +1,14 @@
+@inject('navigation', 'App\T\Navigation\Navigation')
 @extends('layouts.content')
 @section('content')
-    <!--<div class="content_header">
-        <a href="#" class="title">t-cms</a>
-    </div>-->
     <div class="container">
+        {!! Breadcrumbs::render('category', $navigation) !!}
         <h1 class="content_title">{!! $post->title !!}</h1>
         <p class="info">
+            <span class="avatar">
+                <img src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
+                <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
+            </span>
             <span>{!! $post->views_count !!} 次阅读</span>
             <span>{!! $post->published_at !!}</span>
         </p>

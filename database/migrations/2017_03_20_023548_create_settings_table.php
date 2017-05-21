@@ -13,14 +13,17 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 30)->unique();
-            $table->text('value');
-            $table->string('description')->nullable();
-            $table->boolean('is_autoload')->default(true);
-            $table->timestamps();
-        });
+        Schema::create(
+            'settings', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name', 30)->unique();
+                $table->text('value');
+                $table->string('description')->nullable();
+                $table->boolean('is_autoload')->default(true);
+                $table->unsignedInteger('type_id')->nullable()->index();
+                $table->timestamps();
+            }
+        );
     }
 
     /**

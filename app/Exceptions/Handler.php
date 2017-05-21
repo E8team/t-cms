@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $exception
+     * @param  \Exception               $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request                 $request
      * @param  \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
@@ -68,17 +68,19 @@ class Handler extends ExceptionHandler
     /**
      * Render the given HttpException.
      *
-     * @param  \Symfony\Component\HttpKernel\Exception\HttpException  $e
+     * @param  \Symfony\Component\HttpKernel\Exception\HttpException $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function renderHttpException(HttpException $e)
     {
         $status = $e->getStatusCode();
         $theme = app(ThemeManager::class);
-        view()->replaceNamespace('errors', [
+        view()->replaceNamespace(
+            'errors', [
             ($theme->getActiveThemePath().'/views/errors'),
             __DIR__.'/views',
-        ]);
+            ]
+        );
 
         if (view()->exists("errors::{$status}")) {
             return response()->view("errors::{$status}", ['exception' => $e], $status, $e->getHeaders());

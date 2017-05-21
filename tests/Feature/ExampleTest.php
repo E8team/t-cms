@@ -16,10 +16,12 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->post('/api/admin/login', [
+        $response = $this->post(
+            '/api/admin/login', [
             'user_name' => 'ty666',
             'password' => 'taoyu'
-        ]);
+            ]
+        );
         $response->assertStatus(204);
     }
 }

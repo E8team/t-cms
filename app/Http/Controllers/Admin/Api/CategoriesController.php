@@ -26,6 +26,7 @@ class CategoriesController extends ApiController
 
     /**
      * 获取导航栏
+     *
      * @return array
      */
     public function nav()
@@ -35,7 +36,8 @@ class CategoriesController extends ApiController
 
     /**
      * 创建分类
-     * @param CategoryCreateRequest $request
+     *
+     * @param  CategoryCreateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function store(CategoryCreateRequest $request)
@@ -46,8 +48,9 @@ class CategoriesController extends ApiController
 
     /**
      * 更新分类
-     * @param Category $category
-     * @param CategoryUpdateRequest $request
+     *
+     * @param  Category              $category
+     * @param  CategoryUpdateRequest $request
      * @return \Dingo\Api\Http\Response
      */
     public function update(Category $category, CategoryUpdateRequest $request)
@@ -58,6 +61,7 @@ class CategoriesController extends ApiController
 
     /**
      * 获取一级分类
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function getTopCategories(Request $request)
@@ -74,7 +78,8 @@ class CategoriesController extends ApiController
 
     /**
      * 获取子级分类
-     * @param Category $category
+     *
+     * @param  Category $category
      * @return \Dingo\Api\Http\Response
      */
     public function getChildren(Category $category, Request $request)
@@ -89,8 +94,9 @@ class CategoriesController extends ApiController
 
     /**
      * 获取指定分类下的文章
-     * @param Category $category
-     * @param Request $request
+     *
+     * @param  Category $category
+     * @param  Request  $request
      * @return \Dingo\Api\Http\Response
      */
     public function posts(Category $category, Request $request)
@@ -129,8 +135,9 @@ class CategoriesController extends ApiController
 
     /**
      * 删除分类
-     * @param Category $category
-     * @param Request $request
+     *
+     * @param  Category $category
+     * @param  Request  $request
      * @return \Dingo\Api\Http\Response
      */
     public function destroy(Category $category, Request $request)

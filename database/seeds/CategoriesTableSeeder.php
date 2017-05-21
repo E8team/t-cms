@@ -11,7 +11,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
+        DB::table('categories')->insert(
+            [
             [
                 'id' => 1,
                 'type' => 0,
@@ -72,6 +73,7 @@ class CategoriesTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
-        ]);
+            ]
+        );
     }
 }

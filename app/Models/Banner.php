@@ -17,14 +17,18 @@ class Banner extends BaseModel implements InterfaceTypeable
         'is_visible' => 'boolean'
     ];
 
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
-
     public function scopeIsVisible($query, $isVisible = true)
     {
         return $query->where('is_visible', $isVisible)->ordered();
     }
 
+    public function getPictureUrl($style, $defaultPic = '')
+    {
+        return $this->getPicure($this->picture, $style, $defaultPic);
+    }
+
+    public function getPictureUrlsAttribute()
+    {
+        return $this->getPicure($this->picture, ['banner_sm', 'banner_index']);
+    }
 }

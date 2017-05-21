@@ -3,15 +3,20 @@
 namespace App\Models;
 
 use App\Models\Traits\Cachable;
+use App\Models\Traits\Listable;
+use App\Models\Traits\Typeable;
 use Cache;
 
-class Setting extends BaseModel
+class Setting extends BaseModel implements InterfaceTypeable
 {
-    use Cachable;
+    use Cachable, Typeable, Listable;
 
     protected $hasDefaultValuesFields = ['is_autoload'];
 
-    protected $fillable = ['name', 'value', 'description', 'is_autoload'];
+    protected $fillable = ['name', 'value', 'description', 'is_autoload', 'type_id'];
+
+    protected static $allowSortFields = ['name', 'value', 'description', 'type_id'];
+    protected static $allowSearchFields = ['name', 'value', 'is_autoload'];
 
     protected $casts = [
         'is_autoload' => 'boolean',
@@ -45,18 +50,22 @@ class Setting extends BaseModel
 
     public static function allSettingWithCache()
     {
-        return Cache::rememberForever('setting_autoload', function () {
-            return static::allSetting();
-        });
+        return Cache::rememberForever(
+            'setting_autoload', function () {
+                return static::allSetting();
+            }
+        );
     }
 
     public static function getSettingWithCache($name)
     {
         $value = static::allSettingWithCache()->get($name);
         if (is_null($value)) {
-            $value = Cache::rememberForever('setting_' . $name, function () use ($name) {
-                return static::findByName($name);
-            });
+            $value = Cache::rememberForever(
+                'setting_' . $name, function () use ($name) {
+                    return static::findByName($name);
+                }
+            );
         }
         return $value;
     }
