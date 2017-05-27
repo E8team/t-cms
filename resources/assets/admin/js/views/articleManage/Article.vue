@@ -111,6 +111,7 @@
         this.confirmLoading = status;
         this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getPlainTxt().substr(0, this.excerptSize);
         this.article.status = status;
+        console.log(this.article);
         this.$http[method](url, this.$diff.diff(this.article)).then(res => {
           this.$message({
               message: `${this.title}成功`,
@@ -171,8 +172,8 @@
                 if(this.article.cover){
                   this.preViewCover = this.article.cover_urls.lg;
                 }
-                this.$diff.save(this.article);
-                this.editor.setContent(this.article.content ? this.article.content.data.content : '');
+                this.article.content = this.article.content ? this.article.content.data.content : '';
+                this.editor.setContent(this.article.content);
             });
           }
         });

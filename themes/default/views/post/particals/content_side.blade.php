@@ -8,9 +8,11 @@
                 if($(document).scrollTop() >= sideTop){
                     $side.css('position', 'fixed');
                     $side.css('right', $main.offset().left);
+                    $side.css('top', '60px');
                 }else{
                     $side.css('position', 'absolute');
                     $side.css('right', '0px');
+                    $side.css('top', '0px');
                 }
             })
         })

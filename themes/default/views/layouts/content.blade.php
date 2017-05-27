@@ -27,6 +27,8 @@
     var lastTop = 0;
     var $title = $('.content_title');
     $(document).scroll(function (e) {
+        if($nav.length == 0){$nav = $('.nav_container')};
+        if($title.length == 0){$title = $('.content_title')};
         var currentTop = $(this).scrollTop();
         if(currentTop <= lastTop){
             if($nav.css('position') != 'fixed'){

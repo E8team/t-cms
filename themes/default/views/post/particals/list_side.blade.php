@@ -19,7 +19,7 @@
                 $side.css('position', 'static');
             }
         })
-    })
+   })
 </script>
 @endpush
 @inject('navigation', 'App\T\Navigation\Navigation')
