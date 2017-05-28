@@ -30,6 +30,56 @@
 	</div>
     {!! Facades\App\T\Widgets\Alert::render() !!}
     @yield('content')
+    <div class="friendship-link">
+        <div class="container">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h3>院系设置</h3>
+                <ul class="links">
+                    <li>
+                        <a href="#">计算机学院</a>
+                    </li>
+                    <li>
+                        <a href="#">法学院</a>
+                    </li>
+                    <li>
+                        <a href="#">文传学院</a>
+                    </li>
+                    <li>
+                        <a href="#">化学与材料工程学院</a>
+                    </li>
+                    <li>
+                        <a href="#">美术与设计学院</a>
+                    </li>
+                    <li>
+                        <a href="#">电子工程学院</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h3>院系设置</h3>
+                <ul class="links">
+                    <li>
+                        <a href="#">计算机学院</a>
+                    </li>
+                    <li>
+                        <a href="#">法学院</a>
+                    </li>
+                    <li>
+                        <a href="#">文传学院</a>
+                    </li>
+                    <li>
+                        <a href="#">化学与材料工程学院</a>
+                    </li>
+                    <li>
+                        <a href="#">美术与设计学院</a>
+                    </li>
+                    <li>
+                        <a href="#">电子工程学院</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="about">
         <div class="container">
             <img class="footer-logo" src="{!! asset('static/jsj/images/footer-logo.png') !!}" alt="">
