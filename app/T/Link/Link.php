@@ -10,7 +10,9 @@ class Link
 {
     public function getLink()
     {
-        return Type::link()->with('links')->ordered()->recent()->get();
+        return Type::byModel('link')->with(['links' => function ($query){
+            return $query->ordered()->recent();
+        }])->ordered()->get();
     }
 
     public function getLinkWithoutType()
