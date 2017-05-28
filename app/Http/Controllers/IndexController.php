@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function index(Request $request)
     {
-        return $this->postList('company-news', $request);
+        return $this->postList('company-news', $request, app(CategoryRepository::class));
     }
 
     public function postList($cateSlug, Request $request, CategoryRepository $categoryRepository)
