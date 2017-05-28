@@ -1,6 +1,6 @@
 <?php
 
-namespace App\T\Widgets;
+namespace App\Widgets;
 
 
 class BaseWidget implements InterfaceWidget

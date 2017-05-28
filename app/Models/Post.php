@@ -4,12 +4,9 @@ namespace App\Models;
 
 use App\Models\Presenters\PostPresenters;
 use App\Models\Traits\Listable;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Laracasts\Presenter\PresentableTrait;
-use PictureManager;
 use Ty666\PictureManager\Traits\Picture;
 
 class Post extends BaseModel
@@ -113,17 +110,6 @@ class Post extends BaseModel
         $this->views_count++;
     }
 
-    public static function movePosts2Categories($categoryIds, $postIds)
-    {
-        $categoryIds = Category::findOrFail($categoryIds)->pluck('id');
-        $posts = static::findOrFail($postIds);
-        $posts->each(
-            function ($post) use ($categoryIds) {
-                $post->categories()->sync($categoryIds);
-            }
-        );
-    }
-
     public function content()
     {
         return $this->hasOne(PostContent::class);
@@ -148,58 +134,6 @@ class Post extends BaseModel
     public function getCover($style, $defaultCover = '')
     {
         return $this->getPicure($this->cover, $style, $defaultCover);
-    }
-
-    public static function createPage($data)
-    {
-        $data = static::filterData($data);
-        $data['type'] = 'page';
-        $post = static::create($data);
-        $post->addition(Arr::only($data, ['content', 'category_ids']));
-        return $post;
-    }
-
-    public static function filterData($data)
-    {
-        if (isset($data['title'])) {
-            $data['title'] = e($data['title']);
-        }
-        if (isset($data['author_info'])) {
-            $data['author_info'] = e($data['author_info']);
-        }
-        if (isset($data['excerpt'])) {
-            $data['excerpt'] = e($data['excerpt']);
-        }
-        if (isset($data['content'])) {
-            $data['content'] = clean($data['content']);
-        }
-        // 处理置顶
-        if (isset($data['top'])) {
-            if ($data['top']) {
-                $data['top'] = Carbon::now();
-            } else {
-                $data['top'] = null;
-            }
-        }
-        if (isset($data['cover_in_content'])) {
-            $data['conver'] = PictureManager::convert($data['cover_in_content']);
-        }
-        if (isset($data['published_at'])) {
-            $data['published_at'] = new Carbon($data['published_at']);
-        }
-        return $data;
-    }
-
-    public static function createPost($data)
-    {
-        $data = static::filterData($data);
-        $data['type'] = 'post';
-        if (!isset($data['published_at'])) {
-            $data['published_at'] = Carbon::now();
-        }
-        $post = static::create($data);
-        $post->addition(Arr::only($data, ['content', 'category_ids']));
-        return $post;
     }
 
     /**

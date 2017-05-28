@@ -62,7 +62,7 @@ class Navigation
     }
 
     /**
-     * 获取当前导航的顶级导航
+     * 获取当前所在的子导航的顶级导航
      *
      * @param  \Illuminate\Http\Request $request
      * @return Category

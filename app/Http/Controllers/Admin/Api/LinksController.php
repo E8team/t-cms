@@ -20,7 +20,7 @@ class LinksController extends ApiController
             ->recent()
             ->withSimpleSearch()
             ->withSort()
-            ->paginate();
+            ->paginate($this->perPage());
         return $this->response->paginator($links, new LinkTransformer())
             ->setMeta(Link::getAllowSortFieldsMeta() + Link::getAllowSearchFieldsMeta());
     }
@@ -32,7 +32,7 @@ class LinksController extends ApiController
             ->recent()
             ->withSimpleSearch()
             ->withSort()
-            ->paginate();
+            ->paginate($this->perPage());
         return $this->response->paginator($links, new LinkTransformer())
             ->setMeta(Link::getAllowSortFieldsMeta() + Link::getAllowSearchFieldsMeta());
     }

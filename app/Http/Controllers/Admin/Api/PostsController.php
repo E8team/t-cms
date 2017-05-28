@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\PostContent;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
+use App\Repositories\PostRepository;
 use App\Transformers\PostTransformer;
 use Auth;
 use Carbon\Carbon;
@@ -47,7 +48,7 @@ class PostsController extends ApiController
             ->addMeta('cate_ids', $cateids);
     }
 
-    public function storePage(Category $category, Request $request)
+    public function storePage(Category $category, Request $request, PostRepository $postRepository)
     {
         $data = array_filter(
             $request->only('title', 'content'), function ($item) {
@@ -67,9 +68,9 @@ class PostsController extends ApiController
             // 创建
             $data['published_at'] = Carbon::now();
             $data['user_id'] = Auth::id();
-            Post::createPage($data);
+            $postRepository->createPage($data);
         } else {
-            $data = Post::filterData($data);
+            $data = $postRepository->filterData($data);
             $page->addition($data);
         }
         return $this->response->noContent();
@@ -82,12 +83,12 @@ class PostsController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(PostCreateRequest $request)
+    public function store(PostCreateRequest $request, PostRepository $postRepository)
     {
         $data = $request->all();
         //$data['status'] = 'publish';
         $data['user_id'] = Auth::id();
-        Post::createPost($data);
+        $postRepository->createPost($data);
         return $this->response->noContent();
     }
 
@@ -135,7 +136,7 @@ class PostsController extends ApiController
      * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
-    public function movePosts2Categories(Request $request)
+    public function movePosts2Categories(Request $request, PostRepository $postRepository)
     {
         $this->validate(
             $request, [
@@ -145,7 +146,7 @@ class PostsController extends ApiController
         );
         $postIds = $request->get('post_ids');
         $categoryIds = $request->get('category_ids');
-        Post::movePosts2Categories($postIds, $categoryIds);
+        $postRepository->movePosts2Categories($postIds, $categoryIds);
         return $this->response->noContent();
     }
 }
