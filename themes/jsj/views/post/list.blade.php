@@ -1,48 +1,71 @@
 @extends('layouts.app')
-
-@inject('navigation', 'App\T\Navigation\Navigation')
-
 @section('content')
-    <div class="content container">
-        {!! Breadcrumbs::render('category', $navigation) !!}
-        <div class="main col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            {!! Facades\App\T\Widgets\Banner::render() !!}
-            <div id="list" class="header">
-                @php
-                    $request = request();
-                    $order = $request->get('order', 'default');
-                @endphp
-                @foreach(['default', 'recent', 'popular'] as $item)
-                    <a href="{!! $request->fullUrlWithQuery(['order' => $item]).'#list' !!}"@if($order==$item) class="active"@endif>{!! trans('app.'.$item) !!}</a>
-                @endforeach
-            </div>
-            <ul class="list">
-                @foreach($postList as $post)
+    <div class="page-bg" style="background-image: url('{!! asset('static/jsj/images/page-bg-3.png') !!}')">
+        <div class="title">
+            <div class="mask"></div>
+            <h2>公司介绍</h2>
+        </div>
+    </div>
+    <div class="list-body">
+        <div class="container">
+            <div class="nav_menu col-md-3 col-lg-3">
+                <ul>
+                    <li class="active">
+                        <span class="pendant"></span>
+                        <a class="active" href="#">公司简介</a>
+                        <span class="arrow glyphicon glyphicon-chevron-right"></span>
+                    </li>
                     <li>
-                        @if(!is_null($post->cover))
-                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}" style="">
-                            <img lazy src="{!! $post->getCover('cover_sm') !!}"/>
-                        </a>
-                        @endif
-                        <div class="info @if(is_null($post->cover)) no_cover @endif">
-                            <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
-                                <h3>@if($post->isTop())<span class="label label-danger">置顶</span>@endif{!! $post->present()->suitedTitle() !!}</h3>
+                        <span class="pendant"></span>
+                        <a class="active" href="#">资质证书</a>
+                        <span class="arrow glyphicon glyphicon-chevron-right"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-page col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="header">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li class="active">Data</li>
+                    </ol>
+                </div>
+                <ul class="list">
+                    <li>
+                        <div class="info no_cover">
+                            <a href="#" title="计算机学院：举办2017届毕业生干部座谈会">
+                                <h3><span class="label label-danger">置顶</span>计算机学院：举办2017届毕业生干部座谈会</h3>
                             </a>
-                            <p class="describe">{!! $post->excerpt !!}</p>
+                            <p class="describe">5月24日上午，计算机学院于A201举办2017届毕业生干部座谈会，党总支书记许江荣、副书记吴兆文、党政办主任彭飞、计科专业辅导员李晓燕、2017届辅导员冯笑炜参加，座谈会由吴兆文主持。</p>
                             <div class="list_footer">
-                                <p class="avatar">
-                                    <img src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
-                                    <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
-                                </p>
-                                <p class="time">{!! $post->published_at !!}</p>
+                                <div class="avatar">
+                                    <img src="http://e8-cms.dev/images/default_avatar.jpg" alt="admin">
+                                    <span class="uname">admin</span>
+                                </div>
+                                <p class="time">2017-5-29</p>
                             </div>
                         </div>
                     </li>
-                @endforeach
-            </ul>
-            {{--分页--}}
-            {!! $postList->fragment('list')->links() !!}
+                    <li>
+                        <div class="info">
+                            <a class="cover" href="#" title="asd">
+                                <img src="http://211.70.176.141/jxx/Public/data/upload/image/20170525/1495685863607737.jpg"/>
+                            </a>
+                            <a href="#" title="计算机学院：举办2017届毕业生干部座谈会">
+                                <h3><span class="label label-danger">置顶</span>计算机学院：举办2017届毕业生干部座谈会</h3>
+                            </a>
+                            <p class="describe">5月24日上午，计算机学院于A201举办2017届毕业生干部座谈会，党总支书记许江荣、副书记吴兆文、党政办主任彭飞、计科专业辅导员李晓燕、2017届辅导员冯笑炜参加，座谈会由吴兆文主持。</p>
+                            <div class="list_footer">
+                                <div class="avatar">
+                                    <img src="http://e8-cms.dev/images/default_avatar.jpg" alt="admin">
+                                    <span class="uname">admin</span>
+                                </div>
+                                <p class="time">2017-5-29</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        @include('post.particals.list_side')
     </div>
 @endsection

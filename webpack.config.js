@@ -82,7 +82,6 @@ if (Mix.options.extractVueStyles) {
 
     module.exports.plugins = (module.exports.plugins || []).concat(vueExtractTextPlugin);
 }
-console.log(Mix.resourceRoot);
 module.exports.module = {
     rules: [
         {

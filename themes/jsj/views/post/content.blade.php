@@ -13,6 +13,11 @@
             <p class="info">
                 <span>2015-04-01</span>
                 <span>点击：23</span>
+                <span class="avatar">
+                    上传：
+                    <img src="http://e8-cms.dev/images/default_avatar.jpg" alt="">
+                    <span class="uname">陶煜</span>
+                </span>
             </p>
         </div>
         <div class="body">

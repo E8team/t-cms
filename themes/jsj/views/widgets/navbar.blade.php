@@ -7,15 +7,15 @@
             $list.css('display', 'block');
             $list.stop().animate({
                 'opacity': 1,
-                'top': '60px'
+                'top': '65px'
             }, 200)
         }, function () {
             var $list = $(this).find('.sub-nav')
             $list.stop().animate({
                 'opacity': 0,
-                'top': '70px'
+                'top': '80px'
             }, 200, function () {
-                if($list.css('top') == '70px'){
+                if($list.css('top') == '80px'){
                     $list.css('display', 'none');
                 }
             })
