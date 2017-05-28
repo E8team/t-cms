@@ -24,7 +24,7 @@
     "cross-env": "^3.2.3"
   },
   "dependencies": {
-  	"axios": "^0.15.3",
+    "axios": "^0.15.3",
     "element-ui": "^1.2.7",
     "normalize.css": "^6.0.0",
     "vue-nprogress": "^0.1.5",
