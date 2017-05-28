@@ -20,7 +20,7 @@
                 @foreach($postList as $post)
                     <li>
                         @if(!is_null($post->cover))
-                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}" style="">
+                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
                             <img lazy src="{!! $post->getCover('cover_sm') !!}"/>
                         </a>
                         @endif
