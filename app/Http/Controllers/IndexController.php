@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\PostHasBeenRead;
+use App\Events\VisitPostList;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\T\Navigation\Navigation;
@@ -20,7 +21,7 @@ class IndexController extends Controller
     {
         $category = $categoryRepository->findBySlug($cateSlug);
 
-        app(Navigation::class)->setActiveNav($category);
+        event(new VisitPostList($category));
 
         if ($category->isPostList()) {
             return $this->showList($category, $request);

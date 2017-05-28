@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 
-class PostHasBeenRead extends BaseEvent
+class PostHasBeenRead
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
