@@ -64,8 +64,6 @@ module.exports.entry = Mix.entry();
  */
 
 module.exports.output = Mix.output();
-
-
 /*
  |--------------------------------------------------------------------------
  | Rules
@@ -84,8 +82,7 @@ if (Mix.options.extractVueStyles) {
 
     module.exports.plugins = (module.exports.plugins || []).concat(vueExtractTextPlugin);
 }
-
-
+console.log(Mix.resourceRoot);
 module.exports.module = {
     rules: [
         {

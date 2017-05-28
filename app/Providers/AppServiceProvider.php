@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         /*if (!is_null($activeTheme = Setting::getSetting('active_theme'))) {
             $theme->setActiveTheme($ActiveTheme);
         }*/
-        $theme->setActiveTheme('default');
+        $theme->setActiveTheme('jsj');
     }
 
     public function registerCustomValidator()
