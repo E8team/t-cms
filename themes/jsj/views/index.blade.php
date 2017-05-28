@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Facades\App\T\Widgets\Banner::render() !!}
+{!! Facades\App\Widgets\Banner::render() !!}
 <div class="focus-news">
     <div class="container">
         <div class="news-panel col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -233,54 +233,7 @@
         </div>
     </div>
 </div>
-<div class="special">
-    <div class="container">
-        <h3 class="title">专题推荐</h3>
-        <div class="body">
-            <div class="top_special">
-                <a href="#">
-                    <div class="image">
-                        <img src="http://www.fudan.edu.cn/2016/images/lxyz.jpg" alt="">
-                    </div>
-                    <div class="footer">
-                        <h4>“两学一做”学习教育专题</h4>
-                        <p>发布复“两学一做”教育实施动态及学习参考等学习教育，具体指的是：“1. 学习共产党党章党规，2. 学习贯彻习近平总。</p>
-                    </div>
-                </a>
-            </div>
-            <ul class="special-list">
-                <li>
-                    <div class="detail">
-                        <a class="title" href="#">智圆行方的世界——中国传统文化概论</a>
-                        <p>本课既非以哲学史、亦非以思想史、更非以断代史的方式介绍中华优秀传统文化，而是从中华优秀传统文化的文化精神及思维方式入手，展开中华文化的历史画卷。您想了解中华</p>
-                    </div>
-                    <a class="image" href="#">
-                        <img src="http://www.fudan.edu.cn/2016/images/hanbingguan.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <div class="detail">
-                        <a class="title" href="#">智圆行方的世界——中国传统文化概论</a>
-                        <p>本课既非以哲学史、亦非以思想史、更非以断代史的方式介绍中华优秀传统文化，而是从中华优秀传统文化的文化精神及思维方式入手，展开中华文化的历史画卷。您想了解中华</p>
-                    </div>
-                    <a class="image" href="#">
-                        <img src="http://www.fudan.edu.cn/2016/images/hanbingguan.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <div class="detail">
-                        <a class="title" href="#">智圆行方的世界——中国传统文化概论</a>
-                        <p>本课既非以哲学史、亦非以思想史、更非以断代史的方式介绍中华优秀传统文化，而是从中华优秀传统文化的文化精神及思维方式入手，展开中华文化的历史画卷。您想了解中华</p>
-                    </div>
-                    <a class="image" href="#">
-                        <img src="http://www.fudan.edu.cn/2016/images/hanbingguan.jpg" alt="">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="mask"></div>
-</div>
+{!! Facades\App\Widgets\PostList::setCategory('zttj')->setLimit(4)->render() !!}
 <div class="image-link">
     <div class="container">
         <div class="image-link-item col-md-3 col-lg-3 col-xs-12 col-sm-6">
