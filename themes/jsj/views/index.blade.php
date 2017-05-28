@@ -355,26 +355,4 @@
         </div>
     </div>
 </div>
-<div class="about">
-    <div class="container">
-        <img class="footer-logo" src="{!! asset('static/jsj/images/footer-logo.png') !!}" alt="">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <ul class="footer-nav">
-                <li><a href="#">学院概况</a></li>
-                <li><a href="#">院长寄语</a></li>
-                <li><a href="#">师资队伍</a></li>
-                <li><a href="#">教学管理</a></li>
-                <li><a href="#">科学研究</a></li>
-                <li><a href="#">党团建设</a></li>
-                <li><a href="#">招生就业</a></li>
-                <li><a href="#">校友风采</a></li>
-                <li><a href="#">资料下载</a></li>
-            </ul>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
-    </div>
-</div>
-<div class="footer-copy">
-    Copyright &copy; 2017 <a href="#">e8net</a>. All Rights Reserved.
-</div>
 @endsection
