@@ -68,19 +68,43 @@ body{
             float: left;
             list-style: none;
             line-height: 70px;
-            &:hover a{
+            position: relative;
+            &:hover .nav-link{
                 border-bottom: 2px solid #DAE6F0;
             }
-            &.active a{
+            &.active .nav-link{
                 border-bottom: 2px solid #DAE6F0;
             }
         }
-        a{
+        .nav-link{
             color: #fff;
             padding: 10px 3px;
             font-size: 16px;
             text-decoration: none;
             margin: 0 16px;
+        }
+        .sub-nav{
+            position: absolute;
+            padding: 5px 0;
+            top: 70px;
+            background-color: #2875B1;
+            z-index: 10;
+            display: none;
+            opacity: 0;
+            .sub-nav-item{
+                line-height: normal;
+                a{
+                    text-decoration: none;
+                    width: 140px;
+                    padding-left: 15px;
+                    line-height: 50px;
+                    color: #fff;
+                    display: block;
+                    &:hover{
+                        background-color: #579ED9;
+                    }
+                }
+            }
         }
     }
 }
