@@ -1,6 +1,6 @@
 <?php
 
-namespace App\T\Widgets;
+namespace App\Widgets;
 
 
 Interface InterfaceWidget

@@ -21,7 +21,7 @@ class BannersController extends ApiController
             ->recent()
             ->withSimpleSearch()
             ->withSort()
-            ->paginate();
+            ->paginate($this->perPage());
         return $this->response->paginator($banners, new BannerTransformer())
             ->setMeta(Banner::getAllowSortFieldsMeta() + Banner::getAllowSearchFieldsMeta());
     }
@@ -33,7 +33,7 @@ class BannersController extends ApiController
             ->recent()
             ->withSimpleSearch()
             ->withSort()
-            ->paginate();
+            ->paginate($this->perPage());
         return $this->response->paginator($banners, new BannerTransformer())
             ->setMeta(Banner::getAllowSortFieldsMeta() + Banner::getAllowSearchFieldsMeta());
     }

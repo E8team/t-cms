@@ -6,7 +6,7 @@
     <div class="content container">
         {!! Breadcrumbs::render('category', $navigation) !!}
         <div class="main col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            {!! Facades\App\T\Widgets\Banner::render() !!}
+            {!! Facades\App\Widgets\Banner::render() !!}
             <div id="list" class="header">
                 @php
                     $request = request();
@@ -20,7 +20,7 @@
                 @foreach($postList as $post)
                     <li>
                         @if(!is_null($post->cover))
-                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}" style="">
+                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
                             <img lazy src="{!! $post->getCover('cover_sm') !!}"/>
                         </a>
                         @endif

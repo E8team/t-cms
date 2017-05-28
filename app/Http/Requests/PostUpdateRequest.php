@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\Update;
 use App\Models\BaseModel;
 use App\Models\Post;
+use App\Repositories\PostRepository;
 
 class PostUpdateRequest extends Request
 {
@@ -57,7 +58,7 @@ class PostUpdateRequest extends Request
     {
         $this->defaultPerformUpdate(
             $post, function (array $data) use ($callback) {
-                $data = Post::filterData($data);
+                $data = app(PostRepository::class)->filterData($data);
                 if(!is_null($callback)) {
                     $data = $callback($data);
                 }

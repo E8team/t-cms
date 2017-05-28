@@ -29,16 +29,6 @@ class Type extends BaseModel
 
     }
 
-    public function __get($key)
-    {
-        $mapKey = substr($key, 0, -1);
-        if (isset(self::$modelMapWithType[$mapKey])) {
-            return $this->hasMany(self::$modelMapWithType[$mapKey]);
-        } else {
-            return parent::__get($key);
-        }
-    }
-
     public function __call($method, $args)
     {
         $mapKey = substr($method, 0, -1);

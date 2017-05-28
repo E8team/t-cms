@@ -23,7 +23,6 @@ var tcms = {
             'pjax:complete', function () {
                 original_title = document.title;
                 NProgress.done();
-
             }
         );
         // Exclude links with a specific attr

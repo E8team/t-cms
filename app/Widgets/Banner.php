@@ -1,5 +1,5 @@
 <?php
-namespace App\T\Widgets;
+namespace App\Widgets;
 
 use App\Models\Banner as BannerModel;
 

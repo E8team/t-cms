@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PostHasBeenRead;
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use App\T\Navigation\Navigation;
 use Illuminate\Http\Request;
 use Auth;
@@ -17,12 +18,12 @@ class IndexController extends Controller
 
     public function blog(Request $request)
     {
-        return $this->postList('company-news', $request);
+        return $this->postList('company-news', $request, app(CategoryRepository::class));
     }
 
-    public function postList($cateSlug, Request $request)
+    public function postList($cateSlug, Request $request, CategoryRepository $categoryRepository)
     {
-        $category = Category::findBySlug($cateSlug);
+        $category = $categoryRepository->findBySlug($cateSlug);
 
         app(Navigation::class)->setActiveNav($category);
 
@@ -60,9 +61,9 @@ class IndexController extends Controller
      * @param  $cateSlug
      * @return \Illuminate\Contracts\View\View
      */
-    public function post($cateSlug, $post, Request $request)
+    public function post($cateSlug, $post, Request $request, CategoryRepository $categoryRepository)
     {
-        $category = Category::findBySlug($cateSlug);
+        $category = $categoryRepository->findBySlug($cateSlug);
         $queryBuilder = $category->posts()->post()->where('id', $post);
         if (Auth::check() && Auth::user()->can('admin.post.show')) {
             $post = $queryBuilder->where(

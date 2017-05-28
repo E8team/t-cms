@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Presenters\PostPresenters;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Repositories\CategoryRepository;
 use App\Transformers\CategoryTransformer;
 use App\Transformers\PostTransformer;
 use Illuminate\Http\Request;
@@ -123,13 +124,13 @@ class CategoriesController extends ApiController
         return $this->response->item($category->page(), new PostTransformer());
     }
 
-    public function getAllCategory(Request $request)
+    public function getAllCategory(Request $request, CategoryRepository $categoryRepository)
     {
         if ($request->get('show') == 'indent') {
             //$indentStr = $request->get('indent_str');
-            return $this->response->array(Category::allCategoryIndent($request->get('type'), '　∟　'));
+            return $this->response->array($categoryRepository->allCategoryIndent($request->get('type'), '　∟　'));
         } else {
-            return $this->response->array(Category::allCategoryArray($request->get('type')));
+            return $this->response->array($categoryRepository->allCategoryArray($request->get('type')));
         }
     }
 
