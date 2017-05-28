@@ -1,0 +1,86 @@
+body{
+    background-color: #f5f5f5;
+}
+
+.header-nav{
+    height: 120px;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 60px;
+    .mask-left, .mask-right{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+        z-index: 0;
+    }
+    .mask-left {
+        left: 0;
+        width: 342px;
+        background-image: url("../resources/backgrounds/header-mark-left.png");
+    }
+    .mask-right {
+        right: 0;
+        width: 511px;
+        background-image: url("../resources/backgrounds/header-mark-right.png");
+    }
+    .container{
+        position: relative;
+        z-index: 10;
+    }
+    .logo{
+        margin-top: 17px;
+        float: left;
+    }
+    .search{
+        position: absolute;
+        right: 0;
+        top: 39px;
+        height: 35px;
+        .input-box{
+            padding: 0 20px 0 10px;
+            height: 100%;
+            border-radius: 3px;
+            border: 2px solid #2875B1;
+            outline: 0;
+        }
+        .submit{
+            position: absolute;
+            right: 7px;
+            top: 10px;
+            color: #2875B1;
+            font-size: 16px;
+        }
+    }
+    .nav{
+        height: 70px;
+        background-color: #2875B1;
+        box-shadow: rgba(0,0,0,0.16) 0 2px 2px;
+        position: absolute;
+        width: 100%;
+        z-index: 11;
+        bottom: -60px;
+        ul{
+            padding: 0;
+        }
+        li{
+            float: left;
+            list-style: none;
+            line-height: 70px;
+            &:hover a{
+                border-bottom: 2px solid #DAE6F0;
+            }
+            &.active a{
+                border-bottom: 2px solid #DAE6F0;
+            }
+        }
+        a{
+            color: #fff;
+            padding: 10px 3px;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 0 16px;
+        }
+    }
+}
