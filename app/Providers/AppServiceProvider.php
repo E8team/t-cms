@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\T\Navigation\Navigation;
-use App\T\Widgets\Alert;
+use App\Widgets\Alert;
 use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
