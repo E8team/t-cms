@@ -1,6 +1,6 @@
 <?php
 
-namespace App\T\Widgets;
+namespace App\Widgets;
 
 use Facades\App\T\Navigation\Navigation;
 class Navbar extends BaseWidget

@@ -24,7 +24,7 @@ class SettingsController extends ApiController
             ->recent()
             ->withSimpleSearch()
             ->withSort()
-            ->paginate();
+            ->paginate($this->perPage());
         return $this->response->paginator($settings, new SettingTransformer())
             ->setMeta(Setting::getAllowSortFieldsMeta() + Setting::getAllowSearchFieldsMeta());
     }
@@ -36,7 +36,7 @@ class SettingsController extends ApiController
             ->recent()
             ->withSimpleSearch()
             ->withSort()
-            ->paginate();
+            ->paginate($this->perPage());
         return $this->response->paginator($settings, new SettingTransformer())
             ->setMeta(Setting::getAllowSortFieldsMeta() + Setting::getAllowSearchFieldsMeta());
     }

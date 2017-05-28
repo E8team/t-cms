@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Requests\Request;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\UserRepository;
 use App\Transformers\RoleTransformer;
 use App\Transformers\UserTransformer;
 use Auth;
@@ -133,7 +134,7 @@ class UsersController extends ApiController
      * @param  Request $request
      * @return \Dingo\Api\Http\Response
      */
-    public function moveUsers2Roles(Request $request)
+    public function moveUsers2Roles(Request $request, UserRepository $userRepository)
     {
         $this->validate(
             $request, [
@@ -143,7 +144,7 @@ class UsersController extends ApiController
         );
         $userIds = $request->get('user_ids');
         $roleIds = $request->get('role_ids');
-        User::moveUsers2Roles($userIds, $roleIds);
+        $userRepository->moveUsers2Roles($userIds, $roleIds);
         return $this->response->noContent();
     }
 }

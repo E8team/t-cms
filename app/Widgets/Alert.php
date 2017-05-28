@@ -1,6 +1,6 @@
 <?php
 
-namespace App\T\Widgets;
+namespace App\Widgets;
 
 use Illuminate\Contracts\Session\Session;
 

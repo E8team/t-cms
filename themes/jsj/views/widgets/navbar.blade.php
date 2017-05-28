@@ -27,30 +27,22 @@
 <div class="nav">
     <div class="container">
         <ul id="nav">
-            <li class="active"><a class="nav-link" href="#">网站首页</a></li>
-            <li>
-                <a class="nav-link" href="#">学院概况</a>
-                <div class="sub-nav">
-                    <div class="sub-nav-item">
-                        <a href="#">学院概况</a>
-                    </div>
-                    <div class="sub-nav-item">
-                        <a href="#">学院概况</a>
-                    </div>
-                    <div class="sub-nav-item">
-                        <a href="#">学院概况</a>
-                    </div>
-                </div>
-            </li>
-            <li><a class="nav-link" href="#">院长寄予</a></li>
-            <li><a class="nav-link" href="#">师资队伍</a></li>
-            <li><a class="nav-link" href="#">教学管理</a></li>
-            <li><a class="nav-link" href="#">科学研究</a></li>
-            <li><a class="nav-link" href="#">党团建设</a></li>
-            <li><a class="nav-link" href="#">招生就业</a></li>
-            <li><a class="nav-link" href="#">校友风采</a></li>
-            <li><a class="nav-link" href="#">资料下载</a></li>
-            <li><a class="nav-link" href="#">联系我们</a></li>
+            <li class="active"><a class="nav-link" href="{!! URL::to('/') !!}">网站首页</a></li>
+            @foreach($navbars as $nav)
+                <li @if(!is_null($topNav) && $nav->equals($topNav)) class="active" @endif>
+                    <a class="nav-link" {!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>
+                    @if(!$nav->children->isEmpty())
+
+                        <div class="sub-nav">
+                            @foreach($nav->children as $children)
+                                <div class="sub-nav-item">
+                                    <a {!! $children->present()->aProperty() !!}>{!! $children->cate_name !!}</a>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </li>
+            @endforeach
         </ul>
     </div>
 </div>
