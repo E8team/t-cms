@@ -9,12 +9,6 @@ use Illuminate\Support\Str;
 
 class UserProvider extends EloquentUserProvider
 {
-    public function validateCredentials(Authenticatable $user, array $credentials)
-    {
-        $plain = $credentials['password'];
-        return $this->hasher->check($plain, $user->getAuthPassword());
-    }
-
     /**
      * Retrieve a user by the given credentials.
      *
