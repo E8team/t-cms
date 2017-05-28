@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\PostHasBeenRead' => [
             'App\Listeners\PostEventListener',
         ],
-        'App\Events\VisitPostList' => [
+        'App\Events\VisitedPostList' => [
             'App\Listeners\PostEventListener',
         ],
     ];

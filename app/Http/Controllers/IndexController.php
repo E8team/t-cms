@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\PostHasBeenRead;
-use App\Events\VisitPostList;
+use App\Events\VisitedPostList;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\T\Navigation\Navigation;
@@ -21,7 +21,7 @@ class IndexController extends Controller
     {
         $category = $categoryRepository->findBySlug($cateSlug);
 
-        event(new VisitPostList($category));
+        event(new VisitedPostList($category));
 
         if ($category->isPostList()) {
             return $this->showList($category, $request);
@@ -74,8 +74,7 @@ class IndexController extends Controller
         } else {
             $post = $queryBuilder->publish()->firstOrFail();
         }
-        event(new PostHasBeenRead($post, $request->getClientIp()));
-        app(Navigation::class)->setActiveNav($category);
+        event(new PostHasBeenRead($category, $post, $request->getClientIp()));
         return theme_view($post->template, ['post' => $post]);
     }
 }
