@@ -4,7 +4,7 @@ namespace App\Events;
 
 use App\Models\Category;
 
-class VisitPostList
+class VisitedPostList
 {
 
     public $category;
