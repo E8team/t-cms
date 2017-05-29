@@ -39,7 +39,7 @@
 <section id="banner" class="slider">
     @foreach($banners as $banner)
         <div>
-            <a href="{{ $banner->url }}" target="_blank" {{ $banner->title }}>
+            <a href="{{ $banner->url }}" target="_blank" title="{{ $banner->title }}">
                 <img lazy src="{{ $banner->getPictureUrl('optimize') }}">
             </a>
             <p class="text">{{ $banner->title }}</p>
