@@ -14,6 +14,8 @@
 @section('content')
 {!! Facades\App\Widgets\Banner::render() !!}
 <div class="focus-news">
+    <div class="watermark left"></div>
+    <div class="watermark right"></div>
     <div class="container">
         <div class="news-panel col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <div class="header">
