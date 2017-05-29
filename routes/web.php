@@ -9,3 +9,5 @@ Route::group(
         Route::post('ajax_upload_picture', 'PicturesController@upload');
     }
 );
+
+Route::get('/s/{keywords}', 'SearchController@search')->name('search');

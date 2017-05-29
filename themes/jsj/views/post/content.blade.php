@@ -5,7 +5,7 @@
 @section('content')
     <div class="container content-body">
         <div class="header">
-            {!! Breadcrumbs::render('category', $navigation) !!}
+            {!! Breadcrumbs::render('post', $navigation, $post) !!}
         </div>
         <div class="title_container">
             <h1>{!! $post->title !!}</h1>
