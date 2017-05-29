@@ -6,7 +6,7 @@
         <h1 class="content_title">{!! $post->title !!}</h1>
         <p class="info">
             <span class="avatar">
-                <img lazy src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
+                <img lazy src="{{ $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) }}">
                 <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
             </span>
             <span>{!! $post->views_count !!} 次阅读</span>
@@ -26,7 +26,7 @@
     @if($nextPost)
     <div class="contnet_footer">
         <div class="container">
-            <a href="{!! $nextPost->present()->getUrl() !!}">
+            <a href="{{ $nextPost->present()->getUrl() }}">
                 <div class="nav-title">
                     <span>阅读下一篇</span>
                 </div>

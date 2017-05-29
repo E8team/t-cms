@@ -13,25 +13,25 @@
                     $order = $request->get('order', 'default');
                 @endphp
                 @foreach(['default', 'recent', 'popular'] as $item)
-                    <a href="{!! $request->fullUrlWithQuery(['order' => $item]).'#list' !!}"@if($order==$item) class="active"@endif>{!! trans('app.'.$item) !!}</a>
+                    <a href="{{ $request->fullUrlWithQuery(['order' => $item]).'#list' }}"@if($order==$item) class="active"@endif>{!! trans('app.'.$item) !!}</a>
                 @endforeach
             </div>
             <ul class="list">
                 @foreach($postList as $post)
                     <li>
                         @if(!is_null($post->cover))
-                        <a class="cover" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
-                            <img lazy src="{!! $post->getCover('cover_sm') !!}"/>
+                        <a class="cover" href="{{ $post->present()->getUrl() }}" title="{{ $post->title }}">
+                            <img lazy src="{{ $post->getCover('cover_sm') }}"/>
                         </a>
                         @endif
                         <div class="info @if(is_null($post->cover)) no_cover @endif">
-                            <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
+                            <a href="{{ $post->present()->getUrl() }}" title="{{ $post->title }}">
                                 <h3>@if($post->isTop())<span class="label label-danger">置顶</span>@endif{!! $post->present()->suitedTitle() !!}</h3>
                             </a>
                             <p class="describe">{!! $post->excerpt !!}</p>
                             <div class="list_footer">
                                 <p class="avatar">
-                                    <img src="{!! $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) !!}">
+                                    <img src="{{ $post->user->getAvatar('xs', asset('images/default_avatar.jpg')) }}">
                                     <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
                                 </p>
                                 <p class="time">{!! $post->published_at !!}</p>
