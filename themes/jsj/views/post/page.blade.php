@@ -2,6 +2,8 @@
 
 @inject('navigation', 'App\T\Navigation\Navigation')
 
+@section('title'){!! $navigation->getActiveNav()->cate_name!!}@endsection
+
 @section('content')
 	@include('post.particals.category_bg')
 	<div class="list-body">

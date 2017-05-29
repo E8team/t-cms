@@ -25,7 +25,7 @@
 @endpush
 <div class="nav_container">
     <div class="container">
-        <a no-pjax href="{!! URL::to('/') !!}" class="logo"><img src="http://ooqq2vj4w.bkt.clouddn.com/logo.png" alt="logo"></a>
+        <a no-pjax href="{{ URL::to('/') }}" class="logo"><img src="http://ooqq2vj4w.bkt.clouddn.com/logo.png" alt="logo"></a>
         <ul class="nav_list" id="nav_list">
             @foreach($navbars as $nav)
                 <li @if(!is_null($topNav) && $nav->equals($topNav)) class="active" @endif>

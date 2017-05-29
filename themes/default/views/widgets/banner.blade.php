@@ -37,8 +37,8 @@
     <ul>
         @foreach($banners as $banner)
         <li class="item active">
-            <a target="_blank" href="{!! $banner->url !!}" title="{!! $banner->title !!}">
-                <img src="{!! $banner->getPictureUrl('banner_index') !!}"/>
+            <a target="_blank" href="{{ $banner->url }}" title="{{ $banner->title }}">
+                <img src="{{ $banner->getPictureUrl('banner_index') }}"/>
             </a>
         </li>
         @endforeach
