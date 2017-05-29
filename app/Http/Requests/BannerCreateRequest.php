@@ -23,8 +23,8 @@ class BannerCreateRequest extends Request
     public function rules()
     {
         return [
-            'url' => 'required|url|max:255',
-            'title' => 'required|string|max:20',
+            'url' => 'nullable|url|max:255',
+            'title' => 'nullable|string|max:20',
             'picture' => 'picture_id',
             'type_id' => 'nullable|int',
             'order' => 'nullable|int',
