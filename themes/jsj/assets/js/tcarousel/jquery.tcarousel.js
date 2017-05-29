@@ -43,7 +43,8 @@
                 rePos(0);
             })
         }
-
+        // 滑动
+        var $wrapper = _self.find('.wrapper');
         return this;
     }
 })(jQuery, window);

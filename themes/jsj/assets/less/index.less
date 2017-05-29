@@ -48,8 +48,13 @@
         text-decoration: none;
       }
       h3{
-        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 15px;
+        font-size: 18px;
         color: #666;
+        line-height: 28px;
         span{
           border-bottom: 1px solid ;
         }
@@ -113,9 +118,14 @@
           }
         }
         a.title{
+          padding-right: 65px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           text-decoration: none;
           font-size: 16px;
           color: #545454;
+          display: block;
           &:hover{
             color: #1C4F79;
           }
@@ -142,14 +152,14 @@
   .body{
     .notice-time{
       float: left;
-      background-color: #E9EBF0;
+      background-color: #548DBB;
       width: 80px;
-      height: 80px;
-      color: #0E419C;
+      height: 75px;
+      color: #fff;
       text-align: center;
-      padding-top: 5px;
+      padding-top: 3px;
       .day{
-        font-size: 32px;
+        font-size: 28px;
       }
       .month{
         font-size: 14px;

@@ -5,6 +5,7 @@
     -khtml-user-select:none;
     user-select:none;
     overflow: hidden;
+    padding: 0;
 }
 .tcarousel .wrapper, .tcarousel .item{
     list-style: none;
