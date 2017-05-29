@@ -21,8 +21,8 @@
         <div class="mask-right"></div>
         <div class="container">
             <a class="logo" href="#"><img src="{!! asset('static/jsj/images/logo.png') !!}"></a>
-            <form method="get" class="search">
-                <input class="input-box" type="text" placeholder="请输入关键字">
+            <form method="get" id="search-form" class="search">
+                <input class="input-box" name="keyword" type="text" placeholder="请输入关键字">
                 <i class="submit glyphicon glyphicon-search"></i>
             </form>
         </div>
@@ -34,6 +34,17 @@
     @include('layouts.particals.footer')
     @yield('js')
     @stack('js')
+    <script>
+        var $searchForm = $('#search-form');
+        $searchForm.find('input').keydown(function (e) {
+            if(e.keyCode == 13){
+                $searchForm.submit();
+            }
+        })
+        $searchForm.find('i').click(function () {
+            $searchForm.submit();
+        })
+    </script>
 </div>
 </body>
 </html>
