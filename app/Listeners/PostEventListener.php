@@ -2,8 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\BaseEvent;
 use App\Events\PostHasBeenRead;
+use App\Events\VisitedPostList;
+use App\T\Navigation\Navigation;
 use Cache;
 
 class PostEventListener
@@ -21,16 +22,19 @@ class PostEventListener
     /**
      * Handle the event.
      *
-     * @param  BaseEvent  $event
+     * @param  $event
      * @return void
      */
-    public function handle(BaseEvent $event)
+    public function handle($event)
     {
         if($event instanceof PostHasBeenRead){
+            app(Navigation::class)->setActiveNav($event->category);
             if(!$this->isAlreadyRead($event->post, $event->ip)){
                 $this->setAlreadyRead($event->post, $event->ip);
                 $event->post->addViewCount();
             }
+        }elseif($event instanceof VisitedPostList) {
+            app(Navigation::class)->setActiveNav($event->category);
         }
     }
 

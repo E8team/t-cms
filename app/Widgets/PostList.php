@@ -40,7 +40,13 @@ class PostList extends BaseWidget
     public function getData()
     {
         return [
+            'category' => $this->category,
             'posts' => $this->category->postListWithOrder('default')->limit($this->limit)->get()
         ];
+    }
+
+    public function render()
+    {
+        return theme_view($this->getViewName(), $this->getData())->render();
     }
 }

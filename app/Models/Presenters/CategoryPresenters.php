@@ -12,9 +12,9 @@ class CategoryPresenters extends Presenter
     public function aProperty()
     {
         if (!$this->entity->isExtLink()) {
-            return 'href="'.route('category', $this->cate_slug).'"';
+            return ' href="'.route('category', $this->cate_slug).'"';
         } else {
-            return 'href="'.$this->url.'" target="_blank"';
+            return ' href="'.$this->url.'" target="_blank"';
         }
     }
 }
