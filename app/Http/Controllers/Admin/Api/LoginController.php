@@ -8,6 +8,7 @@ use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Predis\Connection\ConnectionException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Validator;
@@ -16,7 +17,9 @@ class LoginController extends ApiController
 {
     use ThrottlesLogins;
 
-
+    private $loginKey = 'user_name';
+    private $loginId;
+    private $userName = null;
     /**
      * 处理登录请求
      *
@@ -26,10 +29,7 @@ class LoginController extends ApiController
     public function login(Request $request)
     {
         $credentials = $this->credentials($request);
-        $validator = $this->validateLogin($credentials);
-        if ($validator->fails()) {
-            throw new ValidationHttpException($validator->errors());
-        }
+        $this->validateLogin($credentials);
 
         try {
             // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -64,13 +64,37 @@ class LoginController extends ApiController
      */
     protected function validateLogin($credentials)
     {
-        $validator = Validator::make(
-            $credentials, [
-            $this->username() => ['bail', 'required', 'regex:/^[a-zA-Z0-9_]+$/'],
+        $rules = [
+            'user_name' => ['bail', 'required', 'regex:/^[a-zA-Z0-9_]+$/'],
+            'email' => ['bail', 'required', 'email'],
             'password' => ['required']
-            ]
+        ];
+        $userName = $this->username();
+        $validator = Validator::make(
+            $credentials,
+            Arr::only($rules, [$userName, 'password'])
         );
-        return $validator;
+
+        if ($validator->fails()) {
+            if($validator->errors()->has($userName)){
+                $errors = $validator->errors()->messages();
+                $errors[$this->loginKey] = $errors[$userName];
+                unset($errors[$userName]);
+                //$validator->errors()->add($this->loginKey, $validator->errors()->get($this->username()));
+            }else{
+                $errors = $validator->errors();
+            }
+            throw new ValidationHttpException($errors);
+        }
+    }
+
+    protected function parseUserName($userName)
+    {
+        if(false === strpos($userName, '@')){
+            return 'user_name';
+        }else{
+            return 'email';
+        }
     }
 
     /**
@@ -100,7 +124,13 @@ class LoginController extends ApiController
      */
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password');
+        $credentials = $request->only($this->loginKey, 'password');
+        $this->loginId = $credentials[$this->loginKey];
+        return [
+            $this->username() => $this->loginId,
+            'password' => $credentials['password']
+        ];
+
     }
 
 
@@ -152,6 +182,8 @@ class LoginController extends ApiController
      */
     public function username()
     {
-        return 'user_name';
+        if(is_null($this->userName))
+            $this->userName = $this->parseUserName($this->loginId);
+        return $this->userName;
     }
 }
