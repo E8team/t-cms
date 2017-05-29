@@ -27,7 +27,7 @@
 <div class="nav">
     <div class="container">
         <ul id="nav">
-            <li class="active"><a class="nav-link" href="{!! URL::to('/') !!}">网站首页</a></li>
+            <li @if(URL::current() == URL::to('/'))class="active"@endif><a class="nav-link" href="{!! URL::to('/') !!}">网站首页</a></li>
             @foreach($navbars as $nav)
                 <li @if(!is_null($topNav) && $nav->equals($topNav)) class="active" @endif>
                     <a class="nav-link"{!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>

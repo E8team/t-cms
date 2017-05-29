@@ -45,7 +45,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'teaching-staff',
                     'is_nav' => true,
                     'parent_id' => 0,
-                    'list_template' => 'page.index',
+                    'list_template' => 'post.page',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ],
@@ -123,7 +123,7 @@ class CategoriesTableSeeder extends Seeder
                 ],
                 [
                     'id' => 10,
-                    'type' => 0,
+                    'type' => 1,
                     'cate_name' => '联系我们',
                     'description' => '联系我们',
                     'cate_slug' => 'contact-us',
@@ -135,7 +135,7 @@ class CategoriesTableSeeder extends Seeder
                 ],
                 [
                     'id' => 11,
-                    'type' => 0,
+                    'type' => 1,
                     'cate_name' => '学院简介',
                     'description' => '学院简介',
                     'cate_slug' => 'xyjj',
