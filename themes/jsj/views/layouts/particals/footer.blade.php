@@ -4,7 +4,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <ul class="footer-nav">
                 @foreach(Facades\App\T\Navigation\Navigation::getAllNavFromCache()->take(9) as $nav)
-                    <li><a {!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a></li>
+                    <li><a{!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a></li>
                 @endforeach
             </ul>
         </div>

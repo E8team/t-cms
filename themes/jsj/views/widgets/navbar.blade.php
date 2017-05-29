@@ -30,13 +30,13 @@
             <li class="active"><a class="nav-link" href="{!! URL::to('/') !!}">网站首页</a></li>
             @foreach($navbars as $nav)
                 <li @if(!is_null($topNav) && $nav->equals($topNav)) class="active" @endif>
-                    <a class="nav-link" {!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>
+                    <a class="nav-link"{!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>
                     @if(!$nav->children->isEmpty())
 
                         <div class="sub-nav">
                             @foreach($nav->children as $children)
                                 <div class="sub-nav-item">
-                                    <a {!! $children->present()->aProperty() !!}>{!! $children->cate_name !!}</a>
+                                    <a{!! $children->present()->aProperty() !!}>{!! $children->cate_name !!}</a>
                                 </div>
                             @endforeach
                         </div>
