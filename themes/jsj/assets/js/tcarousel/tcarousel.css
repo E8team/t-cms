@@ -1,19 +1,22 @@
 .tcarousel{
-    -moz-user-select:none;
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
     -webkit-user-select:none;
     -ms-user-select:none;
-    -khtml-user-select:none;
     user-select:none;
     overflow: hidden;
-    padding: 0;
 }
 .tcarousel .wrapper, .tcarousel .item{
     list-style: none;
 }
 .tcarousel .wrapper{
     height: 100%;
+    padding: 0;
     overflow: hidden;
-    position: relative;
+    position: absolute;
+    left: 0;
 }
 .tcarousel .item{
     position: absolute;

@@ -1,12 +1,14 @@
 @extends('layouts.app')
 @push('js')
 <script type="text/javascript">
-    var $allItem = $('.news .currency-list>.item');
-    $allItem.hover(function () {
-        var _self = $(this);
-        _self.parent().find('.open').removeClass('open');
-        _self.addClass('open');
-    }, function () {})
+    $(function () {
+        var $allItem = $('.news .currency-list>.item');
+        $allItem.hover(function () {
+            var _self = $(this);
+            _self.parent().find('.open').removeClass('open');
+            _self.addClass('open');
+        }, function () {})
+    })
 </script>
 @endpush
 @section('content')
