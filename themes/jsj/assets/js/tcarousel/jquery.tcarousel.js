@@ -7,6 +7,9 @@
         }, options);
 
         var imgs = this.find('img');
+        var $wrapper = _self.find('.wrapper');
+        var $litems = _self.find('.item');
+        imgs.attr('ondragstart', 'return false;')
         var length = imgs.length;
         this.addClass("tcarousel");
         this.css('height', _options.height);
@@ -22,18 +25,20 @@
         })
         function rePos(posIndex) {
             var windowWidth  = $(window).width();
-            var litems = _self.find('.item');
-            litems.each(function (index, element) {
+            var totalWidth = 0;
+            $litems.each(function (index, element) {
+                totalWidth += $litems[index].offsetWidth;
                 if(posIndex == index){
                     element.style.left = (windowWidth - element.offsetWidth) / 2 + 'px';
                 }else if(index > posIndex){
                     if(index == length - 1) {
-                        element.style.left = litems[0].offsetLeft - litems[0].offsetWidth + 'px';
+                        element.style.left = $litems[0].offsetLeft - $litems[0].offsetWidth + 'px';
                     }else {
-                        element.style.left = litems[index - 1].offsetLeft + litems[index - 1].offsetWidth + 'px';
+                        element.style.left = $litems[index - 1].offsetLeft + $litems[index - 1].offsetWidth + 'px';
                     }
+                    $wrapper.css('width', totalWidth);
                 }else{
-                    element.style.left = litems[index + 1].offsetLeft - litems[index + 1].offsetWidth + 'px';
+                    element.style.left = $litems[index + 1].offsetLeft - $litems[index + 1].offsetWidth + 'px';
                 }
             })
         }
@@ -44,7 +49,27 @@
             })
         }
         // 滑动
-        var $wrapper = _self.find('.wrapper');
+        var isDown = false;
+        var lastX = 0;
+        $wrapper.mousedown(function (e) {
+            lastX = - this.offsetLeft + e.pageX;
+            isDown = true;
+        }).mouseup(function () {
+            isDown = false;
+            var minIndex = 0;
+            for(var index in $litems){
+                if( Math.abs(- $litems[index].offsetLeft - this.offsetLeft) < Math.abs(- this.offsetLeft - $litems[minIndex].offsetLeft)){
+                    minIndex = index;
+                }
+            }
+            $(this).animate({
+                left: - $litems[minIndex].offsetLeft + ($(window).width() - $litems[minIndex].offsetWidth) / 2
+            }, 300)
+        }).mousemove(function (e) {
+            if(isDown){
+                $(this).css('left', e.pageX - lastX);
+            }
+        });
         return this;
     }
 })(jQuery, window);
