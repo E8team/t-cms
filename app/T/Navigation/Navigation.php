@@ -77,8 +77,10 @@ class Navigation
         // 这里不直接 return $this->topNav->children() 的原因是为了从缓存中获取数据
         $topNav = $this->getAllNavFromCache()->where('id', $this->topNav->id)->first();
         if(!is_null($topNav)){
-            $topNav->children();
+            return $topNav->children;
+        }else{
+            return collect();
         }
-        return collect();
+
     }
 }
