@@ -1,5 +1,14 @@
 @extends('layouts.app')
-
+@push('js')
+<script type="text/javascript">
+    var $allItem = $('.news .currency-list>.item');
+    $allItem.hover(function () {
+        var _self = $(this);
+        _self.parent().find('.open').removeClass('open');
+        _self.addClass('open');
+    }, function () {})
+</script>
+@endpush
 @section('content')
 {!! Facades\App\Widgets\Banner::render() !!}
 <div class="focus-news">
@@ -23,35 +32,35 @@
                 </div>
                 <ul class="currency-list focus-currency-list col-md-7 col-lg-7 col-xs-12 col-sm-12">
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
                 </ul>
@@ -112,36 +121,81 @@
             </div>
             <div class="body">
                 <ul class="currency-list">
-                    <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                    <li class="item open">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a href="#">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                 </ul>
@@ -154,36 +208,81 @@
             </div>
             <div class="body">
                 <ul class="currency-list">
-                    <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                    <li class="item open">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a href="#">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                     <li class="item">
-                        <a href="#">附属中山医院多学科协作与精细化发展</a>
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
                         <div class="time">6个小时前</div>
                     </li>
                 </ul>
@@ -195,41 +294,86 @@
                 <a class="more" href="#" target="_blank">更多</a>
             </div>
             <div class="body">
-            <ul class="currency-list">
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-                <li class="item">
-                    <a href="#">附属中山医院多学科协作与精细化发展</a>
-                    <div class="time">6个小时前</div>
-                </li>
-            </ul>
-        </div>
+                <ul class="currency-list">
+                    <li class="item open">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a href="#">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精展</a>
+                        <div class="info">
+                            <a class="image" href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                            </a>
+                            <a href="#" class="has-cover">为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</a>
+                        </div>
+                        <div class="time">6个小时前</div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
