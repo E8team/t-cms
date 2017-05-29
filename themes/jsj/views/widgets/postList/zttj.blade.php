@@ -8,7 +8,7 @@
 @endphp
 <div class="special">
     <div class="container">
-        <h3 class="title">专题推荐</h3>
+        <h3 class="title">{!! $category->cate_name !!}</h3>
         <div class="body">
             <div class="top_special">
                 <a href="{!! $topPost->present()->getUrl() !!}" title="{!! $topPost->title !!}">
@@ -16,7 +16,7 @@
                         <img lazy src="{!! $topPost->getCover('optimize') !!}" alt="{!! $topPost->title !!}">
                     </div>
                     <div class="footer">
-                        <h4>{!! $topPost->title !!}</h4>
+                        <h4>{!! $topPost->present()->suitedTitle() !!}</h4>
                         <p>{!! $topPost->excerpt !!}</p>
                     </div>
                 </a>
@@ -25,7 +25,7 @@
                 @foreach($otherPosts as $otherPost)
                 <li>
                     <div class="detail">
-                        <a class="title" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">{!! $otherPost->title !!}</a>
+                        <a class="title" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">{!! $otherPost->present()->suitedTitle() !!}</a>
                         <p>{!! $otherPost->excerpt !!}</p>
                     </div>
                     <a lazy class="image" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">

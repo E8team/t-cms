@@ -32,7 +32,6 @@
                 <li @if(!is_null($topNav) && $nav->equals($topNav)) class="active" @endif>
                     <a class="nav-link"{!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>
                     @if(!$nav->children->isEmpty())
-
                         <div class="sub-nav">
                             @foreach($nav->children as $children)
                                 <div class="sub-nav-item">

@@ -3,30 +3,10 @@
 @inject('navigation', 'App\T\Navigation\Navigation')
 
 @section('content')
-    <div class="page-bg" style="background-image: url('{!! asset('static/jsj/images/page-bg-3.png') !!}')">
-        <div class="title">
-            <div class="mask"></div>
-            <h2>{!! $navigation->getTopNav()->cate_name !!}</h2>
-        </div>
-    </div>
+    @include('post.particals.category_bg')
     <div class="list-body" id="list">
         <div class="container">
-            <div class="nav_menu col-md-3 col-lg-3">
-                <ul>
-                    <li @if($navigation->getTopNav()->equals($navigation->getActiveNav()))class="active"@endif>
-                        <span class="pendant"></span>
-                        <a{!! $navigation->getTopNav()->present()->aProperty !!}>{!! $navigation->getTopNav()->cate_name !!}</a>
-                        <span class="arrow glyphicon glyphicon-chevron-right"></span>
-                    </li>
-                    @foreach($navigation->getChildrenNav() as $childNav)
-                    <li @if($childNav->equals($navigation->getActiveNav()))class="active"@endif>
-                        <span class="pendant"></span>
-                        <a{!! $childNav->present()->aProperty !!}>{!! $childNav->cate_name !!}</a>
-                        <span class="arrow glyphicon glyphicon-chevron-right"></span>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
+            @include('post.particals.category_side_nav')
             <div class="main-page col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="header">
                     {!! Breadcrumbs::render('category', $navigation) !!}

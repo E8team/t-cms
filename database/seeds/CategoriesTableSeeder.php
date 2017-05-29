@@ -21,7 +21,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'department-profile',
                     'is_nav' => true,
                     'parent_id' => 0,
-                    'list_template' => 'post.page',
+                    'page_template' => 'post.page',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ],
@@ -33,7 +33,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'dean-message',
                     'is_nav' => true,
                     'parent_id' => 0,
-                    'list_template' => 'post.page',
+                    'page_template' => 'post.page',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ],
@@ -45,7 +45,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'teaching-staff',
                     'is_nav' => true,
                     'parent_id' => 0,
-                    'list_template' => 'post.page',
+                    'page_template' => 'post.page',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ],
@@ -129,7 +129,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'contact-us',
                     'is_nav' => true,
                     'parent_id' => 0,
-                    'list_template' => 'post.page',
+                    'page_template' => 'post.page',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ],
@@ -141,7 +141,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'xyjj',
                     'is_nav' => true,
                     'parent_id' => 1,
-                    'list_template' => 'post.page',
+                    'page_template' => 'post.page',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ],
