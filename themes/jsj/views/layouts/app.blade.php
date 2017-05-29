@@ -21,8 +21,8 @@
         <div class="mask-right"></div>
         <div class="container">
             <a class="logo" href="#"><img src="{!! asset('static/jsj/images/logo.png') !!}"></a>
-            <form method="get" id="search-form" class="search">
-                <input class="input-box" name="keyword" type="text" placeholder="请输入关键字">
+            <form method="get" id="search-form" class="search" action="/">
+                <input class="input-box" name="keywords" type="text" @if(isset($keywords))value="{!! $keywords !!}"@endif placeholder="请输入关键字">
                 <i class="submit glyphicon glyphicon-search"></i>
             </form>
         </div>
@@ -32,8 +32,6 @@
     @yield('content')
     @include('layouts.particals.link')
     @include('layouts.particals.footer')
-    @yield('js')
-    @stack('js')
     <script>
         var $searchForm = $('#search-form');
         $searchForm.find('input').keydown(function (e) {
@@ -44,7 +42,18 @@
         $searchForm.find('i').click(function () {
             $searchForm.submit();
         })
+        $searchForm.submit(function (e) {
+            var $this = $(this), keywords = encodeURIComponent($this.find("input[name=keywords]").val());
+            if(!keywords){
+                location.href = "/";
+                return false;
+            }
+            location.href = "{!! route('search', ['keywords'=>'__KEYWORDS__']) !!}".replace("__KEYWORDS__", keywords);
+            return false;
+        });
     </script>
+    @yield('js')
+    @stack('js')
 </div>
 </body>
 </html>
