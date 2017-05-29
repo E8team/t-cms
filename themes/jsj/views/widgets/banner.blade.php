@@ -1,32 +1,39 @@
 @push('js')
 <script type="text/javascript">
     // 轮播图
-    var $banner = $("#banner");
-    $banner.slick({
-        dots: true,
-        infinite: true,
-        centerMode: true,
-        variableWidth: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    });
-    $banner.on('afterChange',function(event, slick, currentSlide){
-        var $currentText = $banner.find('.slick-current p.text');
-        $currentText.css('display', 'block');
-        $currentText.animate({
-            opacity: .65,
-            'margin-left': 130
-        }, 300)
-    })
-    $banner.on('beforeChange', function(event, slick, currentSlide, nextSlide){
-        var $currentText = $banner.find('.slick-current p.text');
-        $currentText.animate({
-            opacity: 0,
-            'margin-left': 0
-        }, 300, function () {
-            $currentText.css('display', 'none');
+    $(function () {
+        var $banner = $("#banner");
+        $banner.slick({
+            dots: true,
+            infinite: true,
+            centerMode: true,
+            variableWidth: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+        $banner.on('afterChange',function(event, slick, currentSlide){
+            showCurrent();
         })
-    });
+
+        $banner.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            var $currentText = $banner.find('.slick-current p.text');
+            $currentText.animate({
+                opacity: 0,
+                'margin-left': 0
+            }, 300, function () {
+                $currentText.css('display', 'none');
+            })
+        });
+        function showCurrent() {
+            var $currentText = $banner.find('.slick-current p.text');
+            $currentText.css('display', 'block');
+            $currentText.animate({
+                opacity: .65,
+                'margin-left': 130
+            }, 300)
+        }
+        showCurrent();
+    })
 </script>
 @endpush
 <section id="banner" class="slider">
