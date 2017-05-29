@@ -33,24 +33,26 @@
     @include('layouts.particals.link')
     @include('layouts.particals.footer')
     <script>
-        var $searchForm = $('#search-form');
-        $searchForm.find('input').keydown(function (e) {
-            if(e.keyCode == 13){
+        $(function () {
+            var $searchForm = $('#search-form');
+            $searchForm.find('input').keydown(function (e) {
+                if(e.keyCode == 13){
+                    $searchForm.submit();
+                }
+            })
+            $searchForm.find('i').click(function () {
                 $searchForm.submit();
-            }
-        })
-        $searchForm.find('i').click(function () {
-            $searchForm.submit();
-        })
-        $searchForm.submit(function (e) {
-            var $this = $(this), keywords = encodeURIComponent($this.find("input[name=keywords]").val());
-            if(!keywords){
-                location.href = "/";
+            })
+            $searchForm.submit(function (e) {
+                var $this = $(this), keywords = encodeURIComponent($this.find("input[name=keywords]").val());
+                if(!keywords){
+                    location.href = "/";
+                    return false;
+                }
+                location.href = "{!! route('search', ['keywords'=>'__KEYWORDS__']) !!}".replace("__KEYWORDS__", keywords);
                 return false;
-            }
-            location.href = "{!! route('search', ['keywords'=>'__KEYWORDS__']) !!}".replace("__KEYWORDS__", keywords);
-            return false;
-        });
+            });
+        })
     </script>
     @yield('js')
     @stack('js')

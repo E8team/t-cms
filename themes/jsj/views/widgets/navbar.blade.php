@@ -19,6 +19,43 @@
                     $list.css('display', 'none');
                 }
             })
+        });
+        var $nav = $('.nav');
+        var lastTop = 0;
+        var oldNavTop = $nav.offset().top;
+        $(window).scroll(function (e) {
+            if(this.pageYOffset >= oldNavTop - 20){
+                $nav.addClass('small');
+            }else{
+                $nav.removeClass('small');
+                $nav.css({
+                    'position': 'absolute',
+                    'top': '110px'
+                });
+            }
+            if(this.pageYOffset <= lastTop){
+                if($nav.css('position') != 'fixed' && this.pageYOffset >= oldNavTop){
+                    $nav.css({
+                        'position': 'fixed',
+                        'top': '-62px'
+                    });
+                    $nav.animate({
+                        top: '0'
+                    }, 300 , function () {
+                        if($nav.css('position') != 'fixed'){
+                            $nav.css({
+                                'top': '110px'
+                            });
+                        }
+                    });
+                }
+            }else{
+                $nav.css({
+                    'position': 'absolute',
+                    'top': '110px'
+                });
+            }
+            lastTop = this.pageYOffset;
         })
     });
 
