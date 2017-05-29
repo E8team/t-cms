@@ -29,12 +29,12 @@
         <ul class="nav_list" id="nav_list">
             @foreach($navbars as $nav)
                 <li @if(!is_null($topNav) && $nav->equals($topNav)) class="active" @endif>
-                    <a {!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>
+                    <a{!! $nav->present()->aProperty() !!}>{!! $nav->cate_name !!}</a>
                     @if(!$nav->children->isEmpty())
                         <span class="glyphicon glyphicon-chevron-down"></span>
                         <ul class="sub_nav">
                             @foreach($nav->children as $children)
-                                <li><a {!! $children->present()->aProperty() !!}>{!! $children->cate_name !!}</a></li>
+                                <li><a{!! $children->present()->aProperty() !!}>{!! $children->cate_name !!}</a></li>
                             @endforeach
                         </ul>
                     @endif
