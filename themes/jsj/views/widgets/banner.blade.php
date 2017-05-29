@@ -37,28 +37,20 @@
 </script>
 @endpush
 <section id="banner" class="slider">
-    <div>
-        <a href="#" target="#">
-            <img src="http://www.pku.edu.cn/images/content/2017-05/20170524123828405775.jpg">
-        </a>
-        <p class="text">百廿北大 因你而新：北大2017年校园开放日暨“引领未来”本科生招生咨询会举行0</p>
-    </div>
-    <div>
-        <a href="#" target="#">
-            <img src="http://www.pku.edu.cn/images/content/2017-05/20170514192853790577.jpg">
-        </a>
-        <p class="text">百廿北大 因你而新：北大2017年校园开放日暨“引领未来”本科生招生咨询会举行1</p>
-    </div>
-    <div>
-        <a href="#">
-            <img src="http://www.pku.edu.cn/images/content/2017-05/20170529133458089409.jpg">
-        </a>
-        <p class="text">百廿北大 因你而新：北大2017年校园开放日暨“引领未来”本科生招生咨询会举行2</p>
-    </div>
-    <div>
-        <a href="#">
-            <img src="http://www.pku.edu.cn/images/content/2017-05/20170522101204651052.jpg">
-        </a>
-        <p class="text">百廿北大 因你而新：北大2017年校园开放日暨“引领未来”本科生招生咨询会举行3</p>
-    </div>
+    @foreach($banners as $banner)
+        <div>
+            <a href="{{ $banner->url }}" target="_blank" {{ $banner->title }}>
+                <img lazy src="{{ $banner->getPictureUrl('optimize') }}">
+            </a>
+            <p class="text">{{ $banner->title }}</p>
+        </div>
+    @endforeach
+        @foreach($banners as $banner)
+            <div>
+                <a href="{{ $banner->url }}" target="_blank" {{ $banner->title }}>
+                    <img lazy src="{{ $banner->getPictureUrl('optimize') }}">
+                </a>
+                <p class="text">{{ $banner->title }}</p>
+            </div>
+        @endforeach
 </section>

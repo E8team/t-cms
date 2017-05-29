@@ -1,4 +1,4 @@
-window.$ = require('jquery');
-import 'slick-carousel/slick/slick.js'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+window.$ = window.jQuery = require('jquery');
+require('slick-carousel/slick/slick.js')
+require('slick-carousel/slick/slick.css')
+require('slick-carousel/slick/slick-theme.css')
