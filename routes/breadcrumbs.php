@@ -21,6 +21,6 @@ Breadcrumbs::register(
 Breadcrumbs::register(
     'post', function ($breadcrumbs, \App\T\Navigation\Navigation $navigation, $post) {
         $breadcrumbs->parent('category', $navigation);
-        $breadcrumbs->push($post->title, route('post', [$navigation->getActiveNav()->cate_slug, $post->id]));
+        $breadcrumbs->push($post->title/*, route('post', [$navigation->getActiveNav()->cate_slug, $post->id])*/);
     }
 );
