@@ -24,7 +24,7 @@
                     <el-table-column property="order" label="排序"></el-table-column>
                     <el-table-column label="是否显示">
                         <template scope="scope">
-                            <el-tag :type="scope.row.is_visible ? 'success' : 'gray'">{{scope.row.is_menu ? '显示' : '隐藏'}}</el-tag>
+                            <el-tag :type="scope.row.is_visible ? 'success' : 'gray'">{{scope.row.is_visible ? '显示' : '隐藏'}}</el-tag>
                         </template>
                     </el-table-column>
                     <el-table-column property="linkman" label="联系人"></el-table-column>
