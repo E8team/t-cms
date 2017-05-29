@@ -1,3 +1,36 @@
+.slider{
+  margin-bottom: 0!important;
+  position: relative;
+  .text{
+    background-color: #000;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 50px;
+    padding: 0 8px;
+    font-family: "Microsoft Yahei";
+    position: absolute;
+    bottom: 30px;
+    display: none;
+  }
+  .slick-arrow{
+    display: none!important;
+  }
+  .slick-dots{
+    position: absolute;
+    bottom: 10px;
+    z-index: 99;
+    li{
+      &.slick-active {
+        button:before {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
 .focus-news{
   background: #fff;
   position: relative;

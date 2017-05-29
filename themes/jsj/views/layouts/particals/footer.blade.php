@@ -12,5 +12,5 @@
     </div>
 </div>
 <div class="footer-copy">
-    Copyright © 2017 <a href="#">E8net</a>. All Rights Reserved.
+    Copyright © 2017 <a href="http://e8net.cn" target="_blank">E8net</a>.  powered by <a target="_blank" href="https://github.com/3tnet/t-cms">t-cms</a>
 </div>
