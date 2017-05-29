@@ -1,5 +1,22 @@
 .focus-news{
   background: #fff;
+  position: relative;
+  .watermark{
+    width: 397px;
+    height: 397px;
+    position: absolute;
+    top: 15px;
+    background-image: url("../resources/backgrounds/watermark.png");
+    transform:rotate(30deg);
+    opacity: .5;
+    filter: alpha(opacity=50);
+    &.left{
+      left: 80px;
+    }
+    &.right{
+      right: 80px;
+    }
+  }
 }
 .news-panel{
   .header{
