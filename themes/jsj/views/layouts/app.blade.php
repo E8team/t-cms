@@ -7,7 +7,7 @@
     <meta name="keywords" content="@yield('keywords')">
     <meta name="description" content="@yield('description')">
     {{--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />--}}
-    <title>@section('title')我的站点@show - powered by t-cms</title>
+    <title>@yield('title')_计算机学院_powered by t-cms</title>
     <meta http-equiv="x-pjax-version" content="{!! asset(mix('/js/app.js', 'static/jsj')) !!} . {!! asset(mix('/css/app.css', 'static/jsj')) !!} }}">
     <script type="text/javascript" src="{!! asset(mix('/js/app.js', 'static/jsj')) !!}"></script>
     <link rel="stylesheet" href="{!! asset('static/jsj/css/bootstrap.min.css') !!}">

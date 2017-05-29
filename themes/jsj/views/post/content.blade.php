@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title'){!! $post->title !!}@endsection
+
 @inject('navigation', 'App\T\Navigation\Navigation')
 
 @section('content')

@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@push('js')
+@section('title')首页@endsection
+@section('js')
 <script type="text/javascript">
     $(function () {
         var $allItem = $('.news .currency-list>.item');
@@ -10,7 +11,7 @@
         }, function () {})
     })
 </script>
-@endpush
+@endsection
 @section('content')
 {!! Facades\App\Widgets\Banner::render() !!}
 <div class="focus-news">

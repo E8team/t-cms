@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title')"{!! $keywords !!}" 搜索结果@endsection
+
 @section('js')
 <script type="text/javascript">
     $(function () {
