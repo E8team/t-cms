@@ -151,7 +151,9 @@ export default {
       }else{
         this.page.title = '';
         this.page.content = '';
-        this.editor.setContent(this.page.content);
+        try {
+            this.editor.setContent(this.page.content);
+        }catch (e){}
         this.$http.get(`categories/${this.activeIndex}/page`, {
           params: {
             include: 'content'
@@ -160,7 +162,9 @@ export default {
           if(res.data){
             this.page.title = res.data.data.title;
             this.page.content = res.data.data.content.data.content;
-            this.editor.setContent(this.page.content);
+              try {
+                  this.editor.setContent(this.page.content);
+              }catch (e){}
           }
         })
       }
@@ -196,6 +200,7 @@ export default {
       });
       this.editor.ready(() => {
         this.editor.execCommand('serverparam', '_token', window.t_meta.csrfToken);
+        this.editor.setContent(this.page.content);
       });
     },
     restore (id) {
