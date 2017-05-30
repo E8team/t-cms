@@ -76,13 +76,27 @@ body{
         width: 100%;
         z-index: 11;
         bottom: -60px;
-        transition: height .3s;
+        transition: height .3s, background-color.3s;
         &.small{
-            height: 60px;
+            background-color: #fff;
+            height: 50px;
+            z-index: 9999;
             li{
-                line-height: 60px;
+                line-height: 50px;
                 .nav-link{
-                    font-size: 14px;
+                    font-size: 12px;
+                    color: #333;
+                }
+                .sub-nav{
+                    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 2px;
+                    background-color: #fff;
+                    a{
+                        line-height: 40px;
+                        color: #444;
+                        &:hover{
+                            background-color: #f1f1f1;
+                        }
+                    }
                 }
             }
         }

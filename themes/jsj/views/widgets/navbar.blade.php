@@ -2,12 +2,13 @@
 @push('js')
 <script type="text/javascript">
     $(function () {
+        var $nav = $('.nav');
         $('#nav>li').hover(function () {
             var $list = $(this).find('.sub-nav')
             $list.css('display', 'block');
             $list.stop().animate({
                 'opacity': 1,
-                'top': '65px'
+                'top': $nav.hasClass('small') ? '50px' : '65px'
             }, 200)
         }, function () {
             var $list = $(this).find('.sub-nav')
@@ -20,12 +21,14 @@
                 }
             })
         });
-        var $nav = $('.nav');
-        var lastTop = 0;
         var oldNavTop = $nav.offset().top;
         $(window).scroll(function (e) {
-            if(this.pageYOffset >= oldNavTop - 20){
+            if(this.pageYOffset >= oldNavTop + 20){
                 $nav.addClass('small');
+                $nav.css({
+                    'position': 'fixed',
+                    'top': '0'
+                });
             }else{
                 $nav.removeClass('small');
                 $nav.css({
@@ -33,29 +36,6 @@
                     'top': '110px'
                 });
             }
-            if(this.pageYOffset <= lastTop){
-                if($nav.css('position') != 'fixed' && this.pageYOffset >= oldNavTop){
-                    $nav.css({
-                        'position': 'fixed',
-                        'top': '-62px'
-                    });
-                    $nav.animate({
-                        top: '0'
-                    }, 300 , function () {
-                        if($nav.css('position') != 'fixed'){
-                            $nav.css({
-                                'top': '110px'
-                            });
-                        }
-                    });
-                }
-            }else{
-                $nav.css({
-                    'position': 'absolute',
-                    'top': '110px'
-                });
-            }
-            lastTop = this.pageYOffset;
         })
     });
 
