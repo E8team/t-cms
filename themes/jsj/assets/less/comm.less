@@ -76,6 +76,16 @@ body{
         width: 100%;
         z-index: 11;
         bottom: -60px;
+        transition: height .3s;
+        &.small{
+            height: 60px;
+            li{
+                line-height: 60px;
+                .nav-link{
+                    font-size: 14px;
+                }
+            }
+        }
         ul{
             padding: 0;
         }
