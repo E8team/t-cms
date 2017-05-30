@@ -13,7 +13,7 @@
 </script>
 @endsection
 @section('content')
-{!! Facades\App\Widgets\Banner::render() !!}
+{!! app(\App\Widgets\Banner::class)->setType(3)->render() !!}
 <div class="focus-news">
     <div class="watermark left"></div>
     <div class="watermark right"></div>
