@@ -24,8 +24,8 @@
             @foreach($posts as $post)
                 <li>
                     <div class="notice-time">
-                        <div class="day">23</div>
-                        <div class="month">5月</div>
+                        <div class="day">{!! $post->published_at->day !!}</div>
+                        <div class="month">{!! $post->published_at->month !!}月</div>
                     </div>
                     <div class="title">
                         <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle() !!}</a>
