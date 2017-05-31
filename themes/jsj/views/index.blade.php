@@ -15,16 +15,6 @@
             autoplaySpeed: 6000,
             adaptiveHeight: true
         });
-        var $notice = $('#notice');
-        setInterval(function () {
-            $notice.append($notice.children().first());
-            $notice.animate({
-                top: '-90px'
-            }, 300, function () {
-                $notice.css('top', 0);
-            })
-        }, 3000)
-
     })
 </script>
 @endsection
@@ -105,66 +95,7 @@
                 </ul>
             </div>
         </div>
-        <div class="news-panel col-xs-12 col-sm-12 col-md-4 col-lg-4 notice">
-            <div class="header">
-                <h3>通知公告</h3>
-                <a class="more" href="#" target="_blank">更多</a>
-            </div>
-            <div class="body">
-                <ul id="notice" class="notice-list">
-                    <li>
-                        <div class="notice-time">
-                            <div class="day">23</div>
-                            <div class="month">5月</div>
-                        </div>
-                        <div class="title">
-                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
-                            <span class="author">admin</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="notice-time">
-                            <div class="day">23</div>
-                            <div class="month">5月</div>
-                        </div>
-                        <div class="title">
-                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
-                            <span class="author">admin</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="notice-time">
-                            <div class="day">23</div>
-                            <div class="month">5月</div>
-                        </div>
-                        <div class="title">
-                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
-                            <span class="author">admin</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="notice-time">
-                            <div class="day">23</div>
-                            <div class="month">5月</div>
-                        </div>
-                        <div class="title">
-                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
-                            <span class="author">admin</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="notice-time">
-                            <div class="day">23</div>
-                            <div class="month">5月</div>
-                        </div>
-                        <div class="title">
-                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
-                            <span class="author">admin</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        {!! app(App\Widgets\PostList::class)->setCategory('notice')->setLimit(20)->render()!!}
     </div>
 </div>
 <div class="splitter-bar">
