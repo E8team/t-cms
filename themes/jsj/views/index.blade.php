@@ -9,6 +9,22 @@
             _self.parent().find('.open').removeClass('open');
             _self.addClass('open');
         }, function () {})
+        $("#top-carousel").slick({
+            dots: true,
+            autoplay: true,
+            autoplaySpeed: 6000,
+            adaptiveHeight: true
+        });
+        var $notice = $('#notice');
+        setInterval(function () {
+            $notice.append($notice.children().first());
+            $notice.animate({
+                top: '-90px'
+            }, 300, function () {
+                $notice.css('top', 0);
+            })
+        }, 3000)
+
     })
 </script>
 @endsection
@@ -25,7 +41,21 @@
             </div>
             <div class="body">
                 <div class="top-carousel col-xs-12 col-sm-12 col-md-5 col-lg-5">
-                    <div class="wrapper">
+                    <div id="top-carousel" class="wrapper">
+                        <div class="top-carousel-item">
+                            <a href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                                <h3>拓展合作共赢局面，推进生源基地建设工作</h3>
+                                <p>为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</p>
+                            </a>
+                        </div>
+                        <div class="top-carousel-item">
+                            <a href="#">
+                                <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
+                                <h3>拓展合作共赢局面，推进生源基地建设工作</h3>
+                                <p>为了加强校际联系，扩大我校招生宣传，根据学校统一部署，5月16日-18日，计算机学院学院党政领导与党政办主任等一行五人先后走访了源潭中学、</p>
+                            </a>
+                        </div>
                         <div class="top-carousel-item">
                             <a href="#">
                                 <img src="http://www.pku.edu.cn/img/news/484d7eb258891a6d376b27.JPG" alt="">
@@ -68,6 +98,10 @@
                         <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
                         <div class="time">6个小时前</div>
                     </li>
+                    <li class="item">
+                        <a class="title" href="#">附属中山医院多学科协作与精细化发展</a>
+                        <div class="time">6个小时前</div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -77,7 +111,27 @@
                 <a class="more" href="#" target="_blank">更多</a>
             </div>
             <div class="body">
-                <ul class="notice-list">
+                <ul id="notice" class="notice-list">
+                    <li>
+                        <div class="notice-time">
+                            <div class="day">23</div>
+                            <div class="month">5月</div>
+                        </div>
+                        <div class="title">
+                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
+                            <span class="author">admin</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="notice-time">
+                            <div class="day">23</div>
+                            <div class="month">5月</div>
+                        </div>
+                        <div class="title">
+                            <a href="#">计算机推荐2017届品学兼优毕业生公示</a>
+                            <span class="author">admin</span>
+                        </div>
+                    </li>
                     <li>
                         <div class="notice-time">
                             <div class="day">23</div>

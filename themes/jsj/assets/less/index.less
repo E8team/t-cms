@@ -34,11 +34,13 @@
 .focus-news{
   background: #fff;
   position: relative;
+  padding-top: 10px;
+  padding-bottom: 15px;
   .watermark{
     width: 397px;
     height: 397px;
     position: absolute;
-    top: 15px;
+    top: 27px;
     background-image: url("../resources/backgrounds/watermark.png");
     transform:rotate(30deg);
     opacity: .5;
@@ -91,13 +93,18 @@
     }
     .top-carousel{
       padding: 10px 0 0 0;
+      .top-carousel-item{
+        padding: 0 2px;
+      }
       img{
         width: 100%;
       }
       a{
         text-decoration: none;
+        outline: none;
       }
       h3{
+        outline: none;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -191,25 +198,38 @@
 }
 .notice{
   padding-left: 35px;
+  .body{
+    height: 355px;
+    overflow: hidden;
+  }
   .notice-list{
+    position: relative;
+    top: 0;
     padding-top: 10px!important;
     li{
       margin-bottom: 10px;
-      height: 90px;
+      height: 80px;
       border-bottom: 1px #E6E6E6 dashed;
+      &:hover{
+        .notice-time{
+          background-color: #548DBB;
+          color: #fff;
+        }
+      }
     }
   }
   .body{
     .notice-time{
       float: left;
-      background-color: #548DBB;
-      width: 80px;
-      height: 75px;
-      color: #fff;
+      transition: background-color .3s, color .3s;
+      background-color: #f1f1f1;
+      width: 70px;
+      height: 65px;
+      color: #b3b3b3;
       text-align: center;
-      padding-top: 3px;
+      padding-top: 2px;
       .day{
-        font-size: 28px;
+        font-size: 24px;
       }
       .month{
         font-size: 14px;
@@ -217,7 +237,7 @@
     }
     .title{
       padding-top: 3px;
-      padding-left: 90px;
+      padding-left: 80px;
       a{
         font-size: 16px;
         color: #666;
@@ -228,7 +248,7 @@
         }
       }
       .author{
-        margin-top: 10px;
+        margin-top: 6px;
         display: block;
         font-size: 12px;
         color: #999;
