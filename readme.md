@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://avatars2.githubusercontent.com/u/15854856?v=3&s=150">
-  <img src="https://avatars1.githubusercontent.com/u/28562345?v=3&s=150">
+  <img style="max-width:50%" src="https://avatars2.githubusercontent.com/u/15854856?v=3&s=150">
+  <img style="max-width:50%" src="https://avatars1.githubusercontent.com/u/28562345?v=3&s=150">
   <br><strong>3t</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>E8net</strong>
 </p>
 <p align="center">
