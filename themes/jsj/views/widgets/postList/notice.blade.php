@@ -19,15 +19,15 @@
 <div class="news-panel col-xs-12 col-sm-12 col-md-4 col-lg-4 notice">
     <div class="header">
         <h3>{!! $category->cate_name !!}</h3>
-        <a class="more" {!! $category->present()->aProperty() !!}>更多</a>
+        <a class="more" {!! $category->present()->aProperty(true) !!}>更多</a>
     </div>
     <div class="body">
         <ul id="notice" class="notice-list">
             @foreach($posts as $post)
                 <li>
-                    <div class="notice-time">
-                        <div class="day">23</div>
-                        <div class="month">5月</div>
+                    <div class="notice-time" title="{!! $post->published_at !!}">
+                        <div class="day">{!! $post->published_at->day !!}</div>
+                        <div class="month">{!! $post->published_at->month !!}月</div>
                     </div>
                     <div class="title">
                         <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle() !!}</a>

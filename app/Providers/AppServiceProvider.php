@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\T\Navigation\Navigation;
 use App\Widgets\Alert;
+use Carbon\Carbon;
 use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
@@ -39,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
             $theme->setActiveTheme($ActiveTheme);
         }*/
         $theme->setActiveTheme('jsj');
+
+        Carbon::setLocale(config('app.locale'));
     }
 
     public function registerCustomValidator()
