@@ -54,6 +54,13 @@ class PostUpdateRequest extends Request
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'category_ids.int_array' => '请选择分类'
+        ];
+    }
+
     public function performUpdate(BaseModel $post, callable $callback = null)
     {
         $this->defaultPerformUpdate(

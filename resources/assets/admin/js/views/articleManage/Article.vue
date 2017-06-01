@@ -2,29 +2,33 @@
   <div class="article">
     <panel title="撰写新文章" class="main">
        <el-form label-position="top" :model="article">
-          <el-form-item required label="标题">
-              <el-input v-model="article.title" placeholder="在此输入标题"></el-input>
+          <el-form-item :error="errors.title" required label="标题">
+              <el-input @change="errors.title = ''" v-model="article.title" placeholder="在此输入标题"></el-input>
           </el-form-item>
-          <el-form-item label="作者信息">
-              <el-input v-model="article.author_info" placeholder="请输入作者信息"></el-input>
+          <el-form-item :error="errors.author_info" label="作者信息">
+              <el-input @change="errors.author_info = ''" v-model="article.author_info" placeholder="请输入作者信息"></el-input>
           </el-form-item>
           <el-form-item id="ueditor_wrapper"></el-form-item>
-          <el-form-item label="摘要">
-              <el-input v-model="article.excerpt" placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
+          <el-form-item :error="errors.excerpt" label="摘要">
+              <el-input @change="errors.excerpt = ''" v-model="article.excerpt" placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
               <div class="tip">选填，如果不填写会默认抓取正文前<input v-model="excerptSize" class="excerpt_size" type="text"/>个字</div>
           </el-form-item>
        </el-form>
     </panel>
     <div class="postbox_container">
       <panel title="栏目" size="small">
-        <el-checkbox-group v-model="article.category_ids">
-        <el-tree
-          default-expand-all
-          :render-content="renderCategorie"
-          :data="allCategories"
-          :props= 'props'>
-        </el-tree>
-        </el-checkbox-group>
+          <el-form label-position="top" :model="article">
+              <el-form-item required :error="errors.category_ids">
+                <el-checkbox-group @change="errors = ''" v-model="article.category_ids">
+                <el-tree
+                  default-expand-all
+                  :render-content="renderCategorie"
+                  :data="allCategories"
+                  :props= 'props'>
+                </el-tree>
+                </el-checkbox-group>
+              </el-form-item>
+          </el-form>
       </panel>
       <panel title="发布" size="small">
         <el-form label-position="top" :model="article">
@@ -111,7 +115,6 @@
         this.confirmLoading = status;
         this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getPlainTxt().substr(0, this.excerptSize);
         this.article.status = status;
-        console.log(this.article);
         this.$http[method](url, this.$diff.diff(this.article)).then(res => {
           this.$message({
               message: `${this.title}成功`,
@@ -121,6 +124,7 @@
           this.$router.back();
         }).catch(err => {
           this.confirmLoading = false;
+          this.errors = err.response.data.errors;
         })
       },
       selImage () {
@@ -264,7 +268,8 @@
           'published_at': null,
            'top': false
         },
-        excerptSize: 54
+        excerptSize: 54,
+        errors: []
       }
     },
     watch: {

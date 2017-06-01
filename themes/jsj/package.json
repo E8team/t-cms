@@ -6,7 +6,9 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
+    "Respond.js": "scottjehl/Respond",
     "bootstrap": "^3.3.7",
+    "es5-shim": "^4.5.9",
     "jquery": "^1.12.4",
     "slick-carousel": "^1.6.0"
   }

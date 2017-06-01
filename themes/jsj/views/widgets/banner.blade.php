@@ -39,7 +39,7 @@
     })
 </script>
 @endpush
-<section id="banner" class="slider">
+<div id="banner" class="slider">
     @foreach($banners as $banner)
         <div>
             <a href="{{ $banner->url }}" target="_blank" title="{{ $banner->title }}">
@@ -56,4 +56,4 @@
                 <p class="text">{{ $banner->title }}</p>
             </div>
         @endforeach
-</section>
+</div>

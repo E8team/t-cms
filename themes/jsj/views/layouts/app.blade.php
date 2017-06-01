@@ -2,6 +2,7 @@
 <html lang="{!! config('app.locale') !!}">
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta name="keywords" content="@yield('keywords')">
@@ -10,9 +11,16 @@
     <title>@yield('title')_计算机学院_powered by t-cms</title>
     <meta http-equiv="x-pjax-version"
           content="{!! asset(mix('/js/app.js', 'static/jsj')) !!} . {!! asset(mix('/css/app.css', 'static/jsj')) !!} }}">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="{{ asset('static/jsj/js/es5-shim.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/jsj/js/es5-sham.min.js') }}"></script>
+    <![endif]-->
     <script type="text/javascript" src="{!! asset(mix('/js/app.js', 'static/jsj')) !!}"></script>
     <link rel="stylesheet" href="{!! asset('static/jsj/css/bootstrap.min.css') !!}">
     <link rel="stylesheet" href="{!! asset(mix('/css/app.css', 'static/jsj')) !!}">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="{{ asset('static/jsj/js/respond.min.js') }}"></script>
+    <![endif]-->
     @yield('style')
 </head>
 <body>
