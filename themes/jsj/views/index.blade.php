@@ -114,22 +114,46 @@
     <div class="container">
         <div class="image-link-item col-md-3 col-lg-3 col-xs-12 col-sm-6">
             <a href="#">
-                <img src="http://www.xinhuanet.com/titlepic/112052/1120522872_1489022225269_title0h.jpg" alt="">
+                <div class="inner">
+                    <img src="http://www.xinhuanet.com/titlepic/112052/1120522872_1489022225269_title0h.jpg" alt="">
+                    <div class="desc">
+                        <div class="mask"></div>
+                        <p>淮南师范学院</p>
+                    </div>
+                </div>
             </a>
         </div>
         <div class="image-link-item col-md-3 col-lg-3 col-xs-12 col-sm-6">
             <a href="#">
-                <img src="http://211.70.176.141/jxx/Public/e8admin/upload/image/2017-02-23/58ae7b538dc3a.png" alt="">
+                <div class="inner">
+                    <img src="http://www.xinhuanet.com/titlepic/112052/1120522872_1489022225269_title0h.jpg" alt="">
+                    <div class="desc">
+                        <div class="mask"></div>
+                        <p>淮南师范学院</p>
+                    </div>
+                </div>
             </a>
         </div>
         <div class="image-link-item col-md-3 col-lg-3 col-xs-12 col-sm-6">
             <a href="#">
-                <img src="http://211.70.176.141/fxy/Public/upload/image/20170324/58d52e505f0fd.png" alt="">
+                <div class="inner">
+                    <img src="http://www.xinhuanet.com/titlepic/112052/1120522872_1489022225269_title0h.jpg" alt="">
+                    <div class="desc">
+                        <div class="mask"></div>
+                        <p>淮南师范学院</p>
+                    </div>
+                </div>
             </a>
         </div>
         <div class="image-link-item col-md-3 col-lg-3 col-xs-12 col-sm-6">
             <a href="#">
-                <img src="http://211.70.176.141/fxy/Public/upload/image/20170324/58d5280d497a8.jpg" alt="">
+                <div class="inner">
+                    <img src="http://www.xinhuanet.com/titlepic/112052/1120522872_1489022225269_title0h.jpg" alt="">
+                    <div class="desc">
+                        <div class="mask"></div>
+                        <p>淮南师范学院</p>
+                    </div>
+                </div>
             </a>
         </div>
     </div>

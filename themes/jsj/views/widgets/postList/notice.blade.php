@@ -3,14 +3,16 @@
 <script type="text/javascript">
     $(function (){
         var $notice = $('#notice');
-        setInterval(function () {
-            $notice.append($notice.children().first());
-            $notice.animate({
-                top: '-90px'
-            }, 300, function () {
-                $notice.css('top', 0);
-            })
-        }, 3000)
+        if($notice.children().length > 4){
+            setInterval(function () {
+                $notice.animate({
+                    top: '-90px'
+                }, 300, function () {
+                    $notice.append($notice.children().first());
+                    $notice.css('top', 0);
+                })
+            }, 3000)
+        }
     });
 </script>
 @endpush

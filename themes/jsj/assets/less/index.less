@@ -387,9 +387,45 @@
       display: block;
       background-color: #fff;
       padding: 10px;
+      text-decoration: none;
+      &:hover{
+        .desc{
+          bottom: 0;
+        }
+      }
+      .inner{
+        position: relative;
+        overflow: hidden;
+      }
       img{
         width: 100%;
         height: 150px;
+      }
+    }
+    .desc{
+      transition: bottom .3s;
+      position: absolute;
+      width: 100%;
+      bottom: -30px;
+      p{
+        color: #fff;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: 600;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin: 0;
+      }
+      .mask{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: .6;
+        filter: alpha(opacity=60);
       }
     }
   }
