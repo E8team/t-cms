@@ -18,10 +18,10 @@
     <script type="text/javascript" src="{!! asset(mix('/js/app.js', 'static/jsj')) !!}"></script>
     <link rel="stylesheet" href="{!! asset('static/jsj/css/bootstrap.min.css') !!}">
     <link rel="stylesheet" href="{!! asset(mix('/css/app.css', 'static/jsj')) !!}">
+    @yield('style')
     <!--[if lt IE 9]>
     <script type="text/javascript" src="{{ asset('static/jsj/js/respond.min.js') }}"></script>
     <![endif]-->
-    @yield('style')
 </head>
 <body>
 <div class="body">

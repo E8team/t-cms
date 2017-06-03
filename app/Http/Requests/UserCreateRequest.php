@@ -27,7 +27,8 @@ class UserCreateRequest extends Request
             'email' => 'required|email|unique:users',
             'avatar' => 'nullable|picture_id',
             'password' => 'required',
-            'role_ids' => 'nullable|int_array'
+            'role_ids' => 'nullable|int_array',
+            'is_locked' => 'nullable|boolean'
         ];
     }
 

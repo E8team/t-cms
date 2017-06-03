@@ -104,12 +104,12 @@
 </div>
 <div class="news">
     <div class="container">
-        {!! app(App\Widgets\PostList::class)->setCategory('zttj')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
-        {!! app(App\Widgets\PostList::class)->setCategory('zttj')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
-        {!! app(App\Widgets\PostList::class)->setCategory('zttj')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
     </div>
 </div>
-{!! app(App\Widgets\PostList::class)->setCategory('zttj')->setLimit(4)->render() !!}
+{!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setLimit(4)->render() !!}
 <div class="image-link">
     <div class="container">
         <div class="image-link-item col-md-3 col-lg-3 col-xs-12 col-sm-6">

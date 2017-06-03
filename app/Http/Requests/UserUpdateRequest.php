@@ -9,7 +9,7 @@ class UserUpdateRequest extends Request
 {
     use Update;
 
-    protected $allowModifyFields = ['user_name', 'nick_name', 'email', 'password', 'is_lock', 'avatar'];
+    protected $allowModifyFields = ['user_name', 'nick_name', 'email', 'password', 'is_locked', 'avatar'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +35,7 @@ class UserUpdateRequest extends Request
             'email' => ['email', Rule::unique('users')->ignore($user->id)],
             'avatar' => 'nullable|picture_id',
             'password' => 'nullable|min:6',
-            'is_lock' => 'nullable|boolean',
+            'is_locked' => 'nullable|boolean',
             'role_ids' => 'nullable|int_array'
         ];
     }
