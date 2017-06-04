@@ -29,7 +29,13 @@
         <div class="mask-left"></div>
         <div class="mask-right"></div>
         <div class="container">
-            <a class="logo" href="#"><img src="{!! asset('static/jsj/images/logo.png') !!}"></a>
+            <a class="logo" href="#">
+                <img src="{!! asset('static/jsj/images/logo.png') !!}">
+                <div class="title">
+                    <h3>计算机学院</h3>
+                    <p>Huainan Normal University</p>
+                </div>
+            </a>
             <form method="get" id="search-form" class="search" action="/">
                 <input class="input-box" name="keywords" type="text" @if(isset($keywords))value="{!! $keywords !!}"
                        @endif placeholder="请输入关键字">
