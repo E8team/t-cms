@@ -256,9 +256,8 @@ export default {
   .cate_tree_wrapper{
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    position: fixed;
-    top: 80px;
-    bottom: 10px;
+    position: absolute;
+    left: 190px;
     width: 190px;
     background-color: #fff;
     header{
