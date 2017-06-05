@@ -20,6 +20,7 @@ class CategoriesTableSeeder extends Seeder
                     'cate_slug' => 'department-profile',
                     'is_nav' => true,
                     'parent_id' => 0,
+                    'list_template' => null,
                     'page_template' => 'post.page',
                     'content_template' => null,
                     'created_at' => \Carbon\Carbon::now(),
@@ -34,6 +35,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -47,6 +49,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -60,6 +63,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -73,6 +77,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -86,6 +91,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -99,6 +105,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -112,6 +119,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -125,6 +133,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -138,6 +147,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 0,
                     'page_template' => 'post.page',
+                    'list_template' => null,
                     'content_template' => null,
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -151,6 +161,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 1,
                     'page_template' => 'post.page',
+                    'list_template' => null,
                     'content_template' => null,
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -164,6 +175,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 1,
                     'page_template' => 'post.page',
+                    'list_template' => null,
                     'content_template' => null,
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -177,6 +189,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 1,
                     'page_template' => 'post.page',
+                    'list_template' => null,
                     'content_template' => null,
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -190,6 +203,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 1,
                     'page_template' => 'post.page',
+                    'list_template' => null,
                     'content_template' => null,
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -203,6 +217,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 1,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -216,6 +231,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 5,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -229,6 +245,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 5,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -242,6 +259,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 5,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -255,6 +273,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 5,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -268,6 +287,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 5,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -281,6 +301,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 7,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -294,6 +315,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => true,
                     'parent_id' => 7,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -307,6 +329,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => false,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
@@ -320,6 +343,7 @@ class CategoriesTableSeeder extends Seeder
                     'is_nav' => false,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
+                    'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
