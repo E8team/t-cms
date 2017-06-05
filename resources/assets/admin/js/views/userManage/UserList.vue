@@ -18,7 +18,7 @@
                     </el-table-column>
                     <el-table-column label="状态">
                         <template scope="scope">
-                            <el-tag :type="scope.row.is_lock ? 'danger' : 'success'">{{scope.row.is_lock ? '锁定' : '正常'}}</el-tag>
+                            <el-tag :type="scope.row.is_locked ? 'danger' : 'success'">{{scope.row.is_locked ? '锁定' : '正常'}}</el-tag>
                         </template>
                     </el-table-column>
                     <el-table-column label="角色">

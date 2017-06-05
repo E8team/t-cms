@@ -9,7 +9,8 @@ class CategoryPresenters extends Presenter
     /**
      * a标签的属性
      */
-    public function aProperty($needTarget, $target = '_blank')
+
+    public function aProperty($needTarget = false, $target = '_blank')
     {
         if (!$this->entity->isExtLink()) {
             $propertyStr = ' href="'.route('category', $this->cate_slug).'"';
