@@ -53,7 +53,7 @@ class PostRepository
             }
         }
         if (isset($data['cover_in_content'])) {
-            $data['conver'] = PictureManager::convert($data['cover_in_content']);
+            $data['cover'] = PictureManager::convert($data['cover_in_content'])->getPictureId();
         }
         if (isset($data['published_at'])) {
             $data['published_at'] = new Carbon($data['published_at']);
