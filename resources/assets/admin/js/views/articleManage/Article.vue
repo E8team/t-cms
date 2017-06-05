@@ -113,7 +113,7 @@
         this.id ? (method = 'put', url = `posts/${this.id}`) : (method = 'post', url = 'posts');
         this.article.content = this.articleContent;
         this.confirmLoading = status;
-        this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getPlainTxt().substr(0, this.excerptSize);
+        this.article.excerpt = this.article.excerpt ? this.article.excerpt : this.editor.getContentTxt().substr(0, this.excerptSize);
         this.article.status = status;
         this.$http[method](url, this.$diff.diff(this.article)).then(res => {
           this.$message({
