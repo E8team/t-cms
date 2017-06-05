@@ -220,7 +220,7 @@ class CategoriesTableSeeder extends Seeder
                     'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
-                    'updated_at' => \Carbon\Carbon::now()
+                    'updated_at' => \Carbon\Carbon::tnow()
                 ],
                 [
                     'id' => 16,

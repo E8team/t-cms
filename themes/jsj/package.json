@@ -10,6 +10,7 @@
     "bootstrap": "^3.3.7",
     "es5-shim": "^4.5.9",
     "jquery": "^1.12.4",
+    "jquery-lazyload": "^1.9.7",
     "slick-carousel": "^1.6.0"
   }
 }
