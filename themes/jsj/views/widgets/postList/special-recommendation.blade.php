@@ -4,7 +4,7 @@
     $topPost = $posts->where('top', '!==', null)->first();
     if(is_null($topPost))
         $topPost = $posts->first();
-    $otherPosts = $posts->where('id', '!==', $topPost->id)->all();
+    $otherPosts = $posts->where('id', '!==', $topPost->id);
 @endphp
 <div class="special">
     <div class="container">

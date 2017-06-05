@@ -29,4 +29,15 @@ class Link
     {
         return $this->getLinkWithoutType();
     }
+
+    public function getLinkByTypeId($typeId)
+    {
+        return LinkModel::where('type_id', $typeId)->ordered()->recent()->get();
+    }
+
+    public function getLinkByTypeIdFromCache($typeId)
+    {
+        return $this->getLinkByTypeId($typeId);
+    }
+
 }
