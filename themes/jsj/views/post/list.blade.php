@@ -28,7 +28,7 @@
                                         <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">
                                             <h3>@if($post->isTop())<span class="label label-danger">置顶</span>@endif{!! $post->title !!}</h3>
                                         </a>
-                                        @if(is_null($post->excerpt))
+                                        @if(!is_null($post->excerpt))
                                             <p class="describe">{!! $post->excerpt !!}</p>
                                         @endif
                                         <div class="list_footer">
