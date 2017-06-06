@@ -36,7 +36,7 @@ class PostUpdateRequest extends Request
     public function rules()
     {
         return [
-            'title' => ['nullable', 'string', /*Rule::unique('posts')->where(function ($query) {
+            'title' => ['nullable', 'string', 'max:100' /*Rule::unique('posts')->where(function ($query) {
                 $query->where('type', 'post');
             })->ignore($post->id)*/],
             'author_info' => 'nullable|string|max:50',
