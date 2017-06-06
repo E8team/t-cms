@@ -29,7 +29,7 @@
         <div class="mask-left"></div>
         <div class="mask-right"></div>
         <div class="container">
-            <a class="logo" href="#">
+            <a class="logo" href="{!! URL::to('/') !!}">
                 <img src="{!! asset('static/jsj/images/logo.png') !!}">
                 <div class="title">
                     <h3>计算机学院</h3>
