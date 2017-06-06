@@ -220,7 +220,7 @@ class CategoriesTableSeeder extends Seeder
                     'page_template' => null,
                     'content_template' => 'post.content',
                     'created_at' => \Carbon\Carbon::now(),
-                    'updated_at' => \Carbon\Carbon::tnow()
+                    'updated_at' => \Carbon\Carbon::now()
                 ],
                 [
                     'id' => 16,
@@ -340,6 +340,20 @@ class CategoriesTableSeeder extends Seeder
                     'cate_name' => '通知公告',
                     'description' => '通知公告',
                     'cate_slug' => 'notice',
+                    'is_nav' => false,
+                    'parent_id' => 0,
+                    'list_template' => 'post.list',
+                    'page_template' => null,
+                    'content_template' => 'post.content',
+                    'created_at' => \Carbon\Carbon::now(),
+                    'updated_at' => \Carbon\Carbon::now()
+                ],
+                [
+                    'id' => 25,
+                    'type' => 0,
+                    'cate_name' => '院系新闻',
+                    'description' => '院系新闻',
+                    'cate_slug' => 'news',
                     'is_nav' => false,
                     'parent_id' => 0,
                     'list_template' => 'post.list',
