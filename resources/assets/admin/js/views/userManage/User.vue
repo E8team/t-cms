@@ -24,6 +24,15 @@
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
+                <el-form-item label="状态">
+                    <el-switch
+                            v-model="user.is_locked"
+                            on-color="#ff4949"
+                            off-color="#13ce66"
+                            on-text="锁定"
+                            off-text="正常">
+                    </el-switch>
+                </el-form-item>
                 <el-form-item required label="选择角色">
                     <el-checkbox-group v-model="user.role_ids">
                         <el-checkbox v-for="item in allRoles" :label="item.id" :key="item.id">{{item.display_name}}</el-checkbox>
@@ -62,7 +71,8 @@
                     'avatar_urls': {},
                     'password': null,
                     'rePassword': null,
-                    'role_ids': []
+                    'role_ids': [],
+                    'is_locked': false
                 }
             }
         },

@@ -7,6 +7,7 @@ use App\Events\VisitedPostList;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\T\Navigation\Navigation;
+use App\Widgets\Alert;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -74,7 +75,7 @@ class IndexController extends Controller
             )->withTrashed()->firstOrFail();
             if (!$post->isPublish() || $post->trashed()) {
                 // 管理员预览草稿或未发布的文章
-                Alert::setWarning('当前文章未发布，此页面只有管理员可见!');
+                app(Alert::class)::setWarning('当前文章未发布，此页面只有管理员可见!');
             }
         } else {
             $post = $queryBuilder->publish()->firstOrFail();
