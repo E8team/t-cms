@@ -16,7 +16,7 @@
                         <img lazy src="{!! $topPost->getCover('optimize') !!}" alt="{!! $topPost->title !!}">
                     </div>
                     <div class="footer">
-                        <h4>{!! $topPost->present()->suitedTitle() !!}</h4>
+                        <h4>{!! $topPost->present()->suitedTitle(30) !!}</h4>
                         <p>{!! $topPost->excerpt !!}</p>
                     </div>
                 </a>

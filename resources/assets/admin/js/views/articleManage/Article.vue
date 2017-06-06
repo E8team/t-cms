@@ -11,7 +11,7 @@
           <el-form-item id="ueditor_wrapper"></el-form-item>
           <el-form-item :error="errors.excerpt" label="摘要">
               <el-input @change="errors.excerpt = ''" v-model="article.excerpt" placeholder="请输入摘要" type="textarea" :rows="3"></el-input>
-              <div class="tip">选填，如果不填写会默认抓取正文前<input v-model="excerptSize" class="excerpt_size" type="text"/>个字</div>
+              <div class="tip">选填，如果不填写会默认抓取正文前<input v-model="excerptSize" class="excerpt_size" type="number"/>个字</div>
           </el-form-item>
        </el-form>
     </panel>
@@ -268,7 +268,7 @@
           'published_at': null,
            'top': false
         },
-        excerptSize: 54,
+        excerptSize: 128,
         errors: []
       }
     },
@@ -333,8 +333,8 @@
       .excerpt_size{
           border: 0;
           outline: none;
-          width: 36px;
-          padding: 2px 0px;
+          width: 50px;
+          padding: 2px 0px 2px 10px;
           border-bottom: 1px solid #999;
           margin: 0 5px;
           text-align: center;

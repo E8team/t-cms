@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \DB::listen(
+        /*\DB::listen(
             function ($query) {
                 \Log::info(
                     'sql', [$query->sql
@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
                     , $query->time]
                 );
             }
-        );
+        );*/
 
         $this->registerCustomValidator();
         // 获取当前主题

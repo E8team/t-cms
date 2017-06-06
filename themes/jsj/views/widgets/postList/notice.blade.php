@@ -30,7 +30,7 @@
                         <div class="month">{!! $post->published_at->month !!}月</div>
                     </div>
                     <div class="title">
-                        <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle() !!}</a>
+                        <a href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(59) !!}</a>
                         <span class="author">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
                     </div>
                 </li>
