@@ -43,7 +43,7 @@ class PostCreateRequest extends Request
     public function messages()
     {
         return [
-
+            'category_ids.int_array' => '请选择分类'
         ];
     }
 }

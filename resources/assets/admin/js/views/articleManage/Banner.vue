@@ -3,7 +3,7 @@
         <panel :covered="false" :title="title">
             <el-form :model="banner" label-width="85px">
                 <el-form-item :error="errors.title" label="标题">
-                    <el-input @change="errors.url = ''" placeholder="请设置标题" required v-model="banner.title"></el-input>
+                    <el-input @change="errors.title = ''" placeholder="请设置标题" required v-model="banner.title"></el-input>
                 </el-form-item>
                 <el-form-item :error="errors.url" label="URL">
                     <el-input @change="errors.url = ''" placeholder="请设置banner URL" required v-model="banner.url"></el-input>

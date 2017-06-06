@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
         );
         Validator::extend(
             'int_array', function ($attribute, $value, $parameters, $validator) {
-                if (!is_array($value)) {
+                if (!is_array($value) || empty($value)) {
                     return false;
                 }
                 foreach ($value as $v) {
