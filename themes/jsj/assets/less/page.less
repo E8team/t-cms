@@ -128,7 +128,7 @@
     margin: 0;
     li {
       position: relative;
-      padding: 20px;
+      padding: 20px 20px 10px 20px;
       border-bottom: 1px solid #eeeeee;
       &:hover {
         background-color: #fafff8;
@@ -162,6 +162,9 @@
           margin: 0;
           font-size: 18px;
           font-weight: 500;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
           span{
             padding: 4px 3px;
             font-size: 12px;
@@ -176,7 +179,8 @@
           width: 100%;
           padding-right: 10px;
           line-height: 23px;
-          height: 64px;
+          max-height: 64px;
+          min-height: 20px;
         }
         .list_footer{
           margin-top: 10px;

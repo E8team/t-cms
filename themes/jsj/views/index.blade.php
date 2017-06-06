@@ -9,12 +9,14 @@
             _self.parent().find('.open').removeClass('open');
             _self.addClass('open');
         }, function () {})
-        $("#top-carousel").slick({
-            dots: true,
-            autoplay: true,
-            autoplaySpeed: 6000,
-            adaptiveHeight: true
-        });
+        try {
+            $("#top-carousel").slick({
+                dots: true,
+                autoplay: true,
+                autoplaySpeed: 6000,
+                adaptiveHeight: true
+            });
+        }catch (e){}
     })
 </script>
 @endsection
