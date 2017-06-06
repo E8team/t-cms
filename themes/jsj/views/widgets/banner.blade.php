@@ -3,6 +3,8 @@
     // 轮播图
     $(function () {
         var $banner = $("#banner");
+        if($banner.children().length == 0)
+        	return;
         $banner.slick({
             dots: true,
             infinite: true,
