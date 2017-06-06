@@ -19,7 +19,7 @@
             <el-tab-pane label="回收站" name="trashed"></el-tab-pane>
           </el-tabs>
           <el-table border :data="list.data" style="width: 100%">
-            <el-table-column width="340px" label="标题">
+            <el-table-column label="标题">
               <template scope="scope">
                 <div class="title_box">
                   <el-tag class="tag" type="danger" v-if="scope.row.top">置顶</el-tag>
@@ -29,9 +29,9 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column property="user.nick_name" label="发布者"></el-table-column>
-            <el-table-column width="80px" property="views_count" label="访问"></el-table-column>
-            <el-table-column width="120px" label="发布时间">
+            <el-table-column property="user.nick_name" width="80" label="发布者"></el-table-column>
+            <el-table-column width="80" property="views_count" label="访问"></el-table-column>
+            <el-table-column width="120" label="发布时间">
               <template scope="scope">
                 <el-tooltip :content="scope.row.published_at" placement="left-start">
                   <span>{{scope.row.published_at | onlyDate}}</span>
