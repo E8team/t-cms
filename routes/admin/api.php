@@ -89,6 +89,8 @@ $api->group(
         $api->post('categories/{category}/page', 'PostsController@storePage');
         // 软删除指定的文章
         $api->delete('posts/{post}', 'PostsController@softDelete');
+        // 真删除指定的文章
+        $api->delete('posts/{postId}/force', 'PostsController@destruct');
         // 还原指定的被软删除的文章
         $api->post('posts/{post}/restore', 'PostsController@restore');
         // -------------------------------------------------

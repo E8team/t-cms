@@ -8,7 +8,7 @@ class Navbar extends BaseWidget
     public function getData()
     {
         return [
-            'navbars' => Navigation::getAllNavFromCache(),
+            'navbars' => Navigation::getAllNav(),
             'topNav' => Navigation::getTopNav(),
         ];
     }

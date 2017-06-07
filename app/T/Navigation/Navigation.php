@@ -20,6 +20,7 @@ class Navigation
     public function getAllNav()
     {
         if (is_null($this->allNav)) {
+            //todo cache
             $this->allNav = Category::nav()->topCategories()->with(
                 ['children' => function ($query) {
                     $query->nav();
@@ -27,11 +28,6 @@ class Navigation
             )->ordered()->ancient()->get();
         }
         return $this->allNav;
-    }
-
-    public function getAllNavFromCache()
-    {
-        return $this->getAllNav();
     }
 
     /**
@@ -74,13 +70,6 @@ class Navigation
 
     public function getChildrenNav()
     {
-        // 这里不直接 return $this->topNav->children() 的原因是为了从缓存中获取数据
-        $topNav = $this->getAllNavFromCache()->where('id', $this->topNav->id)->first();
-        if(!is_null($topNav)){
-            return $topNav->children;
-        }else{
-            return collect();
-        }
-
+        return $this->getAllNav()->where('id', $this->topNav->id)->first()->children;
     }
 }
