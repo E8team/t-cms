@@ -5,7 +5,7 @@
     </div>
     <div class="body">
         <ul class="currency-list">
-            @foreach($posts as $post)
+            @forelse($posts as $post)
             <li class="item @if($loop->first) open @endif">
                 <a class="title" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(30) !!}</a>
                 <div class="info">
@@ -18,7 +18,9 @@
                 </div>
                 <div class="time" title="{!! $post->published_at !!}">{!! $post->published_at->diffForHumans() !!}</div>
             </li>
-            @endforeach
+                @empty
+                <li>暂无内容</li>
+            @endforelse
         </ul>
     </div>
 </div>
