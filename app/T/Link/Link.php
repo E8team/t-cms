@@ -22,12 +22,23 @@ class Link
 
     public function getLinkFromCache()
     {
-        return $this->getLink();
+        static $link = null;
+        if(is_null($link)){
+            // todo cache
+            $link = $this->getLink();
+        }
+
+        return $link;
     }
 
     public function getLinkWithoutTypeFromCache()
     {
-        return $this->getLinkWithoutType();
+        static $linkWithOutType = null;
+        if(is_null($linkWithOutType)){
+            // todo cache
+            $linkWithOutType = $this->getLinkWithoutType();
+        }
+        return $linkWithOutType;
     }
 
     public function getLinkByTypeId($typeId)
@@ -37,7 +48,12 @@ class Link
 
     public function getLinkByTypeIdFromCache($typeId)
     {
-        return $this->getLinkByTypeId($typeId);
+        static $linkByTypeId = [];
+        if(!isset($linkByTypeId[$typeId])){
+            //todo cache
+            $linkByTypeId[$typeId] = $this->getLinkByTypeId($typeId);
+        }
+        return $linkByTypeId[$typeId];
     }
 
 }

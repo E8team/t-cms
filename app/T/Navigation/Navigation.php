@@ -20,6 +20,7 @@ class Navigation
     public function getAllNav()
     {
         if (is_null($this->allNav)) {
+            //todo cache
             $this->allNav = Category::nav()->topCategories()->with(
                 ['children' => function ($query) {
                     $query->nav();
@@ -27,11 +28,6 @@ class Navigation
             )->ordered()->ancient()->get();
         }
         return $this->allNav;
-    }
-
-    public function getAllNavFromCache()
-    {
-        return $this->getAllNav();
     }
 
     /**
@@ -74,6 +70,6 @@ class Navigation
 
     public function getChildrenNav()
     {
-        return $this->getAllNavFromCache()->where('id', $this->topNav->id)->first()->children;
+        return $this->getAllNav()->where('id', $this->topNav->id)->first()->children;
     }
 }
