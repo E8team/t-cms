@@ -53,7 +53,7 @@
         @foreach($banners as $banner)
             <div>
                 <a href="{{ $banner->url }}" target="_blank" {{ $banner->title }}>
-                    <img lazy src="{{ $banner->getPictureUrl('optimize') }}">
+                    <img lazy src="{{ $banner->getPictureUrl('original') }}">
                 </a>
                 <p class="text">{{ $banner->title }}</p>
             </div>
