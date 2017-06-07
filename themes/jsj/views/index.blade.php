@@ -36,9 +36,9 @@
 </div>
 <div class="news">
     <div class="container">
-        {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
-        {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
-        {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('education-teach')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('party-construction')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('league-work')->setViewName('widgets.postList.index_list')->setLimit(8)->render()!!}
     </div>
 </div>
 {!! app(App\Widgets\PostList::class)->setCategory('special-recommendation')->setLimit(4)->render() !!}
