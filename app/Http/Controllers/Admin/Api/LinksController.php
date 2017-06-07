@@ -17,7 +17,7 @@ class LinksController extends ApiController
     public function allLinks()
     {
         $links = Link::ordered()
-            ->recent()
+            ->ancient()
             ->withSimpleSearch()
             ->withSort()
             ->paginate($this->perPage());
@@ -28,7 +28,7 @@ class LinksController extends ApiController
     public function lists(Type $type = null)
     {
         $links = Link::byType($type)
-            ->ordered()
+            ->ancient()
             ->recent()
             ->withSimpleSearch()
             ->withSort()

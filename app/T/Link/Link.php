@@ -11,13 +11,13 @@ class Link
     public function getLink()
     {
         return Type::byModel('link')->with(['links' => function ($query){
-            return $query->ordered()->recent();
+            return $query->ordered()->ancient();
         }])->ordered()->get();
     }
 
     public function getLinkWithoutType()
     {
-        return LinkModel::whereNull('type_id')->ordered()->recent()->get();
+        return LinkModel::whereNull('type_id')->ordered()->ancient()->get();
     }
 
     public function getLinkFromCache()
@@ -32,7 +32,7 @@ class Link
 
     public function getLinkByTypeId($typeId)
     {
-        return LinkModel::where('type_id', $typeId)->ordered()->recent()->get();
+        return LinkModel::where('type_id', $typeId)->ordered()->ancient()->get();
     }
 
     public function getLinkByTypeIdFromCache($typeId)
