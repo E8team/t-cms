@@ -3,7 +3,8 @@
     <TreeItem
         v-for="modelItem in model"
         :key="modelItem.id"
-        :model="modelItem">
+        :model="modelItem"
+        :root="true">
       </TreeItem>
   </div>
 </template>
