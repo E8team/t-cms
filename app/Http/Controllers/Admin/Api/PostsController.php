@@ -134,6 +134,16 @@ class PostsController extends ApiController
     }
 
     /**
+     * 真删除
+     * @param $postId
+     * @return \Dingo\Api\Http\Response
+     */
+    public function destruct($postId)
+    {
+        Post::onlyTrashed()->findOrFail($postId)->forceDelete();
+        return $this->response->noContent();
+    }
+    /**
      * 还原指定的被软删除的文章
      *
      * @param  $postId
