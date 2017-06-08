@@ -69,7 +69,7 @@ class IndexController extends Controller
             )->withTrashed()->firstOrFail();
             if (!$post->isPublish() || $post->trashed()) {
                 // 管理员预览草稿或未发布的文章
-                app(Alert::class)::setWarning('当前文章未发布，此页面只有管理员可见!');
+                app(Alert::class)->setDanger('当前文章未发布，此页面只有管理员可见!');
             }
         } else {
             $post = $queryBuilder->publish()->firstOrFail();
