@@ -6,7 +6,6 @@ use App\Events\PostHasBeenRead;
 use App\Events\VisitedPostList;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
-use App\T\Navigation\Navigation;
 use App\Widgets\Alert;
 use Illuminate\Http\Request;
 use Auth;
@@ -20,7 +19,7 @@ class IndexController extends Controller
 
     public function blog(Request $request)
     {
-        return $this->postList('company-news', $request, app(CategoryRepository::class));
+        return $this->postList('company-news', $request, app(CategoryRepository::class))->render();
     }
 
     public function postList($cateSlug, Request $request, CategoryRepository $categoryRepository)

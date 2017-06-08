@@ -148,7 +148,8 @@ $api->group(
         $api->put('banners/{banner}', 'BannersController@update');
         // 删除指定的banner
         $api->delete('banners/{banner}', 'BannersController@destroy');
-    }
+
+}
 );
 
 
