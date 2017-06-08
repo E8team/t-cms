@@ -9,7 +9,7 @@ class Alert extends BaseWidget
     const ALERT_KEY = 'ALERT_FLASH';
     protected $config;
     private $session;
-
+    private $isCurrentSession = false;
     public function __construct(Session $session, $config)
     {
         $this->session = $session;
@@ -37,6 +37,7 @@ class Alert extends BaseWidget
         if (is_null($needContainer)) {
             $needContainer = $this->config['default_need_container'];
         }
+        $this->isCurrentSession = true;
         $this->session->flash(
             static::ALERT_KEY, [
                 'type' => $type,
@@ -70,7 +71,11 @@ class Alert extends BaseWidget
     public function getData()
     {
         if($this->session->has(static::ALERT_KEY)){
-            return $this->session->get(static::ALERT_KEY);
+            if($this->isCurrentSession)
+                return $this->session->pull(static::ALERT_KEY);
+            else
+                return $this->session->get(static::ALERT_KEY);
+
         }else{
             return [];
         }
