@@ -148,7 +148,18 @@ $api->group(
         $api->put('banners/{banner}', 'BannersController@update');
         // 删除指定的banner
         $api->delete('banners/{banner}', 'BannersController@destroy');
-    }
+
+        // -----------------------------------------------------
+        // 获取所有cachePage
+        $api->get('cache', 'CacheController@cachePages');
+        // 获取指定的cachePage
+        $api->get('cache/{cachePage}', 'CacheController@cachePages');
+        // 更新指定的cachePage
+        $api->put('cache/{cachePage}', 'CacheController@update');
+        // 清除指定的缓存
+        $api->get('cache/{cachePage}/clear', 'CacheController@cachePages');
+
+}
 );
 
 
