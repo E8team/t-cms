@@ -23,7 +23,7 @@
     </div>
     <div class="body">
         <ul id="notice" class="notice-list">
-            @foreach($posts as $post)
+            @forelse($posts as $post)
                 <li>
                     <div class="notice-time" title="{!! $post->published_at !!}">
                         <div class="day">{!! $post->published_at->day !!}</div>
@@ -34,7 +34,9 @@
                         <span class="author">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
                     </div>
                 </li>
-            @endforeach
+                @empty
+                <li>暂无内容</li>
+            @endforelse
         </ul>
     </div>
 </div>

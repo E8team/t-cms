@@ -48,30 +48,46 @@ class PostsController extends ApiController
             ->addMeta('cate_ids', $cateids);
     }
 
+    private function updatePage(Post $page, Request $request, PostRepository $postRepository)
+    {
+        // 更新单页
+        $this->validate(
+            $request, [
+                'title' => 'nullable|max:100',
+                'content' => 'nullable|required',
+            ]
+        );
+        $data = $postRepository->filterData($request->only('title', 'content'));
+        $page->addition($data);
+        if(isset($data['title'])){
+            $page->title = $data['title'];
+            $page->save();
+        }
+
+    }
+
     public function storePage(Category $category, Request $request, PostRepository $postRepository)
     {
-        $data = array_filter(
-            $request->only('title', 'content'), function ($item) {
-                return !is_null($item);
-            }
-        );
-        $data['category_ids'] = [$category->id];
+        if(!$category->isPage()){
+            $this->response->errorNotFound('该栏目不是单网页');
+        }
         $page = $category->page();
         if (is_null($page)) {
-            //todo 验证规则
+            // 创建单页
             $this->validate(
                 $request, [
-                'title' => 'required',
-                'content' => 'required',
+                    'title' => 'required|max:100',
+                    'content' => 'required',
                 ]
             );
-            // 创建
+            $data = $request->only('title', 'content');
+            $data['category_ids'] = [$category->id];
             $data['published_at'] = Carbon::now();
             $data['user_id'] = Auth::id();
             $postRepository->createPage($data);
         } else {
-            $data = $postRepository->filterData($data);
-            $page->addition($data);
+            // 更新单页
+            $this->updatePage($page, $request, $postRepository);
         }
         return $this->response->noContent();
     }
@@ -117,6 +133,16 @@ class PostsController extends ApiController
         return $this->response->noContent();
     }
 
+    /**
+     * 真删除
+     * @param $postId
+     * @return \Dingo\Api\Http\Response
+     */
+    public function destruct($postId)
+    {
+        Post::onlyTrashed()->findOrFail($postId)->forceDelete();
+        return $this->response->noContent();
+    }
     /**
      * 还原指定的被软删除的文章
      *

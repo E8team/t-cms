@@ -120,8 +120,11 @@ class CategoriesController extends ApiController
         if (!$category->isPage()) {
             //todo 国际化
             return $this->response->errorNotFound('该栏目不是单网页');
+        } elseif (!$page = $category->page()) {
+            return $this->response->noContent();
         }
-        return $this->response->item($category->page(), new PostTransformer());
+
+        return $this->response->item($page, new PostTransformer());
     }
 
     public function getAllCategory(Request $request, CategoryRepository $categoryRepository)
