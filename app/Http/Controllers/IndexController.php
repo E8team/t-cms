@@ -14,9 +14,7 @@ class IndexController extends Controller
 {
     public function index(Request $request)
     {
-        return $this->cache(function () use ($request){
-            return $this->postList('company-news', $request, app(CategoryRepository::class))->render();
-        });
+        return $this->postList('company-news', $request, app(CategoryRepository::class))->render();
     }
 
     public function postList($cateSlug, Request $request, CategoryRepository $categoryRepository)
