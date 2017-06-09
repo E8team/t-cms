@@ -215,7 +215,7 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
         }).then(() => {
-            this.$http.delete(`posts/${id}`).then(res => {
+            this.$http.delete(`posts/${id}` + this.activeTab == 'default' ? '' : '/force').then(res => {
                 this.$message('已删除');
                 this.$refs['list'].refresh()
             })

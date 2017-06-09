@@ -33,7 +33,7 @@
                 <img src="{!! asset('static/jsj/images/logo.png') !!}">
                 <div class="title">
                     <h3>计算机学院</h3>
-                    <p>Huainan Normal University</p>
+                    <p>School of Computer Science</p>
                 </div>
             </a>
             <form method="get" id="search-form" class="search" action="/">
