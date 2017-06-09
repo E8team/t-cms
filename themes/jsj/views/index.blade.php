@@ -32,7 +32,7 @@
 </div>
 <div class="splitter-bar">
     <div class="mask">工程&nbsp;&nbsp;&nbsp;应用&nbsp;&nbsp;&nbsp;实践&nbsp;&nbsp;&nbsp;创新</div>
-    <div class="containeqnwzbr"><img src="{!! asset('static/jsj/images/splitter.png') !!}" alt=""></div>
+    <div class="container"><img src="{!! asset('static/jsj/images/splitter.png') !!}" alt=""></div>
 </div>
 <div class="news">
     <div class="container">
