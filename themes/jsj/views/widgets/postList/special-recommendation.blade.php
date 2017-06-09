@@ -16,7 +16,7 @@
                         <img lazy src="{!! $topPost->getCover('optimize') !!}" alt="{!! $topPost->title !!}">
                     </div>
                     <div class="footer">
-                        <h4>{!! $topPost->present()->suitedTitle(30) !!}</h4>
+                        <h4>{!! $topPost->present()->suitedTitle(29) !!}</h4>
                         <p>{!! $topPost->excerpt !!}</p>
                     </div>
                 </a>
@@ -25,7 +25,7 @@
                 @foreach($otherPosts as $otherPost)
                 <li>
                     <div class="detail">
-                        <a class="title" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">{!! $otherPost->present()->suitedTitle() !!}</a>
+                        <a class="title" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">{!! $otherPost->present()->suitedTitle(56) !!}</a>
                         <p>{!! $otherPost->excerpt !!}</p>
                     </div>
                     <a lazy class="image" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">

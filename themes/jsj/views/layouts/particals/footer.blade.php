@@ -3,7 +3,7 @@
         <img class="footer-logo" src="{!! asset('static/jsj/images/footer-logo.png') !!}" alt="">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <ul class="footer-nav">
-                @foreach(Facades\App\T\Navigation\Navigation::getAllNavFromCache()->take(9) as $nav)
+                @foreach(Facades\App\T\Navigation\Navigation::getAllNav()->take(9) as $nav)
                     <li><a{!! $nav->present()->aProperty(false) !!}>{!! $nav->cate_name !!}</a></li>
                 @endforeach
             </ul>

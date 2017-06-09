@@ -36,22 +36,22 @@ class Setting extends BaseModel implements InterfaceTypeable
         static::query()->where('name', $name)->first();
     }
 
-    public static function allSetting($isAutoload = null)
+    public static function allSetting($isAutoload = true)
     {
-        if (!is_null($isAutoload)) {
+        /*if (!is_null($isAutoload)) {
             $query = static::where('is_autoload', (boolean)$isAutoload);
         } else {
             $query = static::query();
-        }
-        return $query->recent()
+        }*/
+        return static::where('is_autoload', (boolean)$isAutoload)->recent()
             ->get()
             ->keyBy('name');
     }
 
     public static function allSettingWithCache()
     {
-        return Cache::rememberForever(
-            'setting_autoload', function () {
+        return Cache::remember(
+            'setting_autoload', config('config.ttl'), function () {
                 return static::allSetting();
             }
         );
@@ -61,8 +61,8 @@ class Setting extends BaseModel implements InterfaceTypeable
     {
         $value = static::allSettingWithCache()->get($name);
         if (is_null($value)) {
-            $value = Cache::rememberForever(
-                'setting_' . $name, function () use ($name) {
+            $value = Cache::remember(
+                'setting_' . $name, config('cache.ttl'),function () use ($name) {
                     return static::findByName($name);
                 }
             );

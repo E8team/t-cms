@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CachePageRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -24,6 +25,7 @@ class Controller extends BaseController
         $perPage = (request('per_page') ?: $default) ?: config('app.default_per_page');
         return (int)($perPage < $maxPerPage ? $perPage : $maxPerPage);
     }
+
     public function rbacAuthorize($permission, $requireAll = false)
     {
         if (!Auth::user()->may($permission, $requireAll)) {

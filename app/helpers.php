@@ -1,4 +1,4 @@
-<?php  /* 辅助函数 */
+<?php /* 辅助函数 */
 
 
 /**
@@ -17,13 +17,19 @@ function setting($key = null, $default = null)
     if (is_null($key)) {
         return $allSetting;
     }
-    if (array_key_exists($key, $allSetting)) {
-        return $allSetting[$key];
+
+    if ($allSetting->has($key)) {
+        if($setting = $allSetting->get($key)){
+            return $setting->value;
+        }else{
+            return $setting;
+        }
     }
+
     return $default;
 }
 
-function isSameHost( $url )
+function isSameHost($url)
 {
     return app(\Illuminate\Http\Request::class)->getHost() == parse_url($url, PHP_URL_HOST);
 }

@@ -27,7 +27,7 @@ return [
         'lg' => '600,0',
         'cover_sm' => '190,120',
         'banner_sm' => '200,0',
-        'banner_index' => '855,0',
+        'banner_index' => '0,460',
         'index_link_image' => '235,150',
         'optimize' => '0,0',//原图 优化后
         'original' => '0,0,100'//原图

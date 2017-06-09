@@ -46,5 +46,6 @@ class RepositoryServiceProvider extends ServiceProvider
                 return new UserRepository();
             }
         );
+
     }
 }
