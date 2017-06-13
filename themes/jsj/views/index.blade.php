@@ -12,7 +12,7 @@
         try {
             $("#top-carousel").slick({
                 dots: true,
-                autoplay: true,
+                autoplay: false,
                 autoplaySpeed: 6000,
                 adaptiveHeight: true
             });
