@@ -43,11 +43,11 @@ class Post extends BaseModel
         $query->orderByTop();
         $query->post();
 
-        if (!isset($data['q'])) {
+        if (isset($data['q'])) {
             $query->withSimpleSearch($data['q']);
         }
 
-        if (!isset($data['orders'])) {
+        if (isset($data['orders'])) {
             $query->withSort($data['orders']);
         }
 

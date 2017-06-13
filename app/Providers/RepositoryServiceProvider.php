@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Repositories\CachePageRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
@@ -48,10 +47,5 @@ class RepositoryServiceProvider extends ServiceProvider
             }
         );
 
-        $this->app->singleton(
-            CachePageRepository::class, function () {
-            return new CachePageRepository();
-        }
-        );
     }
 }
