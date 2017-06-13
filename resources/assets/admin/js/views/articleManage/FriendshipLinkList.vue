@@ -101,6 +101,5 @@
 <style lang="less">
     .pic{
         margin-top: 5px;
-        width: 100%;
     }
 </style>
