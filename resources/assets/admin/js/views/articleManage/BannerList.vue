@@ -16,12 +16,12 @@
                         </template>
                     </el-table-column>
                     <el-table-column property="title" label="标题"></el-table-column>
-                    <el-table-column label="url" width="200">
+                    <el-table-column label="url">
                         <template scope="scope">
                             <a target="_blank" :href="scope.row.url">{{scope.row.url}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column property="order" label="排序"></el-table-column>
+                    <el-table-column property="order" width="80" label="排序"></el-table-column>
                     <el-table-column width="120px" label="创建时间">
                         <template scope="scope">
                             <el-tooltip :content="scope.row.created_at" placement="left-start">
