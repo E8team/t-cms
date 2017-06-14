@@ -85,7 +85,7 @@ return [
     | value to get prefixed to all our keys so we can avoid collisions.
     |
     */
-    'prefix' => '3t',
+    'prefix' => env('CACHE_PREFIX', 'tcms'),
     //默认缓存时间
     'ttl' => 60,
 
