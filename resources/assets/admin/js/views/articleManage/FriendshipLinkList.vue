@@ -16,18 +16,18 @@
                         </template>
                     </el-table-column>
                     <el-table-column property="name" label="链接名称"></el-table-column>
-                    <el-table-column label="url" width="200">
+                    <el-table-column label="url">
                         <template scope="scope">
                             <a target="_blank" :href="scope.row.url">{{scope.row.url}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column property="order" label="排序"></el-table-column>
-                    <el-table-column label="是否显示">
+                    <el-table-column property="order" width="80" label="排序"></el-table-column>
+                    <el-table-column width="100" label="是否显示">
                         <template scope="scope">
                             <el-tag :type="scope.row.is_visible ? 'success' : 'gray'">{{scope.row.is_visible ? '显示' : '隐藏'}}</el-tag>
                         </template>
                     </el-table-column>
-                    <el-table-column property="linkman" label="联系人"></el-table-column>
+                    <el-table-column property="linkman" width="150" label="联系人"></el-table-column>
                     <el-table-column width="120px" label="创建时间">
                         <template scope="scope">
                             <el-tooltip :content="scope.row.created_at" placement="left-start">
@@ -101,6 +101,5 @@
 <style lang="less">
     .pic{
         margin-top: 5px;
-        width: 100%;
     }
 </style>

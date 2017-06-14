@@ -15,7 +15,7 @@
             'base_url' => url('/'),
             'ueditor_include' => [
                 asset('vendor/ueditor/ueditor.config.js'),
-                asset('vendor/ueditor/ueditor.all.js')
+                asset('vendor/ueditor/ueditor.all.min.js')
             ],
             'ueditor_server_url' => config('ueditor.route.name'),
             'public' => asset('/')
