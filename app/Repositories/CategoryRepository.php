@@ -55,7 +55,7 @@ class CategoryRepository
                         unset($parent['children'][$i]);
                     }
                 }
-
+                $parent['children'] = array_values($parent['children']);
                 if($parent['type']!=$type)
                 {
                     if(count($parent['children'])<=0){
@@ -64,6 +64,7 @@ class CategoryRepository
                 }
             }
         }
+        $res = array_values($res);
         unset($parent);
         return $res;
     }
@@ -85,7 +86,7 @@ class CategoryRepository
                         unset($parent['children'][$i]);
                     }
                 }
-
+                $parent['children'] = array_values($parent['children']);
                 if($parent['type']!=$type)
                 {
                     if(count($parent['children'])<=0){
@@ -94,6 +95,7 @@ class CategoryRepository
                 }
             }
         }
+        $res = array_values($res);
         unset($parent);
         return $res;
     }
