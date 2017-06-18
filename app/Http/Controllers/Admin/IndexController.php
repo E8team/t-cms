@@ -8,4 +8,10 @@ class IndexController extends Controller
     {
         return view('admin.index');
     }
+
+    public function theme($themeId)
+    {
+        //todo
+        abort('404');
+    }
 }
