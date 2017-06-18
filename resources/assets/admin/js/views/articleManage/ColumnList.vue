@@ -27,7 +27,7 @@
             </template>
           </el-table-column>
           <el-table-column property="order" width="80" label="排序"></el-table-column>
-          <el-table-column label="是否为导航">
+          <el-table-column width="120" label="是否为导航">
             <template scope="scope">
                 <el-tag :type="scope.row.is_nav ? 'success' : 'gray'">{{scope.row.is_nav ? '作为导航' : '普通栏目'}}</el-tag>
             </template>
