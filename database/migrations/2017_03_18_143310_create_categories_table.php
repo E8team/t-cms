@@ -30,7 +30,7 @@ class CreateCategoriesTable extends Migration
                 // 链接是否在新窗口打开
                 $table->boolean('is_target_blank')->default(true);
                 // 分类slug
-                $table->string('cate_slug', 30)->nullable()->unique();
+                $table->string('cate_slug', 30)->unique();
                 // 是否在导航栏显示
                 $table->boolean('is_nav')->default(false);
                 $table->integer('order')->default(0)->index()->comment('排序字段');

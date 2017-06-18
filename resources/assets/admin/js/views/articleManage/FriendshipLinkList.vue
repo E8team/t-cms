@@ -12,7 +12,9 @@
                 <el-table border :data="list.data" style="width: 100%">
                     <el-table-column label="logo" width="200">
                         <template scope="scope">
-                            <img class="pic" v-if="scope.row.logo_urls.sm" :src="scope.row.logo_urls.sm" alt="scope.row.name">
+                            <div class="pic-wrapper">
+                                <img class="pic" v-if="scope.row.logo_urls.sm" :src="scope.row.logo_urls.sm" alt="scope.row.name">
+                            </div>
                         </template>
                     </el-table-column>
                     <el-table-column property="name" label="链接名称"></el-table-column>
@@ -99,7 +101,10 @@
 </script>
 
 <style lang="less">
-    .pic{
-        margin-top: 5px;
+    .pic-wrapper{
+        text-align: center;
+        .pic{
+            margin-top: 5px;
+        }
     }
 </style>
