@@ -21,6 +21,7 @@
               <el-form-item required :error="errors.category_ids">
                 <el-checkbox-group @change="errors = ''" v-model="article.category_ids">
                 <el-tree
+                  class="tree"
                   default-expand-all
                   :render-content="renderCategorie"
                   :data="allCategories"
@@ -155,7 +156,19 @@
         })
       },
       renderCategorie(h, { node, data, store }) {
-        return (<span style="overflow: hidden"><el-checkbox label={node.data.id}>{node.label}</el-checkbox></span>);
+          if(data.type == 0){
+              return (<span style="overflow: hidden">
+                  <el-checkbox label={node.data.id}>
+                      {node.label}
+                  </el-checkbox>
+              </span>);
+          }else{
+              return (<span style="overflow: hidden">
+                  <span>
+                      {node.label}
+                  </span>
+              </span>);
+          }
       },
       initEditor () {
         this.editorInited = true;
@@ -376,6 +389,9 @@
         }
       }
     }
+  }
+  .tree{
+      color: #1f2d3d;
   }
   .el-scrollbar__wrap{
     margin-bottom: 0!important;
