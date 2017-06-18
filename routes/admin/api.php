@@ -57,8 +57,6 @@ $api->group(
 
         //获取所有分类?type=post|page|ext_link
         $api->get('categories/all', 'CategoriesController@getAllCategory');
-        //获取所有分类?type=post|page|ext_link
-        $api->get('categories/all', 'CategoriesController@getAllCategory');
         // 获取所有的父级分类?type=post|page|ext_link
         $api->get('top_categories', 'CategoriesController@getTopCategories');
         // 获取指定分类下的子级分类?type=post|page|ext_link

@@ -26,13 +26,45 @@ class CategoryRepository
         return $res;
     }*/
 
-
+    private function type($type){
+        switch ($type) {
+            case 'post_list':
+            case 'post': // 为了兼容
+                return 0;
+                break;
+            case 'page':
+                return 1;
+                break;
+            case 'ext_link':
+                return 2;
+                break;
+        }
+    }
 
     public function allCategoryArray($type = null)
     {
-        $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
+        $allCategory = Category::orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
         $res = [];
         $this->treeByArray($allCategory, $res);
+        if(!is_null($type)){
+            $type = $this->type($type);
+            foreach ($res as $index => &$parent){
+
+                foreach ($parent['children'] as $i => $category){
+                    if($category['type'] != $type) {
+                        unset($parent['children'][$i]);
+                    }
+                }
+
+                if($parent['type']!=$type)
+                {
+                    if(count($parent['children'])<=0){
+                        unset($res[$index]);
+                    }
+                }
+            }
+        }
+        unset($parent);
         return $res;
     }
 
@@ -44,6 +76,25 @@ class CategoryRepository
         $allCategory = Category::byType($type)->orderBy('parent_id', 'ASC')->ordered()->ancient()->get()->toArray();
         $res = [];
         $this->treeByIndent($allCategory, $res, $indentStr, 0, 0);
+        if(!is_null($type)){
+            $type = $this->type($type);
+            foreach ($res as $index => &$parent){
+
+                foreach ($parent['children'] as $i => $category){
+                    if($category['type'] != $type) {
+                        unset($parent['children'][$i]);
+                    }
+                }
+
+                if($parent['type']!=$type)
+                {
+                    if(count($parent['children'])<=0){
+                        unset($res[$index]);
+                    }
+                }
+            }
+        }
+        unset($parent);
         return $res;
     }
 
