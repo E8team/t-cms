@@ -16,7 +16,7 @@ class CreatePostContentsTable extends Migration
         Schema::create(
             'post_contents', function (Blueprint $table) {
                 $table->unsignedInteger('post_id')->unique();
-                $table->text('content');
+                $table->longText('content');
                 $table->timestamps();
             }
         );

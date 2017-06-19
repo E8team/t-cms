@@ -46,8 +46,8 @@
                     <el-option label="外部链接" :value="2"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item v-if="column.type != 2" label="栏目slug">
-                <el-input placeholder="请设置栏目slug" v-model="column.cate_slug"></el-input>
+            <el-form-item :error="errors.cate_slug" v-if="column.type != 2" label="栏目slug">
+                <el-input @change="errors.cate_slug = ''" placeholder="请设置栏目slug" v-model="column.cate_slug"></el-input>
             </el-form-item>
             <el-form-item v-if="column.type == 2" label="外部链接">
                 <el-input placeholder="请设置外部链接" v-model="column.url"></el-input>
