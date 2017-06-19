@@ -1,7 +1,7 @@
 <template>
   <div :class="{'close': !root && !isOpen}" class="tree_item">
     <div :class="{'active': parentComp.currentIndex == model.id}" class="item">
-      <div v-if="root" class="toggle" :class="{'open': root && isOpen}" @click="toggle($event)">
+      <div v-if="root && model.children.length > 0" class="toggle" :class="{'open': root && isOpen}" @click="toggle($event)">
         <i class="el-icon-caret-right"></i>
       </div>
       <span :class="{'root': root}" @click="parentComp.currentIndex = model.id">{{model.cate_name}}</span>
