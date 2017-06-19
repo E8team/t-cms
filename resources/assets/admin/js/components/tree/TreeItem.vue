@@ -6,6 +6,7 @@
       </div>
       <span :class="{'root': root}" @click="parentComp.currentIndex = model.id">{{model.cate_name}}</span>
       <tree-item
+        v-if="model.type != 2"
         :root="false"
         class="item"
         :key="model.id"
