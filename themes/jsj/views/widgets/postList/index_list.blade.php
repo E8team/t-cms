@@ -7,10 +7,10 @@
         <ul class="currency-list">
             @forelse($posts as $post)
             <li class="item @if($loop->first) open @endif">
-                <a class="title" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(30) !!}</a>
+                <a target="_blank" class="title" href="{!! $post->present()->getUrl() !!}" title="{!! $post->title !!}">{!! $post->present()->suitedTitle(30) !!}</a>
                 <div class="info">
                     @if(!is_null($post->cover))
-                    <a class="image" href="{!! $post->present()->getUrl() !!}">
+                    <a target="_blank" class="image" href="{!! $post->present()->getUrl() !!}">
                         <img lazy src="{!! $post->getCover('cover_sm') !!}" alt="{!! $post->title !!}">
                     </a>
                     @endif

@@ -26,7 +26,7 @@
     <div class="watermark left"></div>
     <div class="watermark right"></div>
     <div class="container">
-        {!! app(App\Widgets\PostList::class)->setCategory('news')->setLimit(20)->render()!!}
+        {!! app(App\Widgets\PostList::class)->setCategory('news')->setLimit(12)->render()!!}
         {!! app(App\Widgets\PostList::class)->setCategory('notice')->setLimit(20)->render()!!}
     </div>
 </div>
