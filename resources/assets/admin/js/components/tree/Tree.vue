@@ -2,6 +2,7 @@
   <div class="tree" data-id="tree">
     <TreeItem
         v-for="modelItem in model"
+        v-if="model.type != 2"
         :key="modelItem.id"
         :model="modelItem"
         :root="true">

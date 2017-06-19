@@ -191,6 +191,7 @@
                 }
                 this.article.content = this.article.content ? this.article.content.data.content : '';
                 this.editor.setContent(this.article.content);
+                this.$diff.save(this.article);
             });
           }
         });
