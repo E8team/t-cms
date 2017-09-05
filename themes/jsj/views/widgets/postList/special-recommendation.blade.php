@@ -11,7 +11,7 @@
         <h3 class="title">{!! $category->cate_name !!}</h3>
         <div class="body">
             <div class="top_special">
-                <a href="{!! $topPost->present()->getUrl() !!}" title="{!! $topPost->title !!}">
+                <a target="_blank" href="{!! $topPost->present()->getUrl() !!}" title="{!! $topPost->title !!}">
                     <div class="image">
                         <img lazy src="{!! $topPost->getCover('optimize') !!}" alt="{!! $topPost->title !!}">
                     </div>
@@ -25,10 +25,10 @@
                 @foreach($otherPosts as $otherPost)
                 <li>
                     <div class="detail">
-                        <a class="title" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">{!! $otherPost->present()->suitedTitle(56) !!}</a>
+                        <a target="_blank" class="title" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">{!! $otherPost->present()->suitedTitle(56) !!}</a>
                         <p>{!! $otherPost->excerpt !!}</p>
                     </div>
-                    <a lazy class="image" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">
+                    <a target="_blank" class="image" href="{!! $otherPost->present()->getUrl() !!}" title="{!! $otherPost->title !!}">
                         <img lazy src="{!! $otherPost->getCover('optimize') !!}" alt="{!! $otherPost->title !!}">
                     </a>
                 </li>
